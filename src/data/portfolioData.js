@@ -116,7 +116,7 @@ export const portfolioData = {
       },
       skills: {
         title: "Keahlian & Tools",
-        subtitle: "Kompetensi dan perangkat yang saya gunakan.",
+        subtitle: "[Kalimat pengantar singkat]",
         competenciesTitle: "Kompetensi Utama",
         toolsTitle: "Tools & Tech",
       },
@@ -199,7 +199,7 @@ export const portfolioData = {
       },
       skills: {
         title: "Skills & Tools",
-        subtitle: "The competencies and tools I use.",
+        subtitle: "[Kalimat pengantar singkat]",
         competenciesTitle: "Core Competencies",
         toolsTitle: "Tools & Tech",
       },
