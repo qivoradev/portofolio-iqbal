@@ -114,7 +114,9 @@ export const portfolioData = {
         title: "Tentang Saya",
       },
       skills: {
-        title: "Tools",
+        title: "Skills & Tools",
+        competenciesTitle: "Kompetensi Utama",
+        toolsTitle: "Tools & Tech",
       },
       projects: {
         tag: "Karya Terpilih",
@@ -185,7 +187,9 @@ export const portfolioData = {
         title: "About Me",
       },
       skills: {
-        title: "Tools",
+        title: "Skills & Tools",
+        competenciesTitle: "Core Competencies",
+        toolsTitle: "Tools & Tech",
       },
       projects: {
         tag: "Selected Works",
@@ -236,17 +240,35 @@ export const portfolioData = {
     }
   },
 
-  // Tool Showcase (7 item: Figma, Excel, Google Sheets, Looker Studio, Laravel, PostgreSQL, PowerPoint)
-  // Field icon → kunci ke iconMap di Skills.jsx (react-icons/si)
-  // brandColor → warna merek resmi, dipakai untuk border hover kartu
+  // Tool Showcase (7 item aktif, 2 item standby: Python & SQL)
+  // Tool Showcase (Disesuaikan khusus Data Analyst)
+  // featured: true untuk SQL, Python, Excel, PostgreSQL, Google Sheets, Looker Studio; false untuk PowerPoint
+  // enabled: true untuk 7 tool analitis aktif; enabled: false untuk Figma & Laravel
+  // Urutan tampil: SQL, Python, Excel, PostgreSQL, Google Sheets, Looker Studio, PowerPoint
   tools: [
-    { name: "Figma",         icon: "figma",        brandColor: "multicolor" },
-    { name: "Excel",         icon: "excel",        brandColor: "#217346" },
-    { name: "Google Sheets", icon: "google-sheets", brandColor: "#0F9D58" },
-    { name: "Looker Studio", icon: "looker",        brandColor: "#4285F4" },
-    { name: "Laravel",       icon: "laravel",       brandColor: "#FF2D20" },
-    { name: "PostgreSQL",    icon: "postgresql",    brandColor: "#4169E1" },
-    { name: "PowerPoint",    icon: "powerpoint",    brandColor: "#D24726" },
+    { name: "SQL",           icon: "sql",           brandColor: "var(--accent)", featured: true,  enabled: true },
+    { name: "Python",        icon: "python",        brandColor: "#3776AB",       featured: true,  enabled: true },
+    { name: "Excel",         icon: "excel",        brandColor: "#217346",       featured: true,  enabled: true },
+    { name: "PostgreSQL",    icon: "postgresql",    brandColor: "#4169E1",       featured: true,  enabled: true },
+    { name: "Google Sheets", icon: "google-sheets", brandColor: "#0F9D58",       featured: true,  enabled: true },
+    { name: "Looker Studio", icon: "looker",        brandColor: "#4285F4",       featured: true,  enabled: true },
+    { name: "PowerPoint",    icon: "powerpoint",    brandColor: "#D24726",       featured: false, enabled: true },
+    { name: "Figma",         icon: "figma",        brandColor: "#F24E1E",       featured: false, enabled: false },
+    { name: "Laravel",       icon: "laravel",       brandColor: "#FF2D20",       featured: false, enabled: false },
+  ],
+
+  // Kompetensi Utama Data Analyst (Dua Bahasa: { id, en })
+  // Hanya item dengan enabled: true yang dirender
+  coreCompetencies: [
+    { name: { id: "Analisis Data", en: "Data Analysis" }, enabled: true },
+    { name: { id: "Pembersihan Data", en: "Data Cleaning" }, enabled: true },
+    { name: { id: "Validasi Data", en: "Data Validation" }, enabled: true },
+    { name: { id: "Pengolahan Data", en: "Data Processing" }, enabled: true },
+    { name: { id: "Pelaporan Terstruktur", en: "Structured Reporting" }, enabled: true },
+    { name: { id: "Visualisasi Data", en: "Data Visualization" }, enabled: true },
+    { name: { id: "Exploratory Data Analysis (EDA)", en: "Exploratory Data Analysis (EDA)" }, enabled: false },
+    { name: { id: "Data Storytelling", en: "Data Storytelling" }, enabled: false },
+    { name: { id: "Pemecahan Masalah", en: "Problem Solving" }, enabled: false },
   ],
 
   // Kelompok Kemampuan Analitik (4 Kelompok Placeholder Teks)
