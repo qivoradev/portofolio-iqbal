@@ -1397,273 +1397,169 @@ button,
 }
 
 /* ==========================================================================
-   Section Skills & Tools
-   Desktop (>= 901px): Grid dua kolom 0.9fr 1.1fr, gap 64px, dipisah garis 1px
-   Kiri: Kompetensi Utama (daftar teks baris dipisah garis 1px, hover --accent 150ms)
-   Kanan: Tools & Tech (grid 3 kolom seragam, tinggi 72px, radius 16px, kotak ikon 44px)
-   Mobile (<= 900px): Satu kolom (Kompetensi padding 14px lalu Tools grid 2 kolom tinggi 96px)
-   Motion: Fade + naik 16px (stagger 80ms), baris kompetensi berurutan 60ms
+/* ==========================================================================
+   Section Skills & Tools — Grid Ubin Vertikal
+   - Judul rata kiri, tanpa subjudul, tanpa label kapital
+   - Kompetensi: satu baris teks biasa dipisah titik tengah
+   - Tools: Grid ubin vertikal (ikon sedang di atas dengan warna asli, nama di bawah)
+   - Layout: 5 kolom desktop, 3 kolom tablet, 2 kolom HP
+   - Latar netral sesuai tema, border tipis, sudut membulat sedang, hover aksen
    ========================================================================== */
 
+#tools,
 .skills-section {
   padding-top: clamp(72px, 9vw, 120px);
-  padding-bottom: clamp(72px, 9vw, 120px);
+  padding-bottom: clamp(40px, 5vw, 60px);
   scroll-margin-top: calc(var(--navbar-height) + 48px);
   position: relative;
 }
 
 .skills-section .container {
-  max-width: 1320px;
+  max-width: var(--max-width);
 }
 
-
-/* ── Grid Dua Kolom (Desktop >= 901px) ───────────────────────────────────── */
-
-.skills-grid {
-  display: grid;
-  grid-template-columns: 0.9fr 1.1fr;
-  gap: 64px;
-  align-items: stretch;
+/* Modifikasi jarak SectionHeading khusus Skills agar mengalir dekat ke baris kompetensi */
+.skills-section .section-heading {
+  margin-bottom: 16px;
 }
 
-/* Kolom Kiri: Core Competencies */
-.skills-col-competencies {
-  border-right: 1px solid var(--border);
-  padding-right: 32px;
-  margin-right: -32px;
-  display: flex;
-  flex-direction: column;
-}
+/* ── Daftar Kompetensi: Lebih kecil dan lebih redup dari judul ─────────────── */
 
-/* Kolom Kanan: Tools & Tech */
-.skills-col-tools {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.skills-col-heading {
-  font-size: clamp(18px, 1.8vw, 22px);
-  font-weight: 700;
-  font-family: var(--font-heading);
-  color: var(--text);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  margin: 0 0 20px 0;
-}
-
-/* ── Daftar Teks Kompetensi (Baris dipisah garis 1px, hover --accent 150ms) ─ */
-
-.skills-comp-list {
-  display: flex;
-  flex-direction: column;
-}
-
-.skills-comp-item {
-  padding: 15px 0;
-  border-bottom: 1px solid var(--border);
-  cursor: default;
-  display: flex;
-  align-items: center;
-  /* Animasi fade + naik 16px, stagger berurutan 60ms */
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.4s ease, transform 0.4s ease, color 150ms ease;
-}
-
-.skills-comp-item:last-child {
-  border-bottom: none;
-}
-
-.skills-comp-item--visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.skills-comp-name {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--text);
+.skills-competencies-line {
   font-family: var(--font-body);
-  line-height: 1.35;
-  transition: color 150ms ease;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-2);
+  opacity: 0.88;
+  margin: 0 0 28px 0;
+  text-align: left;
 }
 
-.skills-comp-item:hover .skills-comp-name,
-.skills-comp-item:focus-within .skills-comp-name {
-  color: var(--accent);
-}
-
-/* ── Kolom Tools & Tech: Grid 2 Kolom Seimbang (Tanpa Kartu Menggantung) ──── */
+/* ── Grid Ubin Vertikal Tools ────────────────────────────────────────────── */
 
 .skills-tools-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
+  width: 100%;
 }
 
-/* Jika jumlah kartu ganjil, kartu terakhir membentang penuh 2 kolom agar seimbang */
-.tool-card:last-child:nth-child(odd) {
-  grid-column: 1 / -1;
-}
+/* ── Ubin Vertikal Tool ─────────────────────────────────────────────────── */
 
-.tool-card {
+.tool-tile {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  height: 72px;
-  border-radius: 16px;
+  justify-content: center;
+  text-align: center;
+  padding: 24px 16px;
+  gap: 14px;
   background-color: var(--surface);
   border: 1px solid var(--border);
-  padding: 0 16px;
-  gap: 12px;
-  cursor: default;
+  border-radius: var(--radius-md);
   box-sizing: border-box;
-  text-align: left;
-  transition: transform 150ms ease, border-color 150ms ease;
-  min-width: 0;
+  cursor: default;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, opacity 300ms ease;
+  box-shadow: var(--shadow-card);
 }
 
-/* Hover/focus: naik 3px, border berubah seragam ke var(--accent), 150ms */
-.tool-card:hover,
-.tool-card:focus-visible {
+.tool-tile:hover,
+.tool-tile:focus-visible {
   transform: translateY(-3px);
   border-color: var(--accent);
   outline: none;
 }
 
-.tool-card-icon-box {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background-color: var(--surface-2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: transform 150ms ease;
-}
-
-.tool-card-icon-box svg,
-.tool-card-icon-box img {
-  width: 24px;
-  height: 24px;
-  display: block;
-  object-fit: contain;
-}
-
-.tool-card-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--text);
-  font-family: var(--font-body);
-  line-height: 1.25;
-  text-align: left;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ── Animasi Gerak Kolom ─────────────────────────────────────────────────── */
-
-.skills-animate,
-.skills-animate-col {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.45s ease, transform 0.45s ease;
-}
-
-.skills-animate--visible {
+.tool-tile--visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* ── Responsif Mobile (<= 900px) ─────────────────────────────────────────── */
+/* ── Wadah Chip Netral di Belakang Ikon ──────────────────────────────────── */
 
-@media (max-width: 900px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
+.tool-tile-icon-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  background-color: var(--surface-2);
+  border: 1px solid var(--border);
+  transition: transform 150ms ease, background-color 150ms ease, border-color 150ms ease;
+}
+
+.tool-tile:hover .tool-tile-icon-box {
+  transform: scale(1.05);
+}
+
+/* Di mode gelap, beri latar chip netral terang agar ikon hijau & biru kontras sempurna */
+[data-theme="dark"] .tool-tile-icon-box {
+  background-color: #EFECE6;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.tool-tile-icon-box svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.tool-tile-name {
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.25;
+  white-space: nowrap;
+}
+
+/* ── Responsif Breakpoints ───────────────────────────────────────────────── */
+
+/* Tablet: 3 kolom */
+@media (max-width: 1024px) {
+  .skills-tools-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+}
+
+/* HP / Mobile: 2 kolom dengan lebar tetap (ubin terakhir di kiri, sisi kanan kosong) */
+@media (max-width: 640px) {
+  #tools,
+  .skills-section {
+    scroll-margin-top: calc(var(--navbar-height) + 36px);
+    padding-bottom: 36px;
   }
 
-  .skills-col-competencies {
-    border-right: none;
-    padding-right: 0;
-    margin-right: 0;
+  .skills-competencies-line {
+    font-size: 13.5px;
+    margin-bottom: 20px;
   }
 
-  /* Kompetensi mobile: baris 14px padding */
-  .skills-comp-item {
-    padding: 14px 0;
-  }
-
-  .skills-col-tools {
-    border-top: 1px solid var(--border);
-    padding-top: 32px;
-  }
-
-  /* Tools sebagai grid 2 kolom; tiap item vertikal, tinggi 96px, nama 14px boleh wrap 2 baris */
   .skills-tools-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
   }
 
-  .tool-card {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    height: 96px;
-    padding: 10px 8px;
-    gap: 8px;
-  }
-
-  .tool-card-icon-box {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-  }
-
-  .tool-card-name {
-    font-size: 14px;
-    line-height: 1.2;
-    text-align: center;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: clip;
-    max-width: 100%;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+  .tool-tile {
+    padding: 20px 12px;
+    gap: 10px;
   }
 }
 
-/* ── Reduced Motion (Mati Total Sesuai Preferensi) ────────────────────────── */
+/* ── Reduced Motion ──────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {
-  .skills-animate,
-  .skills-animate-col,
-  .skills-comp-item {
+  .tool-tile {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
   }
 
-
-  .skills-comp-name {
-    transition: none !important;
-  }
-
-  .tool-card {
-    transition: none !important;
-  }
-
-  .tool-card:hover,
-  .tool-card:focus-visible {
+  .tool-tile:hover .tool-tile-icon-box {
     transform: none !important;
-  }
-
-  .tool-card-icon-box {
-    transition: none !important;
   }
 }
 

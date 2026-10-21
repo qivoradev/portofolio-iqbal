@@ -116,9 +116,6 @@ export const portfolioData = {
       },
       skills: {
         title: "Keahlian & Tools",
-        subtitle: "[Kalimat pengantar singkat]",
-        competenciesTitle: "Kompetensi Utama",
-        toolsTitle: "Tools & Tech",
       },
       projects: {
         tag: "Karya Terpilih",
@@ -199,9 +196,6 @@ export const portfolioData = {
       },
       skills: {
         title: "Skills & Tools",
-        subtitle: "[Kalimat pengantar singkat]",
-        competenciesTitle: "Core Competencies",
-        toolsTitle: "Tools & Tech",
       },
       projects: {
         tag: "Selected Works",
@@ -259,21 +253,66 @@ export const portfolioData = {
     }
   },
 
-  // Tool Showcase (7 item aktif, 2 item standby: Python & SQL)
-  // Tool Showcase (Disesuaikan khusus Data Analyst)
-  // featured: true untuk SQL, Python, Excel, PostgreSQL, Google Sheets, Looker Studio; false untuk PowerPoint
-  // enabled: true untuk 7 tool analitis aktif; enabled: false untuk Figma & Laravel
-  // Urutan tampil: SQL, Python, Excel, PostgreSQL, Google Sheets, Looker Studio, PowerPoint
+  // 3 Baris Berdasarkan Tahap Kerja: "Ambil Data", "Olah & Bersihkan", "Sajikan"
+  workStages: [
+    {
+      id: "ambil-data",
+      title: {
+        id: "Ambil Data",
+        en: "Data Ingestion",
+      },
+      competencies: [
+        { id: "Analisis Data", en: "Data Analysis" },
+      ],
+      tools: [
+        { name: "SQL", icon: "sql" },
+        { name: "PostgreSQL", icon: "postgresql" },
+      ],
+    },
+    {
+      id: "olah-bersihkan",
+      title: {
+        id: "Olah & Bersihkan",
+        en: "Process & Clean",
+      },
+      competencies: [
+        { id: "Pembersihan Data", en: "Data Cleaning" },
+        { id: "Validasi Data", en: "Data Validation" },
+        { id: "Pengolahan Data", en: "Data Processing" },
+      ],
+      tools: [
+        { name: "Python", icon: "python" },
+        { name: "Excel", icon: "excel" },
+        { name: "Google Sheets", icon: "google-sheets" },
+      ],
+    },
+    {
+      id: "sajikan",
+      title: {
+        id: "Sajikan",
+        en: "Present",
+      },
+      competencies: [
+        { id: "Visualisasi Data", en: "Data Visualization" },
+        { id: "Pelaporan Terstruktur", en: "Structured Reporting" },
+      ],
+      tools: [
+        { name: "Excel", icon: "excel" },
+      ],
+    },
+  ],
+
+  get stages() {
+    return this.workStages;
+  },
+
+  // Tool Showcase (5 tool analitis: SQL, PostgreSQL, Python, Excel, Google Sheets)
   tools: [
-    { name: "SQL",           icon: "sql",           brandColor: "var(--accent)", featured: true,  enabled: true },
-    { name: "Python",        icon: "python",        brandColor: "#3776AB",       featured: true,  enabled: true },
-    { name: "Excel",         icon: "excel",        brandColor: "#217346",       featured: true,  enabled: true },
-    { name: "PostgreSQL",    icon: "postgresql",    brandColor: "#4169E1",       featured: true,  enabled: true },
-    { name: "Google Sheets", icon: "google-sheets", brandColor: "#0F9D58",       featured: true,  enabled: true },
-    { name: "Looker Studio", icon: "looker",        brandColor: "#4285F4",       featured: true,  enabled: true },
-    { name: "PowerPoint",    icon: "powerpoint",    brandColor: "#D24726",       featured: false, enabled: true },
-    { name: "Figma",         icon: "figma",        brandColor: "#F24E1E",       featured: false, enabled: false },
-    { name: "Laravel",       icon: "laravel",       brandColor: "#FF2D20",       featured: false, enabled: false },
+    { name: "SQL",           icon: "sql",           brandColor: "#E48E00", featured: true,  enabled: true },
+    { name: "PostgreSQL",    icon: "postgresql",    brandColor: "#4169E1", featured: true,  enabled: true },
+    { name: "Python",        icon: "python",        brandColor: "#3776AB", featured: true,  enabled: true },
+    { name: "Excel",         icon: "excel",         brandColor: "#107C41", featured: true,  enabled: true },
+    { name: "Google Sheets", icon: "google-sheets", brandColor: "#0F9D58", featured: true,  enabled: true },
   ],
 
   // Kompetensi Utama Data Analyst (Dua Bahasa: { id, en })
