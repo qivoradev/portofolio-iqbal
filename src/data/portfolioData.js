@@ -67,25 +67,29 @@ export const portfolioData = {
   about: {
     id: [
       "Fresh graduate program studi Teknologi Informasi yang berfokus pada pengolahan, pembersihan, dan analisis data. Selama masa studi, aktif mendalami fondasi logika pemrograman web (HTML, CSS, JavaScript) serta perancangan antarmuka UI/UX, yang tervalidasi melalui sertifikasi profesi Web Developer (BNSP) dan Artificial Intelligence (Certiport).",
-      "Berbekal latar belakang teknis tersebut, terbiasa mengelola dan mengekstraksi basis data relasional menggunakan SQL, menganalisis dataset dengan Python, serta menyusun validasi dan pelaporan terstruktur melalui Microsoft Excel. Memiliki ketelitian tinggi dalam akurasi data dan pemikiran analitis yang kuat, serta siap berkontribusi secara profesional untuk mendukung pengambilan keputusan dan efisiensi operasional tim."
+      "Berbekal latar belakang teknis tersebut, terbiasa mengelola dan mengekstraksi basis data relasional menggunakan SQL, menganalisis dataset dengan Python, serta menyusun validasi dan pelaporan terstruktur melalui Microsoft Excel.",
+      "Memiliki ketelitian tinggi dalam akurasi data dan pemikiran analitis yang kuat, serta siap berkontribusi secara profesional untuk mendukung pengambilan keputusan dan efisiensi operasional tim."
     ],
     en: [
       "Information Technology fresh graduate focused on data processing, cleaning, and analysis. During my studies, I actively explored the fundamentals of web programming logic (HTML, CSS, JavaScript) and UI/UX interface design, validated through professional certifications as a Web Developer (BNSP) and in Artificial Intelligence (Certiport).",
-      "With this technical background, I am experienced in managing and extracting data from relational databases using SQL, analyzing datasets with Python, and building structured validation and reporting in Microsoft Excel. I have a high attention to data accuracy and strong analytical thinking, and I am ready to contribute professionally to support decision-making and team operational efficiency."
+      "With this technical background, I am experienced in managing and extracting data from relational databases using SQL, analyzing datasets with Python, and building structured validation and reporting in Microsoft Excel.",
+      "I have a high attention to data accuracy and strong analytical thinking, and I am ready to contribute professionally to support decision-making and team operational efficiency."
     ]
   },
 
-  // Fakta ringkas di section About (3 fakta, dua bahasa)
+  // Fakta ringkas kartu samping di section About (Pendidikan, Tahun Lulus, Lokasi, Status)
   aboutFacts: {
     id: [
-      { label: "Fokus",        value: "Pengolahan, pembersihan, dan analisis data" },
-      { label: "Sertifikasi",  value: "Web Developer (BNSP), Artificial Intelligence (Certiport)" },
-      { label: "Tools",        value: "SQL, Python, Excel" },
+      { label: "Pendidikan",   value: "Teknologi Informasi" },
+      { label: "Tahun Lulus",  value: "[Isi]" },
+      { label: "Lokasi",       value: "Indonesia" },
+      { label: "Status",       value: "Terbuka untuk pekerjaan" },
     ],
     en: [
-      { label: "Focus",           value: "Data processing, cleaning, and analysis" },
-      { label: "Certifications",  value: "Web Developer (BNSP), Artificial Intelligence (Certiport)" },
-      { label: "Tools",           value: "SQL, Python, Excel" },
+      { label: "Education",        value: "Information Technology" },
+      { label: "Graduation Year",  value: "[Isi]" },
+      { label: "Location",         value: "Indonesia" },
+      { label: "Status",           value: "Open to work" },
     ],
   },
 
@@ -112,7 +116,6 @@ export const portfolioData = {
       },
       about: {
         title: "Tentang Saya",
-        subtitle: "Latar belakang dan fokus saya.",
       },
       skills: {
         title: "Keahlian & Tools",
@@ -192,7 +195,6 @@ export const portfolioData = {
       },
       about: {
         title: "About Me",
-        subtitle: "My background and focus.",
       },
       skills: {
         title: "Skills & Tools",

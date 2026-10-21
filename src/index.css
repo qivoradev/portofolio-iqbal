@@ -1008,8 +1008,8 @@ button,
 /* a. Kalimat pembuka */
 .about-lead {
   position: relative;
-  font-size: clamp(22px, 2.2vw, 30px);
-  line-height: 1.4;
+  font-size: clamp(18px, 1.8vw, 22px);
+  line-height: 1.5;
   font-weight: 600;
   color: var(--text);
   padding-left: 24px;
@@ -1033,9 +1033,9 @@ button,
   transition: transform 80ms ease-out;
 }
 
-/* b. Teks isi (jarak dari kalimat pembuka 32px) */
+/* b. Teks isi (jarak dari kalimat pembuka 28px) */
 .about-body {
-  margin-top: 32px;
+  margin-top: 28px;
   max-width: 64ch;
 }
 
@@ -1204,7 +1204,7 @@ button,
   }
 
   .about-lead {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .about-body {
