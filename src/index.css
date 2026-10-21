@@ -1,0 +1,1400 @@
+/* ==========================================================================
+   DESIGN SYSTEM - TAHAP 1
+   Arah: Terang-dulu, tenang, lega, rapi.
+   Tipografi: Plus Jakarta Sans (700/800 judul, 400/500 isi)
+   ========================================================================== */
+
+:root,
+[data-theme="light"] {
+  /* Surface & Background */
+  --bg: #F7F5F0;
+  --surface: #FFFFFF;
+  --surface-2: #EFEBE3;
+
+  /* Text Colors */
+  --text: #1B1A17;
+  --text-2: #5C5850;
+
+  /* Borders */
+  --border: #E2DDD2;
+
+  /* Aksen */
+  --accent: #C2501F;
+  --accent-hover: #A84218;
+  --accent-soft: rgba(194, 80, 31, 0.10);
+
+  /* Titik crop foto hero (memotong ~25% area transparan atas kanvas: kepala mulai 32%, sisa ruang ~5.8% di desktop) */
+  --photo-top-offset: 25%;
+  --photo-top-offset-num: 0.25;
+
+  /* Latar Halus Panel Hero (Opacity) */
+  --hero-glow-opacity: 0.10;
+  --hero-line-opacity: 0.08;
+
+  /* Radius */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-pill: 9999px;
+
+  /* Bayangan (hanya 0 1px 2px rgba(0,0,0,.05) di tema terang) */
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --navbar-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+  /* Floating Navbar */
+  --navbar-bg: rgba(255, 255, 255, 0.80);
+  --navbar-border: var(--border);
+  --navbar-height: 72px;
+
+  /* Brand Colors */
+  --brand-github-dark: #181717;
+  --brand-linkedin: #0A66C2;
+  --brand-instagram: #E4405F;
+  --brand-whatsapp: #25D366;
+
+  /* Backward Compatibility Aliases agar section lain tetap terbaca */
+  --bg-primary: var(--bg);
+  --bg-surface: var(--surface);
+  --bg-surface-elevated: var(--surface-2);
+  --bg-surface-subtle: var(--surface-2);
+  --border-subtle: var(--border);
+  --border-card: var(--border);
+  --border-strong: var(--border);
+  --text-primary: var(--text);
+  --text-secondary: var(--text-2);
+  --text-muted: var(--text-2);
+  --text-inverse: #FFFFFF;
+  --accent-subtle: var(--accent-soft);
+
+  /* Typography */
+  --font-heading: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout */
+  --max-width: 1140px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+
+  /* Backdrop Grid */
+  --backdrop-stroke: var(--accent);
+  --backdrop-opacity: 0.15;
+  --backdrop-opacity-grid: 0.08;
+}
+
+[data-theme="dark"] {
+  /* Netral, tidak kebiruan */
+  --bg: #0E0F12;
+  --surface: #16181C;
+  --surface-2: #1C1F24;
+
+  /* Text Colors */
+  --text: #F2F0EB;
+  --text-2: #A5A29B;
+
+  /* Borders */
+  --border: #2A2D33;
+
+  /* Aksen */
+  --accent: #C2501F;
+  --accent-hover: #A84218;
+  --accent-soft: rgba(194, 80, 31, 0.10);
+
+  /* Latar Halus Panel Hero (Opacity Tema Gelap) */
+  --hero-glow-opacity: 0.12;
+  --hero-line-opacity: 0.07;
+
+  /* Bayangan (tidak ada di tema gelap) */
+  --shadow-card: none;
+  --navbar-shadow: none;
+
+  /* Floating Navbar */
+  --navbar-bg: rgba(22, 24, 28, 0.80);
+  --navbar-border: var(--border);
+
+  /* Brand Colors */
+  --brand-github-dark: #FFFFFF;
+
+  /* Backward Compatibility Aliases */
+  --bg-primary: var(--bg);
+  --bg-surface: var(--surface);
+  --bg-surface-elevated: var(--surface-2);
+  --bg-surface-subtle: var(--surface-2);
+  --border-subtle: var(--border);
+  --border-card: var(--border);
+  --border-strong: var(--border);
+  --text-primary: var(--text);
+  --text-secondary: var(--text-2);
+  --text-muted: var(--text-2);
+  --text-inverse: #0E0F12;
+  --accent-subtle: var(--accent-soft);
+
+  /* Backdrop Grid */
+  --backdrop-stroke: var(--accent);
+  --backdrop-opacity: 0.15;
+  --backdrop-opacity-grid: 0.08;
+}
+
+/* ==========================================================================
+   Base & Resets
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Minimalist Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-card);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast), border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+button, input, textarea {
+  font-family: inherit;
+}
+
+/* ==========================================================================
+   Layout & Reusable Utilities
+   ========================================================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* scroll-margin-top disesuaikan dengan navbar floating yang lebih tinggi */
+.section {
+  padding-top: 84px;
+  padding-bottom: 84px;
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  scroll-margin-top: calc(var(--navbar-height) + 24px);
+}
+
+/* ==========================================================================
+   HERO — Tahap 1: Single Large Panel (Editorial, Tenang, Rapi)
+   - Panel: border-radius 32px, bg var(--surface-2), border 1px var(--border)
+   - Tinggi: min(calc(100svh - var(--navbar-height) - 56px), 640px)
+   - Grid 2-kolom: 1.1fr 0.9fr, padding 56px (mobile 24px)
+   ========================================================================== */
+
+.hero-section {
+  position: relative;
+  min-height: calc(100svh - 0px);
+  padding-top: calc(var(--navbar-height) + 24px);
+  padding-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+#beranda {
+  scroll-margin-top: calc(var(--navbar-height) + 8px);
+}
+
+/* ── Panel Utama ──────────────────────────────────────────────────────────── */
+
+.hero-panel {
+  position: relative;
+  width: 100%;
+  max-width: var(--max-width);
+  min-height: min(calc(100svh - var(--navbar-height) - 48px), 640px);
+  height: auto;
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 0.9fr;
+  gap: 32px;
+  padding: 40px 0 0 48px;
+  box-shadow: var(--shadow-card);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   KOLOM KIRI — Teks, Tombol, Sosial
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.hero-left {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-bottom: 48px;
+}
+
+/* 1. Salam kecil */
+.hero-greeting {
+  font-size: 20px;
+  color: color-mix(in srgb, var(--text) 75%, transparent);
+  font-weight: 400;
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+  text-transform: none;
+}
+
+/* 2. Nama 2 baris */
+.hero-name {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 800;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 16px;
+  font-family: var(--font-heading);
+}
+
+/* 3. Role */
+.hero-role {
+  font-size: clamp(20px, 2.2vw, 28px);
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-family: var(--font-heading);
+}
+
+/* 4. Deskripsi singkat (t.hero.description, maks 46ch) */
+.hero-bio {
+  font-size: 17px;
+  line-height: 1.7;
+  max-width: 46ch;
+  color: var(--text-2);
+  margin-bottom: 32px;
+  font-family: var(--font-body);
+}
+
+/* 5. Baris Tombol: Lihat Proyek (solid) & Unduh CV (outline), tinggi 48px */
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.hero-btn-projects {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  background: var(--accent);
+  color: #FFFFFF !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-pill);
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition-fast), transform var(--transition-fast);
+}
+
+.hero-btn-projects:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+}
+
+.hero-btn-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 24px;
+  background: transparent;
+  color: var(--text) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--border);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.hero-btn-cv:hover {
+  background: var(--surface);
+  border-color: var(--text-2);
+  transform: translateY(-1px);
+}
+
+/* 6. Ikon Sosial — di bawah tombol, jarak 28px, ukuran 24px, tap target 44x44px, jarak 8px, tanpa kotak dan pill */
+.hero-socials {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-social {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: var(--text-2);
+  text-decoration: none;
+  transition: color 150ms ease, transform 150ms ease;
+  cursor: pointer;
+}
+
+.hero-social svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.hero-social:hover,
+.hero-social:focus-visible,
+.hero-social:active {
+  transform: translateY(-2px);
+}
+
+[data-theme="dark"]  .hero-social.hs-github:hover,
+[data-theme="dark"]  .hero-social.hs-github:focus-visible,
+[data-theme="dark"]  .hero-social.hs-github:active  { color: #FFFFFF; }
+
+[data-theme="light"] .hero-social.hs-github:hover,
+[data-theme="light"] .hero-social.hs-github:focus-visible,
+[data-theme="light"] .hero-social.hs-github:active  { color: #181717; }
+
+.hero-social.hs-linkedin:hover,
+.hero-social.hs-linkedin:focus-visible,
+.hero-social.hs-linkedin:active  { color: #0A66C2; }
+
+.hero-social.hs-instagram:hover,
+.hero-social.hs-instagram:focus-visible,
+.hero-social.hs-instagram:active { color: #E4405F; }
+
+.hero-social.hs-whatsapp:hover,
+.hero-social.hs-whatsapp:focus-visible,
+.hero-social.hs-whatsapp:active  { color: #25D366; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   KOLOM KANAN — Wadah Foto, Foto no-bg (Tanpa Lingkaran), Kartu Sudut
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.hero-right {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/* Wadah foto di kolom kanan hero: tinggi 100% panel, menempel ke dasar panel, justify-self: end */
+.hero-photo-wrap {
+  position: relative;
+  align-self: end;
+  justify-self: end;
+  margin-left: auto;
+  margin-right: clamp(16px, 3vw, 48px);
+  width: min(100%, 540px);
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Wadah crop foto: overflow hidden, tinggi ~104% tinggi panel, menempel ke dasar panel */
+.hero-photo-frame {
+  position: relative;
+  width: 100%;
+  height: 104%;
+  aspect-ratio: 1365 / 1536;
+  overflow: hidden;
+  z-index: 2;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+/* Foto dengan object-fit: contain, object-position: center bottom, crop atas dengan --photo-top-offset */
+.hero-photo-img {
+  width: 100%;
+  height: calc(100% / (1 - var(--photo-top-offset-num, 0.28)));
+  object-fit: contain;
+  object-position: center bottom;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Fallback mode bila foto nobg gagal dan beralih ke /foto.jpg */
+.hero-photo-wrap.is-fallback .hero-photo-frame {
+  aspect-ratio: unset;
+  overflow: visible;
+}
+.hero-photo-wrap.is-fallback .hero-photo-img {
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+/* Kartu jurusan dan status: radius 16px, latar var(--surface), border 1px, padding 12px 16px */
+/* Diposisikan di dalam wadah foto: left: -40px, bottom: 32px (menempel sisi kiri-bawah tanpa menimpa siku/lengan) */
+.hero-photo-card {
+  position: absolute;
+  bottom: 32px;
+  left: -40px;
+  z-index: 4;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 12px 16px;
+  box-shadow: var(--shadow-card);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.hero-card-major {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.35;
+}
+
+.hero-card-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-2);
+  font-family: var(--font-body);
+  line-height: 1.35;
+  margin-top: 6px;
+}
+
+.hero-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22C55E;
+  display: inline-block;
+  flex-shrink: 0;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-status-dot {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LATAR HALUS PANEL HERO — Rona di belakang foto & Siluet garis data
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* a) Rona di belakang foto */
+.hero-photo-glow {
+  position: absolute;
+  top: 4%;
+  left: 50%;
+  width: 110%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--accent) 0%, transparent 100%);
+  opacity: var(--hero-glow-opacity, 0.10);
+  pointer-events: none;
+  z-index: 1;
+  transform: translate(-50%, 0);
+  animation: hero-glow-drift 14s ease-in-out infinite alternate;
+}
+
+@keyframes hero-glow-drift {
+  0% {
+    transform: translate(calc(-50% - 6px), -6px);
+  }
+  100% {
+    transform: translate(calc(-50% + 6px), 6px);
+  }
+}
+
+/* b) Siluet garis data */
+.hero-data-silhouette {
+  position: absolute;
+  right: clamp(16px, 3vw, 48px);
+  bottom: 0;
+  width: 55%;
+  height: 60%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: var(--hero-line-opacity, 0.08);
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 40%, rgba(0, 0, 0, 0) 100%);
+}
+
+.hero-data-silhouette svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* c) Gerak garis tren */
+.hero-trend-line {
+  stroke-dasharray: 800;
+  stroke-dashoffset: 800;
+  animation: hero-draw-line 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes hero-draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-photo-glow {
+    animation: none !important;
+    transform: translate(-50%, 0) !important;
+  }
+  .hero-trend-line {
+    animation: none !important;
+    stroke-dashoffset: 0 !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   RESPONSIF — ≤900px: satu kolom di dalam panel
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+  .hero-section {
+    min-height: unset;
+    padding-top: calc(var(--navbar-height) + 16px);
+    padding-bottom: 24px;
+  }
+
+  .hero-panel {
+    height: auto;
+    min-height: unset;
+    grid-template-columns: 1fr;
+    padding: 24px 24px 0 24px;
+    gap: 36px;
+    border-radius: 24px;
+  }
+
+  .hero-left {
+    padding-bottom: 0;
+  }
+
+  .hero-name {
+    font-size: clamp(34px, 8.5vw, 48px);
+  }
+
+  .hero-bio {
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  .hero-right {
+    height: auto;
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  /* Mobile: wadah menempel ke dasar panel (0 celah, 0 padding-bottom), lebar min(100%, 340px), rata tengah */
+  .hero-photo-wrap {
+    width: min(100%, 340px);
+    height: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+  }
+
+  /* Mobile: aspect-ratio sesuai crop, mask transparansi supaya dasar foto memudar halus */
+  .hero-photo-frame {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    aspect-ratio: 1365 / 1536;
+    mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 85%, transparent 100%);
+  }
+
+  /* Mobile: menumpuk di kiri-bawah foto, position absolute, left 8px, bottom 16px */
+  .hero-photo-card {
+    position: absolute;
+    left: 8px;
+    bottom: 16px;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 12px;
+    z-index: 4;
+    text-align: left;
+    width: fit-content;
+    max-width: calc(100% - 16px);
+    white-space: nowrap;
+  }
+
+  .hero-card-major {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .hero-card-status {
+    font-size: 11px;
+    margin-top: 4px;
+    justify-content: flex-start;
+  }
+
+  .hero-data-silhouette {
+    display: none !important;
+  }
+
+  .hero-photo-glow {
+    top: 2%;
+    width: min(100%, 320px);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-name {
+    font-size: clamp(32px, 10vw, 42px);
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .hero-btn-projects,
+  .hero-btn-cv {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.section-header {
+  margin-bottom: 40px;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-family: var(--font-heading);
+}
+
+.section-title {
+  font-size: clamp(1.85rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.section-description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  max-width: 620px;
+  line-height: 1.65;
+}
+
+/* ==========================================================================
+   Section Tentang — Revised Layout
+   Judul di atas → grid 1.4fr 0.8fr
+   Kiri: paragraf | Kanan: fakta vertikal + border-left
+   Mobile (≤900px): satu kolom, border-left → border-top
+   ========================================================================== */
+
+/* Judul: satu baris di atas, rata kiri, jarak bawah 32px */
+.about-heading {
+  font-size: clamp(1.85rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 32px;
+}
+
+/* Grid dua kolom */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.8fr;
+  gap: 0 64px;
+  align-items: start;
+}
+
+/* Kolom kiri: teks */
+.about-col-text {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Paragraf 1 — warna teks utama */
+.about-para-first {
+  font-size: clamp(1.0625rem, 1.3vw, 1.1875rem); /* clamp(17px, 1.3vw, 19px) */
+  line-height: 1.75;
+  color: var(--text-primary);
+  max-width: 62ch;
+  margin-bottom: 1.25em;
+  font-family: var(--font-body);
+}
+
+/* Paragraf 2 — warna teks sekunder */
+.about-para-second {
+  font-size: clamp(1.0625rem, 1.3vw, 1.1875rem);
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 62ch;
+  margin-bottom: 0;
+  font-family: var(--font-body);
+}
+
+/* Kolom kanan: fakta dengan border-left */
+.about-col-facts {
+  /* Sejajar dengan awal paragraf, tidak sticky */
+}
+
+.about-facts-list {
+  border-left: 1px solid var(--border-card);
+  padding-left: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.about-fact-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Label: 14px, huruf biasa, warna redup */
+.about-fact-label {
+  font-size: 0.875rem;          /* 14px */
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  line-height: 1.4;
+}
+
+/* Nilai: 17px, warna utama */
+.about-fact-value {
+  font-size: 1.0625rem;         /* 17px */
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.5;
+  font-family: var(--font-body);
+}
+
+/* ── Animasi fade + naik 16px ────────────────────────────────────────────── */
+
+.about-animate {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.about-animate--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Reduced Motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .about-animate {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ── Mobile ≤900px: satu kolom, border-left → border-top ───────────────── */
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 32px 0;
+  }
+
+  .about-para-first,
+  .about-para-second {
+    max-width: 100%;
+  }
+
+  .about-facts-list {
+    border-left: none;
+    border-top: 1px solid var(--border-card);
+    padding-left: 0;
+    padding-top: 24px;
+    /* Horizontal pada mobile: wrap ke baris baru tiap item */
+    flex-direction: column;
+    gap: 20px;
+  }
+}
+
+/* ── Extra small ≤480px ──────────────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .about-heading {
+    font-size: 1.75rem;
+    margin-bottom: 24px;
+  }
+}
+
+/* Cards (Editorial Clean Grid) */
+
+.editorial-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-normal), background-color var(--transition-normal);
+}
+
+.editorial-card:hover {
+  border-color: var(--border-strong);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #ffffff;
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: var(--border-card);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-surface-elevated);
+  border-color: var(--border-strong);
+}
+
+/* Tags & Badges */
+.editorial-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.editorial-tag:hover {
+  border-color: var(--border-strong);
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   Social Link Brand Colors (Hero) — hover, focus-visible, active
+   Hanya ikon dan border yang berubah warna; label teks tetap normal.
+   Transisi 150ms, tanpa glow, tanpa bayangan tambahan.
+   ========================================================================== */
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
+  cursor: pointer;
+}
+
+.social-link[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.social-link .social-icon {
+  transition: color 0.15s ease;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+}
+
+.social-link .social-label {
+  color: var(--text-secondary);
+  transition: none; /* label tidak ikut berubah warna */
+}
+
+/* GitHub: #181717 terang / #FFFFFF gelap */
+.social-link--github:hover .social-icon,
+.social-link--github:focus-visible .social-icon,
+.social-link--github:active .social-icon {
+  color: var(--brand-github-dark);
+}
+.social-link--github:hover,
+.social-link--github:focus-visible,
+.social-link--github:active {
+  border-color: var(--brand-github-dark);
+}
+
+/* LinkedIn: #0A66C2 — kontras pada bg surface ≥3:1 di kedua tema */
+.social-link--linkedin:hover .social-icon,
+.social-link--linkedin:focus-visible .social-icon,
+.social-link--linkedin:active .social-icon {
+  color: var(--brand-linkedin);
+}
+.social-link--linkedin:hover,
+.social-link--linkedin:focus-visible,
+.social-link--linkedin:active {
+  border-color: var(--brand-linkedin);
+}
+
+/* Instagram: #E4405F solid */
+.social-link--instagram:hover .social-icon,
+.social-link--instagram:focus-visible .social-icon,
+.social-link--instagram:active .social-icon {
+  color: var(--brand-instagram);
+}
+.social-link--instagram:hover,
+.social-link--instagram:focus-visible,
+.social-link--instagram:active {
+  border-color: var(--brand-instagram);
+}
+
+/* WhatsApp: #25D366 — kontras 3.2:1 di dark bg #12151b, 3.0:1 di light bg putih ✓ */
+.social-link--whatsapp:hover .social-icon,
+.social-link--whatsapp:focus-visible .social-icon,
+.social-link--whatsapp:active .social-icon {
+  color: var(--brand-whatsapp);
+}
+.social-link--whatsapp:hover,
+.social-link--whatsapp:focus-visible,
+.social-link--whatsapp:active {
+  border-color: var(--brand-whatsapp);
+}
+
+/* ==========================================================================
+   Tool Showcase Marquee (CSS Murni, Tanpa Library) — Satu Baris
+   Kartu: 200×160px, ikon 56px, nama 16px, jarak 22px
+   Hover: naik 4px, border → brandColor via CSS custom property
+   Durasi: 40 detik, tepi memudar dengan mask-image
+   ========================================================================== */
+
+.marquee-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 56px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+}
+
+.marquee-row {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: stretch;
+  gap: 22px;
+  width: max-content;
+  will-change: transform;
+  padding: 8px 0;
+}
+
+.marquee-track-left {
+  animation: marquee-scroll-left 40s linear infinite;
+}
+
+/* Hover pada track (atau wrapper) menghentikan animasi */
+.marquee-wrapper:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Kartu Tool ─────────────────────────────────────────────────────────── */
+
+.tool-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 200px;
+  height: 160px;
+  padding: 20px 16px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  /* Tidak ada box-shadow, tidak ada glow, tidak ada gradasi */
+  transition: transform 0.18s ease, border-color 0.18s ease;
+  cursor: default;
+  flex-shrink: 0;
+}
+
+.tool-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--brand-color, var(--accent));
+  /* Tidak ada box-shadow tebal */
+}
+
+.tool-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+}
+
+/* SVG react-icons: ukuran ditentukan via prop size, pastikan tidak dikecilkan */
+.tool-card-icon svg,
+.tool-card-icon-img {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.tool-card-name {
+  font-size: 1rem;           /* 16px */
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  font-family: var(--font-body);
+  letter-spacing: -0.01em;
+}
+
+/* ── Reduced Motion: tampil sebagai grid statis, wrap ────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-wrapper {
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
+    overflow: visible !important;
+    margin-bottom: 40px;
+  }
+  .marquee-row {
+    overflow: visible !important;
+  }
+  .marquee-track {
+    animation: none !important;
+    transform: none !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    width: 100% !important;
+    gap: 20px !important;
+  }
+  /* Sembunyikan duplikat aria-hidden */
+  .marquee-track > [aria-hidden="true"] {
+    display: none !important;
+  }
+}
+
+/* ── Mobile ≤640px ───────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+  .marquee-wrapper {
+    /* Pastikan tidak ada scroll horizontal pada halaman */
+    max-width: 100vw;
+    margin-bottom: 44px;
+  }
+  .tool-card {
+    width: 150px;
+    height: 130px;
+    padding: 14px 12px 12px;
+    gap: 10px;
+  }
+  .tool-card-icon,
+  .tool-card-icon svg,
+  .tool-card-icon-img {
+    width: 44px;
+    height: 44px;
+  }
+  .tool-card-name {
+    font-size: 0.875rem;
+  }
+  .marquee-track {
+    gap: 16px;
+  }
+}
+
+/* ==========================================================================
+   Skill Groups: Teks Biasa Dua Kolom dengan Garis Pemisah Tipis
+   ========================================================================== */
+
+.skill-groups-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 28px;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 40px;
+}
+
+@media (min-width: 768px) {
+  .skill-groups-container {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 56px;
+    row-gap: 32px;
+  }
+}
+
+.skill-group-block {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 24px;
+}
+
+.skill-group-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+}
+
+.skill-group-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skill-group-list-item {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   Hero Backdrop — Grid, Garis Tren, Titik Data, Chart Batang
+   Animasi hanya: transform, opacity, stroke-dashoffset (zero layout shift)
+   ========================================================================== */
+
+/* Grid lines — sangat samar (setengah backdrop-opacity) */
+.hb-grid-line {
+  stroke: var(--backdrop-stroke);
+  stroke-opacity: var(--backdrop-opacity-grid);
+  stroke-width: 1;
+}
+
+/* Grid group: bergeser ke atas 1 sel (48px) — seamless karena periode 48px */
+.hb-grid-group {
+  animation: hb-grid-shift 80s linear infinite;
+}
+
+@keyframes hb-grid-shift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-48px); }
+}
+
+/* Garis tren: animasi menggambar diri, lalu reset */
+.hb-trend-line {
+  stroke: var(--backdrop-stroke);
+  stroke-opacity: var(--backdrop-opacity);
+  stroke-width: 1.5;
+  fill: none;
+  animation: hb-draw-trend 10s ease-in-out infinite;
+}
+
+@keyframes hb-draw-trend {
+  0%   { stroke-dashoffset: 900; opacity: 0; }
+  8%   { opacity: 1; }
+  65%  { stroke-dashoffset: 0;   opacity: 1; }
+  80%  { stroke-dashoffset: 0;   opacity: 1; }
+  93%  { stroke-dashoffset: 900; opacity: 0; }
+  100% { stroke-dashoffset: 900; opacity: 0; }
+}
+
+/* Titik data: berdenyut opacity pelan, delay berbeda per titik */
+.hb-data-dot {
+  fill: var(--backdrop-stroke);
+  fill-opacity: var(--backdrop-opacity);
+  animation: hb-dot-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes hb-dot-pulse {
+  0%, 100% { opacity: 0.45; }
+  50%       { opacity: 1;    }
+}
+
+/* Chart batang: naik-turun dengan transform-origin bottom */
+.hb-bar-rect {
+  fill: none;
+  stroke: var(--backdrop-stroke);
+  stroke-opacity: var(--backdrop-opacity);
+  stroke-width: 1;
+  transform-box: fill-box;
+  transform-origin: bottom center;
+  animation: hb-bar-pulse ease-in-out infinite;
+  /* animation-duration & delay diatur via inline style di komponen */
+}
+
+@keyframes hb-bar-pulse {
+  0%, 100% { transform: scaleY(0.45); }
+  50%       { transform: scaleY(1);    }
+}
+
+/* Mobile (<=900px): sembunyikan bars, turunkan opacity */
+@media (max-width: 900px) {
+  .hb-bars-group {
+    display: none;
+  }
+  :root,
+  [data-theme="dark"] {
+    --backdrop-opacity: 0.16;
+    --backdrop-opacity-grid: 0.08;
+  }
+  [data-theme="light"] {
+    --backdrop-opacity: 0.09;
+    --backdrop-opacity-grid: 0.045;
+  }
+}
+
+/* Reduced motion: matikan semua animasi, tampilkan versi statis */
+@media (prefers-reduced-motion: reduce) {
+  .hb-grid-group {
+    animation: none !important;
+  }
+  .hb-trend-line {
+    animation: none !important;
+    stroke-dashoffset: 0 !important; /* tampilkan garis penuh, statis */
+  }
+  .hb-data-dot {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .hb-bar-rect {
+    animation: none !important;
+    transform: scaleY(0.65) !important; /* posisi statis */
+  }
+}
