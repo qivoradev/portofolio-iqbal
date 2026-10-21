@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
+import SectionHeading from './SectionHeading';
 import { FaDatabase } from 'react-icons/fa6';
 import { SiPython } from 'react-icons/si';
 import excelSlot from '../assets/tools/excel.svg';
@@ -140,11 +141,8 @@ export default function About() {
   return (
     <section id="tentang" className="about-section" ref={sectionRef}>
       <div className="container">
-        {/* 1. Judul "Tentang Saya" / "About Me" + Garis Aksen */}
-        <div className="about-header about-animate">
-          <h2 className="about-title">{t.about.title}</h2>
-          <span className="about-accent-line" aria-hidden="true" />
-        </div>
+        {/* Judul & Subjudul: SectionHeading Bersama */}
+        <SectionHeading title={t.about.title} subtitle={t.about.subtitle} />
 
         {/* 2. Grid Dua Kolom (1.5fr 0.9fr, gap 80px) */}
         <div className="about-grid">

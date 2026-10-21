@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
+import SectionHeading from './SectionHeading';
 import {
   SiGooglesheets,
   SiLooker,
@@ -168,11 +169,8 @@ export default function Skills() {
   return (
     <section id="tools" className="skills-section" ref={sectionRef}>
       <div className="container">
-        {/* Judul: "Skills & Tools" + Garis Aksen 48px x 4px */}
-        <div className="skills-header skills-animate">
-          <h2 className="skills-title">{t.skills.title}</h2>
-          <span className="skills-accent-line" aria-hidden="true" />
-        </div>
+        {/* Judul & Subjudul: SectionHeading Bersama */}
+        <SectionHeading title={t.skills.title} subtitle={t.skills.subtitle} />
 
         {/* Grid Dua Kolom (0.9fr 1.1fr, gap 64px, dipisah garis 1px) */}
         <div className="skills-grid">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
+import SectionHeading from './SectionHeading';
 
 export default function Experience() {
   const { t, portfolioData } = usePortfolio();
@@ -9,12 +10,8 @@ export default function Experience() {
     <section id="pengalaman" className="section">
       <div className="container">
         
-        {/* Section Header */}
-        <div className="section-header">
-          <span className="section-tag">{t.experience.tag}</span>
-          <h2 className="section-title">{t.experience.title}</h2>
-          <p className="section-description">{t.experience.description}</p>
-        </div>
+        {/* Judul & Subjudul: SectionHeading Bersama */}
+        <SectionHeading title={t.experience.title} subtitle={t.experience.subtitle || t.experience.description} />
 
         {/* Minimalist Editorial Timeline */}
         <div style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '24px' }}>

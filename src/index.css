@@ -19,9 +19,9 @@
   --border: #E2DDD2;
 
   /* Aksen */
-  --accent: #C2501F;
-  --accent-hover: #A84218;
-  --accent-soft: rgba(194, 80, 31, 0.10);
+  --accent: #BC4715;
+  --accent-hover: #9E380C;
+  --accent-soft: rgba(188, 71, 21, 0.10);
 
   /* Titik crop foto hero (memotong ~25% area transparan atas kanvas: kepala mulai 32%, sisa ruang ~5.8% di desktop) */
   --photo-top-offset: 25%;
@@ -108,9 +108,9 @@
   --border: #2A2D33;
 
   /* Aksen */
-  --accent: #C2501F;
-  --accent-hover: #A84218;
-  --accent-soft: rgba(194, 80, 31, 0.10);
+  --accent: #DE6833;
+  --accent-hover: #E87A48;
+  --accent-soft: rgba(222, 104, 51, 0.12);
 
   /* Latar Halus Panel Hero (Opacity Tema Gelap) */
   --hero-glow-opacity: 0.12;
@@ -275,19 +275,6 @@ button,
   scroll-margin-top: calc(var(--navbar-height) + 24px);
 }
 
-/* Garis pemisah antar section: border 1px var(--border) selebar container, bukan selebar layar */
-.about-section::after,
-.skills-section::after,
-.section:not(#kontak)::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(calc(100% - clamp(32px, 6vw, 48px)), var(--max-width));
-  border-bottom: 1px solid var(--border);
-  pointer-events: none;
-}
 
 /* ==========================================================================
    HERO — Tahap 1: Single Large Panel (Editorial, Tenang, Rapi)
@@ -880,32 +867,83 @@ button,
   }
 }
 
-.section-header {
-  margin-bottom: 40px;
+/* ==========================================================================
+   SectionHeading — Unified Section Title Block (Rata Kiri)
+   Garis tipis 1px var(--border) selebar container tepat di atas judul (jarak 48px)
+   Tanpa garis aksen di samping judul
+   ========================================================================== */
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  border-top: 1px solid var(--border);
+  padding-top: 48px; /* Jarak 48px dari garis pemisah ke judul */
+  margin-bottom: 40px; /* Jarak blok judul ke isi 40px */
+  width: 100%;
+  box-sizing: border-box;
 }
 
-.section-tag {
-  display: inline-block;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 8px;
+.section-heading-title {
+  font-size: clamp(26px, 2.8vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  text-wrap: balance;
+  color: var(--text);
+  margin: 0;
   font-family: var(--font-heading);
+  text-align: left;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1), transform 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.section-title {
-  font-size: clamp(1.85rem, 3.5vw, 2.6rem);
-  font-weight: 700;
-  margin-bottom: 12px;
+.section-heading-subtitle {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-2);
+  max-width: 52ch;
+  margin-top: 12px; /* Jarak 12px dari judul */
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
+  text-align: left;
+  font-family: var(--font-body);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 400ms cubic-bezier(0.16, 1, 0.3, 1) 80ms, transform 400ms cubic-bezier(0.16, 1, 0.3, 1) 80ms; /* stagger 80ms */
 }
 
-.section-description {
-  font-size: 1rem;
-  color: var(--text-secondary);
-  max-width: 620px;
-  line-height: 1.65;
+/* Muncul sekali saja */
+.section-heading--visible .section-heading-title,
+.section-heading--visible .section-heading-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 900px) {
+  .section-heading {
+    padding-top: 48px;
+    margin-bottom: 32px;
+  }
+
+  .section-heading-title {
+    font-size: clamp(24px, 6.5vw, 30px);
+  }
+
+  .section-heading-subtitle {
+    font-size: 15px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .section-heading-title,
+  .section-heading-subtitle {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* ==========================================================================
@@ -922,37 +960,6 @@ button,
   position: relative;
 }
 
-/* Header: Judul + Garis aksen 48px x 4px, jarak bawah 48px */
-.about-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 48px;
-}
-
-.about-title {
-  font-size: clamp(32px, 3.6vw, 48px);
-  font-weight: 800;
-  font-family: var(--font-heading);
-  color: var(--text);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.about-accent-line {
-  display: inline-block;
-  width: 0;
-  height: 4px;
-  background-color: var(--accent);
-  border-radius: 2px;
-  flex-shrink: 0;
-  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-}
-
-.about-header.about-animate--visible .about-accent-line {
-  width: 48px;
-}
 
 /* Grid dua kolom desktop: 1.5fr 0.9fr, gap 80px */
 .about-grid {
@@ -1148,10 +1155,6 @@ button,
     transform: none !important;
     transition: none !important;
   }
-  .about-accent-line {
-    width: 48px !important;
-    transition: none !important;
-  }
   .about-lead-line {
     transform: scaleY(1) !important;
     transition: none !important;
@@ -1186,10 +1189,6 @@ button,
 }
 
 @media (max-width: 480px) {
-  .about-header {
-    gap: 14px;
-    margin-bottom: 36px;
-  }
 
   .about-panel {
     padding: 24px 20px;
@@ -1387,38 +1386,6 @@ button,
   max-width: 1320px;
 }
 
-/* ── Header: Judul "Skills & Tools" + Garis Aksen 48px x 4px ─────────────── */
-
-.skills-header {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 48px;
-}
-
-.skills-title {
-  font-size: clamp(32px, 3.6vw, 48px);
-  font-weight: 800;
-  font-family: var(--font-heading);
-  color: var(--text);
-  line-height: 1.15;
-  letter-spacing: -0.02em;
-  margin: 0;
-}
-
-.skills-accent-line {
-  display: inline-block;
-  width: 0;
-  height: 4px;
-  background-color: var(--accent);
-  border-radius: 2px;
-  flex-shrink: 0;
-  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
-}
-
-.skills-header.skills-animate--visible .skills-accent-line {
-  width: 48px;
-}
 
 /* ── Grid Dua Kolom (Desktop >= 901px) ───────────────────────────────────── */
 
@@ -1446,7 +1413,7 @@ button,
 }
 
 .skills-col-heading {
-  font-size: 24px;
+  font-size: clamp(18px, 1.8vw, 22px);
   font-weight: 700;
   font-family: var(--font-heading);
   color: var(--text);
@@ -1646,10 +1613,6 @@ button,
     transition: none !important;
   }
 
-  .skills-accent-line {
-    width: 48px !important;
-    transition: none !important;
-  }
 
   .skills-comp-name {
     transition: none !important;
@@ -1772,3 +1735,584 @@ button,
     transform: scaleY(0.65) !important; /* posisi statis */
   }
 }
+
+/* ==========================================================================
+   SERTIFIKASI SECTION (Side-by-Side 2-Column Grid & Updated Lightbox)
+   ========================================================================== */
+.cert-section {
+  padding-top: clamp(48px, 6vw, 72px); /* Kecilkan ruang kosong */
+  padding-bottom: clamp(64px, 8vw, 96px);
+  scroll-margin-top: calc(var(--navbar-height) + 24px);
+  position: relative;
+}
+
+
+/* Grid Desktop (>= 901px): 2 Kolom sama lebar (1fr 1fr), gap 40px, rata tengah */
+.cert-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: stretch;
+  padding-bottom: 64px;
+  justify-content: center;
+}
+
+/* Tiap Item: Kolom flex vertikal dengan tinggi sama */
+.cert-item {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--cert-idx, 0) * 80ms);
+}
+
+.cert-item--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* a) Bingkai foto: tinggi tetap 300px, padding 8px, radius 12px, border 1px, latar surface-2 */
+.cert-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  padding: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background-color: var(--surface-2);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 180ms ease, border-color 180ms ease;
+  position: relative;
+  text-align: center;
+}
+
+.cert-frame:hover,
+.cert-frame:focus-visible {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  outline: none;
+}
+
+.cert-frame:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.cert-img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.cert-frame-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-2);
+  padding: 24px;
+  line-height: 1.5;
+  background-color: var(--surface-2);
+  border-radius: 8px;
+  font-family: var(--font-body);
+}
+
+/* Blok teks di bawah foto: rata tengah, jarak foto ke teks 20px */
+.cert-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+}
+
+/* a) Nama: clamp(18px, 1.6vw, 22px), bobot 600, min-height 2 baris, dipusatkan vertikal */
+.cert-name {
+  font-size: clamp(18px, 1.6vw, 22px);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  margin: 0;
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+  text-align: center;
+  min-height: calc(2 * 1.35 * 1em);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.cert-name span {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+/* b) Penerbit: 15px, bobot 500, --text-2, margin-top 6px */
+.cert-issuer {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-2);
+  line-height: 1.4;
+  margin-top: 6px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+/* c) Garis pemisah tipis 1px var(--border), lebar 40px, rata tengah, margin 16px auto */
+.cert-divider {
+  width: 40px;
+  height: 1px;
+  background-color: var(--border);
+  border: none;
+  margin: 16px auto;
+  flex-shrink: 0;
+}
+
+/* d) Periode: dua pasangan sejajar di tengah, jarak 32px, garis vertikal tipis 1px di antaranya */
+.cert-dates {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.cert-date-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+}
+
+.cert-date-label {
+  font-size: 13px;
+  color: var(--text-2);
+  font-weight: 400;
+  line-height: 1.3;
+  text-transform: none;
+}
+
+.cert-date-val {
+  font-size: 15px;
+  color: var(--text);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.cert-date-separator {
+  width: 1px;
+  height: 24px;
+  background-color: var(--border);
+  flex-shrink: 0;
+}
+
+/* e) Deskripsi (bila terisi): 15px, line-height 1.7, --text-2, maks 52ch, margin-inline auto, margin-top 16px */
+.cert-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 52ch;
+  margin-inline: auto;
+  margin-top: 16px;
+  margin-bottom: 0;
+  text-align: center;
+  font-family: var(--font-body);
+}
+
+/* f) Tautan teks "Lihat sertifikat" dan tombol aksi: sebaris, margin-top 8px */
+.cert-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+  width: 100%;
+}
+
+.cert-link-btn {
+  background: transparent;
+  border: none;
+  padding: 0 4px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: none;
+  font-family: var(--font-body);
+  transition: color 150ms ease, text-decoration 150ms ease;
+}
+
+.cert-link-btn:hover,
+.cert-link-btn:focus-visible {
+  text-decoration: underline;
+  outline: none;
+}
+
+.cert-link-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm, 8px);
+}
+
+.cert-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  padding: 0 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 12px);
+  background-color: transparent;
+  text-decoration: none;
+  font-family: var(--font-body);
+  transition: border-color 150ms ease, color 150ms ease, background-color 150ms ease, transform 150ms ease;
+}
+
+.cert-btn:hover,
+.cert-btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: var(--accent-soft);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   LIGHTBOX FOTO MODAL (Foto di atas + Keterangan rata tengah di bawah)
+   ========================================================================== */
+.cert-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: rgba(14, 15, 18, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: certFadeIn 200ms ease forwards;
+  overflow-y: auto;
+}
+
+@keyframes certFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.cert-lightbox-dialog {
+  position: relative;
+  width: fit-content;
+  max-width: min(90vw, 720px);
+  max-height: 90svh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: certScaleIn 200ms ease forwards;
+  outline: none;
+  margin: auto;
+}
+
+@keyframes certScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.cert-lightbox-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: border-color 150ms ease, color 150ms ease, transform 150ms ease;
+  z-index: 20;
+}
+
+.cert-lightbox-close:hover,
+.cert-lightbox-close:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+  transform: scale(1.05);
+}
+
+.cert-lightbox-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Foto besar di atas (maks 90vw x 70svh, object-fit contain) */
+.cert-lightbox-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--surface-2);
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cert-lightbox-img {
+  max-width: 100%;
+  max-height: 70svh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 8px;
+}
+
+/* Keterangan di bawah foto: struktur teks sama */
+.cert-lightbox-meta {
+  padding: 24px;
+  background-color: var(--surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cert-lightbox-name {
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.3;
+  margin: 0;
+  font-family: var(--font-heading);
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.cert-lightbox-issuer {
+  font-size: 15px;
+  color: var(--text-2);
+  font-weight: 500;
+  line-height: 1.4;
+  margin-top: 6px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.cert-lightbox-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin: 16px auto 0 auto;
+  max-width: 52ch;
+  font-family: var(--font-body);
+  text-align: center;
+}
+
+.cert-lightbox-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  width: 100%;
+}
+
+/* ==========================================================================
+   RESPONSIF MOBILE (<= 900px)
+   ========================================================================== */
+@media (max-width: 900px) {
+  .cert-section {
+    padding-top: 40px;
+    padding-bottom: 56px;
+  }
+
+
+  /* Satu kolom, gap antar item 40px */
+  .cert-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+  }
+
+  /* Foto: lebar penuh, tinggi bingkai 240px */
+  .cert-frame {
+    height: 240px;
+    min-height: 44px;
+    width: 100%;
+  }
+
+  /* Blok teks di bawah foto tetap rata tengah, padding horizontal 4px agar teks tidak menempel tepi */
+  .cert-info {
+    margin-top: 16px;
+    padding: 0 4px;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  /* Nama clamp(17px, 4.8vw, 20px), tanpa min-height nama (tinggi mengikuti isi) */
+  .cert-name {
+    font-size: clamp(17px, 4.8vw, 20px);
+    min-height: unset;
+    display: block;
+    text-align: center;
+  }
+
+  .cert-name span {
+    display: inline;
+  }
+
+  /* Penerbit 14px */
+  .cert-issuer {
+    font-size: 14px;
+    margin-top: 6px;
+    text-align: center;
+  }
+
+  .cert-divider {
+    margin: 14px auto;
+  }
+
+  /* Periode mobile: gap 10px (jarak antar pasangan 20px), label 12px, nilai 14px */
+  .cert-dates {
+    gap: 10px;
+  }
+
+  .cert-date-label {
+    font-size: 12px;
+  }
+
+  .cert-date-val {
+    font-size: 14px;
+  }
+
+  .cert-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-top: 14px;
+    margin-inline: auto;
+    text-align: center;
+  }
+
+  .cert-actions {
+    margin-top: 8px;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  /* Lightbox mobile: foto maks 92vw x 55svh, keterangan di bawah */
+  .cert-lightbox-overlay {
+    padding: 16px;
+  }
+
+  .cert-lightbox-dialog {
+    max-width: 92vw;
+  }
+
+  .cert-lightbox-media {
+    padding: 12px;
+  }
+
+  .cert-lightbox-img {
+    max-height: 55svh;
+  }
+
+  .cert-lightbox-meta {
+    padding: 18px 16px;
+  }
+
+  .cert-lightbox-close {
+    top: 12px;
+    right: 12px;
+  }
+}
+
+@media (max-width: 280px) {
+  .cert-dates {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cert-date-separator {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   PREFERS-REDUCED-MOTION
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+
+  .cert-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .cert-frame {
+    transition: none !important;
+    transform: none !important;
+  }
+
+  .cert-lightbox-overlay,
+  .cert-lightbox-dialog {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .cert-btn,
+  .cert-link-btn,
+  .cert-lightbox-close {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+
+

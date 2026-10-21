@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
+import SectionHeading from './SectionHeading';
 import { getWhatsAppLink } from '../data/portfolioData';
 import { Mail, MapPin, Send } from 'lucide-react';
 import { SiGithub, SiInstagram, SiWhatsapp } from 'react-icons/si';
@@ -79,12 +80,8 @@ export default function Contact() {
     <section id="kontak" className="section">
       <div className="container">
         
-        {/* Section Header */}
-        <div className="section-header">
-          <span className="section-tag">{t.contact.tag}</span>
-          <h2 className="section-title">{t.contact.title}</h2>
-          <p className="section-description">{t.contact.description}</p>
-        </div>
+        {/* Judul & Subjudul: SectionHeading Bersama */}
+        <SectionHeading title={t.contact.title} subtitle={t.contact.subtitle} />
 
         <div
           style={{

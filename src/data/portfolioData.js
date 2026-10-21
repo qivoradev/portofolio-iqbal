@@ -112,25 +112,34 @@ export const portfolioData = {
       },
       about: {
         title: "Tentang Saya",
+        subtitle: "Latar belakang dan fokus saya.",
       },
       skills: {
-        title: "Skills & Tools",
+        title: "Keahlian & Tools",
+        subtitle: "Kompetensi dan perangkat yang saya gunakan.",
         competenciesTitle: "Kompetensi Utama",
         toolsTitle: "Tools & Tech",
       },
       projects: {
         tag: "Karya Terpilih",
-        title: "Proyek Analisis Data",
+        title: "Proyek",
+        subtitle: "Studi kasus analisis data.",
         description: "Showcase 4 studi kasus analitis dengan area visualisasi dashboard, pemodelan metrik, dan eksplorasi dataset.",
         caseStudy: "Studi Kasus",
         demoBtn: "Dashboard Demo",
         codeBtn: "Kueri & Analisis",
       },
       certifications: {
-        tag: "Kualifikasi",
         title: "Sertifikasi",
-        description: "Sertifikasi profesi dan kredensial teknis yang tervalidasi.",
-        credentialBtn: "Lihat Kredensial",
+        subtitle: "Kredensial profesi yang saya miliki.",
+        viewCertBtn: "Lihat sertifikat",
+        issuedPrefix: "Terbit",
+        validUntilPrefix: "Berlaku hingga",
+        credentialBtn: "Lihat kredensial",
+        downloadPdfBtn: "Unduh PDF",
+        placeholderImg: "[Foto sertifikat, diisi pemilik]",
+        enlargeAriaPrefix: "Perbesar sertifikat",
+        closeAria: "Tutup",
       },
       experience: {
         tag: "Jejak Karir",
@@ -139,7 +148,8 @@ export const portfolioData = {
       },
       contact: {
         tag: "Komunikasi",
-        title: "Kontak & Diskusi",
+        title: "Kontak",
+        subtitle: "Mari berdiskusi.",
         description: "Punya tawaran proyek, peluang karir, atau diskusi teknis? Silakan hubungi via WhatsApp atau formulir pesan.",
         directHeading: "Saluran Langsung",
         directDesc: "Untuk komunikasi instan, silakan hubungi langsung melalui WhatsApp atau email:",
@@ -185,25 +195,34 @@ export const portfolioData = {
       },
       about: {
         title: "About Me",
+        subtitle: "My background and focus.",
       },
       skills: {
         title: "Skills & Tools",
+        subtitle: "The competencies and tools I use.",
         competenciesTitle: "Core Competencies",
         toolsTitle: "Tools & Tech",
       },
       projects: {
         tag: "Selected Works",
-        title: "Data Analytics Projects",
+        title: "Projects",
+        subtitle: "Data analysis case studies.",
         description: "[EN]",
         caseStudy: "Case Study",
         demoBtn: "Dashboard Demo",
         codeBtn: "Queries & Analysis",
       },
       certifications: {
-        tag: "Qualifications",
         title: "Certifications",
-        description: "[EN]",
-        credentialBtn: "View Credential",
+        subtitle: "Professional credentials I hold.",
+        viewCertBtn: "View certificate",
+        issuedPrefix: "Issued",
+        validUntilPrefix: "Valid until",
+        credentialBtn: "View credential",
+        downloadPdfBtn: "Download PDF",
+        placeholderImg: "[Foto sertifikat, diisi pemilik]",
+        enlargeAriaPrefix: "Enlarge certificate",
+        closeAria: "Close",
       },
       experience: {
         tag: "Career Path",
@@ -212,8 +231,8 @@ export const portfolioData = {
       },
       contact: {
         tag: "Communication",
-        title: "Contact & Discussion",
-        description: "[EN]",
+        title: "Contact",
+        subtitle: "Let's talk.",
         directHeading: "Direct Channels",
         directDesc: "[EN]",
         waOfficial: "Official WhatsApp",
@@ -291,23 +310,50 @@ export const portfolioData = {
     },
   ],
 
-  // Sertifikasi (Placeholder untuk seksi Sertifikasi)
-  certifications: [
+  // Sertifikasi (Certificates Data)
+  // Urut: Certiport dulu, lalu Web Developer
+  certificates: [
     {
-      id: 1,
-      title: "Web Developer",
-      issuer: "Badan Nasional Sertifikasi Profesi (BNSP)",
-      period: "[Tahun / Periode]",
-      credentialUrl: "[Tautan Kredensial / File]",
+      slug: "ai-certiport",
+      name: "Information Technology Specialist: Artificial Intelligence",
+      issuer: "Certiport - A Pearson VUE Business",
+      issued: { id: "Juni 2026", en: "June 2026" },
+      validUntil: { id: "Juni 2031", en: "June 2031" },
+      description: {
+        id: "",
+        en: "",
+      },
+      credentialUrl: "",
+      pdf: "",
+      image: "/certificates/ai-certiport.webp",
+      imageAlt: {
+        id: "Sertifikat Information Technology Specialist: Artificial Intelligence",
+        en: "Information Technology Specialist: Artificial Intelligence Certificate",
+      },
     },
     {
-      id: 2,
-      title: "Artificial Intelligence",
-      issuer: "Certiport",
-      period: "[Tahun / Periode]",
-      credentialUrl: "[Tautan Kredensial / File]",
+      slug: "web-developer",
+      name: "Web Developer",
+      issuer: "Lembaga Sertifikasi Profesi Informatika",
+      issued: { id: "Maret 2026", en: "March 2026" },
+      validUntil: { id: "Maret 2029", en: "March 2029" },
+      description: {
+        id: "",
+        en: "",
+      },
+      credentialUrl: "",
+      pdf: "",
+      image: "/certificates/web-developer.webp",
+      imageAlt: {
+        id: "Sertifikat Web Developer",
+        en: "Web Developer Certificate",
+      },
     },
   ],
+  // Alias backward-compatibility
+  get certifications() {
+    return this.certificates;
+  },
 
   // Proyek Analisis Data (4 Item Placeholder)
   projects: [

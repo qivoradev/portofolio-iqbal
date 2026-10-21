@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
+import SectionHeading from './SectionHeading';
 import { ExternalLink, Image as ImageIcon } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
@@ -11,12 +12,8 @@ export default function Projects() {
     <section id="proyek" className="section">
       <div className="container">
         
-        {/* Section Header */}
-        <div className="section-header">
-          <span className="section-tag">{t.projects.tag}</span>
-          <h2 className="section-title">{t.projects.title}</h2>
-          <p className="section-description">{t.projects.description}</p>
-        </div>
+        {/* Judul & Subjudul: SectionHeading Bersama */}
+        <SectionHeading title={t.projects.title} subtitle={t.projects.subtitle} />
 
         {/* Projects Grid: 4 Item Placeholder (Mobile-friendly minmax 280px) */}
         <div
