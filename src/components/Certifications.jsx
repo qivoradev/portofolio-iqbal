@@ -134,7 +134,7 @@ export default function Certifications() {
   }, [certificates.length]);
 
   return (
-    <section id="sertifikasi" className="cert-section py-12 md:py-16" ref={sectionRef}>
+    <section id="sertifikasi" className="cert-section py-12 md:py-16 scroll-mt-24 pt-8 md:pt-16" ref={sectionRef}>
       <div className="container">
         
         {/* Judul & Subjudul: SectionHeading Bersama */}
@@ -205,21 +205,21 @@ export default function Certifications() {
                   )}
                 </div>
 
-                {/* 2. Alignment & Keseimbangan Teks: flex flex-col justify-between */}
-                <div className="cert-info flex flex-col justify-between flex-1 mt-4">
-                  <div className="cert-info-top flex flex-col">
+                {/* 2. Alignment & Keseimbangan Teks: flex flex-col justify-between (Mobile: Center, Desktop: Left) */}
+                <div className="cert-info flex flex-col justify-between flex-1 mt-4 items-center md:items-start text-center md:text-left">
+                  <div className="cert-info-top flex flex-col items-center md:items-start text-center md:text-left w-full">
                     {/* Pill badge penerbit */}
-                    <span className="cert-badge bg-zinc-800 text-zinc-300 text-xs px-2.5 py-1 rounded-full w-fit mb-2">
+                    <span className="cert-badge bg-zinc-800 text-zinc-300 text-xs px-2.5 py-1 rounded-full w-fit mb-2 mx-auto md:mx-0">
                       {issuerBadge}
                     </span>
 
                     {/* Judul sertifikat dengan min-height min-h-[3.25rem] */}
-                    <h3 className="cert-name text-lg font-semibold text-zinc-100 min-h-[3.25rem] flex items-center">
+                    <h3 className="cert-name text-lg font-semibold text-zinc-100 min-h-[3.25rem] flex items-center justify-center md:justify-start text-center md:text-left w-full">
                       <span>{cert.name}</span>
                     </h3>
 
                     {/* Periode / Tanggal */}
-                    <div className="cert-dates flex items-center gap-3 text-xs text-zinc-400 mt-2 flex-wrap">
+                    <div className="cert-dates flex items-center justify-center md:justify-start gap-3 text-xs text-zinc-400 mt-2 flex-wrap w-full text-center md:text-left">
                       <div className="cert-date-col flex items-center gap-1.5">
                         <span className="cert-date-label">{t.certifications.issuedPrefix || (language === 'id' ? 'Diterbitkan' : 'Issued')}:</span>
                         <span className="cert-date-val font-medium text-zinc-300">{issuedVal}</span>
@@ -233,12 +233,12 @@ export default function Certifications() {
 
                     {/* Deskripsi bila ada */}
                     {hasDesc && (
-                      <p className="cert-desc text-sm text-zinc-400 mt-2">{descText}</p>
+                      <p className="cert-desc text-sm text-zinc-400 mt-2 text-center md:text-left">{descText}</p>
                     )}
                   </div>
 
-                  {/* 3. Tombol Outline Interaktif di bagian paling bawah */}
-                  <div className="cert-info-bottom mt-5">
+                  {/* 3. Tombol Outline Interaktif di bagian paling bawah (Lebar proporsional w-full di mobile) */}
+                  <div className="cert-info-bottom mt-5 w-full">
                     <button
                       type="button"
                       className="cert-btn-outline w-full py-2 px-4 rounded-lg border border-orange-500/40 text-orange-400 hover:bg-orange-500 hover:text-white transition-all text-sm font-medium flex items-center justify-center gap-2"

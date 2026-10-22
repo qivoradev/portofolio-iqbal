@@ -236,7 +236,6 @@ export const portfolioData = {
       },
       footer: {
         copyright: "Hak Cipta Dilindungi.",
-        subtitle: "Desain Editorial Minimalis.",
         backToTop: "Ke Atas",
       }
     },
@@ -325,7 +324,6 @@ export const portfolioData = {
       },
       footer: {
         copyright: "All Rights Reserved.",
-        subtitle: "Minimalist Editorial Design.",
         backToTop: "Back to Top",
       }
     }

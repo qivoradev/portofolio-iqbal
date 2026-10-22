@@ -1,351 +1,240 @@
 import React, { useState, useEffect } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { getWhatsAppLink } from '../data/portfolioData';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Home, BarChart3, Award, Mail, Sun, Moon } from 'lucide-react';
+import { SiWhatsapp } from 'react-icons/si';
 
 export default function Navbar() {
   const { language, toggleLanguage, theme, toggleTheme, t, portfolioData } = usePortfolio();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('beranda');
 
   const { contacts } = portfolioData;
-  const isWaDisabled = !contacts.whatsapp || contacts.whatsapp.trim() === '';
   const whatsappUrl = getWhatsAppLink(contacts.whatsapp, contacts.whatsappMessage, language);
 
   const navLinks = [
-    { id: 'beranda', label: t.nav.home, href: '#beranda' },
-    { id: 'tentang', label: t.nav.about, href: '#tentang' },
-    { id: 'tools', label: t.nav.skills, href: '#tools' },
-    { id: 'proyek', label: t.nav.projects, href: '#proyek' },
-    { id: 'sertifikasi', label: t.nav.certifications, href: '#sertifikasi' },
-    { id: 'kontak', label: t.nav.contact, href: '#kontak' },
+    {
+      id: 'beranda',
+      label: t.nav.home || (language === 'en' ? 'Home' : 'Beranda'),
+      href: '#beranda',
+      Icon: Home,
+    },
+    {
+      id: 'proyek',
+      label: t.nav.projects || (language === 'en' ? 'Projects' : 'Proyek'),
+      href: '#proyek',
+      Icon: BarChart3,
+    },
+    {
+      id: 'sertifikasi',
+      label: t.nav.certifications || (language === 'en' ? 'Certifications' : 'Sertifikasi'),
+      href: '#sertifikasi',
+      Icon: Award,
+    },
+    {
+      id: 'kontak',
+      label: t.nav.contact || (language === 'en' ? 'Contact' : 'Kontak'),
+      href: '#kontak',
+      Icon: Mail,
+    },
   ];
 
-  // Penentuan menu aktif secara deterministik dan langsung (pada mount & scroll)
+  // Penentuan menu aktif secara dinamis saat scroll
   useEffect(() => {
-    const determineActiveSection = () => {
-      if (window.scrollY < 120) {
-        return 'beranda';
+    const sectionIds = ['beranda', 'proyek', 'sertifikasi', 'kontak'];
+
+    const handleScroll = () => {
+      // Jika sudah di paling bawah halaman
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70) {
+        setActiveSection('kontak');
+        return;
       }
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50) {
-        return 'kontak';
-      }
-      const sectionIds = ['beranda', 'tentang', 'tools', 'proyek', 'sertifikasi', 'kontak'];
-      const offset = 160;
-      let current = 'beranda';
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= offset) {
-            current = id;
-          }
+
+      // Deteksi posisi scroll dari bawah ke atas
+      const scrollPosition = window.scrollY + 180;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPosition) {
+          setActiveSection(sectionIds[i]);
+          return;
         }
       }
-      return current;
+      setActiveSection('beranda');
     };
 
-    const update = () => {
-      setIsScrolled(window.scrollY > 40);
-      setActiveSection(determineActiveSection());
-    };
-
-    // Jalankan langsung saat mount
-    update();
-
-    // Jalankan kembali setelah rendering layout selesai
-    const timer1 = setTimeout(update, 50);
-    const timer2 = setTimeout(update, 200);
-
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll, { passive: true });
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      window.removeEventListener('scroll', update);
-      window.removeEventListener('resize', update);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
     };
   }, []);
 
-  // Menutup menu mobile saat tombol Escape ditekan
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
-        setMobileMenuOpen(false);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  // Handler smooth scroll ke anchor
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    const targetId = href.replace('#', '');
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+      targetElement.scrollIntoView({ behavior: 'smooth' });
+      window.history.pushState(null, '', href);
+      setActiveSection(targetId);
+    }
+  };
 
   return (
-    <header
-      style={{
-        position: 'fixed',
-        top: '16px',
-        left: '16px',
-        right: '16px',
-        zIndex: 1000,
-        maxWidth: 'var(--max-width)',
-        margin: '0 auto',
-      }}
-    >
-      {/* Kapsul Melayang (Floating Pill) */}
-      <div
-        className="floating-capsule"
-        style={{
-          width: '100%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: isScrolled ? '8px 18px' : '10px 22px',
-          borderRadius: 'var(--radius-pill)',
-          background: 'var(--navbar-bg)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
-          border: '1px solid var(--border)',
-          boxShadow: 'var(--navbar-shadow)',
-          transition: 'padding var(--transition-fast)',
-        }}
-      >
-        {/* Kiri: Titik kecil warna --accent + Nama */}
-        <a
-          href="#beranda"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '10px',
-            fontFamily: 'var(--font-heading)',
-            fontWeight: 700,
-            fontSize: '1.05rem',
-            letterSpacing: '-0.02em',
-            color: 'var(--text-primary)',
-            minHeight: '44px',
-          }}
-        >
-          <span
-            style={{
-              width: '8px',
-              height: '8px',
-              borderRadius: '50%',
-              background: 'var(--accent)',
-              display: 'inline-block',
-              flexShrink: 0,
-            }}
-          />
-          <span>{portfolioData.name}</span>
-        </a>
-
-        {/* Tengah (Desktop): Link Navigasi Beranda s/d Kontak */}
-        <nav
-          className="desktop-nav-links"
-          style={{
-            display: 'none',
-            alignItems: 'center',
-            gap: '20px',
-          }}
-        >
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
-            return (
-              <a
-                key={link.id}
-                href={link.href}
-                aria-current={isActive ? 'location' : undefined}
-                style={{
-                  fontSize: '0.86rem',
-                  fontWeight: isActive ? 600 : 500,
-                  color: isActive ? 'var(--accent)' : 'var(--text-secondary)',
-                  padding: '0 6px',
-                  minHeight: '44px',
-                  minWidth: '44px',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'relative',
-                  borderBottom: isActive ? '2px solid var(--accent)' : '2px solid transparent',
-                  transition: 'color var(--transition-fast), border-color var(--transition-fast)',
-                }}
-              >
-                {link.label}
-              </a>
-            );
-          })}
-        </nav>
-
-        {/* Kanan: Berurutan ID|EN, Tema, dan SATU tombol Hubungi */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {/* 1. Tombol Bahasa ID | EN */}
-          <button
-            onClick={toggleLanguage}
-            title={language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
-            aria-label="Toggle language"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '4px',
-              padding: '6px 10px',
-              borderRadius: 'var(--radius-pill)',
-              background: 'var(--bg-surface-elevated)',
-              border: '1px solid var(--border-card)',
-              color: 'var(--text-secondary)',
-              fontSize: '0.78rem',
-              fontWeight: 600,
-              cursor: 'pointer',
-              minHeight: '44px',
-              minWidth: '44px',
-              justifyContent: 'center',
-            }}
+    <>
+      {/* 1. Tata Letak Desktop (md:flex): Floating Capsule / Island Navigation di Atas Tengah Layar */}
+      <header className="navbar-desktop-wrapper fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden md:block">
+        <div className="nav-capsule-desktop rounded-full px-5 py-2.5 bg-zinc-900/80 backdrop-blur-md border border-zinc-800 shadow-xl shadow-black/30 flex items-center gap-4">
+          
+          {/* Logo / Inisial kecil dengan status dot oranye ("• Iqbal D.F") */}
+          <a
+            href="#beranda"
+            onClick={(e) => handleNavClick(e, '#beranda')}
+            className="nav-logo flex items-center gap-2 text-sm font-semibold text-zinc-100 hover:text-orange-400 transition-colors"
+            title="Iqbal D.F"
           >
-            <span style={{ color: language === 'id' ? 'var(--accent)' : 'var(--text-muted)' }}>ID</span>
-            <span style={{ color: 'var(--border-strong)' }}>|</span>
-            <span style={{ color: language === 'en' ? 'var(--accent)' : 'var(--text-muted)' }}>EN</span>
+            <span className="nav-status-dot w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.85)] animate-pulse inline-block flex-shrink-0" />
+            <span className="font-heading tracking-tight whitespace-nowrap">Iqbal D.F</span>
+          </a>
+
+          {/* Pemisah Vertikal Tipis */}
+          <div className="nav-divider h-4 w-px bg-zinc-700/60" aria-hidden="true" />
+
+          {/* Navigasi Teks Ringkas (Beranda, Proyek, Sertifikasi, Kontak) */}
+          <nav className="nav-links flex items-center gap-4">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  className={`nav-link-item relative text-xs font-medium tracking-wide transition-colors py-1 ${
+                    isActive ? 'active text-orange-400 font-semibold' : 'text-zinc-400 hover:text-orange-400'
+                  }`}
+                >
+                  <span>{link.label}</span>
+                  {isActive && (
+                    <span
+                      className="active-indicator-dot absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_6px_rgba(249,115,22,0.9)]"
+                      aria-hidden="true"
+                    />
+                  )}
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Pemisah Vertikal Tipis */}
+          <div className="nav-divider h-4 w-px bg-zinc-700/60" aria-hidden="true" />
+
+          {/* Tombol Switch Bahasa (ID / EN) & Tombol Tema / Kontak Cepat */}
+          <div className="nav-actions flex items-center gap-2">
+            {/* Switch Bahasa */}
+            <button
+              type="button"
+              onClick={toggleLanguage}
+              className="nav-lang-btn text-xs font-semibold px-2 py-1 rounded-md text-zinc-300 hover:text-orange-400 hover:bg-zinc-800/80 transition-all flex items-center gap-1 cursor-pointer"
+              title={language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
+              aria-label="Ganti bahasa"
+            >
+              <span className={language === 'id' ? 'text-orange-400 font-bold' : 'text-zinc-400'}>ID</span>
+              <span className="text-zinc-600 text-[10px]">/</span>
+              <span className={language === 'en' ? 'text-orange-400 font-bold' : 'text-zinc-400'}>EN</span>
+            </button>
+
+            {/* Tombol Ganti Tema */}
+            <button
+              type="button"
+              onClick={toggleTheme}
+              className="nav-theme-btn p-1.5 rounded-full text-zinc-300 hover:text-orange-400 hover:bg-zinc-800/80 transition-all flex items-center justify-center cursor-pointer"
+              title={theme === 'dark' ? 'Ganti ke Tema Terang' : 'Ganti ke Tema Gelap'}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+            </button>
+
+            {/* Tombol Kontak Cepat WhatsApp */}
+            {contacts?.whatsapp && (
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-wa-btn p-1.5 rounded-full text-zinc-300 hover:text-emerald-400 hover:bg-zinc-800/80 transition-all flex items-center justify-center"
+                title="Chat via WhatsApp"
+                aria-label="Chat via WhatsApp"
+              >
+                <SiWhatsapp size={15} className="text-emerald-400 hover:scale-110 transition-transform" />
+              </a>
+            )}
+          </div>
+
+        </div>
+      </header>
+
+      {/* 2. Tata Letak Mobile (< 768px): Floating Bottom Dock di Bawah Layar */}
+      <nav className="mobile-dock-wrapper fixed bottom-5 left-1/2 -translate-x-1/2 z-50 md:hidden">
+        <div className="dock-capsule rounded-full px-4 py-2.5 bg-zinc-900/90 backdrop-blur-lg border border-zinc-800 shadow-2xl shadow-black/50 flex items-center gap-4">
+          
+          {/* Ikon Navigasi: Home, Proyek, Sertifikasi, Kontak */}
+          <div className="flex items-center gap-4">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              const IconComponent = link.Icon;
+              return (
+                <a
+                  key={link.id}
+                  href={link.href}
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  aria-label={link.label}
+                  title={link.label}
+                  className={`dock-link-item relative p-1.5 rounded-full flex flex-col items-center justify-center transition-colors ${
+                    isActive ? 'active text-orange-400' : 'text-zinc-400 hover:text-zinc-200'
+                  }`}
+                >
+                  <IconComponent size={20} aria-hidden="true" />
+                  {isActive && (
+                    <span
+                      className="dock-active-dot absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_6px_rgba(249,115,22,0.9)]"
+                      aria-hidden="true"
+                    />
+                  )}
+                </a>
+              );
+            })}
+          </div>
+
+          {/* Pemisah Vertikal Tipis */}
+          <div className="h-4 w-px bg-zinc-700/60" aria-hidden="true" />
+
+          {/* Tombol Teks Mini "ID | EN" */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="dock-lang-btn text-xs font-semibold px-1 py-1 text-zinc-300 flex items-center gap-1 active:scale-95 transition-transform cursor-pointer"
+            title={language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
+            aria-label="Ganti bahasa"
+          >
+            <span className={language === 'id' ? 'text-orange-400 font-bold' : 'text-zinc-400'}>ID</span>
+            <span className="text-zinc-600 text-[10px]">|</span>
+            <span className={language === 'en' ? 'text-orange-400 font-bold' : 'text-zinc-400'}>EN</span>
           </button>
 
-          {/* 2. Tombol Ganti Tema Terang / Gelap */}
+          {/* Tombol Tema Ringkas Mobile */}
           <button
+            type="button"
             onClick={toggleTheme}
+            className="dock-theme-btn p-1 text-zinc-400 hover:text-orange-400 active:scale-95 transition-transform flex items-center justify-center cursor-pointer"
             title={theme === 'dark' ? 'Ganti ke Tema Terang' : 'Ganti ke Tema Gelap'}
-            aria-label="Toggle color theme"
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '8px',
-              borderRadius: 'var(--radius-pill)',
-              background: 'var(--bg-surface-elevated)',
-              border: '1px solid var(--border-card)',
-              color: 'var(--text-primary)',
-              cursor: 'pointer',
-              minHeight: '44px',
-              minWidth: '44px',
-            }}
+            aria-label="Toggle theme"
           >
             {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
           </button>
 
-          {/* 3. SATU Tombol Hubungi (warna solid --accent, tanpa gradasi & glow) */}
-          <a
-            href={isWaDisabled ? undefined : whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-primary desktop-hubungi-btn"
-            style={{
-              borderRadius: 'var(--radius-pill)',
-              padding: '8px 18px',
-              fontSize: '0.84rem',
-              display: 'none',
-              minHeight: '44px',
-              ...(isWaDisabled ? { opacity: 0.45, cursor: 'not-allowed', pointerEvents: 'none' } : {}),
-            }}
-            aria-disabled={isWaDisabled}
-          >
-            <span>{t.nav.contactBtn}</span>
-          </a>
-
-          {/* Hamburger Toggle (<= 820px) */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Buka menu navigasi"
-            className="mobile-hamburger-btn"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'transparent',
-              border: 'none',
-              color: 'var(--text-primary)',
-              cursor: 'pointer',
-              padding: '8px',
-              minHeight: '44px',
-              minWidth: '44px',
-            }}
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
         </div>
-      </div>
-
-      {/* Mobile Dropdown Panel dari Kapsul */}
-      {mobileMenuOpen && (
-        <div
-          role="dialog"
-          aria-modal="true"
-          style={{
-            marginTop: '10px',
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border-card)',
-            borderRadius: 'var(--radius-lg)',
-            padding: '20px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '10px',
-            boxShadow: 'var(--navbar-shadow)',
-          }}
-        >
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
-            return (
-              <a
-                key={link.id}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                aria-current={isActive ? 'location' : undefined}
-                style={{
-                  fontSize: '0.95rem',
-                  fontWeight: isActive ? 600 : 500,
-                  color: isActive ? 'var(--accent)' : 'var(--text-primary)',
-                  padding: '10px 14px',
-                  borderRadius: 'var(--radius-sm)',
-                  background: isActive ? 'var(--accent-subtle)' : 'transparent',
-                  borderLeft: isActive ? '3px solid var(--accent)' : '3px solid transparent',
-                  minHeight: '44px',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                {link.label}
-              </a>
-            );
-          })}
-
-          {/* Tombol Hubungi di Mobile Panel */}
-          <div style={{ paddingTop: '12px', borderTop: '1px solid var(--border-subtle)', marginTop: '4px' }}>
-            <a
-              href={isWaDisabled ? undefined : whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-              onClick={() => setMobileMenuOpen(false)}
-              style={{
-                width: '100%',
-                borderRadius: 'var(--radius-pill)',
-                minHeight: '44px',
-                ...(isWaDisabled ? { opacity: 0.45, cursor: 'not-allowed', pointerEvents: 'none' } : {}),
-              }}
-              aria-disabled={isWaDisabled}
-            >
-              <span>{t.nav.contactBtn}</span>
-            </a>
-          </div>
-        </div>
-      )}
-
-      {/* CSS Responsive Breakpoint untuk Desktop */}
-      <style>{`
-        @media (min-width: 821px) {
-          .desktop-nav-links { display: flex !important; }
-          .desktop-hubungi-btn { display: inline-flex !important; }
-          .mobile-hamburger-btn { display: none !important; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .floating-capsule {
-            transition: none !important;
-          }
-        }
-      `}</style>
-    </header>
+      </nav>
+    </>
   );
 }

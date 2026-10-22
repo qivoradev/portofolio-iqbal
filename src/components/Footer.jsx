@@ -18,7 +18,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="site-footer py-12 md:py-16"
+      className="site-footer py-12 md:py-16 pb-12"
       style={{
         borderTop: '1px solid var(--border)',
         background: 'var(--bg)',
@@ -34,17 +34,9 @@ export default function Footer() {
       >
         {/* Quick Contact Row */}
         <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '16px',
-            paddingBottom: '20px',
-            borderBottom: '1px solid var(--border)',
-          }}
+          className="footer-contact-row flex flex-col md:flex-row items-center justify-between gap-4 pb-5 border-b border-zinc-200 dark:border-zinc-800 w-full text-center md:text-left"
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '20px', flexWrap: 'wrap' }}>
+          <div className="footer-email-col flex items-center justify-center md:justify-start gap-5 flex-wrap w-full md:w-auto">
             {contacts.email && (
               <a
                 href={`mailto:${contacts.email}`}
@@ -64,7 +56,7 @@ export default function Footer() {
             )}
           </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
+          <div className="footer-actions-col flex items-center justify-center md:justify-end gap-3 flex-wrap w-full md:w-auto">
             {contacts.whatsapp && (
               <a
                 href={waUrl}
@@ -99,20 +91,18 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright */}
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            gap: '12px',
-          }}
-        >
-          <p style={{ fontSize: '0.88rem', color: 'var(--text-2)', margin: 0 }}>
+        <div className="footer-copyright-wrap w-full flex justify-center text-center">
+          <p
+            className="footer-copyright text-center w-full"
+            style={{
+              fontSize: '0.88rem',
+              color: 'var(--text-2)',
+              margin: 0,
+              textAlign: 'center',
+              width: '100%',
+            }}
+          >
             © {CURRENT_YEAR} <strong style={{ color: 'var(--text)', fontFamily: 'var(--font-heading)' }}>{portfolioData.name}</strong>. {t.footer.copyright}
-          </p>
-          <p style={{ fontSize: '0.8rem', color: 'var(--text-2)', margin: 0 }}>
-            {t.footer.subtitle}
           </p>
         </div>
       </div>
