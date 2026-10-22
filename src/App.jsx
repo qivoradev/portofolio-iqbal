@@ -12,7 +12,7 @@ import Footer from './components/Footer';
 export default function App() {
   return (
     <PortfolioProvider>
-      <div className="app-layout min-h-screen flex flex-col pb-24 md:pb-0" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <div className="app-layout min-h-screen flex flex-col pb-28 md:pb-0" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
         <Navbar />
         <main style={{ flex: 1 }}>
           <Hero />

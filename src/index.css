@@ -3970,66 +3970,142 @@ hr,
   background-color: rgba(63, 63, 70, 0.5);
 }
 
-/* Mobile Bottom Dock */
+/* ==========================================================================
+   MOBILE BOTTOM DOCK (Strict Horizontal Capsule Layout)
+   ========================================================================== */
 .mobile-dock-wrapper {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
+  position: fixed !important;
+  bottom: 1.5rem !important; /* bottom-6 (24px) */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 9999 !important; /* z-50 */
   display: none;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  max-width: 92vw;
+  align-items: center !important;
+  justify-content: center !important;
+  width: max-content !important;
+  max-width: 95vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  pointer-events: auto !important;
 }
 
 .dock-capsule {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 10px 18px;
-  border-radius: 9999px;
-  background-color: rgba(24, 24, 27, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(63, 63, 70, 0.6);
-  box-shadow: 0 20px 40px -4px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  color: #F4F4F5;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 1.25rem !important; /* gap-5 (20px) */
+  width: auto !important;
+  padding: 10px 20px !important; /* px-5 py-2.5 */
+  border-radius: 9999px !important;
+  background-color: rgba(24, 24, 27, 0.90) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(63, 63, 70, 0.80) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5) !important;
+  box-sizing: border-box !important;
+  color: #F4F4F5 !important;
 }
 
-.dock-link-item {
-  position: relative;
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #A1A1AA;
-  padding: 6px;
-  border-radius: 50%;
-  text-decoration: none;
-  transition: color 0.2s ease, transform 0.15s ease;
+.dock-nav-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-decoration: none !important;
+  color: #A1A1AA !important; /* text-zinc-400 */
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+  transition: color 0.2s ease, transform 0.15s ease !important;
 }
 
-.dock-link-item:hover,
-.dock-link-item.active {
-  color: #FB923C;
+.dock-nav-item:hover,
+.dock-nav-item.active {
+  color: #F97316 !important; /* text-orange-500 */
 }
 
-.dock-link-item:active {
-  transform: scale(0.92);
+.dock-nav-item:active {
+  transform: scale(0.92) !important;
 }
 
-.dock-active-dot {
-  position: absolute;
-  bottom: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: #F97316;
-  box-shadow: 0 0 6px rgba(249, 115, 22, 0.9);
+.dock-nav-item svg,
+.dock-nav-item .w-5 {
+  width: 1.25rem !important; /* w-5 (20px) */
+  height: 1.25rem !important; /* h-5 (20px) */
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+
+.dock-divider {
+  width: 1px !important; /* w-[1px] */
+  height: 1rem !important; /* h-4 (16px) */
+  background-color: rgba(63, 63, 70, 0.6) !important; /* bg-zinc-700/60 */
+  flex-shrink: 0 !important;
+}
+
+.dock-lang-btn {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  color: #D4D4D8 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  transition: color 0.2s ease, transform 0.15s ease !important;
+}
+
+.dock-lang-btn:hover {
+  color: #F97316 !important;
+}
+
+.dock-lang-btn:active {
+  transform: scale(0.92) !important;
+}
+
+.dock-theme-btn {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  color: #A1A1AA !important; /* text-zinc-400 */
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  transition: color 0.2s ease, transform 0.15s ease !important;
+}
+
+.dock-theme-btn:hover {
+  color: #F97316 !important;
+}
+
+.dock-theme-btn:active {
+  transform: scale(0.92) !important;
+}
+
+.dock-theme-btn svg,
+.dock-theme-btn .w-5 {
+  width: 1.25rem !important; /* w-5 (20px) */
+  height: 1.25rem !important; /* h-5 (20px) */
+  display: block !important;
+  flex-shrink: 0 !important;
+}
+
+/* Breakpoints & Area Aman Konten */
+.pb-28 {
+  padding-bottom: 7rem !important; /* 112px */
 }
 
 @media (min-width: 768px) {
@@ -4038,6 +4114,9 @@ hr,
   }
   .mobile-dock-wrapper {
     display: none !important;
+  }
+  .app-layout {
+    padding-bottom: 0 !important;
   }
 }
 
@@ -4049,7 +4128,7 @@ hr,
     display: flex !important;
   }
   .app-layout {
-    padding-bottom: 6rem !important; /* pb-24 */
+    padding-bottom: 7rem !important; /* pb-28: 112px */
   }
 }
 

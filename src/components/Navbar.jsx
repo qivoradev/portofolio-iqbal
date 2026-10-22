@@ -38,18 +38,16 @@ export default function Navbar() {
     },
   ];
 
-  // Penentuan menu aktif secara dinamis saat scroll
+  // Penentuan menu aktif saat scroll
   useEffect(() => {
     const sectionIds = ['beranda', 'proyek', 'sertifikasi', 'kontak'];
 
     const handleScroll = () => {
-      // Jika sudah di paling bawah halaman
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70) {
         setActiveSection('kontak');
         return;
       }
 
-      // Deteksi posisi scroll dari bawah ke atas
       const scrollPosition = window.scrollY + 180;
       for (let i = sectionIds.length - 1; i >= 0; i--) {
         const el = document.getElementById(sectionIds[i]);
@@ -70,7 +68,7 @@ export default function Navbar() {
     };
   }, []);
 
-  // Handler smooth scroll ke anchor
+  // Handler smooth scroll
   const handleNavClick = (e, href) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
@@ -84,7 +82,7 @@ export default function Navbar() {
 
   return (
     <>
-      {/* 1. Tata Letak Desktop (md:flex): Floating Capsule / Island Navigation di Atas Tengah Layar */}
+      {/* 1. Tata Letak Desktop (md:flex): Floating Capsule di Atas Tengah Layar */}
       <header className="navbar-desktop-wrapper fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden md:block">
         <div className="nav-capsule-desktop rounded-full px-5 py-2.5 bg-zinc-900/80 backdrop-blur-md border border-zinc-800 shadow-xl shadow-black/30 flex items-center gap-4">
           
@@ -130,9 +128,8 @@ export default function Navbar() {
           {/* Pemisah Vertikal Tipis */}
           <div className="nav-divider h-4 w-px bg-zinc-700/60" aria-hidden="true" />
 
-          {/* Tombol Switch Bahasa (ID / EN) & Tombol Tema / Kontak Cepat */}
+          {/* Kontrol: Switch Bahasa, Tema, WhatsApp */}
           <div className="nav-actions flex items-center gap-2">
-            {/* Switch Bahasa */}
             <button
               type="button"
               onClick={toggleLanguage}
@@ -145,7 +142,6 @@ export default function Navbar() {
               <span className={language === 'en' ? 'text-orange-400 font-bold' : 'text-zinc-400'}>EN</span>
             </button>
 
-            {/* Tombol Ganti Tema */}
             <button
               type="button"
               onClick={toggleTheme}
@@ -156,7 +152,6 @@ export default function Navbar() {
               {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
             </button>
 
-            {/* Tombol Kontak Cepat WhatsApp */}
             {contacts?.whatsapp && (
               <a
                 href={whatsappUrl}
@@ -166,7 +161,7 @@ export default function Navbar() {
                 title="Chat via WhatsApp"
                 aria-label="Chat via WhatsApp"
               >
-                <SiWhatsapp size={15} className="text-emerald-400 hover:scale-110 transition-transform" />
+                <SiWhatsapp size={15} className="text-emerald-400" />
               </a>
             )}
           </div>
@@ -174,65 +169,64 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* 2. Tata Letak Mobile (< 768px): Floating Bottom Dock di Bawah Layar */}
-      <nav className="mobile-dock-wrapper fixed bottom-5 left-1/2 -translate-x-1/2 z-50 md:hidden">
-        <div className="dock-capsule rounded-full px-4 py-2.5 bg-zinc-900/90 backdrop-blur-lg border border-zinc-800 shadow-2xl shadow-black/50 flex items-center gap-4">
-          
-          {/* Ikon Navigasi: Home, Proyek, Sertifikasi, Kontak */}
-          <div className="flex items-center gap-4">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
-              const IconComponent = link.Icon;
-              return (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  aria-label={link.label}
-                  title={link.label}
-                  className={`dock-link-item relative p-1.5 rounded-full flex flex-col items-center justify-center transition-colors ${
-                    isActive ? 'active text-orange-400' : 'text-zinc-400 hover:text-zinc-200'
-                  }`}
-                >
-                  <IconComponent size={20} aria-hidden="true" />
-                  {isActive && (
-                    <span
-                      className="dock-active-dot absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_6px_rgba(249,115,22,0.9)]"
-                      aria-hidden="true"
-                    />
-                  )}
-                </a>
-              );
-            })}
-          </div>
+      {/* 2. Tata Letak Mobile (< 768px): Floating Bottom Dock Horizontal Penuh */}
+      <nav
+        className="mobile-dock-wrapper fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden"
+        aria-label="Mobile Navigation"
+      >
+        <div
+          className="dock-capsule flex flex-row flex-nowrap items-center justify-center gap-5 w-auto px-5 py-2.5 rounded-full bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/80 shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
+        >
+          {/* Semua item berjajar ke samping (horizontal): [Home] [Proyek] [Sertifikasi] [Kontak] */}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.id;
+            const IconComponent = link.Icon;
+            return (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={(e) => handleNavClick(e, link.href)}
+                aria-label={link.label}
+                title={link.label}
+                className={`dock-nav-item flex items-center justify-center transition-colors ${
+                  isActive ? 'active text-orange-500' : 'text-zinc-400 hover:text-orange-500'
+                }`}
+              >
+                <IconComponent className="w-5 h-5" size={20} aria-hidden="true" />
+              </a>
+            );
+          })}
 
-          {/* Pemisah Vertikal Tipis */}
-          <div className="h-4 w-px bg-zinc-700/60" aria-hidden="true" />
+          {/* Garis Pemisah Vertikal Tipis Sebelum Switch Bahasa: h-4 w-[1px] bg-zinc-700/60 */}
+          <div className="dock-divider h-4 w-[1px] bg-zinc-700/60" aria-hidden="true" />
 
-          {/* Tombol Teks Mini "ID | EN" */}
+          {/* Tombol Teks Switch Bahasa [ID/EN] */}
           <button
             type="button"
             onClick={toggleLanguage}
-            className="dock-lang-btn text-xs font-semibold px-1 py-1 text-zinc-300 flex items-center gap-1 active:scale-95 transition-transform cursor-pointer"
+            className="dock-lang-btn text-xs font-semibold text-zinc-300 hover:text-orange-500 transition-colors flex items-center gap-1 cursor-pointer"
             title={language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
             aria-label="Ganti bahasa"
           >
-            <span className={language === 'id' ? 'text-orange-400 font-bold' : 'text-zinc-400'}>ID</span>
-            <span className="text-zinc-600 text-[10px]">|</span>
-            <span className={language === 'en' ? 'text-orange-400 font-bold' : 'text-zinc-400'}>EN</span>
+            <span className={language === 'id' ? 'text-orange-500 font-bold' : 'text-zinc-400'}>ID</span>
+            <span className="text-zinc-600 text-[10px]">/</span>
+            <span className={language === 'en' ? 'text-orange-500 font-bold' : 'text-zinc-400'}>EN</span>
           </button>
 
-          {/* Tombol Tema Ringkas Mobile */}
+          {/* Tombol Ikon Tema */}
           <button
             type="button"
             onClick={toggleTheme}
-            className="dock-theme-btn p-1 text-zinc-400 hover:text-orange-400 active:scale-95 transition-transform flex items-center justify-center cursor-pointer"
+            className="dock-theme-btn flex items-center justify-center text-zinc-400 hover:text-orange-500 transition-colors cursor-pointer"
             title={theme === 'dark' ? 'Ganti ke Tema Terang' : 'Ganti ke Tema Gelap'}
             aria-label="Toggle theme"
           >
-            {theme === 'dark' ? <Sun size={17} /> : <Moon size={17} />}
+            {theme === 'dark' ? (
+              <Sun className="w-5 h-5" size={20} aria-hidden="true" />
+            ) : (
+              <Moon className="w-5 h-5" size={20} aria-hidden="true" />
+            )}
           </button>
-
         </div>
       </nav>
     </>
