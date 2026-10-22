@@ -1,76 +1,95 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import SectionHeading from './SectionHeading';
 import {
-  SiPython,
+  SiMysql,
   SiGooglesheets,
-  SiPostgresql,
+  SiFigma,
+  SiGithub,
 } from 'react-icons/si';
-import { PiMicrosoftExcelLogoFill as SiMicrosoftexcel } from 'react-icons/pi';
-import { Database } from 'lucide-react';
+import {
+  PiMicrosoftExcelLogoFill,
+  PiMicrosoftPowerpointLogoFill,
+} from 'react-icons/pi';
 
 /**
- * Komponen Ikon Tool berukuran seragam dengan logo resmi:
- * - Excel: SiMicrosoftexcel, hijau (#217346)
- * - Google Sheets: SiGooglesheets, hijau (#0F9D58)
- * - Python: SiPython, warna aslinya (#3776AB)
- * - PostgreSQL: SiPostgresql, biru (#336791)
- * - SQL: Database (lucide-react), warna aksen (var(--accent))
+ * Icon resmi untuk 6 tools aktif:
+ * - Microsoft Excel: PiMicrosoftExcelLogoFill (#107C41)
+ * - MySQL: SiMysql (#4479A1)
+ * - Google Sheets: SiGooglesheets (#0F9D58)
+ * - Figma: SiFigma (#F24E1E)
+ * - PowerPoint: PiMicrosoftPowerpointLogoFill (#D24726)
+ * - GitHub: SiGithub (currentColor / var(--text))
  */
-const ICON_SIZE = 28;
+function ToolBrandIcon({ icon, name, size = 24 }) {
+  const key = (icon || name || '').toLowerCase();
 
-function ToolIcon({ icon }) {
-  if (icon === 'sql') {
+  if (key.includes('excel')) {
     return (
-      <Database
-        size={ICON_SIZE}
-        color="var(--accent)"
-        strokeWidth={2}
+      <PiMicrosoftExcelLogoFill
+        size={size}
+        color="#107C41"
         aria-hidden="true"
         focusable="false"
       />
     );
   }
-  if (icon === 'postgresql') {
+
+  if (key.includes('mysql') || key.includes('postgres') || key.includes('sql')) {
     return (
-      <SiPostgresql
-        size={ICON_SIZE}
-        color="#336791"
+      <SiMysql
+        size={size}
+        color="#4479A1"
         aria-hidden="true"
         focusable="false"
       />
     );
   }
-  if (icon === 'python') {
-    return (
-      <SiPython
-        size={ICON_SIZE}
-        color="#3776AB"
-        aria-hidden="true"
-        focusable="false"
-      />
-    );
-  }
-  if (icon === 'excel') {
-    return (
-      <SiMicrosoftexcel
-        size={ICON_SIZE}
-        color="#217346"
-        aria-hidden="true"
-        focusable="false"
-      />
-    );
-  }
-  if (icon === 'google-sheets' || icon === 'googlesheets') {
+
+  if (key.includes('sheets')) {
     return (
       <SiGooglesheets
-        size={ICON_SIZE}
+        size={size}
         color="#0F9D58"
         aria-hidden="true"
         focusable="false"
       />
     );
   }
+
+  if (key.includes('figma')) {
+    return (
+      <SiFigma
+        size={size}
+        color="#F24E1E"
+        aria-hidden="true"
+        focusable="false"
+      />
+    );
+  }
+
+  if (key.includes('powerpoint')) {
+    return (
+      <PiMicrosoftPowerpointLogoFill
+        size={size}
+        color="#D24726"
+        aria-hidden="true"
+        focusable="false"
+      />
+    );
+  }
+
+  if (key.includes('github')) {
+    return (
+      <SiGithub
+        size={size}
+        style={{ color: 'var(--text)' }}
+        aria-hidden="true"
+        focusable="false"
+      />
+    );
+  }
+
   return null;
 }
 
@@ -79,77 +98,75 @@ export default function Skills() {
   const tools = (portfolioData.tools || []).filter((tool) => tool.enabled !== false);
   const coreCompetencies = (portfolioData.coreCompetencies || []).filter((comp) => comp.enabled !== false);
 
-  // Daftar kompetensi: satu baris teks biasa dipisah titik tengah, bukan ubin
-  const competencyText = coreCompetencies
-    .map((comp) => {
-      const name = typeof comp.name === 'object'
-        ? (comp.name[language] || comp.name.id || comp.name.en)
-        : comp.name;
-      return name;
-    })
-    .filter(Boolean)
-    .join(' · ');
-
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const tiles = el.querySelectorAll('.tool-tile');
-
-    if (prefersReduced) {
-      tiles.forEach((tile) => tile.classList.add('tool-tile--visible'));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          tiles.forEach((tile, i) => {
-            tile.style.transitionDelay = `${i * 60}ms`;
-            tile.classList.add('tool-tile--visible');
-          });
-          observer.disconnect();
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [language]);
+  const defaultDesc = language === 'en'
+    ? 'Data-driven approach to uncovering patterns, validating data integrity, and delivering structured business insights.'
+    : 'Pendekatan berbasis data untuk mengekstrak pola, memvalidasi integritas data, dan menyajikan insight bisnis yang terstruktur.';
 
   return (
-    <section id="tools" className="skills-section" ref={sectionRef}>
+    <section id="tools" className="skills-section py-12 md:py-16">
       <div className="container">
-        {/* Judul section: rata kiri, tanpa subjudul dan tanpa label kapital */}
+        {/* Section Heading */}
         <SectionHeading
           title={t.skills?.title || (language === 'en' ? 'Skills & Tools' : 'Keahlian & Tools')}
         />
 
-        {/* Daftar kompetensi: satu baris teks biasa dipisah titik tengah, bukan ubin */}
-        {competencyText && (
-          <p className="skills-competencies-line">{competencyText}</p>
-        )}
-
-        {/* Grid ubin vertikal tools: 5 kolom desktop, 3 kolom tablet, 2 kolom HP */}
-        <div className="skills-tools-grid" role="list">
-          {tools.map((tool, idx) => (
-            <div
-              key={tool.icon || idx}
-              className="tool-tile"
-              role="listitem"
-              tabIndex={0}
-            >
-              <div className="tool-tile-icon-box" aria-hidden="true">
-                <ToolIcon icon={tool.icon} />
-              </div>
-              <span className="tool-tile-name">{tool.name}</span>
+        {/* Bento Grid 2 Kolom (1 Kolom di Mobile, 2 Kolom di Desktop) */}
+        <div className="skills-bento-grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          {/* Kartu Kiri: Core Competencies */}
+          <div className="skills-bento-card skills-bento-card--competencies">
+            <div className="skills-bento-header">
+              <h3 className="skills-bento-title">
+                {t.skills?.competenciesTitle || (language === 'en' ? 'Core Competencies' : 'Kompetensi Utama')}
+              </h3>
+              <p className="skills-bento-desc">
+                {t.skills?.competenciesDesc || defaultDesc}
+              </p>
             </div>
-          ))}
+
+            <div className="skills-badges-wrap flex-wrap justify-start gap-2" role="list">
+              {coreCompetencies.map((comp, idx) => {
+                const compName = typeof comp.name === 'object'
+                  ? (comp.name[language] || comp.name.id || comp.name.en)
+                  : comp.name;
+                return (
+                  <div key={idx} className="competency-badge-pill" role="listitem">
+                    <span>{compName}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Kartu Kanan: Tools & Technologies (6 Kartu Presisi 2 Kolom x 3 Baris) */}
+          <div className="skills-bento-card skills-bento-card--tools">
+            <div className="skills-bento-header">
+              <h3 className="skills-bento-title">
+                {t.skills?.toolsTitle || (language === 'en' ? 'Tools & Technologies' : 'Tools & Teknologi')}
+              </h3>
+            </div>
+
+            <div className="tools-mini-grid" role="list">
+              {tools.map((tool, idx) => {
+                const toolName = typeof tool.name === 'object'
+                  ? (tool.name[language] || tool.name.id || tool.name.en)
+                  : tool.name;
+                return (
+                  <div
+                    key={tool.icon || toolName || idx}
+                    className="tool-mini-card"
+                    role="listitem"
+                  >
+                    <span className="tool-mini-icon-box" aria-hidden="true">
+                      <ToolBrandIcon icon={tool.icon} name={toolName} size={22} />
+                    </span>
+                    <span className="tool-mini-name">{toolName}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

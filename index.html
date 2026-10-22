@@ -7,6 +7,31 @@
     <title>Iqbal Dwi Fathonah - Portofolio</title>
     <meta name="description" content="Portofolio resmi Iqbal Dwi Fathonah - Data Analyst. Proyek, keahlian, dan kontak." />
     
+    <!-- Anti-FOUC Early Theme Script & Base Styling -->
+    <script>
+      (function() {
+        try {
+          var savedTheme = localStorage.getItem('portfolio_theme');
+          var theme = (savedTheme === 'dark' || savedTheme === 'light') ? savedTheme : 'light';
+          document.documentElement.setAttribute('data-theme', theme);
+          var bg = theme === 'dark' ? '#0E0F12' : '#F7F5F0';
+          var color = theme === 'dark' ? '#F2F0EB' : '#1B1A17';
+          document.documentElement.style.backgroundColor = bg;
+          document.documentElement.style.color = color;
+        } catch (e) {}
+      })();
+    </script>
+    <style>
+      html, body {
+        background-color: #0E0F12;
+        color: #F2F0EB;
+      }
+      html[data-theme="light"], html[data-theme="light"] body {
+        background-color: #F7F5F0;
+        color: #1B1A17;
+      }
+    </style>
+
     <!-- Google Fonts: Plus Jakarta Sans (400, 500, 700, 800) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

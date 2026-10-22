@@ -4,10 +4,11 @@ import { getWhatsAppLink } from '../data/portfolioData';
 import { Mail, ArrowUp } from 'lucide-react';
 import { SiWhatsapp } from 'react-icons/si';
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export default function Footer() {
   const { language, t, portfolioData } = usePortfolio();
   const { contacts } = portfolioData;
-  const currentYear = new Date().getFullYear();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -17,10 +18,10 @@ export default function Footer() {
 
   return (
     <footer
+      className="site-footer py-12 md:py-16"
       style={{
         borderTop: '1px solid var(--border)',
         background: 'var(--bg)',
-        padding: '36px 0 32px 0',
       }}
     >
       <div
@@ -108,7 +109,7 @@ export default function Footer() {
           }}
         >
           <p style={{ fontSize: '0.88rem', color: 'var(--text-2)', margin: 0 }}>
-            © {currentYear} <strong style={{ color: 'var(--text)', fontFamily: 'var(--font-heading)' }}>{portfolioData.name}</strong>. {t.footer.copyright}
+            © {CURRENT_YEAR} <strong style={{ color: 'var(--text)', fontFamily: 'var(--font-heading)' }}>{portfolioData.name}</strong>. {t.footer.copyright}
           </p>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-2)', margin: 0 }}>
             {t.footer.subtitle}

@@ -1,35 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import SectionHeading from './SectionHeading';
+import { ExternalLink } from 'lucide-react';
 
 /**
- * Section Sertifikasi — Revised Side-by-Side (2 Kolom 1fr 1fr) Layout & Lightbox
- *
- * 1) Desktop (>= 901px):
- *    - Grid 2 kolom sama lebar (1fr 1fr), gap 48px, align-items: start.
- *    - Satu border-top 1px var(--border) di atas grid, padding atas 48px, padding bawah 64px.
- *    - Tiap item:
- *      a) Tombol foto: bingkai 100%, tinggi tetap 340px, padding 8px, radius 16px, border 1px var(--border), latar var(--surface-2).
- *         Gambar contain di tengah, max-width 100%, max-height 100%. Hover/focus naik 4px, border var(--accent), 180ms.
- *      b) Jarak 20px ke teks: nama clamp(22px, 2vw, 28px) 700 --text, penerbit 16px --text-2, periode 14px --text-2. Jarak baris 8-12px.
- *      c) Deskripsi 16px line-height 1.7 maks 56ch HANYA bila terisi.
- *      d) Tombol "Lihat kredensial" / "Unduh PDF" HANYA bila credentialUrl / pdf terisi.
- *    - Jarak judul ke grid maks 40px.
- *
- * 2) Lightbox:
- *    - Dialog role="dialog" aria-modal="true", aria-label nama sertifikat.
- *    - Foto besar di atas (maks 90vw x 70svh, contain), keterangan di bawahnya rata kiri pada panel solid var(--surface) maks 720px.
- *    - Focus trap, Esc dan backdrop close, restore focus, body overflow lock, tombol tutup 44x44px.
- *    - Scroll vertikal di layar pendek (1366x768).
- *
- * 3) Mobile (<= 900px):
- *    - 1 kolom, gap antar item 40px, rata kiri.
- *    - Foto: lebar penuh, tinggi bingkai 260px. Nama clamp(20px, 5.5vw, 24px), penerbit 15px, periode 14px.
- *    - Lightbox mobile: foto maks 92vw x 55svh, scroll bila perlu, tanpa scroll horizontal di 360px.
- *    - Judul section proporsional, garis aksen tetap di sebelahnya dan tidak turun baris di 360px.
- *
- * 4) Animasi:
- *    - Fade + naik 16px, stagger 80ms, hormati prefers-reduced-motion.
+ * Section Sertifikasi — Refactored Proportional 16:10 Grid with Balanced Layout
  */
 export default function Certifications() {
   const { t, portfolioData, language } = usePortfolio();
@@ -159,7 +134,7 @@ export default function Certifications() {
   }, [certificates.length]);
 
   return (
-    <section id="sertifikasi" className="cert-section" ref={sectionRef}>
+    <section id="sertifikasi" className="cert-section py-12 md:py-16" ref={sectionRef}>
       <div className="container">
         
         {/* Judul & Subjudul: SectionHeading Bersama */}
@@ -171,7 +146,14 @@ export default function Certifications() {
             const hasError = !cert.image || imgErrors[cert.slug];
             const issuedVal = typeof cert.issued === 'object' ? (cert.issued[language] || cert.issued.id) : cert.issued;
             const validUntilVal = typeof cert.validUntil === 'object' ? (cert.validUntil[language] || cert.validUntil.id) : cert.validUntil;
-            const periodText = `${t.certifications.issuedPrefix} ${issuedVal} · ${t.certifications.validUntilPrefix} ${validUntilVal}`;
+
+            const issuerBadge = cert.badge || (
+              cert.slug === 'ai-certiport'
+                ? 'Certiport (Pearson VUE)'
+                : cert.slug === 'web-developer'
+                ? 'BNSP (LSP Informatika)'
+                : cert.issuer
+            );
 
             // Deskripsi HANYA dirender jika terisi dan tidak kosong
             const descRaw = typeof cert.description === 'object'
@@ -184,12 +166,7 @@ export default function Certifications() {
               ? (cert.imageAlt[language] || cert.imageAlt.id || cert.name)
               : (cert.imageAlt || cert.name);
 
-            const enlargeAria = `${t.certifications.enlargeAriaPrefix} ${cert.name}`;
-
-            // Tombol kredensial dan unduh PDF hanya bila terisi
-            const hasCredential = Boolean(cert.credentialUrl && cert.credentialUrl.trim() !== "");
-            const hasPdf = Boolean(cert.pdf && cert.pdf.trim() !== "");
-            const hasActions = hasCredential || hasPdf;
+            const enlargeAria = `${t.certifications.enlargeAriaPrefix || 'Perbesar sertifikat'} ${cert.name}`;
 
             return (
               <article
@@ -197,12 +174,19 @@ export default function Certifications() {
                 className="cert-item"
                 style={{ '--cert-idx': index }}
               >
-                {/* a) Tombol Foto (Bingkai penuh kolom, tinggi tetap) */}
-                <button
-                  type="button"
-                  className="cert-frame"
+                {/* 1. Container Gambar Sertifikat: Rasio Aspek Seragam 16:10 */}
+                <div
+                  className="cert-frame w-full aspect-[16/10] bg-zinc-950/70 rounded-xl overflow-hidden flex items-center justify-center p-3 border border-zinc-800/80 cursor-pointer"
                   onClick={(e) => {
                     if (!hasError) handleOpenLightbox(cert, e);
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      if (!hasError) handleOpenLightbox(cert, e);
+                    }
                   }}
                   aria-label={enlargeAria}
                 >
@@ -216,72 +200,59 @@ export default function Certifications() {
                       alt={altText}
                       loading="lazy"
                       onError={() => handleImgError(cert.slug)}
-                      className="cert-img"
+                      className="cert-img max-h-full max-w-full object-contain rounded shadow-md transition-transform duration-300 hover:scale-105"
                     />
                   )}
-                </button>
+                </div>
 
-                {/* Blok teks di bawah foto: rata tengah horizontal, jarak foto ke teks 20px */}
-                <div className="cert-info">
-                  {/* a) Nama: clamp(18px, 1.6vw, 22px), bobot 600, min-height 2 baris */}
-                  <h3 className="cert-name"><span>{cert.name}</span></h3>
+                {/* 2. Alignment & Keseimbangan Teks: flex flex-col justify-between */}
+                <div className="cert-info flex flex-col justify-between flex-1 mt-4">
+                  <div className="cert-info-top flex flex-col">
+                    {/* Pill badge penerbit */}
+                    <span className="cert-badge bg-zinc-800 text-zinc-300 text-xs px-2.5 py-1 rounded-full w-fit mb-2">
+                      {issuerBadge}
+                    </span>
 
-                  {/* b) Penerbit: 15px, bobot 500, --text-2, margin-top 6px */}
-                  <div className="cert-issuer">{cert.issuer}</div>
+                    {/* Judul sertifikat dengan min-height min-h-[3.25rem] */}
+                    <h3 className="cert-name text-lg font-semibold text-zinc-100 min-h-[3.25rem] flex items-center">
+                      <span>{cert.name}</span>
+                    </h3>
 
-                  {/* c) Garis pemisah tipis 1px var(--border), lebar 40px, rata tengah, margin 16px auto */}
-                  <div className="cert-divider" aria-hidden="true" />
-
-                  {/* d) Periode sebagai dua pasangan sejajar di tengah, jarak antar pasangan 32px */}
-                  <div className="cert-dates">
-                    <div className="cert-date-col">
-                      <span className="cert-date-label">{t.certifications.issuedPrefix}</span>
-                      <span className="cert-date-val">{issuedVal}</span>
+                    {/* Periode / Tanggal */}
+                    <div className="cert-dates flex items-center gap-3 text-xs text-zinc-400 mt-2 flex-wrap">
+                      <div className="cert-date-col flex items-center gap-1.5">
+                        <span className="cert-date-label">{t.certifications.issuedPrefix || (language === 'id' ? 'Diterbitkan' : 'Issued')}:</span>
+                        <span className="cert-date-val font-medium text-zinc-300">{issuedVal}</span>
+                      </div>
+                      <span className="cert-date-separator text-zinc-600" aria-hidden="true">·</span>
+                      <div className="cert-date-col flex items-center gap-1.5">
+                        <span className="cert-date-label">{t.certifications.validUntilPrefix || (language === 'id' ? 'Berlaku hingga' : 'Valid until')}:</span>
+                        <span className="cert-date-val font-medium text-zinc-300">{validUntilVal}</span>
+                      </div>
                     </div>
-                    <div className="cert-date-separator" aria-hidden="true" />
-                    <div className="cert-date-col">
-                      <span className="cert-date-label">{t.certifications.validUntilPrefix}</span>
-                      <span className="cert-date-val">{validUntilVal}</span>
-                    </div>
+
+                    {/* Deskripsi bila ada */}
+                    {hasDesc && (
+                      <p className="cert-desc text-sm text-zinc-400 mt-2">{descText}</p>
+                    )}
                   </div>
 
-                  {/* e) Deskripsi (bila terisi): 15px, line-height 1.7, --text-2, maks 52ch, margin-inline auto, margin-top 16px */}
-                  {hasDesc && (
-                    <p className="cert-desc">{descText}</p>
-                  )}
-
-                  {/* f) Tautan teks "Lihat sertifikat" / "View certificate" (<button> bergaya teks, 15px, warna var(--accent), garis bawah saat hover/focus, tinggi tap 44px, margin-top 8px). Tombol kredensial / Unduh PDF ditaruh sebaris */}
-                  <div className="cert-actions">
+                  {/* 3. Tombol Outline Interaktif di bagian paling bawah */}
+                  <div className="cert-info-bottom mt-5">
                     <button
                       type="button"
-                      className="cert-link-btn"
+                      className="cert-btn-outline w-full py-2 px-4 rounded-lg border border-orange-500/40 text-orange-400 hover:bg-orange-500 hover:text-white transition-all text-sm font-medium flex items-center justify-center gap-2"
                       onClick={(e) => {
-                        if (!hasError) handleOpenLightbox(cert, e);
+                        if (cert.credentialUrl) {
+                          window.open(cert.credentialUrl, '_blank', 'noopener,noreferrer');
+                        } else if (!hasError) {
+                          handleOpenLightbox(cert, e);
+                        }
                       }}
                     >
-                      {t.certifications.viewCertBtn || (language === 'en' ? 'View certificate' : 'Lihat sertifikat')}
+                      <span>{t.certifications.viewCertBtn || (language === 'id' ? 'Lihat Sertifikat' : 'View Certificate')}</span>
+                      <ExternalLink size={16} aria-hidden="true" />
                     </button>
-
-                    {hasCredential && (
-                      <a
-                        href={cert.credentialUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cert-btn cert-btn--outline"
-                      >
-                        {t.certifications.credentialBtn}
-                      </a>
-                    )}
-                    {hasPdf && (
-                      <a
-                        href={cert.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="cert-btn cert-btn--outline"
-                      >
-                        {t.certifications.downloadPdfBtn}
-                      </a>
-                    )}
                   </div>
                 </div>
               </article>
@@ -313,6 +284,14 @@ export default function Certifications() {
         const activeAltText = typeof activeCert.imageAlt === 'object'
           ? (activeCert.imageAlt[language] || activeCert.imageAlt.id || activeCert.name)
           : (activeCert.imageAlt || activeCert.name);
+
+        const activeBadge = activeCert.badge || (
+          activeCert.slug === 'ai-certiport'
+            ? 'Certiport (Pearson VUE)'
+            : activeCert.slug === 'web-developer'
+            ? 'BNSP (LSP Informatika)'
+            : activeCert.issuer
+        );
 
         return (
           <div
@@ -366,6 +345,9 @@ export default function Certifications() {
 
               {/* 2. Keterangan di bawahnya (panel solid var(--surface), struktur teks sama) */}
               <div className="cert-lightbox-meta">
+                <span className="cert-badge bg-zinc-800 text-zinc-300 text-xs px-2.5 py-1 rounded-full w-fit mb-2">
+                  {activeBadge}
+                </span>
                 <h3 className="cert-lightbox-name">{activeCert.name}</h3>
                 <div className="cert-lightbox-issuer">{activeCert.issuer}</div>
 
@@ -373,12 +355,12 @@ export default function Certifications() {
 
                 <div className="cert-dates">
                   <div className="cert-date-col">
-                    <span className="cert-date-label">{t.certifications.issuedPrefix}</span>
+                    <span className="cert-date-label">{t.certifications.issuedPrefix || (language === 'id' ? 'Diterbitkan' : 'Issued')}</span>
                     <span className="cert-date-val">{activeIssuedVal}</span>
                   </div>
                   <div className="cert-date-separator" aria-hidden="true" />
                   <div className="cert-date-col">
-                    <span className="cert-date-label">{t.certifications.validUntilPrefix}</span>
+                    <span className="cert-date-label">{t.certifications.validUntilPrefix || (language === 'id' ? 'Berlaku hingga' : 'Valid until')}</span>
                     <span className="cert-date-val">{activeValidUntilVal}</span>
                   </div>
                 </div>

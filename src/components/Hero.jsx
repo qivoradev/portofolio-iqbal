@@ -15,10 +15,19 @@ function isValidUrl(url) {
 
 export default function Hero() {
   const { t, portfolioData, language } = usePortfolio();
-  const { contacts, photo, name, cvUrl, major, showAvailability, availability } = portfolioData;
+  const { contacts, photo, name, cvUrl, availability } = portfolioData;
 
   const [imgSrc, setImgSrc] = useState(photo || '/foto-nobg.png');
   const [isFallback, setIsFallback] = useState(false);
+
+  // Cek apakah halaman sudah pernah dimuat di sesi browser ini (mencegah animasi berulang saat refresh)
+  const [hasLoadedBefore] = useState(() => {
+    try {
+      return sessionStorage.getItem('portfolio_has_loaded') === 'true';
+    } catch {
+      return false;
+    }
+  });
 
   const handleImgError = () => {
     if (imgSrc.endsWith('.webp')) {
@@ -34,7 +43,6 @@ export default function Hero() {
   const nameRow1 = nameParts.slice(0, 2).join(' ');
   const nameRow2 = nameParts.slice(2).join(' ');
 
-  const majorText = major ? (major[language] || major.id) : '';
   const availabilityText = availability ? (availability[language] || availability.id) : '';
 
   const waNumber = (contacts.whatsapp || '').replace(/[^0-9]/g, '');
@@ -50,9 +58,29 @@ export default function Hero() {
     { key: 'whatsapp',  label: 'WhatsApp',  url: whatsappUrl,                                                Icon: SiWhatsapp,   cls: 'hs-whatsapp'  },
   ].filter(s => s.url);
 
-  // ── Motion berurutan saat load (< 1.2s) ──
+  // ── Entrance Motion: Hanya SATU KALI per sesi kunjungan browser ──
   const heroRef = useRef(null);
   useEffect(() => {
+    // Jika user me-refresh (hasLoadedBefore = true), langsung tampil instan tanpa delay
+    if (hasLoadedBefore) {
+      const el = heroRef.current;
+      if (!el) return;
+      const items = el.querySelectorAll('[data-ha]');
+      items.forEach(item => {
+        item.style.opacity = '1';
+        item.style.transform = 'none';
+        item.style.transition = 'none';
+      });
+      return;
+    }
+
+    // Kunjungan pertama di sesi ini: tandai di sessionStorage
+    try {
+      sessionStorage.setItem('portfolio_has_loaded', 'true');
+    } catch {
+      // Ignore storage error
+    }
+
     const el = heroRef.current;
     if (!el) return;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -61,24 +89,32 @@ export default function Hero() {
       items.forEach(item => {
         item.style.opacity = '1';
         item.style.transform = 'none';
+        item.style.transition = 'none';
       });
       return;
     }
-    items.forEach(item => {
-      const delay = Number(item.dataset.ha) || 0;
+
+    // Pangkas durasi transisi menjadi sangat cepat (< 0.25s) & subtle
+    items.forEach((item, idx) => {
+      const delay = Math.min(idx * 25, 120);
       item.style.transition = 'none';
       setTimeout(() => {
-        item.style.transition = 'opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+        item.style.transition = 'opacity 0.22s ease-out, transform 0.22s ease-out';
         item.style.opacity = '1';
-        item.style.transform = item.dataset.haTransform || 'none';
+        item.style.transform = 'none';
       }, delay);
     });
-  }, [language]);
+  }, [hasLoadedBefore]);
 
   const heroDescription = t.hero.description;
 
+  // Nilai style awal: jika sudah pernah dimuat (refresh F5), tidak ada opacity: 0
+  const initialAnimStyle = hasLoadedBefore
+    ? undefined
+    : { opacity: 0, transform: 'translateY(6px)' };
+
   return (
-    <section id="beranda" className="hero-section" ref={heroRef}>
+    <section id="beranda" className="hero-section pt-28 pb-12 md:pt-32 md:pb-16" ref={heroRef}>
       <div className="container" style={{ width: '100%' }}>
         {/* Panel Besar Tunggal */}
         <div className="hero-panel">
@@ -100,7 +136,7 @@ export default function Hero() {
                 d="M 140 280 C 220 230, 280 290, 360 210 C 410 160, 460 230, 510 120 L 580 180"
                 stroke="var(--accent)"
                 strokeWidth="1.5"
-                className="hero-trend-line"
+                className={`hero-trend-line ${hasLoadedBefore ? 'hero-trend-line--instant' : ''}`}
               />
             </svg>
           </div>
@@ -112,9 +148,8 @@ export default function Hero() {
             {/* 1. Salam kecil */}
             <p
               className="hero-greeting"
-              data-ha="60"
-              data-ha-transform="translateY(0)"
-              style={{ opacity: 0, transform: 'translateY(16px)' }}
+              data-ha="1"
+              style={initialAnimStyle}
             >
               {t.hero.greeting}
             </p>
@@ -123,9 +158,8 @@ export default function Hero() {
             <h1
               className="hero-name"
               aria-label={name}
-              data-ha="140"
-              data-ha-transform="translateY(0)"
-              style={{ opacity: 0, transform: 'translateY(16px)' }}
+              data-ha="2"
+              style={initialAnimStyle}
             >
               <span>{nameRow1}</span>
               <span>{nameRow2}</span>
@@ -134,9 +168,8 @@ export default function Hero() {
             {/* 3. Role */}
             <div
               className="hero-role"
-              data-ha="240"
-              data-ha-transform="translateY(0)"
-              style={{ opacity: 0, transform: 'translateY(16px)' }}
+              data-ha="3"
+              style={initialAnimStyle}
             >
               Data Analyst
             </div>
@@ -144,9 +177,8 @@ export default function Hero() {
             {/* 4. Deskripsi singkat */}
             <p
               className="hero-bio"
-              data-ha="340"
-              data-ha-transform="translateY(0)"
-              style={{ opacity: 0, transform: 'translateY(16px)' }}
+              data-ha="4"
+              style={initialAnimStyle}
             >
               {heroDescription}
             </p>
@@ -154,9 +186,8 @@ export default function Hero() {
             {/* 5. Baris Tombol: Lihat Proyek (solid) & Unduh CV (outline) */}
             <div
               className="hero-actions"
-              data-ha="440"
-              data-ha-transform="translateY(0)"
-              style={{ opacity: 0, transform: 'translateY(16px)' }}
+              data-ha="5"
+              style={initialAnimStyle}
             >
               <a href="#proyek" className="btn hero-btn-projects">
                 <span>{t.hero.viewProjects || 'Lihat Proyek'}</span>
@@ -177,9 +208,8 @@ export default function Hero() {
             {socials.length > 0 && (
               <div
                 className="hero-socials"
-                data-ha="540"
-                data-ha-transform="none"
-                style={{ opacity: 0 }}
+                data-ha="6"
+                style={hasLoadedBefore ? undefined : { opacity: 0 }}
               >
                 {socials.map(({ key, label, url, Icon, cls }) => (
                   <a
@@ -199,11 +229,11 @@ export default function Hero() {
           </div>
 
           {/* ══════════════════════════════════════════════════════
-              KOLOM KANAN — Wadah Foto + Foto + Kartu (Tanpa Lingkaran)
+              KOLOM KANAN — Wadah Foto + Foto + Kartu
               ══════════════════════════════════════════════════ */}
           <div className="hero-right">
             <div className={`hero-photo-wrap ${isFallback ? 'is-fallback' : ''}`}>
-              {/* Rona di belakang foto (berpindah mengikuti foto, berpusat di belakang kepala-bahu) */}
+              {/* Rona di belakang foto */}
               <div className="hero-photo-glow" aria-hidden="true" />
 
               {/* Wadah crop foto */}
@@ -213,26 +243,24 @@ export default function Hero() {
                   alt={`Foto ${name}`}
                   className="hero-photo-img"
                   onError={handleImgError}
-                  data-ha="400"
-                  data-ha-transform="translateY(0)"
-                  style={{ opacity: 0, transform: 'translateY(20px)' }}
+                  data-ha="5"
+                  style={initialAnimStyle}
                 />
               </div>
 
-              {/* Kartu status dan jurusan di kiri bawah wadah foto */}
+              {/* Floating Badge (di bawah foto) */}
               <div
                 className="hero-photo-card"
-                data-ha="500"
-                data-ha-transform="translateY(0)"
-                style={{ opacity: 0, transform: 'translateY(12px)' }}
+                data-ha="6"
+                style={initialAnimStyle}
               >
-                <div className="hero-card-major">{majorText}</div>
-                {showAvailability && availabilityText && (
-                  <div className="hero-card-status">
-                    <span className="hero-status-dot" aria-hidden="true" />
-                    <span>{availabilityText}</span>
-                  </div>
-                )}
+                <div className="hero-card-status">
+                  <span className="hero-status-dot" aria-hidden="true" />
+                  <span>{availabilityText || 'Open to Work'}</span>
+                </div>
+                <div className="hero-card-role">
+                  {portfolioData.role || 'Data Analyst'}
+                </div>
               </div>
             </div>
           </div>

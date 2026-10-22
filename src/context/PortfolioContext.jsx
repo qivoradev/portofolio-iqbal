@@ -43,6 +43,8 @@ export function PortfolioProvider({ children }) {
   // Sinkronisasi atribut data-theme pada <html>
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.backgroundColor = theme === 'dark' ? '#0E0F12' : '#F7F5F0';
+    document.documentElement.style.color = theme === 'dark' ? '#F2F0EB' : '#1B1A17';
     try {
       localStorage.setItem('portfolio_theme', theme);
     } catch {

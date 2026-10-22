@@ -32,29 +32,15 @@ export default function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Kirim Form via WhatsApp
-  const handleSendWhatsApp = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.message) {
-      setStatusMessage(language === 'en' ? 'Silakan lengkapi nama dan pesan terlebih dahulu.' : 'Silakan lengkapi nama dan pesan terlebih dahulu.');
-      return;
-    }
-    const cleanNumber = (contacts.whatsapp || '').replace(/[^0-9]/g, '');
-    const waText = encodeURIComponent(
-      language === 'en'
-        ? `Hello Iqbal, I'm ${formData.name} (${formData.email || 'Email not provided'}).\nSubject: ${formData.subject || 'Project Discussion'}\n\nMessage:\n${formData.message}`
-        : `Halo Iqbal, saya ${formData.name} (${formData.email || 'Email tidak dicantumkan'}).\nPerihal: ${formData.subject || 'Diskusi Proyek'}\n\nPesan:\n${formData.message}`
-    );
-    const waUrl = `https://wa.me/${cleanNumber}?text=${waText}`;
-    setStatusMessage(language === 'en' ? 'Membuka WhatsApp untuk mengirim pesan...' : 'Membuka WhatsApp untuk mengirim pesan...');
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
-  };
-
   // Kirim Form via Mailto (Aplikasi Email)
-  const handleSendMailto = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.message) {
-      setStatusMessage(language === 'en' ? 'Silakan lengkapi nama dan pesan terlebih dahulu.' : 'Silakan lengkapi nama dan pesan terlebih dahulu.');
+    if (!formData.name.trim() || !formData.message.trim()) {
+      setStatusMessage(
+        language === 'en'
+          ? 'Please enter your name and message first.'
+          : 'Silakan lengkapi nama dan pesan terlebih dahulu.'
+      );
       return;
     }
     const subjectEncoded = encodeURIComponent(
@@ -62,11 +48,13 @@ export default function Contact() {
     );
     const bodyEncoded = encodeURIComponent(
       language === 'en'
-        ? `Sender Name: ${formData.name}\nSender Email: ${formData.email}\n\nMessage:\n${formData.message}`
-        : `Nama Pengirim: ${formData.name}\nEmail Pengirim: ${formData.email}\n\nPesan:\n${formData.message}`
+        ? `Sender Name: ${formData.name}\nSender Email: ${formData.email || 'Not provided'}\n\nMessage:\n${formData.message}`
+        : `Nama Pengirim: ${formData.name}\nEmail Pengirim: ${formData.email || 'Tidak dicantumkan'}\n\nPesan:\n${formData.message}`
     );
     const mailtoUrl = `mailto:${contacts.email}?subject=${subjectEncoded}&body=${bodyEncoded}`;
-    setStatusMessage(language === 'en' ? 'Membuka aplikasi email...' : 'Membuka aplikasi email...');
+    setStatusMessage(
+      language === 'en' ? 'Opening email client...' : 'Membuka aplikasi email...'
+    );
     window.location.href = mailtoUrl;
   };
 
@@ -77,7 +65,7 @@ export default function Contact() {
   ].filter(s => s.url);
 
   return (
-    <section id="kontak" className="section">
+    <section id="kontak" className="section contact-section py-12 md:py-16">
       <div className="container">
         
         {/* Judul & Subjudul: SectionHeading Bersama */}
@@ -91,7 +79,7 @@ export default function Contact() {
             alignItems: 'start',
           }}
         >
-          {/* Direct Contact Info */}
+          {/* Card Kiri: Kontak Langsung (Direct Channels) */}
           <div className="editorial-card" style={{ padding: '32px' }}>
             <h3 style={{ fontSize: '1.25rem', marginBottom: '14px', color: 'var(--text-primary)' }}>
               {t.contact.directHeading}
@@ -150,7 +138,9 @@ export default function Contact() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                 <MapPin size={18} style={{ color: 'var(--accent)', flexShrink: 0 }} />
                 <div>
-                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'block' }}>Lokasi</span>
+                  <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', display: 'block' }}>
+                    {t.contact.locationLabel || (language === 'en' ? 'Location' : 'Lokasi')}
+                  </span>
                   <strong style={{ fontSize: '0.92rem' }}>{contacts.location}</strong>
                 </div>
               </div>
@@ -182,7 +172,7 @@ export default function Contact() {
             )}
           </div>
 
-          {/* Form */}
+          {/* Card Kanan: Form Kirim Pesan (Send Message) */}
           <div className="editorial-card" style={{ padding: '32px' }}>
             <h3 style={{ fontSize: '1.25rem', marginBottom: '6px', color: 'var(--text-primary)' }}>
               {t.contact.formHeading}
@@ -191,7 +181,7 @@ export default function Contact() {
               {t.contact.formDesc}
             </p>
 
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
                 <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
                   {t.contact.nameLabel}
@@ -202,16 +192,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder={t.contact.namePlaceholder}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'var(--bg-surface-elevated)',
-                    border: '1px solid var(--border-card)',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.92rem',
-                    outline: 'none',
-                  }}
+                  className="contact-input border border-zinc-300 dark:border-zinc-800 focus:border-orange-500"
                 />
               </div>
 
@@ -225,16 +206,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder={t.contact.emailPlaceholder}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'var(--bg-surface-elevated)',
-                    border: '1px solid var(--border-card)',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.92rem',
-                    outline: 'none',
-                  }}
+                  className="contact-input border border-zinc-300 dark:border-zinc-800 focus:border-orange-500"
                 />
               </div>
 
@@ -248,16 +220,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder={t.contact.subjectPlaceholder}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'var(--bg-surface-elevated)',
-                    border: '1px solid var(--border-card)',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.92rem',
-                    outline: 'none',
-                  }}
+                  className="contact-input border border-zinc-300 dark:border-zinc-800 focus:border-orange-500"
                 />
               </div>
 
@@ -271,42 +234,29 @@ export default function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder={t.contact.messagePlaceholder}
-                  style={{
-                    width: '100%',
-                    padding: '10px 14px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: 'var(--bg-surface-elevated)',
-                    border: '1px solid var(--border-card)',
-                    color: 'var(--text-primary)',
-                    fontSize: '0.92rem',
-                    outline: 'none',
-                    resize: 'vertical',
-                  }}
+                  className="contact-textarea border border-zinc-300 dark:border-zinc-800 focus:border-orange-500"
                 />
               </div>
 
-              {/* Dual Action Buttons */}
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px', marginTop: '6px' }}>
-                <button
-                  type="button"
-                  onClick={handleSendWhatsApp}
-                  className="btn btn-primary"
-                  style={{ flex: '1 1 180px', minHeight: '44px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-                >
-                  <SiWhatsapp size={16} />
-                  <span>{t.contact.waSubmit}</span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={handleSendMailto}
-                  className="btn btn-secondary"
-                  style={{ flex: '1 1 180px' }}
-                >
-                  <Send size={15} />
-                  <span>{t.contact.emailSubmit}</span>
-                </button>
-              </div>
+              {/* Single Main Submit Button */}
+              <button
+                type="submit"
+                className="btn btn-primary contact-submit-btn"
+                style={{
+                  width: '100%',
+                  minHeight: '44px',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '8px',
+                  fontSize: '0.92rem',
+                  fontWeight: 600,
+                  marginTop: '6px',
+                }}
+              >
+                <Send size={16} aria-hidden="true" />
+                <span>{t.contact.submitBtn || (language === 'en' ? 'Send Message' : 'Kirim Pesan')}</span>
+              </button>
 
               {statusMessage && (
                 <div
