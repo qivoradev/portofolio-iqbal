@@ -114,7 +114,7 @@ export default function Hero() {
     : { opacity: 0, transform: 'translateY(6px)' };
 
   return (
-    <section id="beranda" className="hero-section pt-28 pb-12 md:pt-32 md:pb-16" ref={heroRef}>
+    <section id="beranda" className="hero-section pt-8 pb-12 md:pt-32 md:pb-16" ref={heroRef}>
       <div className="container" style={{ width: '100%' }}>
         {/* Panel Besar Tunggal */}
         <div className="hero-panel">
@@ -145,6 +145,16 @@ export default function Hero() {
               KOLOM KIRI — Teks, Tombol, Sosial
               ══════════════════════════════════════════════════ */}
           <div className="hero-left">
+            {/* Status Availability Badge (Mobile & Desktop) */}
+            <div
+              className="hero-badge-availability inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-medium mb-4"
+              data-ha="1"
+              style={initialAnimStyle}
+            >
+              <span className="hero-badge-dot w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block flex-shrink-0" aria-hidden="true" />
+              <span>{language === 'en' ? 'Available for Work' : 'Terbuka untuk Peluang Kerja'}</span>
+            </div>
+
             {/* 1. Salam kecil */}
             <p
               className="hero-greeting"
@@ -185,7 +195,7 @@ export default function Hero() {
 
             {/* 5. Baris Tombol: Lihat Proyek (solid) & Unduh CV (outline) */}
             <div
-              className="hero-actions"
+              className="hero-actions mb-8 md:mb-6"
               data-ha="5"
               style={initialAnimStyle}
             >

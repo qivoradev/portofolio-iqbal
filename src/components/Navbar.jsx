@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
-import { getWhatsAppLink } from '../data/portfolioData';
 import { Home, BarChart3, Award, Mail, Sun, Moon } from 'lucide-react';
-import { SiWhatsapp } from 'react-icons/si';
+
 
 export default function Navbar() {
-  const { language, toggleLanguage, theme, toggleTheme, t, portfolioData } = usePortfolio();
+  const { language, toggleLanguage, theme, toggleTheme, t } = usePortfolio();
   const [activeSection, setActiveSection] = useState('beranda');
 
-  const { contacts } = portfolioData;
-  const whatsappUrl = getWhatsAppLink(contacts.whatsapp, contacts.whatsappMessage, language);
 
   const navLinks = [
     {
@@ -126,44 +123,31 @@ export default function Navbar() {
           </nav>
 
           {/* Pemisah Vertikal Tipis */}
-          <div className="nav-divider h-4 w-px bg-zinc-700/60" aria-hidden="true" />
+          <div className="nav-divider h-4 w-[1px] bg-zinc-700/60" aria-hidden="true" />
 
-          {/* Kontrol: Switch Bahasa, Tema, WhatsApp */}
-          <div className="nav-actions flex items-center gap-2">
+          {/* Kontrol Desktop Kanan: [Switcher ID / EN] dan [Toggle Tema] */}
+          <div className="nav-actions flex items-center gap-3">
             <button
               type="button"
               onClick={toggleLanguage}
-              className="nav-lang-btn text-xs font-semibold px-2 py-1 rounded-md text-zinc-300 hover:text-orange-400 hover:bg-zinc-800/80 transition-all flex items-center gap-1 cursor-pointer"
+              className="nav-lang-btn text-zinc-400 hover:text-zinc-100 text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer"
               title={language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
               aria-label="Ganti bahasa"
             >
-              <span className={language === 'id' ? 'text-orange-400 font-bold' : 'text-zinc-400'}>ID</span>
+              <span className={language === 'id' ? 'text-orange-500 font-semibold' : 'text-zinc-400'}>ID</span>
               <span className="text-zinc-600 text-[10px]">/</span>
-              <span className={language === 'en' ? 'text-orange-400 font-bold' : 'text-zinc-400'}>EN</span>
+              <span className={language === 'en' ? 'text-orange-500 font-semibold' : 'text-zinc-400'}>EN</span>
             </button>
 
             <button
               type="button"
               onClick={toggleTheme}
-              className="nav-theme-btn p-1.5 rounded-full text-zinc-300 hover:text-orange-400 hover:bg-zinc-800/80 transition-all flex items-center justify-center cursor-pointer"
+              className="nav-theme-btn p-1.5 rounded-full text-zinc-400 hover:text-orange-500 transition-colors flex items-center justify-center cursor-pointer"
               title={theme === 'dark' ? 'Ganti ke Tema Terang' : 'Ganti ke Tema Gelap'}
               aria-label="Toggle theme"
             >
-              {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
+              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
             </button>
-
-            {contacts?.whatsapp && (
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="nav-wa-btn p-1.5 rounded-full text-zinc-300 hover:text-emerald-400 hover:bg-zinc-800/80 transition-all flex items-center justify-center"
-                title="Chat via WhatsApp"
-                aria-label="Chat via WhatsApp"
-              >
-                <SiWhatsapp size={15} className="text-emerald-400" />
-              </a>
-            )}
           </div>
 
         </div>

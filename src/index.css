@@ -460,6 +460,46 @@ hr,
   padding-bottom: 48px;
 }
 
+/* 0. Status Availability Badge */
+.hero-badge-availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  background-color: rgba(16, 185, 129, 0.10);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34D399;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 16px;
+  letter-spacing: 0.01em;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+[data-theme="light"] .hero-badge-availability {
+  background-color: rgba(16, 185, 129, 0.12);
+  border-color: rgba(5, 150, 105, 0.35);
+  color: #059669;
+}
+
+.hero-badge-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #34D399;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.7);
+  display: inline-block;
+  flex-shrink: 0;
+  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+[data-theme="light"] .hero-badge-dot {
+  background-color: #10B981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+}
+
 /* 1. Salam kecil */
 .hero-greeting {
   font-size: 20px;
@@ -823,7 +863,7 @@ hr,
 @media (max-width: 900px) {
   .hero-section {
     min-height: unset;
-    padding-top: calc(var(--navbar-height) + 16px);
+    padding-top: 2rem !important; /* pt-8: optimasi jarak atas mobile tanpa bekas navbar lama */
     padding-bottom: 24px;
   }
 
@@ -831,8 +871,8 @@ hr,
     height: auto;
     min-height: unset;
     grid-template-columns: 1fr;
-    padding: 24px 24px 0 24px;
-    gap: 36px;
+    padding: 24px 20px 0 20px;
+    gap: 32px;
     border-radius: 24px;
   }
 
@@ -843,6 +883,12 @@ hr,
     align-items: center;
     text-align: center;
     padding-bottom: 0;
+  }
+
+  .hero-badge-availability {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 16px;
   }
 
   .hero-greeting {
@@ -887,7 +933,7 @@ hr,
     max-width: 320px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 24px;
+    margin-bottom: 32px !important; /* Margin bawah aman agar tombol CV tidak terhalang floating dock */
     gap: 12px;
   }
 
@@ -3919,55 +3965,111 @@ hr,
 }
 
 .nav-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important; /* gap-3 */
 }
 
-.nav-lang-btn,
-.dock-lang-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 0.76rem;
-  font-weight: 600;
-  padding: 4px 8px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
+.nav-lang-btn {
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 0.75rem !important; /* text-xs */
+  font-weight: 500 !important;
+  padding: 4px 6px !important;
+  border-radius: 6px !important;
+  color: #A1A1AA !important; /* text-zinc-400 */
+  line-height: 1 !important;
+  transition: color 0.2s ease, background-color 0.2s ease !important;
 }
 
 .nav-lang-btn:hover {
-  background-color: rgba(63, 63, 70, 0.5);
+  color: #F4F4F5 !important; /* text-zinc-100 */
+  background-color: rgba(63, 63, 70, 0.35) !important;
 }
 
-.nav-theme-btn,
-.dock-theme-btn,
-.nav-wa-btn {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  border-radius: 50%;
-  color: #A1A1AA;
-  transition: all 0.2s ease;
-  text-decoration: none;
+.nav-lang-btn .text-zinc-400 {
+  color: #A1A1AA !important;
+  transition: color 0.2s ease !important;
 }
 
-.nav-theme-btn:hover,
-.dock-theme-btn:hover {
-  color: #FB923C;
-  background-color: rgba(63, 63, 70, 0.5);
+.nav-lang-btn:hover .text-zinc-400 {
+  color: #F4F4F5 !important;
 }
 
-.nav-wa-btn:hover {
-  color: #34D399;
-  background-color: rgba(63, 63, 70, 0.5);
+.nav-lang-btn .text-orange-500 {
+  color: #F97316 !important;
+  font-weight: 600 !important;
+}
+
+.nav-lang-btn .text-zinc-600 {
+  color: #52525B !important;
+}
+
+.nav-theme-btn {
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 6px !important;
+  border-radius: 50% !important;
+  color: #A1A1AA !important;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.15s ease !important;
+}
+
+.nav-theme-btn:hover {
+  color: #FB923C !important;
+  background-color: rgba(63, 63, 70, 0.4) !important;
+}
+
+/* Utility Tokens */
+.bg-emerald-500\/10 {
+  background-color: rgba(16, 185, 129, 0.10) !important;
+}
+
+.border-emerald-500\/25 {
+  border-color: rgba(16, 185, 129, 0.25) !important;
+}
+
+.text-emerald-400 {
+  color: #34D399 !important;
+}
+
+[data-theme="light"] .text-emerald-400 {
+  color: #059669 !important;
+}
+
+.bg-emerald-400 {
+  background-color: #34D399 !important;
+}
+
+.animate-pulse {
+  animation: pulse-dot 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+.text-zinc-100 {
+  color: #F4F4F5 !important;
+}
+
+.text-zinc-300 {
+  color: #D4D4D8 !important;
+}
+
+.text-zinc-400 {
+  color: #A1A1AA !important;
+}
+
+.text-zinc-600 {
+  color: #52525B !important;
+}
+
+.text-orange-500 {
+  color: #F97316 !important;
 }
 
 /* ==========================================================================
