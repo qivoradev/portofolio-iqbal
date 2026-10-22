@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
-import { ArrowRight, Lock } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { SiGithub, SiInstagram, SiWhatsapp } from 'react-icons/si';
 import { FaLinkedin } from 'react-icons/fa6';
 import { getWhatsAppLink } from '../data/portfolioData';
@@ -193,26 +193,15 @@ export default function Hero() {
               {heroDescription}
             </p>
 
-            {/* 5. Baris Tombol: Lihat Proyek (solid) & Unduh CV (outline) */}
+            {/* 5. Tombol Aksi Utama: Lihat Proyek (Primary CTA Button) */}
             <div
-              className="hero-actions mb-8 md:mb-6"
+              className="hero-actions mb-6"
               data-ha="5"
               style={initialAnimStyle}
             >
               <a href="#proyek" className="btn hero-btn-projects">
                 <span>{t.hero.viewProjects || 'Lihat Proyek'}</span>
                 <ArrowRight size={17} aria-hidden="true" />
-              </a>
-              <a
-                href="javascript:void(0)"
-                onClick={(e) => e.preventDefault()}
-                aria-disabled="true"
-                tabIndex={-1}
-                className="btn hero-btn-cv opacity-60 cursor-not-allowed pointer-events-none"
-                style={{ opacity: 0.6, cursor: 'not-allowed', pointerEvents: 'none' }}
-              >
-                <Lock size={15} aria-hidden="true" />
-                <span>{t.hero.downloadCv || (language === 'en' ? 'CV (Coming Soon)' : 'CV (Segera Hadir)')}</span>
               </a>
             </div>
 
