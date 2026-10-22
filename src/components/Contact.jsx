@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import SectionHeading from './SectionHeading';
 import { getWhatsAppLink } from '../data/portfolioData';
-import { Mail, MapPin, Send } from 'lucide-react';
+import { Mail, MapPin, Send, AlertCircle, CheckCircle2 } from 'lucide-react';
+
 import { SiGithub, SiInstagram, SiWhatsapp } from 'react-icons/si';
 import { FaLinkedin } from 'react-icons/fa6';
 
@@ -24,37 +25,66 @@ export default function Contact() {
     message: '',
   });
 
-  const [statusMessage, setStatusMessage] = useState('');
+  const [statusMessage, setStatusMessage] = useState(null);
 
   const defaultWaUrl = getWhatsAppLink(contacts.whatsapp, contacts.whatsappMessage, language);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    if (statusMessage) setStatusMessage(null);
   };
 
-  // Kirim Form via Mailto (Aplikasi Email)
+  // Kirim Form via Mailto Langsung ke iqbalfathonah20@gmail.com
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name.trim() || !formData.message.trim()) {
-      setStatusMessage(
-        language === 'en'
-          ? 'Please enter your name and message first.'
-          : 'Silakan lengkapi nama dan pesan terlebih dahulu.'
-      );
+
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const subject = formData.subject.trim();
+    const message = formData.message.trim();
+
+    // Validasi: pastikan input wajib tidak kosong
+    if (!name || !email || !message) {
+      setStatusMessage({
+        type: 'error',
+        text:
+          language === 'en'
+            ? 'Please fill in all required fields (Name, Email, and Message).'
+            : 'Silakan isi semua bidang wajib (Nama, Email, dan Pesan).',
+      });
       return;
     }
-    const subjectEncoded = encodeURIComponent(
-      formData.subject || (language === 'en' ? `Portfolio Inquiry from ${formData.name}` : `Pesan Portofolio dari ${formData.name}`)
-    );
-    const bodyEncoded = encodeURIComponent(
+
+    // Format body email rapi
+    const bodyText =
       language === 'en'
-        ? `Sender Name: ${formData.name}\nSender Email: ${formData.email || 'Not provided'}\n\nMessage:\n${formData.message}`
-        : `Nama Pengirim: ${formData.name}\nEmail Pengirim: ${formData.email || 'Tidak dicantumkan'}\n\nPesan:\n${formData.message}`
-    );
-    const mailtoUrl = `mailto:${contacts.email}?subject=${subjectEncoded}&body=${bodyEncoded}`;
-    setStatusMessage(
-      language === 'en' ? 'Opening email client...' : 'Membuka aplikasi email...'
-    );
+        ? `Sender Name: ${name}\nSender Email: ${email}\n\nMessage:\n${message}`
+        : `Nama Pengirim: ${name}\nEmail Pengirim: ${email}\n\nPesan:\n${message}`;
+
+    const defaultSubject = language === 'en' ? 'Portfolio Website Inquiry' : 'Inquiry dari Web Portofolio';
+    const finalSubject = subject || defaultSubject;
+
+    // Buka tautan mailto secara terenkripsi URL
+    const mailtoUrl = `mailto:iqbalfathonah20@gmail.com?subject=${encodeURIComponent(finalSubject)}&body=${encodeURIComponent(bodyText)}`;
+
+    // Feedback visual berhasil
+    setStatusMessage({
+      type: 'success',
+      text:
+        language === 'en'
+          ? 'Opening your email client... Message draft prepared!'
+          : 'Membuka aplikasi email... Draf pesan telah disiapkan!',
+    });
+
+    // Reset form setelah tombol ditekan
+    setFormData({
+      name: '',
+      email: '',
+      subject: '',
+      message: '',
+    });
+
+    // Buka aplikasi email default pengguna
     window.location.href = mailtoUrl;
   };
 
@@ -183,12 +213,14 @@ export default function Contact() {
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
+                <label htmlFor="contact-name" style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
                   {t.contact.nameLabel}
                 </label>
                 <input
+                  id="contact-name"
                   type="text"
                   name="name"
+                  required
                   value={formData.name}
                   onChange={handleChange}
                   placeholder={t.contact.namePlaceholder}
@@ -197,12 +229,14 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
+                <label htmlFor="contact-email" style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
                   {t.contact.emailLabel}
                 </label>
                 <input
+                  id="contact-email"
                   type="email"
                   name="email"
+                  required
                   value={formData.email}
                   onChange={handleChange}
                   placeholder={t.contact.emailPlaceholder}
@@ -211,10 +245,11 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
+                <label htmlFor="contact-subject" style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
                   {t.contact.subjectLabel}
                 </label>
                 <input
+                  id="contact-subject"
                   type="text"
                   name="subject"
                   value={formData.subject}
@@ -225,12 +260,14 @@ export default function Contact() {
               </div>
 
               <div>
-                <label style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
+                <label htmlFor="contact-message" style={{ display: 'block', fontSize: '0.85rem', fontWeight: 600, marginBottom: '6px' }}>
                   {t.contact.messageLabel}
                 </label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   rows={4}
+                  required
                   value={formData.message}
                   onChange={handleChange}
                   placeholder={t.contact.messagePlaceholder}
@@ -260,18 +297,35 @@ export default function Contact() {
 
               {statusMessage && (
                 <div
+                  role={statusMessage.type === 'error' ? 'alert' : 'status'}
                   style={{
-                    padding: '10px 14px',
+                    padding: '11px 16px',
                     borderRadius: 'var(--radius-sm)',
-                    background: 'var(--accent-subtle)',
-                    border: '1px solid var(--accent)',
-                    fontSize: '0.85rem',
-                    color: 'var(--text-primary)',
-                    textAlign: 'center',
-                    marginTop: '6px',
+                    background:
+                      statusMessage.type === 'error'
+                        ? 'rgba(239, 68, 68, 0.12)'
+                        : 'rgba(34, 197, 94, 0.12)',
+                    border: `1px solid ${
+                      statusMessage.type === 'error'
+                        ? 'rgba(239, 68, 68, 0.35)'
+                        : 'rgba(34, 197, 94, 0.35)'
+                    }`,
+                    fontSize: '0.86rem',
+                    color: statusMessage.type === 'error' ? '#EF4444' : '#10B981',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '8px',
+                    marginTop: '8px',
+                    fontWeight: 500,
                   }}
                 >
-                  {statusMessage}
+                  {statusMessage.type === 'error' ? (
+                    <AlertCircle size={16} aria-hidden="true" style={{ flexShrink: 0 }} />
+                  ) : (
+                    <CheckCircle2 size={16} aria-hidden="true" style={{ flexShrink: 0 }} />
+                  )}
+                  <span>{statusMessage.text}</span>
                 </div>
               )}
             </form>
