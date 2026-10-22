@@ -1,215 +1,128 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { Home, BarChart3, Award, Mail, Sun, Moon } from 'lucide-react';
 
+export default function Navbar({ activeTab: propActiveTab, setActiveTab: propSetActiveTab, language: propLanguage } = {}) {
+  const portfolio = usePortfolio();
+  const activeTab = propActiveTab || portfolio.activeTab || 'home';
+  const setActiveTab = propSetActiveTab || portfolio.setActiveTab;
+  const language = propLanguage || portfolio.language || 'id';
+  const { toggleLanguage, theme, toggleTheme } = portfolio;
 
-export default function Navbar() {
-  const { language, toggleLanguage, theme, toggleTheme, t } = usePortfolio();
-  const [activeSection, setActiveSection] = useState('beranda');
-
-
-  const navLinks = [
-    {
-      id: 'beranda',
-      label: t.nav.home || (language === 'en' ? 'Home' : 'Beranda'),
-      href: '#beranda',
-      Icon: Home,
-    },
-    {
-      id: 'proyek',
-      label: t.nav.projects || (language === 'en' ? 'Projects' : 'Proyek'),
-      href: '#proyek',
-      Icon: BarChart3,
-    },
-    {
-      id: 'sertifikasi',
-      label: t.nav.certifications || (language === 'en' ? 'Certifications' : 'Sertifikasi'),
-      href: '#sertifikasi',
-      Icon: Award,
-    },
-    {
-      id: 'kontak',
-      label: t.nav.contact || (language === 'en' ? 'Contact' : 'Kontak'),
-      href: '#kontak',
-      Icon: Mail,
-    },
+  const navItems = [
+    { id: 'home', label: language === 'en' ? 'Home' : 'Beranda', Icon: Home },
+    { id: 'projects', label: language === 'en' ? 'Projects' : 'Proyek', Icon: BarChart3 },
+    { id: 'certifications', label: language === 'en' ? 'Certifications' : 'Sertifikasi', Icon: Award },
+    { id: 'contact', label: language === 'en' ? 'Contact' : 'Kontak', Icon: Mail },
   ];
-
-  // Penentuan menu aktif saat scroll
-  useEffect(() => {
-    const sectionIds = ['beranda', 'proyek', 'sertifikasi', 'kontak'];
-
-    const handleScroll = () => {
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 70) {
-        setActiveSection('kontak');
-        return;
-      }
-
-      const scrollPosition = window.scrollY + 180;
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sectionIds[i]);
-        if (el && el.offsetTop <= scrollPosition) {
-          setActiveSection(sectionIds[i]);
-          return;
-        }
-      }
-      setActiveSection('beranda');
-    };
-
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
-
-  // Handler smooth scroll
-  const handleNavClick = (e, href) => {
-    e.preventDefault();
-    const targetId = href.replace('#', '');
-    const targetElement = document.getElementById(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({ behavior: 'smooth' });
-      window.history.pushState(null, '', href);
-      setActiveSection(targetId);
-    }
-  };
 
   return (
     <>
-      {/* 1. Tata Letak Desktop (md:flex): Floating Capsule di Atas Tengah Layar */}
-      <header className="navbar-desktop-wrapper fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden md:block">
-        <div className="nav-capsule-desktop rounded-full px-5 py-2.5 bg-zinc-900/80 backdrop-blur-md border border-zinc-800 shadow-xl shadow-black/30 flex items-center gap-4">
-          
-          {/* Logo / Inisial kecil dengan status dot oranye ("• Iqbal D.F") */}
-          <a
-            href="#beranda"
-            onClick={(e) => handleNavClick(e, '#beranda')}
-            className="nav-logo flex items-center gap-2 text-sm font-semibold text-zinc-100 hover:text-orange-400 transition-colors"
-            title="Iqbal D.F"
-          >
-            <span className="nav-status-dot w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_8px_rgba(249,115,22,0.85)] animate-pulse inline-block flex-shrink-0" />
-            <span className="font-heading tracking-tight whitespace-nowrap">Iqbal D.F</span>
-          </a>
-
-          {/* Pemisah Vertikal Tipis */}
-          <div className="nav-divider h-4 w-px bg-zinc-700/60" aria-hidden="true" />
-
-          {/* Navigasi Teks Ringkas (Beranda, Proyek, Sertifikasi, Kontak) */}
-          <nav className="nav-links flex items-center gap-4">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
-              return (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`nav-link-item relative text-xs font-medium tracking-wide transition-colors py-1 ${
-                    isActive ? 'active text-orange-400 font-semibold' : 'text-zinc-400 hover:text-orange-400'
-                  }`}
-                >
-                  <span>{link.label}</span>
-                  {isActive && (
-                    <span
-                      className="active-indicator-dot absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-orange-500 shadow-[0_0_6px_rgba(249,115,22,0.9)]"
-                      aria-hidden="true"
-                    />
-                  )}
-                </a>
-              );
-            })}
-          </nav>
-
-          {/* Pemisah Vertikal Tipis */}
-          <div className="nav-divider h-4 w-[1px] bg-zinc-700/60" aria-hidden="true" />
-
-          {/* Kontrol Desktop Kanan: [Switcher ID / EN] dan [Toggle Tema] */}
-          <div className="nav-actions flex items-center gap-3">
-            <button
-              type="button"
-              onClick={toggleLanguage}
-              className="nav-lang-btn text-zinc-400 hover:text-zinc-100 text-xs font-medium transition-colors flex items-center gap-1 cursor-pointer"
-              title={language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
-              aria-label="Ganti bahasa"
-            >
-              <span className={language === 'id' ? 'text-orange-500 font-semibold' : 'text-zinc-400'}>ID</span>
-              <span className="text-zinc-600 text-[10px]">/</span>
-              <span className={language === 'en' ? 'text-orange-500 font-semibold' : 'text-zinc-400'}>EN</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="nav-theme-btn p-1.5 rounded-full text-zinc-400 hover:text-orange-500 transition-colors flex items-center justify-center cursor-pointer"
-              title={theme === 'dark' ? 'Ganti ke Tema Terang' : 'Ganti ke Tema Gelap'}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-            </button>
-          </div>
-
-        </div>
-      </header>
-
-      {/* 2. Tata Letak Mobile (< 768px): Floating Bottom Dock Horizontal Penuh */}
-      <nav
-        className="mobile-dock-wrapper fixed bottom-6 left-1/2 -translate-x-1/2 z-50 md:hidden"
-        aria-label="Mobile Navigation"
-      >
+      {/* 1. Navbar Desktop (Melayang rapi, hanya tampil di desktop: hidden md:flex) */}
+      <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center justify-between px-6 py-2.5 rounded-full bg-zinc-900/90 backdrop-blur-xl border border-zinc-800 shadow-2xl min-w-[560px] max-w-2xl">
+        {/* Sisi Kiri (Logo) */}
         <div
-          className="dock-capsule flex flex-row flex-nowrap items-center justify-center gap-5 w-auto px-5 py-2.5 rounded-full bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/80 shadow-[0_8px_30px_rgb(0,0,0,0.5)]"
+          onClick={() => setActiveTab && setActiveTab('home')}
+          className="flex items-center gap-2 font-semibold text-white text-sm shrink-0 cursor-pointer select-none"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if ((e.key === 'Enter' || e.key === ' ') && setActiveTab) {
+              setActiveTab('home');
+            }
+          }}
         >
-          {/* Semua item berjajar ke samping (horizontal): [Home] [Proyek] [Sertifikasi] [Kontak] */}
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
-            const IconComponent = link.Icon;
-            return (
-              <a
-                key={link.id}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                aria-label={link.label}
-                title={link.label}
-                className={`dock-nav-item flex items-center justify-center transition-colors ${
-                  isActive ? 'active text-orange-500' : 'text-zinc-400 hover:text-orange-500'
-                }`}
-              >
-                <IconComponent className="w-5 h-5" size={20} aria-hidden="true" />
-              </a>
-            );
-          })}
+          <span className="w-2 h-2 rounded-full bg-orange-500" />
+          <span>Iqbal D.F</span>
+        </div>
 
-          {/* Garis Pemisah Vertikal Tipis Sebelum Switch Bahasa: h-4 w-[1px] bg-zinc-700/60 */}
-          <div className="dock-divider h-4 w-[1px] bg-zinc-700/60" aria-hidden="true" />
+        {/* Menu Tengah: container dengan gap-6 dan border kiri-kanan */}
+        <nav className="flex items-center gap-6 px-4 border-l border-r border-zinc-800">
+          {navItems.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              onClick={() => setActiveTab && setActiveTab(item.id)}
+              className={`text-sm font-medium transition-colors bg-transparent border-0 cursor-pointer ${
+                activeTab === item.id
+                  ? 'text-orange-500 font-semibold'
+                  : 'text-zinc-400 hover:text-white'
+              }`}
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
 
-          {/* Tombol Teks Switch Bahasa [ID/EN] */}
+        {/* Sisi Kanan: Switcher Bahasa & Toggle Tema */}
+        <div className="flex items-center gap-3 shrink-0">
           <button
             type="button"
             onClick={toggleLanguage}
-            className="dock-lang-btn text-xs font-semibold text-zinc-300 hover:text-orange-500 transition-colors flex items-center gap-1 cursor-pointer"
-            title={language === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
-            aria-label="Ganti bahasa"
+            className="text-xs font-medium text-zinc-400 hover:text-white bg-transparent border-0 px-2 py-1 cursor-pointer transition-colors"
+            title={language === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
+          >
+            {language === 'en' ? 'EN' : 'ID'}
+          </button>
+
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="text-zinc-400 hover:text-white bg-transparent border-0 cursor-pointer p-1.5 rounded-full flex items-center justify-center transition-colors"
+            title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+          </button>
+        </div>
+      </header>
+
+      {/* 2. Floating Dock Mobile (Hanya tampil di mobile: md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-50) */}
+      <nav
+        className="md:hidden fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center"
+        aria-label="Mobile Navigation"
+      >
+        <div className="flex flex-row flex-nowrap items-center justify-center gap-5 px-5 py-2.5 rounded-full bg-zinc-900/90 backdrop-blur-xl border border-zinc-800/80 shadow-[0_8px_30px_rgb(0,0,0,0.5)]">
+          {navItems.map((item) => {
+            const isActive = activeTab === item.id;
+            const Icon = item.Icon;
+            return (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveTab && setActiveTab(item.id)}
+                aria-label={item.label}
+                title={item.label}
+                className={`flex items-center justify-center transition-colors bg-transparent border-0 cursor-pointer ${
+                  isActive ? 'text-orange-500' : 'text-zinc-400 hover:text-orange-500'
+                }`}
+              >
+                <Icon className="w-5 h-5" size={20} aria-hidden="true" />
+              </button>
+            );
+          })}
+
+          <div className="h-4 w-[1px] bg-zinc-700/60" aria-hidden="true" />
+
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="text-xs font-semibold text-zinc-300 hover:text-orange-500 transition-colors bg-transparent border-0 cursor-pointer flex items-center gap-1"
+            title={language === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
           >
             <span className={language === 'id' ? 'text-orange-500 font-bold' : 'text-zinc-400'}>ID</span>
             <span className="text-zinc-600 text-[10px]">/</span>
             <span className={language === 'en' ? 'text-orange-500 font-bold' : 'text-zinc-400'}>EN</span>
           </button>
 
-          {/* Tombol Ikon Tema */}
           <button
             type="button"
             onClick={toggleTheme}
-            className="dock-theme-btn flex items-center justify-center text-zinc-400 hover:text-orange-500 transition-colors cursor-pointer"
-            title={theme === 'dark' ? 'Ganti ke Tema Terang' : 'Ganti ke Tema Gelap'}
+            className="flex items-center justify-center text-zinc-400 hover:text-orange-500 transition-colors bg-transparent border-0 cursor-pointer"
+            title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
             aria-label="Toggle theme"
           >
-            {theme === 'dark' ? (
-              <Sun className="w-5 h-5" size={20} aria-hidden="true" />
-            ) : (
-              <Moon className="w-5 h-5" size={20} aria-hidden="true" />
-            )}
+            {theme === 'dark' ? <Sun className="w-5 h-5" size={20} /> : <Moon className="w-5 h-5" size={20} />}
           </button>
         </div>
       </nav>

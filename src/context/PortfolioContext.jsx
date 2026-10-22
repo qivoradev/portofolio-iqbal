@@ -3,7 +3,10 @@ import { portfolioData } from '../data/portfolioData';
 
 const PortfolioContext = createContext();
 
-export function PortfolioProvider({ children }) {
+export function PortfolioProvider({ children, activeTab: propActiveTab, setActiveTab: propSetActiveTab }) {
+  const [internalActiveTab, setInternalActiveTab] = useState('home');
+  const activeTab = propActiveTab !== undefined ? propActiveTab : internalActiveTab;
+  const setActiveTab = propSetActiveTab !== undefined ? propSetActiveTab : setInternalActiveTab;
   // 1. Language State ('id' | 'en') dengan localStorage try/catch, default 'id'
   const [language, setLanguageState] = useState(() => {
     try {
@@ -78,6 +81,8 @@ export function PortfolioProvider({ children }) {
         toggleTheme,
         t,
         portfolioData,
+        activeTab,
+        setActiveTab,
       }}
     >
       {children}

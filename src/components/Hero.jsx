@@ -1,271 +1,94 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
-import { ArrowRight } from 'lucide-react';
-import { SiGithub, SiInstagram, SiWhatsapp } from 'react-icons/si';
+import { SiGithub, SiInstagram } from 'react-icons/si';
 import { FaLinkedin } from 'react-icons/fa6';
-import { getWhatsAppLink } from '../data/portfolioData';
-import HeroBackdrop from './HeroBackdrop';
 
-/** Cek URL sosial valid (bukan placeholder "[...]") */
-function isValidUrl(url) {
-  if (!url || typeof url !== 'string') return false;
-  const t = url.trim();
-  return t !== '' && !t.startsWith('[');
-}
-
-export default function Hero() {
-  const { t, portfolioData, language } = usePortfolio();
-  const { contacts, photo, name, availability } = portfolioData;
+export default function Hero({ language: propLanguage, setActiveTab: propSetActiveTab } = {}) {
+  const portfolio = usePortfolio();
+  const language = propLanguage || portfolio.language || 'id';
+  const setActiveTab = propSetActiveTab || portfolio.setActiveTab;
+  const { contacts, photo, name } = portfolio.portfolioData || {};
 
   const [imgSrc, setImgSrc] = useState(photo || '/foto-nobg.png');
   const [isFallback, setIsFallback] = useState(false);
 
-  // Cek apakah halaman sudah pernah dimuat di sesi browser ini (mencegah animasi berulang saat refresh)
-  const [hasLoadedBefore] = useState(() => {
-    try {
-      return sessionStorage.getItem('portfolio_has_loaded') === 'true';
-    } catch {
-      return false;
-    }
-  });
-
   const handleImgError = () => {
-    if (imgSrc.endsWith('.webp')) {
-      setImgSrc('/foto-nobg.png');
-    } else if (!isFallback) {
+    if (!isFallback) {
       setImgSrc('/foto.jpg');
       setIsFallback(true);
     }
   };
 
-  // Pisah nama menjadi dua baris: "Iqbal Dwi" / "Fathonah"
-  const nameParts = (name || '').split(' ');
-  const nameRow1 = nameParts.slice(0, 2).join(' ');
-  const nameRow2 = nameParts.slice(2).join(' ');
-
-  const availabilityText = availability ? (availability[language] || availability.id) : '';
-
-  const waNumber = (contacts.whatsapp || '').replace(/[^0-9]/g, '');
-  const isWaValid = waNumber.length >= 10;
-  const whatsappUrl = isWaValid
-    ? getWhatsAppLink(contacts.whatsapp, contacts.whatsappMessage, language)
-    : null;
-
   const socials = [
-    { key: 'github',    label: 'GitHub',    url: isValidUrl(contacts.github)    ? contacts.github    : null, Icon: SiGithub,    cls: 'hs-github'    },
-    { key: 'linkedin',  label: 'LinkedIn',  url: isValidUrl(contacts.linkedin)  ? contacts.linkedin  : null, Icon: FaLinkedin,  cls: 'hs-linkedin'  },
-    { key: 'instagram', label: 'Instagram', url: isValidUrl(contacts.instagram) ? contacts.instagram : null, Icon: SiInstagram, cls: 'hs-instagram' },
-    { key: 'whatsapp',  label: 'WhatsApp',  url: whatsappUrl,                                                Icon: SiWhatsapp,   cls: 'hs-whatsapp'  },
-  ].filter(s => s.url);
-
-  // ── Entrance Motion: Hanya SATU KALI per sesi kunjungan browser ──
-  const heroRef = useRef(null);
-  useEffect(() => {
-    // Jika user me-refresh (hasLoadedBefore = true), langsung tampil instan tanpa delay
-    if (hasLoadedBefore) {
-      const el = heroRef.current;
-      if (!el) return;
-      const items = el.querySelectorAll('[data-ha]');
-      items.forEach(item => {
-        item.style.opacity = '1';
-        item.style.transform = 'none';
-        item.style.transition = 'none';
-      });
-      return;
-    }
-
-    // Kunjungan pertama di sesi ini: tandai di sessionStorage
-    try {
-      sessionStorage.setItem('portfolio_has_loaded', 'true');
-    } catch {
-      // Ignore storage error
-    }
-
-    const el = heroRef.current;
-    if (!el) return;
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const items = el.querySelectorAll('[data-ha]');
-    if (reduced) {
-      items.forEach(item => {
-        item.style.opacity = '1';
-        item.style.transform = 'none';
-        item.style.transition = 'none';
-      });
-      return;
-    }
-
-    // Pangkas durasi transisi menjadi sangat cepat (< 0.25s) & subtle
-    items.forEach((item, idx) => {
-      const delay = Math.min(idx * 25, 120);
-      item.style.transition = 'none';
-      setTimeout(() => {
-        item.style.transition = 'opacity 0.22s ease-out, transform 0.22s ease-out';
-        item.style.opacity = '1';
-        item.style.transform = 'none';
-      }, delay);
-    });
-  }, [hasLoadedBefore]);
-
-  const heroDescription = t.hero.description;
-
-  // Nilai style awal: jika sudah pernah dimuat (refresh F5), tidak ada opacity: 0
-  const initialAnimStyle = hasLoadedBefore
-    ? undefined
-    : { opacity: 0, transform: 'translateY(6px)' };
+    { key: 'github', label: 'GitHub', url: contacts?.github || 'https://github.com', Icon: SiGithub },
+    { key: 'linkedin', label: 'LinkedIn', url: contacts?.linkedin || 'https://linkedin.com', Icon: FaLinkedin },
+    { key: 'instagram', label: 'Instagram', url: contacts?.instagram || 'https://instagram.com', Icon: SiInstagram },
+  ].filter((s) => s.url && typeof s.url === 'string' && !s.url.startsWith('['));
 
   return (
-    <section id="beranda" className="hero-section pt-8 pb-12 md:pt-32 md:pb-16" ref={heroRef}>
-      <div className="container" style={{ width: '100%' }}>
-        {/* Panel Besar Tunggal */}
-        <div className="hero-panel">
-          {/* Latar Grid Halus di Dalam Panel */}
-          <HeroBackdrop />
-
-          {/* Siluet Garis Data (SVG Inline Dekoratif Sisi Kanan/Bawah Panel) */}
-          <div className="hero-data-silhouette" aria-hidden="true">
-            <svg viewBox="0 0 600 360" fill="none" preserveAspectRatio="none">
-              {/* 5 batang outline */}
-              <rect x="340" y="240" width="36" height="100" stroke="var(--accent)" strokeWidth="1" rx="4" />
-              <rect x="390" y="180" width="36" height="160" stroke="var(--accent)" strokeWidth="1" rx="4" />
-              <rect x="440" y="260" width="36" height="80" stroke="var(--accent)" strokeWidth="1" rx="4" />
-              <rect x="490" y="140" width="36" height="200" stroke="var(--accent)" strokeWidth="1" rx="4" />
-              <rect x="540" y="200" width="36" height="140" stroke="var(--accent)" strokeWidth="1" rx="4" />
-
-              {/* Satu garis tren naik-turun */}
-              <path
-                d="M 140 280 C 220 230, 280 290, 360 210 C 410 160, 460 230, 510 120 L 580 180"
-                stroke="var(--accent)"
-                strokeWidth="1.5"
-                className={`hero-trend-line ${hasLoadedBefore ? 'hero-trend-line--instant' : ''}`}
-              />
-            </svg>
-          </div>
-
-          {/* ══════════════════════════════════════════════════════
-              KOLOM KIRI — Teks, Tombol, Sosial
-              ══════════════════════════════════════════════════ */}
-          <div className="hero-left">
-            {/* Status Availability Badge (Mobile & Desktop) */}
-            <div
-              className="hero-badge-availability inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-medium mb-4"
-              data-ha="1"
-              style={initialAnimStyle}
-            >
-              <span className="hero-badge-dot w-2 h-2 rounded-full bg-emerald-400 animate-pulse inline-block flex-shrink-0" aria-hidden="true" />
-              <span>{language === 'en' ? 'Available for Work' : 'Terbuka untuk Peluang Kerja'}</span>
-            </div>
-
-            {/* 1. Salam kecil */}
-            <p
-              className="hero-greeting"
-              data-ha="1"
-              style={initialAnimStyle}
-            >
-              {t.hero.greeting}
-            </p>
-
-            {/* 2. Nama dua baris */}
-            <h1
-              className="hero-name"
-              aria-label={name}
-              data-ha="2"
-              style={initialAnimStyle}
-            >
-              <span>{nameRow1}</span>
-              <span>{nameRow2}</span>
-            </h1>
-
-            {/* 3. Role */}
-            <div
-              className="hero-role"
-              data-ha="3"
-              style={initialAnimStyle}
-            >
-              Data Analyst
-            </div>
-
-            {/* 4. Deskripsi singkat */}
-            <p
-              className="hero-bio"
-              data-ha="4"
-              style={initialAnimStyle}
-            >
-              {heroDescription}
-            </p>
-
-            {/* 5. Tombol Aksi Utama: Lihat Proyek (Primary CTA Button) */}
-            <div
-              className="hero-actions mb-6"
-              data-ha="5"
-              style={initialAnimStyle}
-            >
-              <a href="#proyek" className="btn hero-btn-projects">
-                <span>{t.hero.viewProjects || 'Lihat Proyek'}</span>
-                <ArrowRight size={17} aria-hidden="true" />
-              </a>
-            </div>
-
-            {/* 6. Ikon Sosial */}
-            {socials.length > 0 && (
-              <div
-                className="hero-socials"
-                data-ha="6"
-                style={hasLoadedBefore ? undefined : { opacity: 0 }}
-              >
-                {socials.map(({ key, label, url, Icon, cls }) => (
-                  <a
-                    key={key}
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`hero-social ${cls}`}
-                    aria-label={label}
-                    title={label}
-                  >
-                    <Icon size={24} />
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* ══════════════════════════════════════════════════════
-              KOLOM KANAN — Wadah Foto + Foto + Kartu
-              ══════════════════════════════════════════════════ */}
-          <div className="hero-right">
-            <div className={`hero-photo-wrap ${isFallback ? 'is-fallback' : ''}`}>
-              {/* Rona di belakang foto */}
-              <div className="hero-photo-glow" aria-hidden="true" />
-
-              {/* Wadah crop foto */}
-              <div className="hero-photo-frame">
-                <img
-                  src={imgSrc}
-                  alt={`Foto ${name}`}
-                  className="hero-photo-img"
-                  onError={handleImgError}
-                  data-ha="5"
-                  style={initialAnimStyle}
-                />
-              </div>
-
-              {/* Floating Badge (di bawah foto) */}
-              <div
-                className="hero-photo-card"
-                data-ha="6"
-                style={initialAnimStyle}
-              >
-                <div className="hero-card-status">
-                  <span className="hero-status-dot" aria-hidden="true" />
-                  <span>{availabilityText || 'Open to Work'}</span>
-                </div>
-                <div className="hero-card-role">
-                  {portfolioData.role || 'Data Analyst'}
-                </div>
-              </div>
-            </div>
-          </div>
+    <section className="w-full flex items-center justify-center py-2">
+      <div className="w-full max-w-2xl mx-auto rounded-3xl bg-zinc-900/60 border border-zinc-800/80 p-6 sm:p-10 backdrop-blur-md flex flex-col items-center text-center shadow-2xl">
+        
+        {/* Lingkaran Foto Estetik (Bulat dengan Background Berwarna) */}
+        <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-emerald-500/20 border-2 border-emerald-500/40 p-2 flex items-center justify-center overflow-hidden mx-auto mb-6 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+          <img
+            src={imgSrc}
+            alt={name || 'Iqbal Dwi Fathonah'}
+            className="w-full h-full object-contain object-bottom rounded-full"
+            onError={handleImgError}
+          />
         </div>
+
+        {/* Status Badge */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-4">
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>{language === 'en' ? 'Available for Work' : 'Terbuka untuk Peluang Kerja'}</span>
+        </div>
+
+        {/* Teks Profil */}
+        <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-2">
+          {name || 'Iqbal Dwi Fathonah'}
+        </h1>
+        <h2 className="text-lg sm:text-xl font-semibold text-orange-500 mb-4">
+          Data Analyst
+        </h2>
+
+        {/* Ikon Sosial Media: Deretan ikon (GitHub, LinkedIn, Instagram) horizontal */}
+        {socials.length > 0 && (
+          <div className="flex items-center justify-center gap-4 text-zinc-400 mb-5">
+            {socials.map(({ key, label, url, Icon }) => (
+              <a
+                key={key}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors p-2 rounded-lg hover:bg-zinc-800/60"
+                aria-label={label}
+                title={label}
+              >
+                <Icon size={20} />
+              </a>
+            ))}
+          </div>
+        )}
+
+        {/* Bio Singkat */}
+        <p className="text-zinc-400 text-sm leading-relaxed max-w-lg mb-6">
+          {language === 'en'
+            ? 'Data Analyst with an Information Technology background, focused on turning complex data into interactive dashboards and actionable insights. Proficient in Excel and SQL to support strategic business decisions.'
+            : 'Data Analyst berlatar belakang Teknologi Informasi yang berfokus menerjemahkan data kompleks menjadi dashboard interaktif dan insight bisnis yang strategis.'}
+        </p>
+
+        {/* Single CTA Button */}
+        <button
+          type="button"
+          onClick={() => setActiveTab && setActiveTab('projects')}
+          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-medium text-sm transition-all shadow-lg shadow-orange-500/20 cursor-pointer"
+        >
+          <span>{language === 'en' ? 'View Projects' : 'Lihat Proyek'}</span>
+          <span>&rarr;</span>
+        </button>
+
       </div>
     </section>
   );
