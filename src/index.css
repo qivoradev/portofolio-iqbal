@@ -2940,14 +2940,27 @@ hr,
 }
 
 [data-theme="dark"] .featured-project-card {
-  background: rgba(24, 24, 27, 0.55);
-  border-color: #27272A;
+  background: rgba(24, 24, 27, 0.40);
+  border-color: rgba(39, 39, 42, 0.80);
 }
 
 .featured-project-card:hover {
   border-color: rgba(249, 115, 22, 0.45);
   transform: translateY(-3px);
   box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.12);
+}
+
+/* Kontainer Tumpukan Proyek Full-Width (Jarak pemisah mt-8 md:mt-12) */
+.projects-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@media (min-width: 768px) {
+  .projects-stack {
+    gap: 48px;
+  }
 }
 
 /* Grid 2 Kolom Featured (7 cols : 5 cols pada Desktop) */
@@ -3044,16 +3057,81 @@ hr,
   border-color: #27272A;
 }
 
+.project-image-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-2);
+}
+
+[data-theme="dark"] .project-image-wrapper {
+  background: #111317;
+}
+
+.project-image-interactive {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #EAF2FA;
+}
+
+[data-theme="dark"] .project-image-interactive {
+  background: #0D131A;
+}
+
+.project-image-zoom-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.42);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.project-image-interactive:hover .project-image-zoom-overlay,
+.project-image-interactive:focus-visible .project-image-zoom-overlay {
+  opacity: 1;
+}
+
+.project-image-zoom-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #111827;
+  font-size: 0.78rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transform: translateY(4px);
+  transition: transform 0.2s ease;
+}
+
+.project-image-interactive:hover .project-image-zoom-btn {
+  transform: translateY(0);
+}
+
 /* Efek Zoom Halus Saat Hover */
 .project-preview-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: top center;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .editorial-card:hover .project-preview-img {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 /* Vector Mockup Frame Dashboard 16:9 */
@@ -3238,6 +3316,118 @@ hr,
   margin: 0 0 18px 0;
 }
 
+/* Metrik Ringkas (KPI Badges) */
+.project-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 640px) {
+  .project-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+.project-metric-card {
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+[data-theme="dark"] .project-metric-card {
+  background: rgba(39, 39, 42, 0.45);
+  border-color: #27272A;
+}
+
+.project-metric-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(188, 71, 21, 0.35);
+}
+
+[data-theme="dark"] .project-metric-card:hover {
+  border-color: rgba(251, 146, 60, 0.4);
+}
+
+.project-metric-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-metric-val {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+/* Alert / Anomali Transaksi Rugi */
+.project-metric-card-alert {
+  background: rgba(239, 68, 68, 0.08);
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+[data-theme="dark"] .project-metric-card-alert {
+  background: rgba(239, 68, 68, 0.16);
+  border-color: rgba(239, 68, 68, 0.45);
+}
+
+.project-metric-card-alert .project-metric-label {
+  color: #DC2626;
+}
+
+[data-theme="dark"] .project-metric-card-alert .project-metric-label {
+  color: #F87171;
+}
+
+.project-metric-card-alert .project-metric-val {
+  color: #DC2626;
+}
+
+[data-theme="dark"] .project-metric-card-alert .project-metric-val {
+  color: #EF4444;
+}
+
+/* Responsif & Proporsional di dalam Grid Card */
+.grid-project-card .project-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+@media (max-width: 1120px) and (min-width: 768px) {
+  .grid-project-card .project-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+.grid-project-card .project-metric-card {
+  padding: 8px 10px;
+}
+
+.grid-project-card .project-metric-label {
+  font-size: 0.62rem;
+}
+
+.grid-project-card .project-metric-val {
+  font-size: 1.05rem;
+}
+
 .project-tags-wrap {
   display: flex;
   flex-wrap: wrap;
@@ -3311,4 +3501,107 @@ hr,
     width: 100%;
     flex: 1 1 100%;
   }
+}
+
+/* Lightbox Modal Dashboard */
+.project-lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(10, 12, 16, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.project-lightbox-content {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  max-width: 1100px;
+  width: 100%;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .project-lightbox-content {
+  background: #18181B;
+  border-color: #27272A;
+}
+
+.project-lightbox-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+[data-theme="dark"] .project-lightbox-topbar {
+  background: #121418;
+  border-bottom-color: #27272A;
+}
+
+.project-lightbox-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.project-lightbox-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.project-lightbox-close-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 6px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.project-lightbox-close-btn:hover {
+  background: rgba(0, 0, 0, 0.08);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .project-lightbox-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+.project-lightbox-img-wrapper {
+  padding: 16px;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #EAF2FA;
+}
+
+[data-theme="dark"] .project-lightbox-img-wrapper {
+  background: #0B0E13;
+}
+
+.project-lightbox-img {
+  width: 100%;
+  max-height: 75vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
 }

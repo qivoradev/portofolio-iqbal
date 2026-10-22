@@ -1,25 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import SectionHeading from './SectionHeading';
-import { ExternalLink, LayoutDashboard } from 'lucide-react';
+import { LayoutDashboard, FileSpreadsheet, Maximize2, X } from 'lucide-react';
 import { GithubIcon } from './Icons';
 
 /**
  * Komponen Preview Dashboard 16:9 (aspect-video)
- * Menampilkan gambar jika file screenshot tersedia, atau mockup dashboard vektor interaktif yang bersih.
+ * Menampilkan gambar jika file screenshot tersedia, lengkap dengan browser topbar dan trigger perbesar.
+ * Jika tidak ada file gambar, menampilkan mockup dashboard vektor interaktif.
  */
-function DashboardPreview({ image, title, badge }) {
+function DashboardPreview({ image, title, badge, onEnlarge, language, fileName }) {
   const hasValidImage = image && typeof image === 'string' && image.trim() !== '' && !image.startsWith('[');
+  const displayTabName = fileName || 'analytics.dashboard.live';
 
   return (
     <div className="project-image-container">
       {hasValidImage ? (
-        <img
-          src={image}
-          alt={title}
-          className="project-preview-img"
-          loading="lazy"
-        />
+        <div className="project-image-wrapper">
+          {/* Header Browser Window Bar */}
+          <div className="project-mockup-topbar">
+            <div className="mockup-dots">
+              <span className="dot dot-red" />
+              <span className="dot dot-yellow" />
+              <span className="dot dot-green" />
+            </div>
+            <div className="mockup-address-bar">
+              <span className="mockup-url-text">{displayTabName}</span>
+            </div>
+            <span className="mockup-ratio-badge">{badge?.split('•')[0]?.trim() || '16:9 HD'}</span>
+          </div>
+
+          {/* Area Gambar Interaktif */}
+          <div
+            className="project-image-interactive"
+            onClick={onEnlarge}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onEnlarge?.();
+              }
+            }}
+            title={title}
+          >
+            <img
+              src={image}
+              alt={title}
+              className="project-preview-img"
+              loading="lazy"
+            />
+            {onEnlarge && (
+              <div className="project-image-zoom-overlay">
+                <span className="project-image-zoom-btn">
+                  <Maximize2 size={15} aria-hidden="true" />
+                  <span>{language === 'en' ? 'Enlarge Dashboard' : 'Perbesar Dashboard'}</span>
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
       ) : (
         /* Mockup Frame Dashboard Vektor 16:9 yang Bersih */
         <div className="project-mockup-frame" aria-hidden="true">
@@ -31,7 +71,7 @@ function DashboardPreview({ image, title, badge }) {
               <span className="dot dot-green" />
             </div>
             <div className="mockup-address-bar">
-              <span className="mockup-url-text">analytics.dashboard.live</span>
+              <span className="mockup-url-text">{displayTabName}</span>
             </div>
             <span className="mockup-ratio-badge">{badge?.split('•')[0]?.trim() || '16:9 HD'}</span>
           </div>
@@ -66,17 +106,14 @@ function DashboardPreview({ image, title, badge }) {
                     <stop offset="100%" stopColor="var(--accent)" stopOpacity="0.0" />
                   </linearGradient>
                 </defs>
-                {/* Horizontal Guide Lines */}
                 <line x1="0" y1="20" x2="400" y2="20" stroke="currentColor" strokeOpacity="0.08" strokeDasharray="3 3" />
                 <line x1="0" y1="55" x2="400" y2="55" stroke="currentColor" strokeOpacity="0.08" strokeDasharray="3 3" />
                 <line x1="0" y1="90" x2="400" y2="90" stroke="currentColor" strokeOpacity="0.08" strokeDasharray="3 3" />
 
-                {/* Shaded Area */}
                 <path
                   d="M0,90 Q40,75 80,55 T160,70 T240,35 T320,25 T400,12 L400,110 L0,110 Z"
                   fill={`url(#chart-grad-${badge?.replace(/[^a-zA-Z0-9]/g, '') || 'default'})`}
                 />
-                {/* Trend Stroke */}
                 <path
                   d="M0,90 Q40,75 80,55 T160,70 T240,35 T320,25 T400,12"
                   fill="none"
@@ -84,7 +121,6 @@ function DashboardPreview({ image, title, badge }) {
                   strokeWidth="2.5"
                   strokeLinecap="round"
                 />
-                {/* Data Points */}
                 <circle cx="80" cy="55" r="3.5" fill="var(--accent)" />
                 <circle cx="160" cy="70" r="3.5" fill="var(--accent)" />
                 <circle cx="240" cy="35" r="3.5" fill="var(--accent)" />
@@ -103,12 +139,27 @@ export default function Projects() {
   const { language, t, portfolioData } = usePortfolio();
   const { projects = [] } = portfolioData;
 
-  if (projects.length === 0) return null;
+  // State untuk modal perbesar gambar dashboard
+  const [activePreview, setActivePreview] = useState(null);
 
-  // Proyek 1: Featured Project (Andalan)
-  const featuredProject = projects[0];
-  // Proyek 2 & 3: Balanced Grid Bawah
-  const gridProjects = projects.slice(1, 3);
+  useEffect(() => {
+    if (!activePreview) return;
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        setActivePreview(null);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activePreview]);
+
+  if (projects.length === 0) return null;
 
   // Helper resolusi teks bilingual
   const resolveText = (field, fallback = '') => {
@@ -119,10 +170,6 @@ export default function Projects() {
     return field;
   };
 
-  const featuredBadge = resolveText(featuredProject.badge, t.projects.featuredBadge || 'FEATURED PROJECT • 01');
-  const featuredTitle = resolveText(featuredProject.title, 'Executive Analytics Dashboard');
-  const featuredDesc = resolveText(featuredProject.description, '');
-
   return (
     <section id="proyek" className="section projects-section py-12 md:py-16">
       <div className="container">
@@ -130,112 +177,96 @@ export default function Projects() {
         {/* Judul & Subjudul: SectionHeading Bersama */}
         <SectionHeading title={t.projects.title} subtitle={t.projects.subtitle} />
 
-        {/* 1. Proyek 1: Featured Project Showcase (Horizontal 2 Kolom: 7 cols & 5 cols) */}
-        {featuredProject && (
-          <article className="featured-project-card editorial-card">
-            <div className="featured-project-grid">
-              
-              {/* Kolom Kiri (7 Cols): Wadah Preview Gambar Dashboard 16:9 */}
-              <div className="featured-project-media">
-                <DashboardPreview
-                  image={featuredProject.image}
-                  title={featuredTitle}
-                  badge={featuredBadge}
-                />
-              </div>
+        {/* Kontainer Full-Width Vertikal Bertumpuk (Horizontal 2 Kolom: 7 cols & 5 cols) */}
+        <div className="projects-stack">
+          {projects.map((project, idx) => {
+            const badge = resolveText(
+              project.badge,
+              idx === 0
+                ? (t.projects.featuredBadge || 'FEATURED CASE STUDY • SPREADSHEET ANALYTICS')
+                : `${t.projects.caseStudy || 'STUDI KASUS'} • 0${idx + 1}`
+            );
+            const title = resolveText(project.title, `Project ${idx + 1}`);
+            const desc = resolveText(project.description, '');
 
-              {/* Kolom Kanan (5 Cols): Informasi & Aksi */}
-              <div className="featured-project-content">
-                <span className="project-category-badge">
-                  {featuredBadge}
-                </span>
+            // Aksi Utama
+            const primaryUrl = project.primaryAction?.url || project.liveUrl || project.githubUrl;
+            const primaryLabel = project.primaryAction
+              ? resolveText(project.primaryAction.label, t.projects.githubBtn || 'Lihat di GitHub / Repositori')
+              : (project.liveUrl
+                ? (t.projects.demoBtn || (language === 'en' ? 'View Dashboard' : 'Lihat Dashboard'))
+                : (t.projects.codeBtn || (language === 'en' ? 'Documentation / GitHub' : 'Dokumentasi / GitHub')));
 
-                <h3 className="featured-project-title">
-                  {featuredTitle}
-                </h3>
+            const isPrimaryGitHub = Boolean(
+              project.primaryAction?.icon === 'github' ||
+              (primaryUrl && primaryUrl.includes('github.com') && !project.liveUrl)
+            );
 
-                <p className="project-description">
-                  {featuredDesc}
-                </p>
+            // Aksi Sekunder
+            const secondaryUrl = project.secondaryAction?.url || project.downloadUrl || (project.liveUrl ? project.githubUrl : null);
+            const secondaryLabel = project.secondaryAction
+              ? resolveText(project.secondaryAction.label, t.projects.downloadBtn || 'Unduh Workbook')
+              : (project.downloadUrl
+                ? (t.projects.downloadBtn || (language === 'en' ? 'Download Workbook' : 'Unduh Workbook'))
+                : (t.projects.codeBtn || (language === 'en' ? 'Documentation / GitHub' : 'Dokumentasi / GitHub')));
 
-                {/* Pill Tags */}
-                {Array.isArray(featuredProject.techStack) && featuredProject.techStack.length > 0 && (
-                  <div className="project-tags-wrap">
-                    {featuredProject.techStack.map((tech, tIdx) => (
-                      <span key={tIdx} className="project-skill-pill">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                )}
+            const isSecondaryDownload = Boolean(
+              project.secondaryAction?.icon === 'download' ||
+              project.downloadUrl
+            );
 
-                {/* 2 Tombol Aksi: Lihat Dashboard (Aksen) & Dokumentasi/GitHub (Outline) */}
-                <div className="project-actions-row">
-                  {featuredProject.liveUrl && (
-                    <a
-                      href={featuredProject.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-primary project-btn-primary"
-                    >
-                      <LayoutDashboard size={16} aria-hidden="true" />
-                      <span>{t.projects.demoBtn || (language === 'en' ? 'View Dashboard' : 'Lihat Dashboard')}</span>
-                    </a>
-                  )}
-
-                  {featuredProject.githubUrl && (
-                    <a
-                      href={featuredProject.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="btn btn-secondary project-btn-secondary"
-                    >
-                      <GithubIcon size={16} />
-                      <span>{t.projects.codeBtn || (language === 'en' ? 'Documentation / GitHub' : 'Dokumentasi / GitHub')}</span>
-                    </a>
-                  )}
-                </div>
-              </div>
-
-            </div>
-          </article>
-        )}
-
-        {/* 2. Proyek 2 & 3: Balanced 2-Column Grid di Bawah Proyek 1 */}
-        {gridProjects.length > 0 && (
-          <div className="projects-bottom-grid">
-            {gridProjects.map((project, idx) => {
-              const badge = resolveText(
-                project.badge,
-                `${t.projects.caseStudy || 'STUDI KASUS'} • 0${idx + 2}`
-              );
-              const title = resolveText(project.title, `Project ${idx + 2}`);
-              const desc = resolveText(project.description, '');
-
-              return (
-                <article key={project.id || idx} className="grid-project-card editorial-card">
-                  {/* Container Gambar Dashboard 16:9 Bagian Atas */}
-                  <div className="grid-project-media">
+            return (
+              <article key={project.id || idx} className="featured-project-card editorial-card">
+                <div className="featured-project-grid">
+                  
+                  {/* Sisi Kiri (Desktop 7 cols): Mockup jendela browser/app dengan file screenshot dashboard */}
+                  <div className="featured-project-media">
                     <DashboardPreview
                       image={project.image}
                       title={title}
                       badge={badge}
+                      language={language}
+                      fileName={project.fileName}
+                      onEnlarge={project.image ? () => setActivePreview({
+                        image: project.image,
+                        title,
+                        badge
+                      }) : undefined}
                     />
                   </div>
 
-                  {/* Teks Detail Studi Kasus Bagian Bawah */}
-                  <div className="grid-project-content">
+                  {/* Sisi Kanan (Desktop 5 cols): Kategori badge, Judul, Deskripsi, Grid 4 KPI, Tag, dan Tombol Aksi */}
+                  <div className="featured-project-content">
                     <span className="project-category-badge">
                       {badge}
                     </span>
 
-                    <h3 className="grid-project-title">
+                    <h3 className="featured-project-title">
                       {title}
                     </h3>
 
                     <p className="project-description">
                       {desc}
                     </p>
+
+                    {/* Grid 4 Kartu KPI */}
+                    {Array.isArray(project.metrics) && project.metrics.length > 0 && (
+                      <div className="project-metrics-grid" role="group" aria-label="Key Performance Indicators">
+                        {project.metrics.map((metric, mIdx) => {
+                          const label = resolveText(metric.label, metric.name || '');
+                          const isAlert = metric.isAlert || metric.negative;
+                          return (
+                            <div
+                              key={mIdx}
+                              className={`project-metric-card ${isAlert ? 'project-metric-card-alert' : ''}`}
+                            >
+                              <span className="project-metric-label">{label}</span>
+                              <span className="project-metric-val">{metric.value}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
 
                     {/* Pill Tags */}
                     {Array.isArray(project.techStack) && project.techStack.length > 0 && (
@@ -250,38 +281,85 @@ export default function Projects() {
 
                     {/* Tombol Aksi */}
                     <div className="project-actions-row">
-                      {project.liveUrl && (
+                      {/* Tombol Utama */}
+                      {primaryUrl && (
                         <a
-                          href={project.liveUrl}
+                          href={primaryUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="btn btn-primary project-btn-primary"
                         >
-                          <ExternalLink size={15} aria-hidden="true" />
-                          <span>{t.projects.demoBtn || (language === 'en' ? 'View Dashboard' : 'Lihat Dashboard')}</span>
+                          {isPrimaryGitHub ? (
+                            <GithubIcon size={16} />
+                          ) : (
+                            <LayoutDashboard size={16} aria-hidden="true" />
+                          )}
+                          <span>{primaryLabel}</span>
                         </a>
                       )}
 
-                      {project.githubUrl && (
+                      {/* Tombol Sekunder / Unduh Workbook */}
+                      {secondaryUrl && (
                         <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
+                          href={secondaryUrl}
+                          target={secondaryUrl === '#' ? undefined : "_blank"}
+                          rel={secondaryUrl === '#' ? undefined : "noopener noreferrer"}
+                          download={project.fileName || undefined}
                           className="btn btn-secondary project-btn-secondary"
                         >
-                          <GithubIcon size={15} />
-                          <span>{t.projects.codeBtn || (language === 'en' ? 'Documentation / GitHub' : 'Dokumentasi / GitHub')}</span>
+                          {isSecondaryDownload ? (
+                            <FileSpreadsheet size={16} aria-hidden="true" />
+                          ) : (
+                            <GithubIcon size={16} />
+                          )}
+                          <span>{secondaryLabel}</span>
                         </a>
                       )}
                     </div>
                   </div>
-                </article>
-              );
-            })}
-          </div>
-        )}
+
+                </div>
+              </article>
+            );
+          })}
+        </div>
 
       </div>
+
+      {/* Lightbox Modal untuk Preview Dashboard Tajam & Besar */}
+      {activePreview && (
+        <div
+          className="project-lightbox-backdrop"
+          onClick={() => setActivePreview(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={activePreview.title}
+        >
+          <div className="project-lightbox-content" onClick={(e) => e.stopPropagation()}>
+            <div className="project-lightbox-topbar">
+              <div className="project-lightbox-info">
+                <span className="project-category-badge">{activePreview.badge}</span>
+                <h4 className="project-lightbox-heading">{activePreview.title}</h4>
+              </div>
+              <button
+                type="button"
+                className="project-lightbox-close-btn"
+                onClick={() => setActivePreview(null)}
+                aria-label={language === 'en' ? 'Close' : 'Tutup'}
+              >
+                <X size={20} />
+              </button>
+            </div>
+            <div className="project-lightbox-img-wrapper">
+              <img
+                src={activePreview.image}
+                alt={activePreview.title}
+                className="project-lightbox-img"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }

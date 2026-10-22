@@ -182,10 +182,12 @@ export const portfolioData = {
         title: "Proyek",
         subtitle: "Studi kasus analisis data dan visualisasi dashboard interaktif.",
         description: "Showcase studi kasus analitis dengan area visualisasi dashboard, pemodelan metrik, dan eksplorasi dataset.",
-        featuredBadge: "PROYEK ANDALAN • 01",
+        featuredBadge: "STUDI KASUS UNGGULAN • SPREADSHEET ANALYTICS",
         caseStudy: "Studi Kasus",
         demoBtn: "Lihat Dashboard",
         codeBtn: "Dokumentasi / GitHub",
+        githubBtn: "Lihat di GitHub / Repositori",
+        downloadBtn: "Unduh Workbook",
       },
       certifications: {
         title: "Sertifikasi",
@@ -270,10 +272,12 @@ export const portfolioData = {
         title: "Projects",
         subtitle: "Data analysis case studies and interactive dashboard visualisations.",
         description: "Showcase of analytical case studies featuring dashboard visualizations, metric modeling, and dataset exploration.",
-        featuredBadge: "FEATURED PROJECT • 01",
+        featuredBadge: "FEATURED CASE STUDY • SPREADSHEET ANALYTICS",
         caseStudy: "Case Study",
         demoBtn: "View Dashboard",
         codeBtn: "Documentation / GitHub",
+        githubBtn: "View on GitHub / Repository",
+        downloadBtn: "Download Workbook",
       },
       certifications: {
         title: "Certifications",
@@ -473,62 +477,121 @@ export const portfolioData = {
     {
       id: 1,
       featured: true,
+      fileName: "Superstore_Sales_and_Profitability_Dashboard_Final.xlsx",
       badge: {
-        id: "PROYEK ANDALAN • 01",
-        en: "FEATURED PROJECT • 01",
+        id: "STUDI KASUS UNGGULAN • SPREADSHEET ANALYTICS",
+        en: "FEATURED CASE STUDY • SPREADSHEET ANALYTICS",
       },
       title: {
-        id: "Executive Sales & Revenue Performance Dashboard",
-        en: "Executive Sales & Revenue Performance Dashboard",
+        id: "Analisis Profitabilitas & Kebocoran Diskon Superstore",
+        en: "Superstore Profitability & Discount Leakage Analysis",
       },
       description: {
-        id: "Analisis komprehensif atas performa penjualan multi-wilayah dan profitabilitas lini produk. Mengekstraksi 50.000+ baris data transaksi dengan SQL, merancang model spreadsheet dinamis di Microsoft Excel, dan menghasilkan visualisasi interaktif yang membantu manajemen mengidentifikasi penurunan margin sebesar 14% serta merumuskan strategi alokasi inventaris baru.",
-        en: "Comprehensive analysis of multi-regional sales performance and product line profitability. Extracted 50,000+ transactional records using SQL, engineered dynamic spreadsheet models in Microsoft Excel, and delivered interactive visualizations identifying a 14% margin dip to optimize inventory allocation.",
+        id: "Mengevaluasi anomali profitabilitas di mana margin keseluruhan 12.5% menyembunyikan 19% transaksi rugi. Analisis membuktikan pemberian diskon di atas 20% menjadi pemicu kebocoran margin (rugi hingga -$140K+), dengan defisit terbesar berpusat di sub-kategori Tables dan negara bagian Texas.",
+        en: "Investigated a profitability paradox where an overall 12.5% margin obscured 19% unprofitable transactions. Proved that discounts above 20% trigger major profit leakage (loss over -$140K+), with deficits concentrated in Tables and Texas.",
       },
-      image: "", // Siap diisi jalur file gambar screenshot dashboard (misal: /projects/sales-dashboard.webp)
-      techStack: ["Microsoft Excel", "SQL", "Looker Studio", "Data Storytelling"],
-      liveUrl: "https://lookerstudio.google.com",
-      githubUrl: "https://github.com/qivoradev",
+      image: "/projects/superstore-dashboard.png",
+      metrics: [
+        {
+          label: { id: "Total Sales", en: "Total Sales" },
+          value: "$2.3M",
+        },
+        {
+          label: { id: "Net Profit", en: "Net Profit" },
+          value: "$286K",
+        },
+        {
+          label: { id: "Profit Margin", en: "Profit Margin" },
+          value: "12.5%",
+        },
+        {
+          label: { id: "Transaksi Rugi", en: "Unprofitable Txns" },
+          value: "19%",
+          isAlert: true,
+        },
+      ],
+      techStack: ["Microsoft Excel", "PivotTables", "Data Cleaning", "Business Storytelling"],
+      primaryAction: {
+        label: {
+          id: "Lihat di GitHub / Repositori",
+          en: "View on GitHub / Repository",
+        },
+        url: "https://github.com/qivoradev/superstore-sales-dashboard",
+        icon: "github",
+      },
+      secondaryAction: {
+        label: {
+          id: "Unduh Workbook",
+          en: "Download Workbook",
+        },
+        url: "https://github.com/user-attachments/files/33320586/Superstore_Sales_and_Profitability_Dashboard_Final.xlsx",
+        icon: "download",
+      },
+      liveUrl: "",
+      githubUrl: "https://github.com/qivoradev/superstore-sales-dashboard",
+      downloadUrl: "https://github.com/user-attachments/files/33320586/Superstore_Sales_and_Profitability_Dashboard_Final.xlsx",
     },
     {
       id: 2,
       featured: false,
+      fileName: "NYC_Collisions_Analysis_Dashboard_v1.xlsx",
       badge: {
-        id: "STUDI KASUS • 02",
-        en: "CASE STUDY • 02",
+        id: "STUDI KASUS • ANALISIS DATA EKSPLORATIF & KESELAMATAN PUBLIK",
+        en: "CASE STUDY • EXPLORATORY DATA ANALYSIS & PUBLIC SAFETY",
       },
       title: {
-        id: "Customer Churn & Retention Cohort Analysis",
-        en: "Customer Churn & Retention Cohort Analysis",
+        id: "Analisis Pola Tabrakan & Risiko Keselamatan Lalu Lintas NYC",
+        en: "NYC Traffic Safety & Collision Risk Analysis",
       },
       description: {
-        id: "Studi kasus retensi pelanggan berbasis analisis kohort berkala. Menggunakan kueri SQL lanjutan (Window Functions, CTE) untuk memetakan perilaku siklus hidup pengguna dan tingkat atrisi pada kuartal pertama pasca-onboarding.",
-        en: "Customer retention case study utilizing cohort-based behavioral tracking. Leveraged advanced SQL queries (Window Functions, CTEs) to map user lifecycle patterns and reduce first-quarter onboarding attrition.",
+        id: "Mengekstrak dan membedah dataset kecelakaan lalu lintas New York City skala besar untuk memetakan titik rawan wilayah, waktu berisiko tinggi, dan akar masalah kecelakaan. Menemukan bahwa kelalaian pengemudi mendominasi 1 dari 4 insiden serta Brooklyn dan Queens menyumbang hampir 59% total kasus.",
+        en: "Extracted and analyzed large-scale NYC traffic collision records to map accident hotspots, peak risk hours, and core contributing factors. Revealed that driver distraction accounts for 1 in 4 collisions, with Brooklyn and Queens generating nearly 59% of total city incidents.",
       },
-      image: "",
-      techStack: ["SQL (PostgreSQL)", "Cohort Analysis", "Google Sheets", "PowerPoint"],
-      liveUrl: "https://lookerstudio.google.com",
-      githubUrl: "https://github.com/qivoradev",
-    },
-    {
-      id: 3,
-      featured: false,
-      badge: {
-        id: "STUDI KASUS • 03",
-        en: "CASE STUDY • 03",
+      image: "/projects/nyc-collision-dashboard.png",
+      metrics: [
+        {
+          label: { id: "Total Tabrakan", en: "Total Collisions" },
+          value: "238.4K",
+        },
+        {
+          label: { id: "Korban Luka", en: "Total Injuries" },
+          value: "116.2K",
+        },
+        {
+          label: { id: "Korban Jiwa", en: "Fatalities" },
+          value: "268",
+          isAlert: true,
+        },
+        {
+          label: { id: "Rasio Cedera", en: "Injury Ratio" },
+          value: "48.7%",
+        },
+      ],
+      techStack: [
+        "Microsoft Excel",
+        "PivotTables",
+        "Data Modeling",
+        "Exploratory Data Analysis",
+        "Data Storytelling",
+      ],
+      primaryAction: {
+        label: {
+          id: "Lihat di GitHub / Repositori",
+          en: "View on GitHub / Repository",
+        },
+        url: "https://github.com/qivoradev/nyc-collision-analysis",
+        icon: "github",
       },
-      title: {
-        id: "Supply Chain & Inventory Turnover Monitoring",
-        en: "Supply Chain & Inventory Turnover Monitoring",
+      secondaryAction: {
+        label: {
+          id: "Unduh Workbook",
+          en: "Download Workbook",
+        },
+        url: "#",
+        icon: "download",
       },
-      description: {
-        id: "Visualisasi efisiensi perputaran persediaan dan estimasi lead-time logistik. Merancang matriks deteksi dini stok kritis (stock-out risk) di Excel guna mencegah keterlambatan pengiriman pesanan hingga 22%.",
-        en: "Inventory turnover efficiency and logistics lead-time monitoring system. Engineered early-warning stock-out indicators in Excel & SQL, helping decrease order fulfillment delays by 22%.",
-      },
-      image: "",
-      techStack: ["Microsoft Excel", "SQL", "Looker Studio", "Business Analytics"],
-      liveUrl: "https://lookerstudio.google.com",
-      githubUrl: "https://github.com/qivoradev",
+      liveUrl: "",
+      githubUrl: "https://github.com/qivoradev/nyc-collision-analysis",
     },
   ],
 
