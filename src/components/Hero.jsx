@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
-import { FileDown, ArrowRight } from 'lucide-react';
+import { ArrowRight, Lock } from 'lucide-react';
 import { SiGithub, SiInstagram, SiWhatsapp } from 'react-icons/si';
 import { FaLinkedin } from 'react-icons/fa6';
 import { getWhatsAppLink } from '../data/portfolioData';
@@ -15,7 +15,7 @@ function isValidUrl(url) {
 
 export default function Hero() {
   const { t, portfolioData, language } = usePortfolio();
-  const { contacts, photo, name, cvUrl, availability } = portfolioData;
+  const { contacts, photo, name, availability } = portfolioData;
 
   const [imgSrc, setImgSrc] = useState(photo || '/foto-nobg.png');
   const [isFallback, setIsFallback] = useState(false);
@@ -194,13 +194,15 @@ export default function Hero() {
                 <ArrowRight size={17} aria-hidden="true" />
               </a>
               <a
-                href={cvUrl || '/cv.pdf'}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn hero-btn-cv"
+                href="javascript:void(0)"
+                onClick={(e) => e.preventDefault()}
+                aria-disabled="true"
+                tabIndex={-1}
+                className="btn hero-btn-cv opacity-60 cursor-not-allowed pointer-events-none"
+                style={{ opacity: 0.6, cursor: 'not-allowed', pointerEvents: 'none' }}
               >
-                <FileDown size={17} aria-hidden="true" />
-                <span>{t.hero.downloadCv || 'Unduh CV'}</span>
+                <Lock size={15} aria-hidden="true" />
+                <span>{t.hero.downloadCv || (language === 'en' ? 'CV (Coming Soon)' : 'CV (Segera Hadir)')}</span>
               </a>
             </div>
 

@@ -3469,6 +3469,7 @@ hr,
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .project-btn-primary {
@@ -3485,6 +3486,93 @@ hr,
   font-size: 0.86rem;
   font-weight: 600;
   min-height: 42px;
+}
+
+/* Tombol Tunggal Workbook (Gaya Minimalis Gelap & Melebar Penuh) */
+.project-btn-workbook {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 20px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  min-height: 44px;
+  background-color: rgba(39, 39, 42, 0.6);
+  border: 1px solid rgba(63, 63, 70, 0.6);
+  color: #F4F4F5;
+  border-radius: var(--radius-sm, 8px);
+  text-decoration: none;
+  box-sizing: border-box;
+  letter-spacing: 0.01em;
+  transition: all var(--transition-fast, 0.2s ease);
+}
+
+[data-theme="light"] .project-btn-workbook {
+  background-color: rgba(39, 39, 42, 0.85);
+  border-color: rgba(63, 63, 70, 0.85);
+  color: #FFFFFF;
+}
+
+[data-theme="dark"] .project-btn-workbook {
+  background-color: rgba(39, 39, 42, 0.6);
+  border-color: rgba(63, 63, 70, 0.6);
+  color: #F4F4F5;
+}
+
+.project-btn-workbook .project-btn-badge-locked {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #F4F4F5;
+}
+
+/* Badge Gembok Tombol Nonaktif Sementara */
+.project-btn-badge-locked {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  margin-left: 6px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+[data-theme="dark"] .project-btn-badge-locked {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  color: #D4D4D8;
+}
+
+/* Utilitas Status Disabled / Nonaktif & Layout */
+.w-full {
+  width: 100% !important;
+}
+
+.bg-zinc-800\/60 {
+  background-color: rgba(39, 39, 42, 0.6) !important;
+}
+
+.border-zinc-700\/60 {
+  border-color: rgba(63, 63, 70, 0.6) !important;
+}
+
+/* Utilitas Status Disabled / Nonaktif */
+.cursor-not-allowed {
+  cursor: not-allowed !important;
+}
+
+.pointer-events-none {
+  pointer-events: none !important;
+}
+
+.opacity-60 {
+  opacity: 0.6 !important;
 }
 
 @media (max-width: 640px) {

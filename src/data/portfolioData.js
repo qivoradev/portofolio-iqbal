@@ -164,7 +164,7 @@ export const portfolioData = {
       hero: {
         greeting: "Halo, saya",
         description: "Data Analyst berlatar belakang Teknologi Informasi yang berfokus menerjemahkan data kompleks menjadi dashboard interaktif dan insight yang dapat ditindaklanjuti. Terampil menggunakan Excel dan SQL untuk mendukung pengambilan keputusan bisnis yang strategis.",
-        downloadCv: "Unduh CV",
+        downloadCv: "CV (Segera Hadir)",
         viewProjects: "Lihat Proyek",
         marqueeItems: "Pengolahan data · Pembersihan data · Analisis data · SQL · Python · Excel",
       },
@@ -254,7 +254,7 @@ export const portfolioData = {
       hero: {
         greeting: "Hi, I'm",
         description: "Data Analyst with an Information Technology background, focused on turning complex data into interactive dashboards and actionable insights. Proficient in Excel and SQL to support strategic business decisions.",
-        downloadCv: "Download CV",
+        downloadCv: "CV (Coming Soon)",
         viewProjects: "View Projects",
         marqueeItems: "Data processing · Data cleaning · Data analysis · SQL · Python · Excel",
       },

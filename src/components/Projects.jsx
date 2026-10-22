@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import SectionHeading from './SectionHeading';
-import { LayoutDashboard, FileSpreadsheet, Maximize2, X } from 'lucide-react';
-import { GithubIcon } from './Icons';
+import { FileSpreadsheet, Maximize2, X, Lock } from 'lucide-react';
+
 
 /**
  * Komponen Preview Dashboard 16:9 (aspect-video)
@@ -189,31 +189,11 @@ export default function Projects() {
             const title = resolveText(project.title, `Project ${idx + 1}`);
             const desc = resolveText(project.description, '');
 
-            // Aksi Utama
-            const primaryUrl = project.primaryAction?.url || project.liveUrl || project.githubUrl;
-            const primaryLabel = project.primaryAction
-              ? resolveText(project.primaryAction.label, t.projects.githubBtn || 'Lihat di GitHub / Repositori')
-              : (project.liveUrl
-                ? (t.projects.demoBtn || (language === 'en' ? 'View Dashboard' : 'Lihat Dashboard'))
-                : (t.projects.codeBtn || (language === 'en' ? 'Documentation / GitHub' : 'Dokumentasi / GitHub')));
+            // Label Tombol Tunggal: Download / Akses Workbook
+            const workbookLabel = project.secondaryAction?.label
+              ? resolveText(project.secondaryAction.label, t.projects.downloadBtn || (language === 'en' ? 'Download Workbook' : 'Unduh Workbook'))
+              : (t.projects.downloadBtn || (language === 'en' ? 'Download Workbook' : 'Unduh Workbook'));
 
-            const isPrimaryGitHub = Boolean(
-              project.primaryAction?.icon === 'github' ||
-              (primaryUrl && primaryUrl.includes('github.com') && !project.liveUrl)
-            );
-
-            // Aksi Sekunder
-            const secondaryUrl = project.secondaryAction?.url || project.downloadUrl || (project.liveUrl ? project.githubUrl : null);
-            const secondaryLabel = project.secondaryAction
-              ? resolveText(project.secondaryAction.label, t.projects.downloadBtn || 'Unduh Workbook')
-              : (project.downloadUrl
-                ? (t.projects.downloadBtn || (language === 'en' ? 'Download Workbook' : 'Unduh Workbook'))
-                : (t.projects.codeBtn || (language === 'en' ? 'Documentation / GitHub' : 'Dokumentasi / GitHub')));
-
-            const isSecondaryDownload = Boolean(
-              project.secondaryAction?.icon === 'download' ||
-              project.downloadUrl
-            );
 
             return (
               <article key={project.id || idx} className="featured-project-card editorial-card">
@@ -279,42 +259,23 @@ export default function Projects() {
                       </div>
                     )}
 
-                    {/* Tombol Aksi */}
+                    {/* Tombol Aksi Tunggal: Download / Akses Workbook (Status Terkunci Sementara) */}
                     <div className="project-actions-row">
-                      {/* Tombol Utama */}
-                      {primaryUrl && (
-                        <a
-                          href={primaryUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="btn btn-primary project-btn-primary"
-                        >
-                          {isPrimaryGitHub ? (
-                            <GithubIcon size={16} />
-                          ) : (
-                            <LayoutDashboard size={16} aria-hidden="true" />
-                          )}
-                          <span>{primaryLabel}</span>
-                        </a>
-                      )}
-
-                      {/* Tombol Sekunder / Unduh Workbook */}
-                      {secondaryUrl && (
-                        <a
-                          href={secondaryUrl}
-                          target={secondaryUrl === '#' ? undefined : "_blank"}
-                          rel={secondaryUrl === '#' ? undefined : "noopener noreferrer"}
-                          download={project.fileName || undefined}
-                          className="btn btn-secondary project-btn-secondary"
-                        >
-                          {isSecondaryDownload ? (
-                            <FileSpreadsheet size={16} aria-hidden="true" />
-                          ) : (
-                            <GithubIcon size={16} />
-                          )}
-                          <span>{secondaryLabel}</span>
-                        </a>
-                      )}
+                      <a
+                        href="#"
+                        onClick={(e) => e.preventDefault()}
+                        aria-disabled="true"
+                        tabIndex={-1}
+                        className="btn project-btn-workbook w-full bg-zinc-800/60 border border-zinc-700/60 opacity-60 cursor-not-allowed pointer-events-none"
+                        style={{ opacity: 0.6, cursor: 'not-allowed', pointerEvents: 'none' }}
+                      >
+                        <FileSpreadsheet size={16} aria-hidden="true" />
+                        <span>{workbookLabel}</span>
+                        <span className="project-btn-badge-locked">
+                          <Lock size={11} aria-hidden="true" />
+                          <span>{language === 'en' ? '(Coming Soon)' : '(Segera Hadir)'}</span>
+                        </span>
+                      </a>
                     </div>
                   </div>
 
