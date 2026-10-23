@@ -60,7 +60,13 @@ function AppContent({ activeTab, setActiveTab }) {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen w-full bg-[#09090b] text-zinc-100 flex flex-col justify-between items-center px-4 pt-24 pb-24 md:pb-10 relative">
+    <div
+      className={
+        activeTab === 'home'
+          ? 'h-screen overflow-hidden w-full bg-[#0a0a0a] text-zinc-100 flex flex-col justify-between items-center px-4 pt-20 pb-4 relative'
+          : 'min-h-screen w-full bg-[#0a0a0a] text-zinc-100 flex flex-col justify-between items-center px-4 pt-24 pb-24 md:pb-10 relative'
+      }
+    >
       {/* Floating Capsule di Desktop & Floating Dock di Mobile */}
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} language={language} />
 
@@ -82,7 +88,7 @@ function AppContent({ activeTab, setActiveTab }) {
       </main>
 
       {/* Footer Hak Cipta */}
-      <footer className="py-4 text-center text-xs text-zinc-600 tracking-wider">
+      <footer className="text-[11px] text-zinc-600 tracking-wider pb-2 text-center">
         © {CURRENT_YEAR} Iqbal Dwi Fathonah. All Rights Reserved.
       </footer>
     </div>
