@@ -43,17 +43,19 @@ export default function Hero({ setActiveTab, language = 'en' } = {}) {
           {/* KOLOM KIRI (md:col-span-5) */}
           <div className="md:col-span-5 flex flex-col justify-between rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 p-5 sm:p-6 text-center md:text-left transition-colors duration-300">
             <div>
-              {/* Avatar bulat toska */}
-              <div className="w-32 h-32 rounded-full bg-gradient-to-b from-teal-400 to-emerald-600 border-2 border-emerald-300/40 p-1 flex items-center justify-center overflow-hidden mb-4 shrink-0 mx-auto md:mx-0 shadow-[0_8px_20px_rgba(20,184,166,0.25)]">
-                <img
-                  src="/profile.png"
-                  alt="Iqbal Dwi Fathonah"
-                  className="w-full h-full object-cover object-[center_18%] scale-[1.7] -translate-y-3 select-none pointer-events-none drop-shadow-md transition-transform duration-300"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = '/foto-nobg.png';
-                  }}
-                />
+              {/* Avatar bulat toska (Tengah di Desktop & Mobile) */}
+              <div className="w-full flex justify-center mb-4">
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-gradient-to-b from-teal-400 to-emerald-600 border-2 border-emerald-300/40 shadow-[0_10px_25px_rgba(20,184,166,0.3)] flex items-center justify-center shrink-0">
+                  <img
+                    src="/profile.png"
+                    alt="Iqbal Dwi Fathonah"
+                    className="w-full h-full object-cover object-[center_18%] scale-[1.7] -translate-y-3 select-none pointer-events-none drop-shadow-md transition-transform duration-300"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      e.currentTarget.src = '/foto-nobg.png';
+                    }}
+                  />
+                </div>
               </div>
 
               {/* Nama & Role Murni Data Analyst */}
