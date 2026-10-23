@@ -72,29 +72,38 @@ export default function Contact({ language = 'en' } = {}) {
           </p>
 
           {/* 4 Kartu Informasi Kontak */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full text-left mb-2">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 sm:gap-4 w-full text-left">
             
-            {/* 1. Email Card */}
-            <div className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex items-center justify-between shadow-xs">
+            {/* 1. Email Card - Klik kartu atau tombol untuk Salin */}
+            <div
+              onClick={handleCopyEmail}
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleCopyEmail();
+                }
+              }}
+              className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-100/90 dark:hover:bg-zinc-900/80 transition-all flex items-center justify-between shadow-xs cursor-pointer group select-none"
+              title={isEn ? 'Click to copy email' : 'Klik untuk menyalin email'}
+            >
               <div className="min-w-0 pr-2">
                 <span className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 mb-1 flex items-center gap-1.5">
                   <MailIcon size={14} className="text-orange-500" />
                   Email
                 </span>
-                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-200 break-all sm:break-normal">
                   {emailAddress}
                 </p>
               </div>
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                className="px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/70 text-zinc-600 dark:text-zinc-300 text-xs font-mono hover:text-orange-500 transition-colors shrink-0 cursor-pointer shadow-xs inline-flex items-center gap-1"
-                title="Copy email to clipboard"
+              <div
+                className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:border-orange-500/50 group-hover:text-orange-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1.5"
               >
                 {copied ? (
                   <>
                     <CheckIcon size={12} className="text-emerald-500 dark:text-emerald-400" />
-                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{isEn ? 'Copied' : 'Tersalin'}</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{isEn ? 'Copied!' : 'Tersalin!'}</span>
                   </>
                 ) : (
                   <>
@@ -102,27 +111,27 @@ export default function Contact({ language = 'en' } = {}) {
                     <span>{isEn ? 'Copy' : 'Salin'}</span>
                   </>
                 )}
-              </button>
+              </div>
             </div>
 
             {/* 2. LinkedIn Card */}
             <a
               href={linkedinUrl}
               target="_blank"
-              rel="noreferrer"
-              className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex items-center justify-between shadow-xs group"
+              rel="noopener noreferrer"
+              className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-100/90 dark:hover:bg-zinc-900/80 transition-all flex items-center justify-between shadow-xs group"
             >
               <div className="min-w-0 pr-2">
                 <span className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 mb-1 flex items-center gap-1.5">
                   <LinkedinIcon size={14} className="text-[#0A66C2]" />
                   LinkedIn
                 </span>
-                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-200">
                   in/iqbaldwifathonah
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/70 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:text-orange-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1">
-                <span>{isEn ? 'Open' : 'Buka'}</span>
+              <span className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:border-[#0A66C2]/50 group-hover:text-[#0A66C2] transition-colors shrink-0 shadow-xs inline-flex items-center gap-1.5">
+                <span>{isEn ? 'Connect' : 'Buka'}</span>
                 <ExternalLinkIcon size={12} />
               </span>
             </a>
@@ -131,52 +140,41 @@ export default function Contact({ language = 'en' } = {}) {
             <a
               href={waUrl}
               target="_blank"
-              rel="noreferrer"
-              className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex items-center justify-between shadow-xs group"
+              rel="noopener noreferrer"
+              className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-100/90 dark:hover:bg-zinc-900/80 transition-all flex items-center justify-between shadow-xs group"
             >
               <div className="min-w-0 pr-2">
                 <span className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 mb-1 flex items-center gap-1.5">
                   <WhatsappIcon size={14} className="text-emerald-500" />
                   WhatsApp
                 </span>
-                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-200">
                   +62 823-2223-1710
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/70 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:text-orange-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1">
+              <span className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:border-emerald-500/50 group-hover:text-emerald-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1.5">
                 <span>Chat</span>
                 <ExternalLinkIcon size={12} />
               </span>
             </a>
 
             {/* 4. Location Card */}
-            <div className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex items-center justify-between shadow-xs">
+            <div className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-100/90 dark:hover:bg-zinc-900/80 transition-all flex items-center justify-between shadow-xs">
               <div className="min-w-0 pr-2">
                 <span className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 mb-1 flex items-center gap-1.5">
                   <MapPinIcon size={14} className="text-orange-500" />
                   {isEn ? 'Location' : 'Lokasi'}
                 </span>
-                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-100 truncate">
-                  Yogyakarta / South Jakarta, ID
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-200">
+                  Yogyakarta / Jakarta, ID
                 </p>
               </div>
-              <span className="px-2 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/70 text-zinc-500 dark:text-zinc-400 text-xs font-mono shrink-0 shadow-xs">
+              <span className="px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-500 dark:text-zinc-400 text-xs font-mono shrink-0 shadow-xs">
                 UTC+7
               </span>
             </div>
 
           </div>
-
-          {/* Tombol CTA Oranye Terbawah ("Mulai Diskusi via WhatsApp") */}
-          <a
-            href={waUrl}
-            target="_blank"
-            rel="noreferrer"
-            className="w-full max-w-sm mx-auto py-3 px-5 rounded-xl bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-medium text-sm transition-all shadow-md shadow-orange-500/20 flex items-center justify-center gap-2 mt-4 cursor-pointer"
-          >
-            <WhatsappIcon size={16} />
-            <span>{isEn ? 'Start Conversation on WhatsApp' : 'Mulai Diskusi via WhatsApp'}</span>
-          </a>
         </div>
 
         {/* 3. Bar Footer Konsol */}
