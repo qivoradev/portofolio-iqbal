@@ -94,7 +94,7 @@ export default function Hero({
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 p-6 sm:p-8 items-stretch">
           
           {/* KOLOM KIRI (md:col-span-5) */}
-          <div className="md:col-span-5 flex flex-col justify-between rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 p-5 sm:p-6 text-center md:text-left transition-colors duration-300">
+          <div className="md:col-span-5 flex flex-col justify-start gap-4 sm:gap-5 h-full rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 p-5 sm:p-6 text-center md:text-left transition-colors duration-300">
             <div>
               {/* Avatar dengan Badge Status Terbuka untuk Kerja */}
               <div className="w-full flex justify-center mb-5">
@@ -126,19 +126,20 @@ export default function Hero({
               </p>
 
               {/* Bio Profil Membumi */}
-              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 font-normal">
+              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
                 {isEn
                   ? 'Data Analyst with an Information Technology background, focused on turning raw data into interactive dashboards, automated reporting, and strategic business insights.'
                   : 'Data Analyst berlatar belakang Teknologi Informasi yang berfokus menerjemahkan data mentah menjadi dashboard interaktif, pelaporan otomatis, dan insight bisnis yang strategis.'}
               </p>
             </div>
 
-            <div>
+            {/* Pembungkus Tombol Aksi */}
+            <div className="mt-2 flex flex-col gap-3">
               {/* Tombol CTA Utama */}
               <button
                 type="button"
                 onClick={() => setActiveTab && setActiveTab('projects')}
-                className="group inline-flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all shadow-md shadow-orange-500/20 cursor-pointer mb-3"
+                className="group inline-flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all shadow-md shadow-orange-500/20 cursor-pointer"
               >
                 <span>{isEn ? 'Explore Projects' : 'Jelajahi Proyek'}</span>
                 <span className="transition-transform group-hover:translate-x-1">
@@ -146,7 +147,7 @@ export default function Hero({
                 </span>
               </button>
 
-              <div className="flex items-center gap-2.5 mt-2">
+              <div className="flex items-center justify-center md:justify-start gap-2.5">
                 {/* 1. Email: Abu-abu -> Hover Oranye Khas Mailto */}
                 <a
                   href="mailto:iqbaldwifathonah@gmail.com"
