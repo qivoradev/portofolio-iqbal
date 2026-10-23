@@ -20,56 +20,65 @@ export default function Projects({ language = 'en' } = {}) {
 
   const projects = [
     {
-      id: 'coffee-shop-sales',
-      title: isEn
-        ? 'Coffee Shop Sales Performance Dashboard'
-        : 'Dashboard Performa Penjualan Coffee Shop',
+      id: 'superstore-sales',
+      title: 'Superstore Sales & Profitability Analysis',
       category: isEn ? 'Excel Analytics & Reporting' : 'Analisis & Pelaporan Excel',
-      stack: excelTags,
+      badge: 'Excel',
+      image: '/projects/superstore-dashboard.png',
       highlight: isEn
-        ? 'Built comprehensively in Microsoft Excel: from raw dataset cleaning and pivot table modeling to dynamic slicers analyzing hourly transaction volume and revenue trends.'
-        : 'Dibangun secara komprehensif menggunakan Microsoft Excel: mulai dari pembersihan dataset mentah, pemodelan pivot table, hingga slicer dinamis untuk menganalisis tren omzet dan volume transaksi per jam.',
+        ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
+        : 'Dashboard eksekutif Microsoft Excel untuk menganalisis total penjualan ($2.29M), profit margin (12.5%), serta kebocoran profit pada kategori produk dan wilayah bagian tertentu.',
+      stack: excelTags,
+      metrics: [
+        { label: isEn ? 'Total Sales' : 'Total Penjualan', value: '$2,295,274' },
+        { label: isEn ? 'Total Profit' : 'Total Profit', value: '$285,988' },
+        { label: isEn ? 'Profit Margin' : 'Profit Margin', value: '12.5%' },
+      ],
       insights: isEn
         ? [
-            'Cleaned and validated 50,000+ transactional records using Excel formulas.',
-            'Identified peak revenue intervals (07:00 - 10:00) with dynamic time slicers.',
-            'Optimized beverage inventory turnarounds via pivot-driven margin rankings.',
-            'Constructed interactive multi-store performance summary cards.',
+            'Mapped monthly sales seasonality and revenue patterns across the 2014–2017 period.',
+            'Identified loss-making product categories and mapped 5 states with negative margins (such as Texas, Ohio, and Pennsylvania).',
+            'Analyzed discount elasticity and its direct impact on overall business margin erosion.',
+            'Engineered dynamic slicer navigation for filtering by year, geographic region, and customer segment.',
           ]
         : [
-            'Membersihkan dan memvalidasi 50.000+ data transaksi menggunakan formula Excel.',
-            'Mengidentifikasi lonjakan omzet jam sibuk pagi (07:00 - 10:00) dengan slicer waktu dinamis.',
-            'Mengoptimalkan perputaran stok minuman espresso melalui ranking margin pivot table.',
-            'Menyusun kartu ringkasan KPI eksekutif antar gerai yang responsif.',
+            'Memetakan tren penjualan bulanan dan pola musiman (Monthly Sales Seasonality) periode 2014–2017.',
+            'Mengidentifikasi kategori produk merugi (Loss-Making Products) dan memetakan 5 negara bagian dengan margin negatif (seperti Texas, Ohio, dan Pennsylvania).',
+            'Menganalisis elastisitas dan dampak pemberian tingkat diskon terhadap penurunan profitabilitas bisnis.',
+            'Membangun kontrol navigasi interaktif berbasis slicer dinamis untuk pemfilteran tahun, wilayah (region), dan segmen pasar.',
           ],
-      image: '/projects/superstore-dashboard.png',
       badgeColor: 'text-emerald-500 dark:text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
       icon: TableIcon,
     },
     {
-      id: 'bank-customer-churn',
-      title: isEn
-        ? 'Bank Customer Churn Risk Analysis'
-        : 'Analisis Risiko Churn Nasabah Bank',
-      category: isEn ? 'Excel Modeling & Cohort Analysis' : 'Pemodelan Excel & Analisis Kohort',
-      stack: excelTags,
+      id: 'nyc-collisions',
+      title: 'NYC Motor Vehicle Collisions & Safety Analysis',
+      category: isEn ? 'Excel Modeling & Safety Analysis' : 'Pemodelan Excel & Analisis Keselamatan',
+      badge: 'Excel',
+      image: '/projects/nyc-collision-dashboard.png',
       highlight: isEn
-        ? 'Engineered entirely in Microsoft Excel: structured customer cohorts by balance tier, credit activity, and tenure to identify key indicators and formulate retention strategies.'
-        : 'Dianalisis dan dimodelkan sepenuhnya di Microsoft Excel: segmentasi kohort demografi nasabah berdasarkan saldo, aktivitas kredit, dan masa rekening untuk merumuskan strategi pencegahan churn.',
+        ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
+        : 'Dashboard interaktif evaluasi keselamatan lalu lintas Kota New York (2021–2023) untuk menganalisis 238.000+ insiden tabrakan, tingkat cedera, dan faktor utama kelalaian pengemudi.',
+      stack: excelTags,
+      metrics: [
+        { label: 'Total Collisions', value: '238,421' },
+        { label: 'Total Injured', value: '116,227' },
+        { label: 'Total Fatalities', value: '268' },
+        { label: 'Injury Rate', value: '48.7%' },
+      ],
       insights: isEn
         ? [
-            'Structured demographic cohorts and retention tiers directly in Excel spreadsheets.',
-            'Isolated high-balance churn indicators when credit score falls below 620.',
-            'Demonstrated 34% stronger customer retention in multi-product account holders.',
-            'Delivered intuitive executive risk matrix with conditional formatting.',
+            'Mapped spatial accident concentration: Brooklyn (76,416 cases / 32%) and Queens accounted for nearly 60% of all city collisions.',
+            'Identified seasonal peaks and high-risk hours: collisions peaked in March and during evening rush hours (16:00 – 18:00).',
+            'Analyzed contributing factors: Driver Inattention/Distraction served as the primary trigger with 58,300+ incidents.',
+            'Delivered key injury metrics (Injury Rate 48.7%) providing actionable foundations for precision patrol allocation.',
           ]
         : [
-            'Menyusun kohort demografi dan tier retensi langsung di spreadsheet Excel.',
-            'Menemukan indikator churn nasabah prioritas bersaldo tinggi saat skor kredit < 620.',
-            'Nasabah dengan kepemilikan >2 produk perbankan terbukti memiliki retensi 34% lebih kuat.',
-            'Menghadirkan matriks risiko eksekutif intuitif dengan conditional formatting.',
+            'Memetakan konsentrasi kecelakaan wilayah: Brooklyn (76.416 kasus / 32%) dan Queens menyumbang hampir 60% total insiden kota.',
+            'Mengidentifikasi puncak musim dan tren waktu rawan: tabrakan memuncak di bulan Maret serta pada jam sibuk sore hari (16:00 – 18:00).',
+            'Menganalisis faktor kelalaian: Driver Inattention/Distraction menjadi pemicu utama dengan lebih dari 58.300 insiden.',
+            'Menyajikan matriks indikator cedera (Injury Rate 48.7%) sebagai dasar perumusan rekomendasi titik patroli presisi.',
           ],
-      image: '/projects/nyc-collision-dashboard.png',
       badgeColor: 'text-orange-500 dark:text-orange-400 border-orange-500/30 bg-orange-500/10',
       icon: TableIcon,
     },
@@ -151,9 +160,25 @@ export default function Projects({ language = 'en' } = {}) {
                   </h2>
 
                   {/* Highlight Ringkas */}
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3">
                     {project.highlight}
                   </p>
+
+                  {/* Metrik Kunci / KPI Chips */}
+                  {project.metrics && project.metrics.length > 0 && (
+                    <div className="grid grid-cols-3 gap-1.5 mb-3.5 p-2 rounded-xl bg-white/80 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs">
+                      {project.metrics.slice(0, 3).map((metric, idx) => (
+                        <div key={idx} className="flex flex-col text-center px-1">
+                          <span className="text-[9px] sm:text-[10px] text-zinc-500 dark:text-zinc-400 font-mono truncate">
+                            {metric.label}
+                          </span>
+                          <span className="text-[11px] sm:text-xs font-mono font-bold text-zinc-900 dark:text-white truncate">
+                            {metric.value}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Tech Stack Pills (Murni Excel) */}
                   <div className="flex flex-wrap gap-1.5 mb-5">
@@ -229,6 +254,18 @@ export default function Projects({ language = 'en' } = {}) {
                 className="w-full h-full object-contain"
               />
             </div>
+
+            {/* Modal Metrics Grid */}
+            {activeModalProject.metrics && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-4">
+                {activeModalProject.metrics.map((metric, idx) => (
+                  <div key={idx} className="p-2 rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 text-center">
+                    <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono block mb-0.5">{metric.label}</span>
+                    <span className="text-xs sm:text-sm font-mono font-bold text-orange-500">{metric.value}</span>
+                  </div>
+                ))}
+              </div>
+            )}
 
             {/* Key Business Insights */}
             <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-4">

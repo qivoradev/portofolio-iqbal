@@ -260,25 +260,29 @@ export default function Hero({
                 {isEn ? 'Business Case Studies' : 'Studi Kasus Bisnis'}
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-                {/* Kasus 1: Sales Performance */}
+                {/* Kasus 1: Retail Sales & Profit Leakage */}
                 <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-3 flex flex-col justify-between shadow-sm">
                   <div className="flex items-center gap-2 text-zinc-900 dark:text-white font-medium mb-1">
                     <span className="w-2 h-2 rounded-full bg-orange-500" />
-                    Sales Performance
+                    Retail Sales &amp; Profit Leakage
                   </div>
                   <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
-                    {isEn ? 'Revenue trends, product margins, & transaction volume analysis' : 'Analisis tren omzet, margin produk, & volume transaksi'}
+                    {isEn
+                      ? 'Analysis of $2.29M revenue performance, product margins, & discount profit leakage'
+                      : 'Analisis performa omzet $2.29M, margin produk, & kebocoran profit diskon'}
                   </p>
                 </div>
 
-                {/* Kasus 2: Customer Churn Risk */}
+                {/* Kasus 2: Traffic Safety & Collision Risk */}
                 <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-3 flex flex-col justify-between shadow-sm">
                   <div className="flex items-center gap-2 text-zinc-900 dark:text-white font-medium mb-1">
                     <span className="w-2 h-2 rounded-full bg-teal-400" />
-                    Customer Churn Risk
+                    Traffic Safety &amp; Collision Risk
                   </div>
                   <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
-                    {isEn ? 'Demographic patterns & customer retention mitigation' : 'Analisis pola demografi & mitigasi tingkat retensi nasabah'}
+                    {isEn
+                      ? 'Evaluation of 238K+ NYC traffic collisions, peak risk hours, & fatality mitigation'
+                      : 'Evaluasi 238K+ kecelakaan lalu lintas NYC, pola waktu rawan, & mitigasi fatalitas'}
                   </p>
                 </div>
               </div>
