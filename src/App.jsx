@@ -48,8 +48,16 @@ class TabErrorBoundary extends Component {
 
 function AppContent({ activeTab, setActiveTab }) {
   const { language, toggleLanguage, theme, toggleTheme } = usePortfolio();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    // Cek apakah web sudah pernah dimuat di sesi tab ini
+    return !sessionStorage.getItem('portfolio_visited');
+  });
   const scrollRef = useRef(null);
+
+  const handleLoadingFinish = () => {
+    sessionStorage.setItem('portfolio_visited', 'true');
+    setIsLoading(false);
+  };
 
   // Otomatis reset posisi scroll ke atas saat berganti tab
   useEffect(() => {
@@ -61,7 +69,7 @@ function AppContent({ activeTab, setActiveTab }) {
 
   return (
     <>
-      {isLoading && <LoadingScreen onFinish={() => setIsLoading(false)} />}
+      {isLoading && <LoadingScreen onFinish={handleLoadingFinish} />}
       <div className="min-h-screen w-full bg-zinc-100 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 flex flex-col justify-between items-center px-4 pt-20 pb-4 relative transition-colors duration-150">
         {/* Floating Capsule di Desktop & Floating Dock di Mobile */}
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} language={language} />

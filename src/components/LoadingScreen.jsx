@@ -57,7 +57,7 @@ const LoadingScreen = ({ onFinish }) => {
             <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
             <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
           </div>
-          <span className="text-[11px] text-zinc-500">iqbal@workspace</span>
+          <span className="text-[11px] text-zinc-500 font-mono tracking-wide">iqbaldf</span>
         </div>
 
         {/* Progress Bar */}
