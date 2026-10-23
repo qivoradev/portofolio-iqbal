@@ -93,12 +93,12 @@ export default function Contact({ language = 'en' } = {}) {
                   <MailIcon size={14} className="text-orange-500" />
                   Email
                 </span>
-                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-200 break-all sm:break-normal">
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-200 break-all sm:break-normal whitespace-normal">
                   {emailAddress}
                 </p>
               </div>
               <div
-                className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:border-orange-500/50 group-hover:text-orange-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1.5"
+                className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:border-orange-500/50 group-hover:text-orange-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1.5 ml-2"
               >
                 {copied ? (
                   <>
@@ -130,7 +130,7 @@ export default function Contact({ language = 'en' } = {}) {
                   in/iqbaldwifathonah
                 </p>
               </div>
-              <span className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:border-[#0A66C2]/50 group-hover:text-[#0A66C2] transition-colors shrink-0 shadow-xs inline-flex items-center gap-1.5">
+              <span className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:border-[#0A66C2]/50 group-hover:text-[#0A66C2] transition-colors shrink-0 shadow-xs inline-flex items-center gap-1.5 ml-2">
                 <span>{isEn ? 'Connect' : 'Buka'}</span>
                 <ExternalLinkIcon size={12} />
               </span>
@@ -148,11 +148,11 @@ export default function Contact({ language = 'en' } = {}) {
                   <WhatsappIcon size={14} className="text-emerald-500" />
                   WhatsApp
                 </span>
-                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-200">
-                  +62 823-2223-1710
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-300">
+                  Direct Message (WA)
                 </p>
               </div>
-              <span className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:border-emerald-500/50 group-hover:text-emerald-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1.5">
+              <span className="px-2.5 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/80 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:border-emerald-500/50 group-hover:text-emerald-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1.5 ml-2">
                 <span>Chat</span>
                 <ExternalLinkIcon size={12} />
               </span>
