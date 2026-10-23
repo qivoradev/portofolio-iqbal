@@ -79,12 +79,13 @@ export default function Navbar({ activeTab: propActiveTab, setActiveTab: propSet
         </div>
       </header>
 
-      {/* 2. Floating Dock Mobile (Hanya tampil di mobile: md:hidden fixed bottom-4) */}
+      {/* 2. Floating Dock Mobile (Minimalis & Ringkas ala Adri Khamid) */}
       <nav
-        className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center justify-center"
+        className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4 py-2 rounded-2xl bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-xl shadow-2xl transition-all duration-300"
         aria-label="Mobile Navigation"
       >
-        <div className="flex flex-row flex-nowrap items-center justify-center gap-5 px-5 py-2.5 rounded-full bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-zinc-200 dark:border-zinc-800/80 shadow-[0_8px_30px_rgb(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.5)] transition-colors duration-300">
+        {/* Tab Menu Navigasi (Home, Projects, Certs, Contact) */}
+        <div className="flex items-center gap-1.5">
           {navItems.map((item) => {
             const isActive = activeTab === item.id;
             const Icon = item.Icon;
@@ -95,38 +96,41 @@ export default function Navbar({ activeTab: propActiveTab, setActiveTab: propSet
                 onClick={() => setActiveTab && setActiveTab(item.id)}
                 aria-label={item.label}
                 title={item.label}
-                className={`flex items-center justify-center transition-colors bg-transparent border-0 cursor-pointer p-1 rounded-full ${
-                  isActive ? 'text-orange-500' : 'text-zinc-500 dark:text-zinc-400 hover:text-orange-500'
+                className={`p-2 rounded-xl transition-colors cursor-pointer border-0 ${
+                  isActive
+                    ? 'text-orange-500 bg-orange-500/10'
+                    : 'text-zinc-400 hover:text-white bg-transparent'
                 }`}
               >
-                <Icon size={19} />
+                <Icon size={20} className="w-5 h-5" />
               </button>
             );
           })}
-
-          <div className="h-4 w-[1px] bg-zinc-300 dark:bg-zinc-700/60" aria-hidden="true" />
-
-          <button
-            type="button"
-            onClick={toggleLanguage}
-            className="text-xs font-semibold text-zinc-600 dark:text-zinc-300 hover:text-orange-500 transition-colors bg-transparent border-0 cursor-pointer flex items-center gap-1"
-            title={isEn ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
-          >
-            <span className={!isEn ? 'text-orange-500 font-bold' : 'text-zinc-500 dark:text-zinc-400'}>ID</span>
-            <span className="text-zinc-400 dark:text-zinc-600 text-[10px]">/</span>
-            <span className={isEn ? 'text-orange-500 font-bold' : 'text-zinc-500 dark:text-zinc-400'}>EN</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="flex items-center justify-center text-zinc-600 dark:text-zinc-400 hover:text-orange-500 transition-colors bg-transparent border-0 cursor-pointer p-1"
-            title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <SunIcon size={18} /> : <MoonIcon size={18} />}
-          </button>
         </div>
+
+        {/* Pembatas Tipis Vertikal */}
+        <div className="w-[1px] h-5 bg-zinc-800 mx-0.5" />
+
+        {/* Switcher Bahasa Bulat Mini */}
+        <button
+          type="button"
+          onClick={toggleLanguage}
+          className="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 text-[11px] font-mono font-semibold flex items-center justify-center hover:bg-zinc-700 transition-colors border-0 cursor-pointer"
+          title={isEn ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
+        >
+          {language.toUpperCase()}
+        </button>
+
+        {/* Tombol Mode Tema Serasi */}
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center hover:bg-zinc-700 transition-colors border-0 cursor-pointer"
+          title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
+          aria-label="Toggle theme"
+        >
+          {theme === 'dark' ? <SunIcon size={14} /> : <MoonIcon size={14} />}
+        </button>
       </nav>
     </>
   );

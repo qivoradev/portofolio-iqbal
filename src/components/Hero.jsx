@@ -56,19 +56,19 @@ export default function Hero({ setActiveTab, language = 'en' } = {}) {
                 />
               </div>
 
-              {/* Nama & Sub-header */}
+              {/* Nama & Role Murni Data Analyst */}
               <h1 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white tracking-tight mb-1">
                 Iqbal Dwi Fathonah
               </h1>
               <p className="text-sm font-semibold text-orange-500 mb-3 font-mono">
-                Data Analyst &amp; BI
+                Data Analyst
               </p>
 
-              {/* Deskripsi ringkas */}
+              {/* Bio Profil Membumi */}
               <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 font-normal">
                 {isEn
-                  ? 'Turning complex operational datasets into interactive executive dashboards and strategic business intelligence.'
-                  : 'Menerjemahkan dataset operasional kompleks menjadi dashboard eksekutif interaktif dan insight bisnis strategis.'}
+                  ? 'Data Analyst with an Information Technology background, focused on turning raw data into interactive dashboards, automated reporting, and strategic business insights.'
+                  : 'Data Analyst berlatar belakang Teknologi Informasi yang berfokus menerjemahkan data mentah menjadi dashboard interaktif, pelaporan otomatis, dan insight bisnis yang strategis.'}
               </p>
             </div>
 
@@ -132,7 +132,7 @@ export default function Hero({ setActiveTab, language = 'en' } = {}) {
           {/* KOLOM KANAN (md:col-span-7 flex flex-col gap-3.5) */}
           <div className="md:col-span-7 flex flex-col gap-3.5">
             
-            {/* Kartu Bento 1: Core Tools */}
+            {/* Kartu Bento 1: Core Analytical Stack (Riil Excel & SQL) */}
             <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-4 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/80">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold flex items-center gap-1.5">
@@ -143,48 +143,80 @@ export default function Hero({ setActiveTab, language = 'en' } = {}) {
                   Ready
                 </span>
               </div>
-              <div className="grid grid-cols-2 sm:grid-cols-2 gap-2 text-xs">
-                <div className="flex items-center gap-2 rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 px-3 py-2 text-zinc-800 dark:text-zinc-200 shadow-sm">
-                  <DatabaseIcon size={14} className="text-sky-500 dark:text-sky-400 shrink-0" />
-                  <span>SQL / PostgreSQL</span>
+
+              {/* 4 Kotak Stack Riil */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                {/* 1. Microsoft Excel (Advanced) */}
+                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 text-zinc-800 dark:text-zinc-200 shadow-sm">
+                  <div className="flex items-center gap-1.5 font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5">
+                    <TableIcon size={14} className="text-emerald-500 dark:text-emerald-400 shrink-0" />
+                    <span>Microsoft Excel (Advanced)</span>
+                  </div>
+                  <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                    Pivot Tables, Slicers, VLOOKUP/XLOOKUP
+                  </span>
                 </div>
-                <div className="flex items-center gap-2 rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 px-3 py-2 text-zinc-800 dark:text-zinc-200 shadow-sm">
-                  <TableIcon size={14} className="text-emerald-500 dark:text-emerald-400 shrink-0" />
-                  <span>Excel (Pivot/VLOOKUP)</span>
+
+                {/* 2. SQL Querying */}
+                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 text-zinc-800 dark:text-zinc-200 shadow-sm">
+                  <div className="flex items-center gap-1.5 font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5">
+                    <DatabaseIcon size={14} className="text-sky-500 dark:text-sky-400 shrink-0" />
+                    <span>SQL Querying</span>
+                  </div>
+                  <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                    Data Extraction, Filtering, Aggregation
+                  </span>
                 </div>
-                <div className="flex items-center gap-2 rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 px-3 py-2 text-zinc-800 dark:text-zinc-200 shadow-sm">
-                  <BarChartIcon size={14} className="text-amber-500 dark:text-amber-400 shrink-0" />
-                  <span>Power BI &amp; DAX</span>
+
+                {/* 3. Data Cleaning & Prep */}
+                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 text-zinc-800 dark:text-zinc-200 shadow-sm">
+                  <div className="flex items-center gap-1.5 font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5">
+                    <CheckIcon size={14} className="text-orange-500 dark:text-orange-400 shrink-0" />
+                    <span>Data Cleaning &amp; Prep</span>
+                  </div>
+                  <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                    {isEn ? 'Raw data validation & inconsistency handling' : 'Validasi data mentah & penanganan inkonsistensi'}
+                  </span>
                 </div>
-                <div className="flex items-center gap-2 rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 px-3 py-2 text-zinc-800 dark:text-zinc-200 shadow-sm">
-                  <CheckIcon size={14} className="text-orange-500 dark:text-orange-400 shrink-0" />
-                  <span>Data Modeling</span>
+
+                {/* 4. Dashboard KPI Design */}
+                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 text-zinc-800 dark:text-zinc-200 shadow-sm">
+                  <div className="flex items-center gap-1.5 font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5">
+                    <BarChartIcon size={14} className="text-amber-500 dark:text-amber-400 shrink-0" />
+                    <span>Dashboard KPI Design</span>
+                  </div>
+                  <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                    {isEn ? 'Intuitive & readable business metric visuals' : 'Visualisasi metrik bisnis yang mudah dibaca'}
+                  </span>
                 </div>
               </div>
             </div>
 
-            {/* Kartu Bento 2: Focus Domain (Grid 2 kolom) */}
+            {/* Kartu Bento 2: Studi Kasus Bisnis (Grid 2 kolom) */}
             <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-4 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/80">
               <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold block mb-3">
-                {isEn ? 'Analytical Focus Domains' : 'Domain Analisis Utama'}
+                {isEn ? 'Business Case Studies' : 'Studi Kasus Bisnis'}
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+                {/* Kasus 1: Sales Performance */}
                 <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-3 flex flex-col justify-between shadow-sm">
                   <div className="flex items-center gap-2 text-zinc-900 dark:text-white font-medium mb-1">
                     <span className="w-2 h-2 rounded-full bg-orange-500" />
                     Sales Performance
                   </div>
                   <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
-                    {isEn ? 'Revenue trends, product margin, & transaction cycles.' : 'Tren omzet, margin produk, & siklus transaksi.'}
+                    {isEn ? 'Revenue trends, product margins, & transaction volume analysis' : 'Analisis tren omzet, margin produk, & volume transaksi'}
                   </p>
                 </div>
+
+                {/* Kasus 2: Customer Churn Risk */}
                 <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-3 flex flex-col justify-between shadow-sm">
                   <div className="flex items-center gap-2 text-zinc-900 dark:text-white font-medium mb-1">
                     <span className="w-2 h-2 rounded-full bg-teal-400" />
                     Customer Churn Risk
                   </div>
                   <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
-                    {isEn ? 'Retention cohorts, balance tiers, & churn mitigation.' : 'Kohort retensi, tier saldo, & mitigasi churn nasabah.'}
+                    {isEn ? 'Demographic patterns & customer retention mitigation' : 'Analisis pola demografi & mitigasi tingkat retensi nasabah'}
                   </p>
                 </div>
               </div>
