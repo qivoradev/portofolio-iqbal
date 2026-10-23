@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
+  DatabaseIcon,
+  TableIcon,
   AwardIcon,
   ArrowRightIcon,
   CheckIcon,
@@ -200,46 +202,64 @@ export default function Hero({
                 <span className="font-mono text-[10px] text-zinc-500">[4 SKILLS]</span>
               </div>
 
-              {/* 4 Kotak Stack Riil Murni Tipografi */}
+              {/* 4 Kotak Stack: 2 Alat Utama Berikon + 2 Metodologi Murni Tipografi */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {/* 1. Microsoft Excel (Analytics) */}
-                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200">
-                  <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
-                    Microsoft Excel (Analytics)
-                  </h4>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mt-1">
-                    Pivot Tables, Slicers, XLOOKUP, KPI Dashboards
-                  </p>
+                {/* 1. Microsoft Excel (Analytics) - Berikon Tabel/Spreadsheet */}
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className="p-1.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 dark:text-emerald-400 shrink-0">
+                        <TableIcon size={14} />
+                      </div>
+                      <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+                        Microsoft Excel (Analytics)
+                      </h4>
+                    </div>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Pivot Tables, Slicers, XLOOKUP, KPI Dashboards
+                    </p>
+                  </div>
                 </div>
 
-                {/* 2. SQL Querying */}
-                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200">
-                  <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
-                    SQL Querying
-                  </h4>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mt-1">
-                    Data Extraction, Filtering, Aggregation
-                  </p>
+                {/* 2. SQL Querying - Berikon Database */}
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200 flex flex-col justify-between">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className="p-1.5 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-500 dark:text-orange-400 shrink-0">
+                        <DatabaseIcon size={14} />
+                      </div>
+                      <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+                        SQL Querying
+                      </h4>
+                    </div>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      Data Extraction, Filtering, Aggregation
+                    </p>
+                  </div>
                 </div>
 
-                {/* 3. Data Cleaning & Prep */}
-                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200">
-                  <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
-                    Data Cleaning &amp; Prep
-                  </h4>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mt-1">
-                    {isEn ? 'Raw data validation & inconsistency handling' : 'Validasi data mentah & penanganan inkonsistensi'}
-                  </p>
+                {/* 3. Data Cleaning & Prep - Murni Tipografi Bersih */}
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200 flex flex-col justify-between">
+                  <div>
+                    <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors mb-1">
+                      Data Cleaning &amp; Prep
+                    </h4>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      {isEn ? 'Raw data validation & inconsistency handling' : 'Validasi data mentah & penanganan inkonsistensi'}
+                    </p>
+                  </div>
                 </div>
 
-                {/* 4. Dashboard KPI Design */}
-                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200">
-                  <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
-                    Dashboard KPI Design
-                  </h4>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mt-1">
-                    {isEn ? 'Intuitive & readable business metric visuals' : 'Visualisasi metrik bisnis yang mudah dibaca'}
-                  </p>
+                {/* 4. Dashboard KPI Design - Murni Tipografi Bersih */}
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200 flex flex-col justify-between">
+                  <div>
+                    <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors mb-1">
+                      Dashboard KPI Design
+                    </h4>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                      {isEn ? 'Intuitive & readable business metric visuals' : 'Visualisasi metrik bisnis yang mudah dibaca'}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -251,10 +271,23 @@ export default function Hero({
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {/* Kasus 1: Retail Sales & Profit Leakage */}
-                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 flex flex-col justify-between shadow-sm transition-all duration-200">
-                  <div className="flex items-center text-zinc-900 dark:text-zinc-200 font-semibold mb-1">
-                    <span className="font-mono text-xs text-zinc-500 font-normal mr-2">01</span>
-                    Retail Sales &amp; Profit Leakage
+                <div
+                  onClick={() => setActiveTab && setActiveTab('projects')}
+                  className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 flex flex-col justify-between shadow-sm transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700/80 cursor-pointer"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
+                    <div className="flex items-center text-zinc-900 dark:text-zinc-200 font-semibold text-sm">
+                      <span className="font-mono text-xs text-zinc-500 font-normal mr-2">01</span>
+                      <span className="group-hover:text-black dark:group-hover:text-white transition-colors">
+                        Retail Sales &amp; Profit Leakage
+                      </span>
+                    </div>
+                    <span className="text-zinc-500 group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0 mt-0.5">
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7" />
+                        <polyline points="7 7 17 7 17 17" />
+                      </svg>
+                    </span>
                   </div>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
                     {isEn
@@ -264,10 +297,23 @@ export default function Hero({
                 </div>
 
                 {/* Kasus 2: Traffic Safety & Collision Risk */}
-                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 flex flex-col justify-between shadow-sm transition-all duration-200">
-                  <div className="flex items-center text-zinc-900 dark:text-zinc-200 font-semibold mb-1">
-                    <span className="font-mono text-xs text-zinc-500 font-normal mr-2">02</span>
-                    Traffic Safety &amp; Collision Risk
+                <div
+                  onClick={() => setActiveTab && setActiveTab('projects')}
+                  className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 flex flex-col justify-between shadow-sm transition-all duration-200 hover:border-zinc-300 dark:hover:border-zinc-700/80 cursor-pointer"
+                >
+                  <div className="flex items-start justify-between gap-2 mb-1.5">
+                    <div className="flex items-center text-zinc-900 dark:text-zinc-200 font-semibold text-sm">
+                      <span className="font-mono text-xs text-zinc-500 font-normal mr-2">02</span>
+                      <span className="group-hover:text-black dark:group-hover:text-white transition-colors">
+                        Traffic Safety &amp; Collision Risk
+                      </span>
+                    </div>
+                    <span className="text-zinc-500 group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-200 shrink-0 mt-0.5">
+                      <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7" />
+                        <polyline points="7 7 17 7 17 17" />
+                      </svg>
+                    </span>
                   </div>
                   <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
                     {isEn
