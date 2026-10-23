@@ -26,7 +26,7 @@ class TabErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="flex flex-col items-center justify-center min-h-[300px] text-center p-6 text-zinc-300 font-mono">
+        <div className="flex flex-col items-center justify-center min-h-[300px] text-center p-6 text-zinc-700 dark:text-zinc-300 font-mono">
           <p className="text-base font-semibold mb-3">Terjadi kendala saat memuat konsol.</p>
           <button
             type="button"
@@ -58,7 +58,7 @@ function AppContent({ activeTab, setActiveTab }) {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen w-full bg-[#09090b] text-zinc-100 flex flex-col justify-between items-center px-4 pt-20 pb-4 relative overflow-x-hidden">
+    <div className="min-h-screen w-full bg-[#fafafa] dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 flex flex-col justify-between items-center px-4 pt-20 pb-4 relative overflow-x-hidden transition-colors duration-300">
       {/* Floating Capsule di Desktop & Floating Dock di Mobile */}
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} language={language} />
 
@@ -80,7 +80,7 @@ function AppContent({ activeTab, setActiveTab }) {
       </main>
 
       {/* Footer Hak Cipta */}
-      <footer className="py-2 text-center text-[11px] font-mono text-zinc-500">
+      <footer className="py-2 text-center text-[11px] font-mono text-zinc-500 dark:text-zinc-500">
         © 2026 Iqbal Dwi Fathonah. All Rights Reserved.
       </footer>
     </div>
@@ -90,8 +90,31 @@ function AppContent({ activeTab, setActiveTab }) {
 export default function App() {
   const [activeTab, setActiveTab] = useState('home');
 
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('portfolio_theme') || 'dark';
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    localStorage.setItem('portfolio_theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  };
+
   return (
-    <PortfolioProvider activeTab={activeTab} setActiveTab={setActiveTab}>
+    <PortfolioProvider
+      activeTab={activeTab}
+      setActiveTab={setActiveTab}
+      theme={theme}
+      toggleTheme={toggleTheme}
+    >
       <AppContent activeTab={activeTab} setActiveTab={setActiveTab} />
     </PortfolioProvider>
   );

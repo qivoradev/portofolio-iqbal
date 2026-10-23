@@ -3,10 +3,17 @@ import { portfolioData } from '../data/portfolioData';
 
 const PortfolioContext = createContext();
 
-export function PortfolioProvider({ children, activeTab: propActiveTab, setActiveTab: propSetActiveTab }) {
+export function PortfolioProvider({
+  children,
+  activeTab: propActiveTab,
+  setActiveTab: propSetActiveTab,
+  theme: propTheme,
+  toggleTheme: propToggleTheme,
+}) {
   const [internalActiveTab, setInternalActiveTab] = useState('home');
   const activeTab = propActiveTab !== undefined ? propActiveTab : internalActiveTab;
   const setActiveTab = propSetActiveTab !== undefined ? propSetActiveTab : setInternalActiveTab;
+
   // 1. Language State ('id' | 'en') dengan localStorage try/catch, default 'id'
   const [language, setLanguageState] = useState(() => {
     try {
@@ -20,8 +27,8 @@ export function PortfolioProvider({ children, activeTab: propActiveTab, setActiv
     return 'id';
   });
 
-  // 2. Theme State ('dark' | 'light') dengan localStorage try/catch, default 'light'
-  const [theme, setThemeState] = useState(() => {
+  // 2. Theme State ('dark' | 'light') dengan localStorage try/catch, default 'dark'
+  const [internalTheme, setInternalThemeState] = useState(() => {
     try {
       const savedTheme = localStorage.getItem('portfolio_theme');
       if (savedTheme === 'dark' || savedTheme === 'light') {
@@ -30,8 +37,10 @@ export function PortfolioProvider({ children, activeTab: propActiveTab, setActiv
     } catch {
       // Fallback default
     }
-    return 'light'; // Default TERANG bila belum ada pilihan tersimpan
+    return 'dark'; // Default DARK
   });
+
+  const theme = propTheme !== undefined ? propTheme : internalTheme;
 
   // Sinkronisasi atribut lang pada <html>
   useEffect(() => {
@@ -43,11 +52,19 @@ export function PortfolioProvider({ children, activeTab: propActiveTab, setActiv
     }
   }, [language]);
 
-  // Sinkronisasi atribut data-theme pada <html>
+  // Sinkronisasi class dark dan atribut data-theme pada <html>
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-    document.documentElement.style.backgroundColor = theme === 'dark' ? '#0E0F12' : '#F7F5F0';
-    document.documentElement.style.color = theme === 'dark' ? '#F2F0EB' : '#1B1A17';
+    const root = document.documentElement;
+    root.setAttribute('data-theme', theme);
+    if (theme === 'dark') {
+      root.classList.add('dark');
+      root.style.backgroundColor = '#09090b';
+      root.style.color = '#F2F0EB';
+    } else {
+      root.classList.remove('dark');
+      root.style.backgroundColor = '#fafafa';
+      root.style.color = '#18181b';
+    }
     try {
       localStorage.setItem('portfolio_theme', theme);
     } catch {
@@ -66,7 +83,11 @@ export function PortfolioProvider({ children, activeTab: propActiveTab, setActiv
   };
 
   const toggleTheme = () => {
-    setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    if (propToggleTheme) {
+      propToggleTheme();
+    } else {
+      setInternalThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
+    }
   };
 
   const t = portfolioData.translations[language] || portfolioData.translations.id;
