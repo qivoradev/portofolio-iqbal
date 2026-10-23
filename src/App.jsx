@@ -58,7 +58,7 @@ function AppContent({ activeTab, setActiveTab }) {
   }, [activeTab]);
 
   return (
-    <div className="min-h-screen w-full bg-[#fafafa] dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 flex flex-col justify-between items-center px-4 pt-20 pb-4 relative overflow-x-hidden transition-colors duration-300">
+    <div className="min-h-screen w-full bg-zinc-100 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 flex flex-col justify-between items-center px-4 pt-20 pb-4 relative transition-colors duration-150">
       {/* Floating Capsule di Desktop & Floating Dock di Mobile */}
       <Navbar activeTab={activeTab} setActiveTab={setActiveTab} language={language} />
 
