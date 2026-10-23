@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { HomeIcon, BarChartIcon, AwardIcon, MailIcon, SunIcon, MoonIcon } from './Icons';
 
@@ -8,6 +8,8 @@ export default function Navbar({ activeTab: propActiveTab, setActiveTab: propSet
   const setActiveTab = propSetActiveTab || portfolio.setActiveTab;
   const language = propLanguage || portfolio.language || 'id';
   const { toggleLanguage, theme, toggleTheme } = portfolio;
+
+  const [isDockOpen, setIsDockOpen] = useState(true);
 
   const isEn = language === 'en';
 
@@ -79,59 +81,85 @@ export default function Navbar({ activeTab: propActiveTab, setActiveTab: propSet
         </div>
       </header>
 
-      {/* 2. Floating Dock Mobile (Minimalis & Ringkas ala Adri Khamid) */}
-      <nav
-        className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4 py-2 rounded-2xl bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-xl shadow-2xl transition-all duration-300"
-        aria-label="Mobile Navigation"
-      >
-        {/* Tab Menu Navigasi (Home, Projects, Certs, Contact) */}
-        <div className="flex items-center gap-1.5">
-          {navItems.map((item) => {
-            const isActive = activeTab === item.id;
-            const Icon = item.Icon;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setActiveTab && setActiveTab(item.id)}
-                aria-label={item.label}
-                title={item.label}
-                className={`p-2 rounded-xl transition-colors cursor-pointer border-0 ${
-                  isActive
-                    ? 'text-orange-500 bg-orange-500/10'
-                    : 'text-zinc-400 hover:text-white bg-transparent'
-                }`}
-              >
-                <Icon size={20} className="w-5 h-5" />
-              </button>
-            );
-          })}
+      {/* 2. Floating Dock Mobile (Collapsible Minimalis) */}
+      {!isDockOpen ? (
+        /* Mode Tertutup: Satu tombol mini mengambang */
+        <button
+          type="button"
+          onClick={() => setIsDockOpen(true)}
+          aria-label="Buka Menu"
+          className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-3 py-1.5 rounded-full bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-xl shadow-xl text-zinc-300 text-xs font-mono active:scale-95 transition-all cursor-pointer"
+        >
+          <svg className="w-3.5 h-3.5 text-orange-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+          <span>Menu</span>
+        </button>
+      ) : (
+        /* Mode Terbuka: Dok navigasi lengkap + tombol sembunyikan */
+        <div className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-3 py-1.5 rounded-2xl bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-xl shadow-2xl transition-all">
+          {/* 4 Icon Menu Utama (Home, Projects, Certifications, Contact) */}
+          <div className="flex items-center gap-1">
+            {navItems.map((item) => {
+              const isActive = activeTab === item.id;
+              const Icon = item.Icon;
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setActiveTab && setActiveTab(item.id)}
+                  aria-label={item.label}
+                  title={item.label}
+                  className={`p-2 rounded-xl transition-colors cursor-pointer border-0 ${
+                    isActive
+                      ? 'text-orange-500 bg-orange-500/10'
+                      : 'text-zinc-400 hover:text-white bg-transparent'
+                  }`}
+                >
+                  <Icon size={19} className="w-5 h-5" />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Switcher Bahasa Bulat */}
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            className="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 text-[11px] font-mono font-semibold flex items-center justify-center hover:bg-zinc-700 transition-colors border-0 cursor-pointer"
+            title={isEn ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
+          >
+            {language.toUpperCase()}
+          </button>
+
+          {/* Tombol Tema Bulat */}
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center hover:bg-zinc-700 transition-colors border-0 cursor-pointer"
+            title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <SunIcon size={14} /> : <MoonIcon size={14} />}
+          </button>
+
+          {/* Divider */}
+          <div className="w-[1px] h-4 bg-zinc-800" />
+
+          {/* Tombol Sembunyikan Dok */}
+          <button
+            type="button"
+            onClick={() => setIsDockOpen(false)}
+            aria-label="Tutup Menu"
+            className="w-7 h-7 rounded-xl bg-zinc-800/80 hover:bg-zinc-700 text-zinc-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer border-0"
+            title="Sembunyikan"
+          >
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
         </div>
-
-        {/* Pembatas Tipis Vertikal */}
-        <div className="w-[1px] h-5 bg-zinc-800 mx-0.5" />
-
-        {/* Switcher Bahasa Bulat Mini */}
-        <button
-          type="button"
-          onClick={toggleLanguage}
-          className="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 text-[11px] font-mono font-semibold flex items-center justify-center hover:bg-zinc-700 transition-colors border-0 cursor-pointer"
-          title={isEn ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
-        >
-          {language.toUpperCase()}
-        </button>
-
-        {/* Tombol Mode Tema Serasi */}
-        <button
-          type="button"
-          onClick={toggleTheme}
-          className="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center hover:bg-zinc-700 transition-colors border-0 cursor-pointer"
-          title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
-          aria-label="Toggle theme"
-        >
-          {theme === 'dark' ? <SunIcon size={14} /> : <MoonIcon size={14} />}
-        </button>
-      </nav>
+      )}
     </>
   );
 }

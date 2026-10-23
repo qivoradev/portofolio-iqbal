@@ -146,14 +146,14 @@ export default function Hero({ setActiveTab, language = 'en' } = {}) {
 
               {/* 4 Kotak Stack Riil */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                {/* 1. Microsoft Excel (Advanced) */}
+                {/* 1. Microsoft Excel (Analytics) */}
                 <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 text-zinc-800 dark:text-zinc-200 shadow-sm">
                   <div className="flex items-center gap-1.5 font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5">
                     <TableIcon size={14} className="text-emerald-500 dark:text-emerald-400 shrink-0" />
-                    <span>Microsoft Excel (Advanced)</span>
+                    <span>Microsoft Excel (Analytics)</span>
                   </div>
                   <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
-                    Pivot Tables, Slicers, VLOOKUP/XLOOKUP
+                    Pivot Tables, Slicers, XLOOKUP, KPI Dashboards
                   </span>
                 </div>
 
