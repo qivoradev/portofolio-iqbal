@@ -45,57 +45,48 @@ export default function Hero({
 
         {/* 1. Header Konsol Terminal */}
         <div className="flex items-center justify-between px-3.5 sm:px-6 py-2.5 sm:py-3 border-b border-zinc-200 dark:border-zinc-800/80 bg-zinc-100/90 dark:bg-zinc-900/60 select-none">
-          {/* Kiri: Traffic Lights */}
+          {/* Kiri: Traffic Lights & Username */}
           <div className="flex items-center gap-1.5 sm:gap-2">
             <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-red-500/80 border border-red-600/40" />
             <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80 border border-yellow-600/40" />
             <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-emerald-500/80 border border-emerald-600/40" />
-            <span className="ml-2 text-[11px] font-mono text-zinc-500 dark:text-zinc-400 hidden sm:inline-block">
-              iqbal@analytics-workspace:~
+            <span className="ml-1 sm:ml-2 font-mono text-xs text-zinc-400 dark:text-zinc-500">
+              iqbaldf
             </span>
           </div>
 
-          {/* Kanan: Live Clock + Mobile Quick Settings (Bahasa & Tema) + Status */}
-          <div className="flex items-center gap-1.5 sm:gap-3">
-            {/* Live Digital Clock */}
-            <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-zinc-200/70 dark:bg-zinc-800/80 border border-zinc-300/80 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-300 font-mono text-[10px] sm:text-xs">
+          {/* Kanan: Jam Realtime + Toolbar Mini Mobile (Bahasa & Tema) */}
+          <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-md bg-zinc-200/70 dark:bg-zinc-800/80 border border-zinc-300/80 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-300 font-mono text-[10px] sm:text-xs">
               <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
-              <span>{currentTime || '10:45 WIB'}</span>
+              <span className="sm:hidden">{currentTime.replace(/:\d{2}\s/, ' ')}</span>
+              <span className="hidden sm:inline">{currentTime || '14:35 WIB'}</span>
             </div>
-
-            {/* Quick Settings Khusus Mobile (Muncul hanya di HP: sm:hidden) */}
-            <div className="flex sm:hidden items-center gap-1">
-              {/* Switcher Bahasa */}
+            <div className="flex sm:hidden items-center p-0.5 rounded-md bg-zinc-200/80 dark:bg-zinc-800/90 border border-zinc-300/70 dark:border-zinc-700/60">
               <button
                 type="button"
                 onClick={toggleLanguage}
-                className="h-6 px-1.5 rounded bg-zinc-200/80 dark:bg-zinc-800 text-[10px] font-mono font-semibold text-zinc-700 dark:text-zinc-300 active:scale-95"
+                className="px-1.5 py-0.5 text-[10px] font-mono font-semibold text-zinc-700 dark:text-zinc-300 hover:text-orange-500 active:scale-95"
               >
                 {language.toUpperCase()}
               </button>
-
-              {/* Switcher Tema */}
+              <span className="text-zinc-400 dark:text-zinc-600 text-[10px]">|</span>
               <button
                 type="button"
                 onClick={toggleTheme}
-                className="h-6 w-6 rounded bg-zinc-200/80 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center active:scale-95"
+                className="p-1 text-zinc-700 dark:text-zinc-300 hover:text-orange-500 active:scale-95"
+                aria-label="Toggle Theme"
               >
                 {theme === 'dark' ? (
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                   </svg>
                 ) : (
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                   </svg>
                 )}
               </button>
-            </div>
-
-            {/* Status Badge */}
-            <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-[10px] sm:text-[11px] font-medium whitespace-nowrap">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse hidden sm:inline-block" />
-              <span>{language === 'en' ? 'Open for Work' : 'Terbuka'}</span>
             </div>
           </div>
         </div>
@@ -106,18 +97,24 @@ export default function Hero({
           {/* KOLOM KIRI (md:col-span-5) */}
           <div className="md:col-span-5 flex flex-col justify-between rounded-2xl border border-zinc-200 dark:border-zinc-800/60 bg-zinc-50 dark:bg-zinc-900/40 p-5 sm:p-6 text-center md:text-left transition-colors duration-300">
             <div>
-              {/* Avatar bulat toska (Tengah di Desktop & Mobile) */}
-              <div className="w-full flex justify-center mb-4">
-                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-gradient-to-b from-teal-400 to-emerald-600 border-2 border-emerald-300/40 shadow-[0_10px_25px_rgba(20,184,166,0.3)] flex items-center justify-center shrink-0">
-                  <img
-                    src="/profile.png"
-                    alt="Iqbal Dwi Fathonah"
-                    className="w-full h-full object-cover object-[center_18%] scale-[1.7] -translate-y-3 select-none pointer-events-none drop-shadow-md transition-transform duration-300"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = '/foto-nobg.png';
-                    }}
-                  />
+              {/* Avatar dengan Badge Status Terbuka untuk Kerja */}
+              <div className="w-full flex justify-center mb-5">
+                <div className="relative inline-block mx-auto">
+                  <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-emerald-500/30 bg-emerald-500/20 p-1 shadow-lg shadow-emerald-500/10">
+                    <img
+                      src="/profile.png"
+                      alt="Iqbal Dwi Fathonah"
+                      className="w-full h-full object-cover object-[center_18%] scale-[1.7] -translate-y-3 rounded-full select-none pointer-events-none drop-shadow-md transition-transform duration-300"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src = '/foto-nobg.png';
+                      }}
+                    />
+                  </div>
+                  <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-zinc-950/90 border border-emerald-500/40 text-emerald-400 text-[10px] sm:text-[11px] font-medium shadow-md whitespace-nowrap backdrop-blur-md">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span>{language === 'en' ? 'Open for Work' : 'Terbuka untuk Kerja'}</span>
+                  </div>
                 </div>
               </div>
 
