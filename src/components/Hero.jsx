@@ -121,7 +121,7 @@ export default function Hero({
             <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-1">
               Iqbal Dwi Fathonah
             </h1>
-            <p className="text-sm sm:text-base font-semibold text-orange-500 dark:text-orange-400 font-mono mb-3">
+            <p className="text-sm sm:text-base font-medium text-zinc-600 dark:text-zinc-300 font-mono tracking-wide mb-3">
               Data Analyst
             </p>
 
@@ -142,10 +142,10 @@ export default function Hero({
                     setActiveTab('projects');
                   }
                 }}
-                className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium text-xs sm:text-sm shadow-lg shadow-orange-500/20 hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-100 dark:bg-zinc-100 text-zinc-900 font-medium text-xs sm:text-sm hover:bg-white hover:shadow-lg hover:shadow-zinc-100/10 active:scale-95 transition-all border border-zinc-200 dark:border-zinc-300 cursor-pointer"
               >
                 <span>{isEn ? 'Explore Projects' : 'Jelajahi Proyek'}</span>
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-4 h-4 text-zinc-900" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </a>
@@ -208,13 +208,19 @@ export default function Hero({
                   {isEn ? 'BUSINESS CASE STUDIES' : 'STUDI KASUS BISNIS'}
                 </span>
                 <div className="space-y-2.5">
-                  <div
-                    onClick={() => setActiveTab && setActiveTab('projects')}
-                    className="p-2.5 rounded-lg bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/60 hover:border-zinc-300 dark:hover:border-zinc-700 flex items-start justify-between cursor-pointer group transition-all"
+                  <a
+                    href="#projects"
+                    onClick={(e) => {
+                      if (setActiveTab) {
+                        e.preventDefault();
+                        setActiveTab('projects');
+                      }
+                    }}
+                    className="p-2.5 rounded-lg bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/60 hover:border-zinc-300 dark:hover:border-zinc-700 flex items-start justify-between cursor-pointer group transition-all block"
                   >
                     <div>
-                      <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
-                        <span className="font-mono text-zinc-400 dark:text-zinc-500 mr-1.5">01</span> Retail Sales &amp; Profit Leakage
+                      <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
+                        <span className="font-mono text-zinc-500 mr-1.5">01</span> Retail Sales &amp; Profit Leakage
                       </div>
                       <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">
                         {isEn
@@ -222,16 +228,22 @@ export default function Hero({
                           : 'Analisis omzet $2.29M, margin produk, & kebocoran diskon'}
                       </p>
                     </div>
-                    <span className="text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-xs mt-0.5">↗</span>
-                  </div>
+                    <span className="text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-xs mt-0.5">↗</span>
+                  </a>
 
-                  <div
-                    onClick={() => setActiveTab && setActiveTab('projects')}
-                    className="p-2.5 rounded-lg bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/60 hover:border-zinc-300 dark:hover:border-zinc-700 flex items-start justify-between cursor-pointer group transition-all"
+                  <a
+                    href="#projects"
+                    onClick={(e) => {
+                      if (setActiveTab) {
+                        e.preventDefault();
+                        setActiveTab('projects');
+                      }
+                    }}
+                    className="p-2.5 rounded-lg bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/60 hover:border-zinc-300 dark:hover:border-zinc-700 flex items-start justify-between cursor-pointer group transition-all block"
                   >
                     <div>
-                      <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
-                        <span className="font-mono text-zinc-400 dark:text-zinc-500 mr-1.5">02</span> Traffic Safety &amp; Collision Risk
+                      <div className="text-xs font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors">
+                        <span className="font-mono text-zinc-500 mr-1.5">02</span> Traffic Safety &amp; Collision Risk
                       </div>
                       <p className="text-[11px] text-zinc-500 dark:text-zinc-400 mt-0.5">
                         {isEn
@@ -239,8 +251,8 @@ export default function Hero({
                           : 'Evaluasi 238K+ kecelakaan NYC, jam rawan, & fatalitas'}
                       </p>
                     </div>
-                    <span className="text-zinc-400 dark:text-zinc-500 group-hover:text-orange-500 dark:group-hover:text-orange-400 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-xs mt-0.5">↗</span>
-                  </div>
+                    <span className="text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-zinc-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-xs mt-0.5">↗</span>
+                  </a>
                 </div>
               </div>
             </div>
@@ -260,7 +272,7 @@ export default function Hero({
                         setActiveTab('certifications');
                       }
                     }}
-                    className="text-[11px] text-orange-500 dark:text-orange-400 hover:underline cursor-pointer"
+                    className="text-[11px] font-mono text-zinc-400 hover:text-zinc-200 transition-colors flex items-center gap-1 cursor-pointer"
                   >
                     {isEn ? 'View all →' : 'Lihat semua →'}
                   </a>
