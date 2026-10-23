@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import {
-  DatabaseIcon,
-  TableIcon,
-  BarChartIcon,
   AwardIcon,
   ArrowRightIcon,
   CheckIcon,
@@ -197,90 +194,69 @@ export default function Hero({
             {/* Kartu Bento 1: Core Analytical Stack (Riil Excel & SQL) */}
             <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-4 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/80">
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold flex items-center gap-1.5">
-                  <DatabaseIcon size={13} className="text-orange-400" />
+                <span className="font-mono text-[11px] tracking-wider text-zinc-500 uppercase font-semibold">
                   Core Analytical Stack
                 </span>
                 <span className="font-mono text-[10px] text-zinc-500">[4 SKILLS]</span>
               </div>
 
-              {/* 4 Kotak Stack Riil */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+              {/* 4 Kotak Stack Riil Murni Tipografi */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {/* 1. Microsoft Excel (Analytics) */}
-                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 shadow-sm">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="p-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-orange-500 dark:text-orange-400 shrink-0">
-                      <TableIcon size={13} />
-                    </div>
-                    <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-xs">
-                      Microsoft Excel (Analytics)
-                    </span>
-                  </div>
-                  <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200">
+                  <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+                    Microsoft Excel (Analytics)
+                  </h4>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mt-1">
                     Pivot Tables, Slicers, XLOOKUP, KPI Dashboards
-                  </span>
+                  </p>
                 </div>
 
                 {/* 2. SQL Querying */}
-                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 shadow-sm">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="p-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-orange-500 dark:text-orange-400 shrink-0">
-                      <DatabaseIcon size={13} />
-                    </div>
-                    <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-xs">
-                      SQL Querying
-                    </span>
-                  </div>
-                  <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200">
+                  <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+                    SQL Querying
+                  </h4>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mt-1">
                     Data Extraction, Filtering, Aggregation
-                  </span>
+                  </p>
                 </div>
 
                 {/* 3. Data Cleaning & Prep */}
-                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 shadow-sm">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="p-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-orange-500 dark:text-orange-400 shrink-0">
-                      <CheckIcon size={13} />
-                    </div>
-                    <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-xs">
-                      Data Cleaning &amp; Prep
-                    </span>
-                  </div>
-                  <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200">
+                  <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+                    Data Cleaning &amp; Prep
+                  </h4>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mt-1">
                     {isEn ? 'Raw data validation & inconsistency handling' : 'Validasi data mentah & penanganan inkonsistensi'}
-                  </span>
+                  </p>
                 </div>
 
                 {/* 4. Dashboard KPI Design */}
-                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 shadow-sm">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="p-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-orange-500 dark:text-orange-400 shrink-0">
-                      <BarChartIcon size={13} />
-                    </div>
-                    <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-xs">
-                      Dashboard KPI Design
-                    </span>
-                  </div>
-                  <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 shadow-sm transition-all duration-200">
+                  <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-200 group-hover:text-black dark:group-hover:text-white transition-colors">
+                    Dashboard KPI Design
+                  </h4>
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed mt-1">
                     {isEn ? 'Intuitive & readable business metric visuals' : 'Visualisasi metrik bisnis yang mudah dibaca'}
-                  </span>
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Kartu Bento 2: Studi Kasus Bisnis (Grid 2 kolom) */}
             <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-4 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/80">
-              <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold block mb-3">
+              <span className="font-mono text-[11px] tracking-wider text-zinc-500 uppercase font-semibold block mb-3">
                 {isEn ? 'Business Case Studies' : 'Studi Kasus Bisnis'}
               </span>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {/* Kasus 1: Retail Sales & Profit Leakage */}
-                <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-3 flex flex-col justify-between shadow-sm">
-                  <div className="flex items-center text-zinc-900 dark:text-zinc-100 font-semibold mb-1">
-                    <span className="font-mono text-xs text-orange-500 font-bold mr-1.5">01</span>
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 flex flex-col justify-between shadow-sm transition-all duration-200">
+                  <div className="flex items-center text-zinc-900 dark:text-zinc-200 font-semibold mb-1">
+                    <span className="font-mono text-xs text-zinc-500 font-normal mr-2">01</span>
                     Retail Sales &amp; Profit Leakage
                   </div>
-                  <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
                     {isEn
                       ? 'Analysis of $2.29M revenue performance, product margins, & discount profit leakage'
                       : 'Analisis performa omzet $2.29M, margin produk, & kebocoran profit diskon'}
@@ -288,12 +264,12 @@ export default function Hero({
                 </div>
 
                 {/* Kasus 2: Traffic Safety & Collision Risk */}
-                <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-3 flex flex-col justify-between shadow-sm">
-                  <div className="flex items-center text-zinc-900 dark:text-zinc-100 font-semibold mb-1">
-                    <span className="font-mono text-xs text-orange-500 font-bold mr-1.5">02</span>
+                <div className="group rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-900/40 p-3.5 flex flex-col justify-between shadow-sm transition-all duration-200">
+                  <div className="flex items-center text-zinc-900 dark:text-zinc-200 font-semibold mb-1">
+                    <span className="font-mono text-xs text-zinc-500 font-normal mr-2">02</span>
                     Traffic Safety &amp; Collision Risk
                   </div>
-                  <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
+                  <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
                     {isEn
                       ? 'Evaluation of 238K+ NYC traffic collisions, peak risk hours, & fatality mitigation'
                       : 'Evaluasi 238K+ kecelakaan lalu lintas NYC, pola waktu rawan, & mitigasi fatalitas'}
