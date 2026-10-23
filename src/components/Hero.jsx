@@ -127,9 +127,9 @@ export default function Hero({
 
             {/* Bio */}
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed mb-6">
-              {isEn
-                ? 'Data Analyst with an Information Technology background, focused on turning raw data into interactive dashboards, automated reporting, and strategic business insights.'
-                : 'Data Analyst berlatar belakang Teknologi Informasi yang berfokus menerjemahkan data mentah menjadi dashboard interaktif, pelaporan otomatis, dan insight bisnis yang strategis.'}
+              {language === 'en'
+                ? '2026 Information Technology Graduate specializing in Data Analytics. Focused on transforming raw operational datasets into interactive Excel dashboards, SQL queries, and actionable business insights.'
+                : 'Lulusan Teknologi Informasi (2026) dengan spesialisasi Data Analytics. Berfokus menerjemahkan dataset mentah menjadi dashboard Excel interaktif, pemodelan query SQL, dan insight bisnis yang strategis.'}
             </p>
 
             {/* Tombol Aksi + Sosmed Links */}
