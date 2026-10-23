@@ -1,95 +1,95 @@
-import React, { useState } from 'react';
-import { usePortfolio } from '../context/PortfolioContext';
-import { SiGithub, SiInstagram } from 'react-icons/si';
-import { FaLinkedin } from 'react-icons/fa6';
+import React from 'react';
+import { FiGithub, FiLinkedin, FiInstagram } from 'react-icons/fi';
 
-export default function Hero({ language: propLanguage, setActiveTab: propSetActiveTab } = {}) {
-  const portfolio = usePortfolio();
-  const language = propLanguage || portfolio.language || 'id';
-  const setActiveTab = propSetActiveTab || portfolio.setActiveTab;
-  const { contacts, photo, name } = portfolio.portfolioData || {};
-
-  const [imgSrc, setImgSrc] = useState(photo || '/foto-nobg.png');
-  const [isFallback, setIsFallback] = useState(false);
-
-  const handleImgError = () => {
-    if (!isFallback) {
-      setImgSrc('/foto.jpg');
-      setIsFallback(true);
-    }
-  };
-
-  const socials = [
-    { key: 'github', label: 'GitHub', url: contacts?.github || 'https://github.com', Icon: SiGithub },
-    { key: 'linkedin', label: 'LinkedIn', url: contacts?.linkedin || 'https://linkedin.com', Icon: FaLinkedin },
-    { key: 'instagram', label: 'Instagram', url: contacts?.instagram || 'https://instagram.com', Icon: SiInstagram },
-  ].filter((s) => s.url && typeof s.url === 'string' && !s.url.startsWith('['));
+const Hero = ({ setActiveTab, language = 'en' } = {}) => {
+  const isEn = language === 'en';
 
   return (
-    <section className="w-full flex items-center justify-center py-2">
-      <div className="w-full max-w-2xl mx-auto rounded-3xl bg-zinc-900/60 border border-zinc-800/80 p-6 sm:p-10 backdrop-blur-md flex flex-col items-center text-center shadow-2xl">
-        
-        {/* Lingkaran Foto Estetik (Bulat dengan Background Berwarna) */}
-        <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full bg-emerald-500/20 border-2 border-emerald-500/40 p-2 flex items-center justify-center overflow-hidden mx-auto mb-6 shadow-[0_0_30px_rgba(16,185,129,0.2)]">
+    <section className="relative w-full max-w-xl mx-auto px-4 py-6 flex flex-col items-center text-center">
+      
+      {/* Background Glow Halus agar tidak terasa AI Slop */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-orange-500/10 blur-[100px] rounded-full pointer-events-none -z-10" />
+
+      {/* 1. Foto Profil Lingkaran Proporsional ala Adri Khamid */}
+      <div className="relative mb-5 group">
+        <div className="w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden bg-gradient-to-b from-zinc-800 to-zinc-950 border-2 border-zinc-700/80 shadow-[0_10px_30px_rgba(0,0,0,0.6)] flex items-end justify-center relative">
+          {/* Zoom & Translate foto agar pundak/badan mengisi dasar lingkaran dan tidak melayang */}
           <img
-            src={imgSrc}
-            alt={name || 'Iqbal Dwi Fathonah'}
-            className="w-full h-full object-contain object-bottom rounded-full"
-            onError={handleImgError}
+            src="/profile.png"
+            alt="Iqbal Dwi Fathonah"
+            className="w-full h-full object-cover object-top scale-[1.38] translate-y-3 drop-shadow-md select-none transition-transform duration-300 group-hover:scale-[1.42]"
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              e.currentTarget.src = '/foto-nobg.png';
+            }}
           />
         </div>
-
-        {/* Status Badge */}
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-4">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          <span>{language === 'en' ? 'Available for Work' : 'Terbuka untuk Peluang Kerja'}</span>
-        </div>
-
-        {/* Teks Profil */}
-        <h1 className="text-3xl sm:text-4xl font-bold text-white tracking-tight mb-2">
-          {name || 'Iqbal Dwi Fathonah'}
-        </h1>
-        <h2 className="text-lg sm:text-xl font-semibold text-orange-500 mb-4">
-          Data Analyst
-        </h2>
-
-        {/* Ikon Sosial Media: Deretan ikon (GitHub, LinkedIn, Instagram) horizontal */}
-        {socials.length > 0 && (
-          <div className="flex items-center justify-center gap-4 text-zinc-400 mb-5">
-            {socials.map(({ key, label, url, Icon }) => (
-              <a
-                key={key}
-                href={url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-white transition-colors p-2 rounded-lg hover:bg-zinc-800/60"
-                aria-label={label}
-                title={label}
-              >
-                <Icon size={20} />
-              </a>
-            ))}
-          </div>
-        )}
-
-        {/* Bio Singkat */}
-        <p className="text-zinc-400 text-sm leading-relaxed max-w-lg mb-6">
-          {language === 'en'
-            ? 'Data Analyst with an Information Technology background, focused on turning complex data into interactive dashboards and actionable insights. Proficient in Excel and SQL to support strategic business decisions.'
-            : 'Data Analyst berlatar belakang Teknologi Informasi yang berfokus menerjemahkan data kompleks menjadi dashboard interaktif dan insight bisnis yang strategis.'}
-        </p>
-
-        {/* Single CTA Button */}
-        <button
-          type="button"
-          onClick={() => setActiveTab && setActiveTab('projects')}
-          className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-orange-500 hover:bg-orange-600 text-white font-medium text-sm transition-all shadow-lg shadow-orange-500/20 cursor-pointer"
-        >
-          <span>{language === 'en' ? 'View Projects' : 'Lihat Proyek'}</span>
-          <span>&rarr;</span>
-        </button>
-
       </div>
+
+      {/* 2. Status Badge Ketersediaan */}
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium mb-4">
+        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        {isEn ? 'Available for Work' : 'Terbuka untuk Peluang Kerja'}
+      </div>
+
+      {/* 3. Identitas & Role */}
+      <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-2">
+        Iqbal Dwi Fathonah
+      </h1>
+      <p className="text-base sm:text-lg font-semibold text-orange-500 tracking-wide mb-4">
+        Data Analyst
+      </p>
+
+      {/* 4. Tautan Sosial Media */}
+      <div className="flex items-center justify-center gap-5 text-zinc-400 mb-6">
+        <a
+          href="https://github.com/qivoradev"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 rounded-full hover:text-white hover:bg-zinc-800/60 transition-colors"
+          aria-label="GitHub"
+        >
+          <FiGithub className="w-5 h-5" />
+        </a>
+        <a
+          href="https://linkedin.com/in/iqbaldwifathonah"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 rounded-full hover:text-white hover:bg-zinc-800/60 transition-colors"
+          aria-label="LinkedIn"
+        >
+          <FiLinkedin className="w-5 h-5" />
+        </a>
+        <a
+          href="https://instagram.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 rounded-full hover:text-white hover:bg-zinc-800/60 transition-colors"
+          aria-label="Instagram"
+        >
+          <FiInstagram className="w-5 h-5" />
+        </a>
+      </div>
+
+      {/* 5. Bio Singkat & Proporsional */}
+      <p className="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-md mx-auto mb-8 font-normal">
+        {isEn
+          ? 'Data Analyst with an Information Technology background, turning raw data into interactive dashboards and actionable strategic insights.'
+          : 'Data Analyst berlatar belakang Teknologi Informasi yang berfokus mengolah data mentah menjadi dashboard interaktif dan insight bisnis strategis.'}
+      </p>
+
+      {/* 6. Single Primary CTA Button */}
+      <button
+        type="button"
+        onClick={() => setActiveTab && setActiveTab('projects')}
+        className="inline-flex items-center gap-2.5 px-7 py-3 rounded-full bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-medium text-sm transition-all shadow-[0_4px_20px_rgba(249,115,22,0.25)] cursor-pointer"
+      >
+        <span>{isEn ? 'View Projects' : 'Lihat Proyek'}</span>
+        <span className="text-base leading-none">&rarr;</span>
+      </button>
+
     </section>
   );
-}
+};
+
+export default Hero;
