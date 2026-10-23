@@ -46,7 +46,7 @@ class TabErrorBoundary extends Component {
 }
 
 function AppContent({ activeTab, setActiveTab }) {
-  const { language } = usePortfolio();
+  const { language, toggleLanguage, theme, toggleTheme } = usePortfolio();
   const scrollRef = useRef(null);
 
   // Otomatis reset posisi scroll ke atas saat berganti tab
@@ -66,14 +66,28 @@ function AppContent({ activeTab, setActiveTab }) {
       <main className="w-full max-w-4xl flex-1 flex flex-col justify-center items-center py-2" id="main-content">
         <TabErrorBoundary>
           <div ref={scrollRef} key={activeTab} className="w-full flex-1 flex flex-col items-center justify-center">
-            {activeTab === 'home' && <Hero language={language} setActiveTab={setActiveTab} />}
+            {activeTab === 'home' && (
+              <Hero
+                language={language}
+                setActiveTab={setActiveTab}
+                toggleLanguage={toggleLanguage}
+                theme={theme}
+                toggleTheme={toggleTheme}
+              />
+            )}
             {activeTab === 'projects' && <Projects language={language} setActiveTab={setActiveTab} />}
             {activeTab === 'certifications' && <Certifications language={language} setActiveTab={setActiveTab} />}
             {activeTab === 'contact' && <Contact language={language} setActiveTab={setActiveTab} />}
 
             {/* Fallback pengaman jika state tidak sengaja kosong/salah */}
             {!['home', 'projects', 'certifications', 'contact'].includes(activeTab) && (
-              <Hero language={language} setActiveTab={setActiveTab} />
+              <Hero
+                language={language}
+                setActiveTab={setActiveTab}
+                toggleLanguage={toggleLanguage}
+                theme={theme}
+                toggleTheme={toggleTheme}
+              />
             )}
           </div>
         </TabErrorBoundary>

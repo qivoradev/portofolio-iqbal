@@ -96,8 +96,8 @@ export default function Navbar({ activeTab: propActiveTab, setActiveTab: propSet
           <span>Menu</span>
         </button>
       ) : (
-        /* Mode Terbuka: Dok navigasi lengkap + tombol sembunyikan */
-        <div className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2.5 px-3 py-1.5 rounded-2xl bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-xl shadow-2xl transition-all">
+        /* Mode Terbuka: Dok navigasi murni (4 Tab Navigasi + Tombol Sembunyikan) */
+        <div className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-xl shadow-2xl transition-all">
           {/* 4 Icon Menu Utama (Home, Projects, Certifications, Contact) */}
           <div className="flex items-center gap-1">
             {navItems.map((item) => {
@@ -121,27 +121,6 @@ export default function Navbar({ activeTab: propActiveTab, setActiveTab: propSet
               );
             })}
           </div>
-
-          {/* Switcher Bahasa Bulat */}
-          <button
-            type="button"
-            onClick={toggleLanguage}
-            className="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 text-[11px] font-mono font-semibold flex items-center justify-center hover:bg-zinc-700 transition-colors border-0 cursor-pointer"
-            title={isEn ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
-          >
-            {language.toUpperCase()}
-          </button>
-
-          {/* Tombol Tema Bulat */}
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="w-7 h-7 rounded-full bg-zinc-800 text-zinc-300 flex items-center justify-center hover:bg-zinc-700 transition-colors border-0 cursor-pointer"
-            title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <SunIcon size={14} /> : <MoonIcon size={14} />}
-          </button>
 
           {/* Divider */}
           <div className="w-[1px] h-4 bg-zinc-800" />
