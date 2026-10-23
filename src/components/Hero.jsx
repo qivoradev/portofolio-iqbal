@@ -229,7 +229,7 @@ export default function Hero({
                   </div>
                   <h4 className="text-xs font-semibold text-zinc-900 dark:text-zinc-200">Microsoft Excel</h4>
                 </div>
-                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">Pivot Tables, Slicers, XLOOKUP, KPI Dashboards</p>
+                <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-relaxed">Pivot Tables, Slicers, Lookup Functions, KPI Dashboards</p>
               </div>
 
               <div className="p-3.5 rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-xs">
