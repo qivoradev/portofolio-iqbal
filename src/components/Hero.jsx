@@ -86,10 +86,20 @@ export default function Hero({
         {/* KONTEN KONSOL UTAMA (1 ALUR VERTIKAL KE BAWAH) */}
         <div className="p-6 sm:p-10 flex flex-col gap-8 max-w-4xl mx-auto">
           
-          {/* 1. HERO PROFILE SECTION (Terpusat & Rapi) */}
-          <div className="flex flex-col items-center text-center">
-            {/* Avatar dengan Badge Status */}
-            <div className="relative inline-block mb-4">
+          {/* 1. HERO PROFILE SECTION (Terpusat & Terstruktur dalam Kartu Kontainer) */}
+          <div className="relative p-6 sm:p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-100/40 dark:bg-zinc-900/30 backdrop-blur-sm flex flex-col items-center text-center overflow-hidden">
+            
+            {/* Metadata Teknis di Pojok Desktop (Mengisi Kiri & Kanan agar tidak kosong) */}
+            <div className="hidden sm:flex items-center justify-between w-full absolute top-4 px-6 text-[10px] font-mono text-zinc-400 dark:text-zinc-500 pointer-events-none">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-500/80" />
+                SYS_ID: IQBAL_WORKSPACE
+              </span>
+              <span>LOC: ID // REMOTE</span>
+            </div>
+
+            {/* Avatar dengan Status Badge */}
+            <div className="relative inline-block mb-4 sm:mt-2">
               <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-2 border-emerald-500/30 bg-emerald-500/20 p-1 shadow-lg shadow-emerald-500/10">
                 <img
                   src="/profile.png"
@@ -115,14 +125,14 @@ export default function Hero({
               Data Analyst
             </p>
 
-            {/* Bio Ringkas */}
+            {/* Bio */}
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-xl leading-relaxed mb-6">
               {isEn
                 ? 'Data Analyst with an Information Technology background, focused on turning raw data into interactive dashboards, automated reporting, and strategic business insights.'
                 : 'Data Analyst berlatar belakang Teknologi Informasi yang berfokus menerjemahkan data mentah menjadi dashboard interaktif, pelaporan otomatis, dan insight bisnis yang strategis.'}
             </p>
 
-            {/* Tombol Aksi & Sosmed Sejajar */}
+            {/* Tombol Aksi + Sosmed Links */}
             <div className="flex flex-wrap items-center justify-center gap-3">
               <a
                 href="#projects"
@@ -140,19 +150,52 @@ export default function Hero({
                 </svg>
               </a>
 
-              {/* Social Links Mini Pill */}
-              <div className="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-100 dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800">
-                <a href="mailto:iqbaldwifathonah@gmail.com" target="_blank" rel="noreferrer" className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-orange-500 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-lg transition-colors" title="Email">
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+              {/* 2. SOSMED LINKS (Terang di Dark & Light Mode, Berwarna saat Diklik/Hover) */}
+              <div className="flex items-center gap-1.5 p-1 rounded-xl bg-zinc-200/70 dark:bg-zinc-800/80 border border-zinc-300/80 dark:border-zinc-700/60 shadow-sm">
+                {/* Email / Gmail: Merah saat Hover & Active */}
+                <a
+                  href="mailto:iqbaldwifathonah@gmail.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Email"
+                  className="p-2 rounded-lg text-zinc-600 dark:text-zinc-200 hover:text-red-500 hover:bg-red-500/10 active:text-red-500 active:bg-red-500/20 active:scale-90 transition-all duration-150"
+                  title="Email"
+                >
+                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
                 </a>
-                <a href="https://linkedin.com/in/iqbaldwifathonah" target="_blank" rel="noreferrer" className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-[#0A66C2] dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-lg transition-colors" title="LinkedIn">
-                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.95 0-1.72.77-1.72 1.72s.77 1.73 1.72 1.73 1.73-.78 1.73-1.73-.78-1.72-1.73-1.72z" /></svg>
+
+                {/* LinkedIn: Biru saat Hover & Active */}
+                <a
+                  href="https://linkedin.com/in/iqbaldwifathonah"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="LinkedIn"
+                  className="p-2 rounded-lg text-zinc-600 dark:text-zinc-200 hover:text-sky-500 hover:bg-sky-500/10 active:text-sky-500 active:bg-sky-500/20 active:scale-90 transition-all duration-150"
+                  title="LinkedIn"
+                >
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.25c-.95 0-1.72.77-1.72 1.72s.77 1.73 1.72 1.73 1.73-.78 1.73-1.73-.78-1.72-1.73-1.72z" />
+                  </svg>
                 </a>
-                <a href="https://instagram.com" target="_blank" rel="noreferrer" className="p-2 text-zinc-600 dark:text-zinc-400 hover:text-pink-500 dark:hover:text-white hover:bg-zinc-200 dark:hover:bg-zinc-800 rounded-lg transition-colors" title="Instagram">
-                  <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" /></svg>
+
+                {/* Instagram: Pink saat Hover & Active */}
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                  className="p-2 rounded-lg text-zinc-600 dark:text-zinc-200 hover:text-pink-500 hover:bg-pink-500/10 active:text-pink-500 active:bg-pink-500/20 active:scale-90 transition-all duration-150"
+                  title="Instagram"
+                >
+                  <svg className="w-4 h-4 fill-currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                  </svg>
                 </a>
               </div>
             </div>
+
           </div>
 
           {/* DIVIDER HALUS */}
