@@ -31,152 +31,156 @@ export default function Contact({ language = 'en' } = {}) {
   return (
     <section className="w-full max-w-4xl mx-auto my-auto py-2">
       {/* Jendela Konsol Luar */}
-      <div className="w-full rounded-3xl border border-zinc-800/90 bg-zinc-950/80 shadow-2xl backdrop-blur-xl overflow-hidden flex flex-col relative">
+      <div className="w-full max-w-4xl mx-auto rounded-3xl border border-zinc-200 dark:border-zinc-800/90 bg-white/95 dark:bg-zinc-950/80 shadow-2xl backdrop-blur-xl overflow-hidden flex flex-col transition-colors duration-300 relative">
         {/* Ambient Glow */}
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-orange-500/10 blur-[120px] rounded-full pointer-events-none -z-10" />
 
-        {/* 1. Header Konsol Terminal */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-800/80 bg-zinc-900/60 font-mono text-xs">
+        {/* 1. Bar Header Konsol */}
+        <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-200 dark:border-zinc-800/80 bg-zinc-100 dark:bg-zinc-900/60 select-none text-zinc-600 dark:text-zinc-400 font-mono text-xs">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#ef4444]" />
             <span className="w-3 h-3 rounded-full bg-[#eab308]" />
             <span className="w-3 h-3 rounded-full bg-[#22c55e]" />
-            <span className="ml-2 text-zinc-300 font-semibold flex items-center gap-1.5">
+            <span className="ml-2 font-semibold flex items-center gap-1.5 text-zinc-700 dark:text-zinc-300">
               contact-interface.sh
             </span>
           </div>
 
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
             <span>SOCKET_OPEN</span>
           </div>
         </div>
 
         {/* 2. Body Grid Terpusat */}
         <div className="p-6 sm:p-10 flex flex-col items-center text-center max-w-2xl mx-auto w-full">
-          {/* Header Title */}
-          <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-orange-400 flex items-center justify-center mb-4">
+          {/* Icon Pembungkus */}
+          <div className="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/20 text-orange-500 flex items-center justify-center mx-auto mb-3">
             <MailIcon size={24} />
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight mb-2">
+          {/* Judul Utama */}
+          <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-2 tracking-tight">
             {isEn ? "Let's Collaborate on Data Solutions" : 'Mari Berkolaborasi'}
           </h2>
 
-          <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-8 max-w-md">
+          {/* Sub-deskripsi */}
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-md mx-auto mb-6 leading-relaxed">
             {isEn
               ? 'Have an analytics opportunity, business intelligence project, or strategic inquiry? Connect directly via channels below.'
-              : 'Punya tawaran analisis data, proyek business intelligence, atau peluang kerja? Hubungi saya secara langsung melalui kanal berikut.'}
+              : 'Punya tawaran analisis data, proyek spreadsheet, atau peluang kerja? Hubungi saya secara langsung melalui kanal berikut.'}
           </p>
 
-          {/* Kartu Kontak Langsung */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full text-left mb-6">
+          {/* 4 Kartu Informasi Kontak */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 w-full text-left mb-2">
             
-            {/* Email Card with Copy Button */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-4 flex flex-col justify-between">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <MailIcon size={14} className="text-orange-400" />
+            {/* 1. Email Card */}
+            <div className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex items-center justify-between shadow-xs">
+              <div className="min-w-0 pr-2">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 mb-1 flex items-center gap-1.5">
+                  <MailIcon size={14} className="text-orange-500" />
                   Email
                 </span>
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="text-[11px] font-mono text-zinc-400 hover:text-white inline-flex items-center gap-1 bg-zinc-800/60 hover:bg-zinc-800 px-2 py-0.5 rounded border border-zinc-700/60 cursor-pointer transition-all"
-                  title="Copy email to clipboard"
-                >
-                  {copied ? (
-                    <>
-                      <CheckIcon size={12} className="text-emerald-400" />
-                      <span className="text-emerald-400 font-semibold">{isEn ? 'Copied' : 'Tersalin'}</span>
-                    </>
-                  ) : (
-                    <>
-                      <CopyIcon size={12} />
-                      <span>{isEn ? 'Copy' : 'Salin'}</span>
-                    </>
-                  )}
-                </button>
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                  {emailAddress}
+                </p>
               </div>
-              <p className="text-xs sm:text-sm font-mono text-white truncate font-medium">
-                {emailAddress}
-              </p>
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/70 text-zinc-600 dark:text-zinc-300 text-xs font-mono hover:text-orange-500 transition-colors shrink-0 cursor-pointer shadow-xs inline-flex items-center gap-1"
+                title="Copy email to clipboard"
+              >
+                {copied ? (
+                  <>
+                    <CheckIcon size={12} className="text-emerald-500 dark:text-emerald-400" />
+                    <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{isEn ? 'Copied' : 'Tersalin'}</span>
+                  </>
+                ) : (
+                  <>
+                    <CopyIcon size={12} />
+                    <span>{isEn ? 'Copy' : 'Salin'}</span>
+                  </>
+                )}
+              </button>
             </div>
 
-            {/* LinkedIn Card */}
+            {/* 2. LinkedIn Card */}
             <a
               href={linkedinUrl}
               target="_blank"
               rel="noreferrer"
-              className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-4 flex flex-col justify-between hover:border-sky-500/40 hover:bg-zinc-900/70 transition-all group"
+              className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex items-center justify-between shadow-xs group"
             >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <LinkedinIcon size={14} className="text-sky-400" />
+              <div className="min-w-0 pr-2">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 mb-1 flex items-center gap-1.5">
+                  <LinkedinIcon size={14} className="text-[#0A66C2]" />
                   LinkedIn
                 </span>
-                <span className="text-zinc-500 group-hover:text-sky-400 transition-colors">
-                  <ExternalLinkIcon size={13} />
-                </span>
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                  in/iqbaldwifathonah
+                </p>
               </div>
-              <p className="text-xs sm:text-sm font-mono text-white truncate font-medium">
-                in/iqbaldwifathonah
-              </p>
+              <span className="px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/70 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:text-orange-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1">
+                <span>{isEn ? 'Open' : 'Buka'}</span>
+                <ExternalLinkIcon size={12} />
+              </span>
             </a>
 
-            {/* WhatsApp Card */}
+            {/* 3. WhatsApp Card */}
             <a
               href={waUrl}
               target="_blank"
               rel="noreferrer"
-              className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-4 flex flex-col justify-between hover:border-emerald-500/40 hover:bg-zinc-900/70 transition-all group"
+              className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex items-center justify-between shadow-xs group"
             >
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <WhatsappIcon size={14} className="text-emerald-400" />
+              <div className="min-w-0 pr-2">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 mb-1 flex items-center gap-1.5">
+                  <WhatsappIcon size={14} className="text-emerald-500" />
                   WhatsApp
                 </span>
-                <span className="text-zinc-500 group-hover:text-emerald-400 transition-colors">
-                  <ExternalLinkIcon size={13} />
-                </span>
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                  +62 823-2223-1710
+                </p>
               </div>
-              <p className="text-xs sm:text-sm font-mono text-white truncate font-medium">
-                +62 823-2223-1710
-              </p>
+              <span className="px-2.5 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/70 text-zinc-600 dark:text-zinc-300 text-xs font-mono group-hover:text-orange-500 transition-colors shrink-0 shadow-xs inline-flex items-center gap-1">
+                <span>Chat</span>
+                <ExternalLinkIcon size={12} />
+              </span>
             </a>
 
-            {/* Location Card */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/50 p-4 flex flex-col justify-between">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <MapPinIcon size={14} className="text-orange-400" />
+            {/* 4. Location Card */}
+            <div className="p-4 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50/80 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex items-center justify-between shadow-xs">
+              <div className="min-w-0 pr-2">
+                <span className="text-[11px] font-mono uppercase text-zinc-400 dark:text-zinc-500 mb-1 flex items-center gap-1.5">
+                  <MapPinIcon size={14} className="text-orange-500" />
                   {isEn ? 'Location' : 'Lokasi'}
                 </span>
-                <span className="text-[10px] font-mono text-zinc-500">
-                  UTC+7
-                </span>
+                <p className="text-xs sm:text-sm font-mono font-medium text-zinc-900 dark:text-zinc-100 truncate">
+                  Yogyakarta / South Jakarta, ID
+                </p>
               </div>
-              <p className="text-xs sm:text-sm font-mono text-white truncate font-medium">
-                Yogyakarta / South Jakarta, ID
-              </p>
+              <span className="px-2 py-1 rounded-lg border border-zinc-200 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/70 text-zinc-500 dark:text-zinc-400 text-xs font-mono shrink-0 shadow-xs">
+                UTC+7
+              </span>
             </div>
 
           </div>
 
-          {/* Quick Action Button */}
+          {/* Tombol CTA Oranye Terbawah ("Mulai Diskusi via WhatsApp") */}
           <a
             href={waUrl}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-semibold text-xs sm:text-sm transition-all shadow-md shadow-orange-500/20"
+            className="w-full max-w-sm mx-auto py-3 px-5 rounded-xl bg-orange-500 hover:bg-orange-600 active:scale-95 text-white font-medium text-sm transition-all shadow-md shadow-orange-500/20 flex items-center justify-center gap-2 mt-4 cursor-pointer"
           >
             <WhatsappIcon size={16} />
             <span>{isEn ? 'Start Conversation on WhatsApp' : 'Mulai Diskusi via WhatsApp'}</span>
           </a>
         </div>
 
-        {/* 3. Footer Konsol Terminal */}
-        <div className="px-5 py-2.5 border-t border-zinc-800/80 bg-zinc-900/60 flex items-center justify-between text-[10px] font-mono text-zinc-500">
+        {/* 3. Bar Footer Konsol */}
+        <div className="px-5 py-2.5 border-t border-zinc-200 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-950/90 flex items-center justify-between text-[10px] font-mono text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
           <span>CONNECTION_READY // PING: 18ms</span>
           <span>ENCRYPTED_TLS // PORT: 443</span>
         </div>
