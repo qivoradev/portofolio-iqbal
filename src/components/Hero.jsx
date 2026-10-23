@@ -11,19 +11,16 @@ const Hero = ({ setActiveTab, language = 'en' } = {}) => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-orange-500/10 blur-[100px] rounded-full pointer-events-none -z-10" />
 
       {/* 1. Foto Profil Lingkaran Proporsional ala Adri Khamid */}
-      <div className="relative mb-5 group">
-        <div className="w-36 h-36 sm:w-40 sm:h-40 rounded-full overflow-hidden bg-gradient-to-b from-zinc-800 to-zinc-950 border-2 border-zinc-700/80 shadow-[0_10px_30px_rgba(0,0,0,0.6)] flex items-end justify-center relative">
-          {/* Zoom & Translate foto agar pundak/badan mengisi dasar lingkaran dan tidak melayang */}
-          <img
-            src="/profile.png"
-            alt="Iqbal Dwi Fathonah"
-            className="w-full h-full object-cover object-top scale-[1.38] translate-y-3 drop-shadow-md select-none transition-transform duration-300 group-hover:scale-[1.42]"
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = '/foto-nobg.png';
-            }}
-          />
-        </div>
+      <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden bg-gradient-to-b from-teal-400 to-emerald-600 border-2 border-emerald-300/40 shadow-[0_10px_25px_rgba(20,184,166,0.3)] flex items-center justify-center mx-auto mb-6">
+        <img
+          src="/profile.png"
+          alt="Iqbal Dwi Fathonah"
+          className="w-full h-full object-cover object-[center_25%] scale-[1.65] -translate-y-1 select-none pointer-events-none drop-shadow-md"
+          onError={(e) => {
+            e.currentTarget.onerror = null;
+            e.currentTarget.src = '/foto-nobg.png';
+          }}
+        />
       </div>
 
       {/* 2. Status Badge Ketersediaan */}
