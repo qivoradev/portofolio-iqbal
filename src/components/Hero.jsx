@@ -201,18 +201,20 @@ export default function Hero({
                   <DatabaseIcon size={13} className="text-orange-400" />
                   Core Analytical Stack
                 </span>
-                <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 px-1.5 py-0.5 rounded bg-emerald-500/10">
-                  Ready
-                </span>
+                <span className="font-mono text-[10px] text-zinc-500">[4 SKILLS]</span>
               </div>
 
               {/* 4 Kotak Stack Riil */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 {/* 1. Microsoft Excel (Analytics) */}
-                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 text-zinc-800 dark:text-zinc-200 shadow-sm">
-                  <div className="flex items-center gap-1.5 font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5">
-                    <TableIcon size={14} className="text-emerald-500 dark:text-emerald-400 shrink-0" />
-                    <span>Microsoft Excel (Analytics)</span>
+                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 shadow-sm">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="p-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-orange-500 dark:text-orange-400 shrink-0">
+                      <TableIcon size={13} />
+                    </div>
+                    <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-xs">
+                      Microsoft Excel (Analytics)
+                    </span>
                   </div>
                   <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
                     Pivot Tables, Slicers, XLOOKUP, KPI Dashboards
@@ -220,10 +222,14 @@ export default function Hero({
                 </div>
 
                 {/* 2. SQL Querying */}
-                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 text-zinc-800 dark:text-zinc-200 shadow-sm">
-                  <div className="flex items-center gap-1.5 font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5">
-                    <DatabaseIcon size={14} className="text-sky-500 dark:text-sky-400 shrink-0" />
-                    <span>SQL Querying</span>
+                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 shadow-sm">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="p-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-orange-500 dark:text-orange-400 shrink-0">
+                      <DatabaseIcon size={13} />
+                    </div>
+                    <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-xs">
+                      SQL Querying
+                    </span>
                   </div>
                   <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
                     Data Extraction, Filtering, Aggregation
@@ -231,10 +237,14 @@ export default function Hero({
                 </div>
 
                 {/* 3. Data Cleaning & Prep */}
-                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 text-zinc-800 dark:text-zinc-200 shadow-sm">
-                  <div className="flex items-center gap-1.5 font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5">
-                    <CheckIcon size={14} className="text-orange-500 dark:text-orange-400 shrink-0" />
-                    <span>Data Cleaning &amp; Prep</span>
+                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 shadow-sm">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="p-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-orange-500 dark:text-orange-400 shrink-0">
+                      <CheckIcon size={13} />
+                    </div>
+                    <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-xs">
+                      Data Cleaning &amp; Prep
+                    </span>
                   </div>
                   <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
                     {isEn ? 'Raw data validation & inconsistency handling' : 'Validasi data mentah & penanganan inkonsistensi'}
@@ -242,10 +252,14 @@ export default function Hero({
                 </div>
 
                 {/* 4. Dashboard KPI Design */}
-                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 text-zinc-800 dark:text-zinc-200 shadow-sm">
-                  <div className="flex items-center gap-1.5 font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5">
-                    <BarChartIcon size={14} className="text-amber-500 dark:text-amber-400 shrink-0" />
-                    <span>Dashboard KPI Design</span>
+                <div className="flex flex-col justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-2.5 shadow-sm">
+                  <div className="flex items-center gap-2 mb-1">
+                    <div className="p-1.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-orange-500 dark:text-orange-400 shrink-0">
+                      <BarChartIcon size={13} />
+                    </div>
+                    <span className="font-semibold text-zinc-900 dark:text-zinc-100 text-xs">
+                      Dashboard KPI Design
+                    </span>
                   </div>
                   <span className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-tight">
                     {isEn ? 'Intuitive & readable business metric visuals' : 'Visualisasi metrik bisnis yang mudah dibaca'}
@@ -262,8 +276,8 @@ export default function Hero({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
                 {/* Kasus 1: Retail Sales & Profit Leakage */}
                 <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-3 flex flex-col justify-between shadow-sm">
-                  <div className="flex items-center gap-2 text-zinc-900 dark:text-white font-medium mb-1">
-                    <span className="w-2 h-2 rounded-full bg-orange-500" />
+                  <div className="flex items-center text-zinc-900 dark:text-zinc-100 font-semibold mb-1">
+                    <span className="font-mono text-xs text-orange-500 font-bold mr-1.5">01</span>
                     Retail Sales &amp; Profit Leakage
                   </div>
                   <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
@@ -275,8 +289,8 @@ export default function Hero({
 
                 {/* Kasus 2: Traffic Safety & Collision Risk */}
                 <div className="rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 p-3 flex flex-col justify-between shadow-sm">
-                  <div className="flex items-center gap-2 text-zinc-900 dark:text-white font-medium mb-1">
-                    <span className="w-2 h-2 rounded-full bg-teal-400" />
+                  <div className="flex items-center text-zinc-900 dark:text-zinc-100 font-semibold mb-1">
+                    <span className="font-mono text-xs text-orange-500 font-bold mr-1.5">02</span>
                     Traffic Safety &amp; Collision Risk
                   </div>
                   <p className="text-[11px] text-zinc-500 dark:text-zinc-400 leading-normal">
@@ -292,7 +306,7 @@ export default function Hero({
             <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-4 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700/80 flex flex-col justify-between">
               <div className="flex items-center justify-between mb-2.5">
                 <span className="text-[11px] font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-semibold flex items-center gap-1.5">
-                  <AwardIcon size={13} className="text-emerald-500 dark:text-emerald-400" />
+                  <AwardIcon size={13} className="text-zinc-400 dark:text-zinc-500" />
                   {isEn ? 'Verified Credentials' : 'Sertifikasi Terverifikasi'}
                 </span>
                 <button
@@ -308,19 +322,19 @@ export default function Hero({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                 <div className="flex items-center justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 px-3 py-2 shadow-sm">
                   <div className="flex items-center gap-2">
-                    <CheckIcon size={13} className="text-emerald-500 dark:text-emerald-400 shrink-0" />
+                    <CheckIcon size={13} className="text-emerald-500/80 dark:text-emerald-400/80 shrink-0" />
                     <span className="text-zinc-800 dark:text-zinc-200 font-medium">Web Developer</span>
                   </div>
-                  <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-transparent">
+                  <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/50">
                     BNSP
                   </span>
                 </div>
                 <div className="flex items-center justify-between rounded-lg border border-zinc-200 dark:border-zinc-800/80 bg-white dark:bg-zinc-950/50 px-3 py-2 shadow-sm">
                   <div className="flex items-center gap-2">
-                    <CheckIcon size={13} className="text-emerald-500 dark:text-emerald-400 shrink-0" />
+                    <CheckIcon size={13} className="text-emerald-500/80 dark:text-emerald-400/80 shrink-0" />
                     <span className="text-zinc-800 dark:text-zinc-200 font-medium">Artificial Intelligence</span>
                   </div>
-                  <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-transparent">
+                  <span className="text-[10px] font-mono uppercase px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/50">
                     Certiport
                   </span>
                 </div>
