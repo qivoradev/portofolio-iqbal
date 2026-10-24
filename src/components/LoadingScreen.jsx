@@ -6,7 +6,7 @@ export default function LoadingScreen({ progress = 0 }) {
   return (
     <div className="bg-[#0a0a0c] text-white fixed inset-0 z-[100] flex flex-col items-center justify-center p-4 select-none">
       {/* Kategori Tipis */}
-      <p className="text-[11px] font-mono tracking-[0.3em] text-zinc-500 uppercase mb-4">
+      <p className="text-[11px] font-mono tracking-[0.3em] text-zinc-500 uppercase mb-4 text-center">
         DATA ANALYTICS // PORTFOLIO
       </p>
 

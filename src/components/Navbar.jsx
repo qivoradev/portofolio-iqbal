@@ -49,7 +49,7 @@ export default function Navbar({ language: propLanguage } = {}) {
   return (
     <header className="fixed top-3 inset-x-0 z-50 flex justify-center pointer-events-none px-4 select-none">
       {/* 1. DESKTOP VIEW (hidden md:flex) */}
-      <div className="pointer-events-auto hidden md:flex items-center gap-5 px-5 py-2.5 rounded-full bg-white/80 dark:bg-zinc-900/90 border border-zinc-200 dark:border-zinc-800 backdrop-blur-md shadow-lg">
+      <div className="pointer-events-auto hidden md:flex items-center gap-5 px-5 py-2.5 rounded-full bg-white/90 text-zinc-900 border border-zinc-200 dark:bg-zinc-900/90 dark:text-zinc-100 dark:border-zinc-800 backdrop-blur-md shadow-lg transition-colors">
         {/* Sisi Kiri (Brand / Dot) */}
         <div
           onClick={() => scrollTo('home')}

@@ -11,12 +11,12 @@ export default function Projects({ language = 'id' } = {}) {
       title: 'Superstore Sales & Profitability Analysis',
       category: isEn ? 'Excel Analytics & Reporting' : 'Analisis & Pelaporan Excel',
       badge: 'MICROSOFT EXCEL',
-      datasetUrl: 'https://www.kaggle.com/datasets/vivek468/superstore-dataset-final',
       image: '/projects/superstore-dashboard.png',
       description: isEn
         ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
         : 'Dashboard eksekutif Microsoft Excel untuk menganalisis total penjualan ($2.29M), profit margin (12.5%), serta kebocoran profit pada kategori produk dan wilayah bagian tertentu.',
-      tools: ['Microsoft Excel', 'Data Cleaning', 'Pivot Tables', 'Dynamic Slicers', 'Margin Analysis'],
+      coreTools: ['Microsoft Excel', 'Pivot Tables', 'Executive KPIs'],
+      detailedTools: ['Microsoft Excel', 'Data Cleaning', 'Pivot Tables', 'Dynamic Slicers', 'Margin Analysis', 'Seasonality Trends', 'Executive KPIs'],
       metrics: [
         { label: isEn ? 'Total Sales' : 'Total Penjualan', value: '$2,295,274' },
         { label: isEn ? 'Total Profit' : 'Total Profit', value: '$285,988' },
@@ -41,12 +41,12 @@ export default function Projects({ language = 'id' } = {}) {
       title: 'NYC Motor Vehicle Collisions & Safety Analysis',
       category: isEn ? 'Excel Modeling & Safety Analysis' : 'Pemodelan Excel & Analisis Keselamatan',
       badge: 'MICROSOFT EXCEL',
-      datasetUrl: 'https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95',
       image: '/projects/nyc-collision-dashboard.png',
       description: isEn
         ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
         : 'Dashboard interaktif evaluasi keselamatan lalu lintas Kota New York (2021–2023) untuk menganalisis 238.000+ insiden tabrakan, tingkat cedera, dan faktor utama kelalaian pengemudi.',
-      tools: ['Microsoft Excel', 'Data Preparation', 'Pivot Tables', 'Geospatial Trends', 'KPI Dashboard'],
+      coreTools: ['Microsoft Excel', 'Pivot Tables', 'Executive KPIs'],
+      detailedTools: ['Microsoft Excel', 'Data Preparation', 'Pivot Tables', 'Geospatial Trends', 'Driver Distraction Analysis', 'Executive KPIs'],
       metrics: [
         { label: isEn ? 'Total Collisions' : 'Total Kecelakaan', value: '238,421' },
         { label: isEn ? 'Total Injured' : 'Korban Cedera', value: '116,227' },
@@ -142,7 +142,7 @@ export default function Projects({ language = 'id' } = {}) {
 
               {/* Tools Badges */}
               <div className="flex flex-wrap gap-1.5 my-3">
-                {project.tools.map((tool, tIdx) => (
+                {project.coreTools.map((tool, tIdx) => (
                   <span
                     key={tIdx}
                     className="text-[10px] sm:text-xs font-mono px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-300"

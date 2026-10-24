@@ -60,9 +60,22 @@ export default function ProjectModal({ project, onClose, language = 'en' }) {
             <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white mb-2">
               {project.title}
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3">
               {project.description || project.highlight}
             </p>
+            {/* Detailed Tools */}
+            {(project.detailedTools || project.tools) && (
+              <div className="flex flex-wrap gap-1.5 pt-1">
+                {(project.detailedTools || project.tools).map((tool, idx) => (
+                  <span
+                    key={idx}
+                    className="text-[10px] sm:text-xs font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-300"
+                  >
+                    {tool}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* C. Ringkasan Metrik KPI (3 Kolom Sejajar Rapi) */}
