@@ -15,16 +15,7 @@ export default function Projects({ language = 'id' } = {}) {
       description: isEn
         ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
         : 'Dashboard eksekutif Microsoft Excel untuk menganalisis total penjualan ($2.29M), profit margin (12.5%), serta kebocoran profit pada kategori produk dan wilayah bagian tertentu.',
-      highlight: isEn
-        ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
-        : 'Dashboard eksekutif Microsoft Excel untuk menganalisis total penjualan ($2.29M), profit margin (12.5%), serta kebocoran profit pada kategori produk dan wilayah bagian tertentu.',
-      stack: [
-        'Margin Leakage',
-        'Financial Modeling',
-        'Pivot Tables',
-        'Dynamic Slicers',
-        'Data Cleaning',
-      ],
+      tools: ['Microsoft Excel', 'Data Cleaning', 'Pivot Tables', 'Dynamic Slicers', 'Margin Analysis'],
       metrics: [
         { label: isEn ? 'Total Sales' : 'Total Penjualan', value: '$2,295,274' },
         { label: isEn ? 'Total Profit' : 'Total Profit', value: '$285,988' },
@@ -53,16 +44,7 @@ export default function Projects({ language = 'id' } = {}) {
       description: isEn
         ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
         : 'Dashboard interaktif evaluasi keselamatan lalu lintas Kota New York (2021–2023) untuk menganalisis 238.000+ insiden tabrakan, tingkat cedera, dan faktor utama kelalaian pengemudi.',
-      highlight: isEn
-        ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
-        : 'Dashboard interaktif evaluasi keselamatan lalu lintas Kota New York (2021–2023) untuk menganalisis 238.000+ insiden tabrakan, tingkat cedera, dan faktor utama kelalaian pengemudi.',
-      stack: [
-        'Risk & Safety Analysis',
-        'Time-Series Trend',
-        'Root Cause Analysis',
-        'Pivot Tables',
-        'Executive KPIs',
-      ],
+      tools: ['Microsoft Excel', 'Data Preparation', 'Pivot Tables', 'Geospatial Trends', 'KPI Dashboard'],
       metrics: [
         { label: isEn ? 'Total Collisions' : 'Total Kecelakaan', value: '238,421' },
         { label: isEn ? 'Total Injured' : 'Korban Cedera', value: '116,227' },
@@ -94,7 +76,7 @@ export default function Projects({ language = 'id' } = {}) {
       <div className="max-w-5xl mx-auto px-4 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
-            {isEn ? 'FEATURED CASE STUDIES' : 'STUDI KASUS & ANALISIS DATA'}
+            {isEn ? 'FEATURED CASE STUDIES & DATA ANALYTICS' : 'STUDI KASUS & ANALISIS DATA'}
           </h2>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
             {isEn
@@ -109,9 +91,9 @@ export default function Projects({ language = 'id' } = {}) {
         {projectsData.map((project, idx) => (
           <div
             key={project.id}
-            className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col lg:flex-row gap-8 items-center"
+            className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col lg:flex-row gap-8 items-start lg:items-center"
           >
-            {/* Kolom Kiri: Visual Dashboard */}
+            {/* Kolom Kiri / Atas: Visual Dashboard */}
             <div className="w-full lg:w-1/2">
               <div
                 onClick={() => handleOpenModal(project)}
@@ -130,7 +112,7 @@ export default function Projects({ language = 'id' } = {}) {
               </div>
             </div>
 
-            {/* Kolom Kanan: Narasi Bisnis & Dampak */}
+            {/* Kolom Kanan / Bawah: Narasi Bisnis & Dampak */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-2 mb-2">
@@ -141,7 +123,7 @@ export default function Projects({ language = 'id' } = {}) {
                     {isEn ? `CASE STUDY #${idx + 1}` : `STUDI KASUS #${idx + 1}`}
                   </span>
                 </div>
-                <h3 className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-white mb-2">
+                <h3 className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-white mb-2 leading-snug">
                   {project.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
@@ -150,12 +132,24 @@ export default function Projects({ language = 'id' } = {}) {
               </div>
 
               {/* Baris Ringkasan KPI Utama */}
-              <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 mb-5 text-center">
+              <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 mb-4 text-center">
                 {project.metrics.map((m, mIdx) => (
                   <div key={mIdx} className="flex flex-col items-center justify-center text-center px-0.5">
                     <p className="text-[10px] text-zinc-500 font-medium truncate w-full">{m.label}</p>
                     <p className="text-xs sm:text-sm font-mono font-bold text-zinc-900 dark:text-zinc-100 truncate w-full">{m.value}</p>
                   </div>
+                ))}
+              </div>
+
+              {/* Tools Badges */}
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {project.tools.map((tool, tIdx) => (
+                  <span
+                    key={tIdx}
+                    className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
+                  >
+                    {tool}
+                  </span>
                 ))}
               </div>
 

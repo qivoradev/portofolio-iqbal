@@ -6,68 +6,75 @@ export default function About({ language = 'id' } = {}) {
   return (
     <div className="max-w-4xl mx-auto px-4">
       {/* Header Section */}
-      <div className="mb-10 text-center sm:text-left">
+      <div className="mb-8 text-center sm:text-left">
         <span className="text-xs font-mono uppercase tracking-widest text-amber-500 font-semibold">
-          // BACKGROUND &amp; PHILOSOPHY
+          // BACKGROUND &amp; EXPERTISE
         </span>
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mt-1">
-          {isEn ? 'Behind The Data' : 'Tentang Saya & Pola Pikir'}
+          {isEn ? 'About Me' : 'Tentang Saya'}
         </h2>
       </div>
 
-      {/* Narasi Cerita */}
+      {/* Narasi Profil Otentik */}
       <div className="max-w-none text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4 mb-10">
         <p>
           {isEn
-            ? 'With a strong foundation in Information Technology, I view data not just as numbers on a sheet, but as the pulse of an organization. My technical background allows me to understand both the underlying database architecture and the real-world business objectives behind every metric.'
-            : 'Berbekal latar belakang pendidikan di bidang Teknologi Informasi, saya memandang data bukan sekadar tumpukan angka di lembar kerja, melainkan denyut nadi operasional bisnis. Pemahaman sistem dan logika pemrograman memungkinkan saya menguasai alur data secara menyeluruh—mulai dari ekstraksi mentah hingga penyajian dashboard interaktif.'}
-        </p>
-        <p>
-          {isEn
-            ? 'My analytical principle is simple: understand the business problem first, validate the data thoroughly, and deliver dashboards that executives can actually use to take immediate action.'
-            : 'Prinsip kerja yang saya pegang: pahami konteks masalah bisnisnya terlebih dahulu, pastikan validitas dan kebersihan data, lalu rancang visualisasi yang memudahkan pengambil keputusan mengeksekusi strategi secara tepat.'}
+            ? 'As an Information Technology graduate (2026) specializing in Data Analytics, I combine programming logic and database understanding with practical business analytics. I am accustomed to processing raw datasets, performing data cleaning, and building interactive analytical dashboards that deliver clear, measurable metric summaries for decision-makers.'
+            : 'Sebagai lulusan Teknologi Informasi (2026) yang mendalami bidang Data Analytics, saya menggabungkan logika pemrograman dan pemahaman database dengan analisis bisnis praktis. Saya terbiasa mengolah dataset mentah, melakukan pembersihan data (cleaning), serta membangun dashboard analitik interaktif yang menyajikan ringkasan metrik secara jelas dan terukur bagi pengambil keputusan.'}
         </p>
       </div>
 
-      {/* 3 Pilar Analisis (Pilar Bernilai Bisnis) */}
+      {/* 3 Kartu Keahlian (Skema Warna Seragam) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Pilar 1 */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
-          <div className="text-amber-500 font-mono text-sm font-bold mb-2">01 // RIGOROUS PREP</div>
-          <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-1.5">
-            {isEn ? 'Data Cleansing & Integrity' : 'Data Cleansing & Integritas'}
-          </h3>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-            {isEn
-              ? 'Eliminating anomalies, resolving missing entries, and establishing robust table relationships before analysis begins.'
-              : 'Menghilangkan anomali, mengatasi data hilang, dan menyusun relasi tabel yang kokoh sebelum proses analisis dimulai.'}
-          </p>
+        {/* Kartu 1: DATA PREPARATION */}
+        <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors flex flex-col justify-between">
+          <div>
+            <div className="text-amber-500 font-mono text-xs font-bold mb-2 tracking-wider">
+              01 // DATA PREPARATION
+            </div>
+            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-2">
+              {isEn ? 'Data Cleaning & Validation' : 'Data Cleaning & Validasi'}
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              {isEn
+                ? 'Checking anomalies, handling missing values, and structuring tables before analytical processing.'
+                : 'Memeriksa anomali, menangani nilai kosong (missing values), dan merapikan struktur tabel sebelum proses analisis.'}
+            </p>
+          </div>
         </div>
 
-        {/* Pilar 2 */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
-          <div className="text-emerald-500 font-mono text-sm font-bold mb-2">02 // STRATEGIC VALUE</div>
-          <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-1.5">
-            {isEn ? 'Root Cause Discovery' : 'Penemuan Akar Masalah'}
-          </h3>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-            {isEn
-              ? 'Investigating patterns behind sales variances, negative margins, and critical operational risk points.'
-              : 'Menyelidiki pola di balik varians penjualan, margin minus, maupun titik risiko operasional yang krusial bagi bisnis.'}
-          </p>
+        {/* Kartu 2: DATA MODELING */}
+        <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors flex flex-col justify-between">
+          <div>
+            <div className="text-amber-500 font-mono text-xs font-bold mb-2 tracking-wider">
+              02 // DATA MODELING
+            </div>
+            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-2">
+              {isEn ? 'Query Logic & Relations' : 'Logika Query & Relasi'}
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              {isEn
+                ? 'Data grouping, relational filtering, and multi-table integration using SQL logic and Excel lookup formulas.'
+                : 'Pengelompokan data, filtering relasional, dan integrasi multi-tabel menggunakan logika SQL dan formula lookup Excel.'}
+            </p>
+          </div>
         </div>
 
-        {/* Pilar 3 */}
-        <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
-          <div className="text-indigo-500 font-mono text-sm font-bold mb-2">03 // ACTIONABLE UX</div>
-          <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-1.5">
-            {isEn ? 'Executive Dashboard Design' : 'Desain Dashboard Eksekutif'}
-          </h3>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
-            {isEn
-              ? 'Delivering intuitive Excel interfaces with dynamic slicers and executive-friendly KPI metric summaries.'
-              : 'Menyajikan antarmuka Excel yang intuitif lengkap dengan slicer dinamis dan ringkasan metrik KPI yang ramah eksekutif.'}
-          </p>
+        {/* Kartu 3: VISUALIZATION */}
+        <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors flex flex-col justify-between">
+          <div>
+            <div className="text-amber-500 font-mono text-xs font-bold mb-2 tracking-wider">
+              03 // VISUALIZATION
+            </div>
+            <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-2">
+              {isEn ? 'KPI Dashboards & Reporting' : 'Dashboard & Pelaporan KPI'}
+            </h3>
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
+              {isEn
+                ? 'Visualizing core business metrics with Pivot Tables, dynamic slicers, and easy-to-understand performance charts.'
+                : 'Visualisasi metrik bisnis utama dengan Pivot Tables, dynamic slicer, dan chart performa yang mudah dipahami.'}
+            </p>
+          </div>
         </div>
       </div>
     </div>

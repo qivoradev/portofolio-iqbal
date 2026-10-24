@@ -33,13 +33,9 @@ export default function Hero({ language = 'id' } = {}) {
       </div>
 
       {/* Status Open for Work */}
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono mb-4">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
-        <span>
-          {isEn
-            ? 'Available for Full-time & Project Roles'
-            : 'Terbuka untuk Peluang Kerja & Proyek'}
-        </span>
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-4">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+        <span>{isEn ? 'Open for Work' : 'Terbuka untuk Kerja'}</span>
       </div>
 
       {/* Headline Utama */}
@@ -50,11 +46,11 @@ export default function Hero({ language = 'id' } = {}) {
         Data Analyst • Business Intelligence &amp; Modeling
       </p>
 
-      {/* Subtitle Ringkas Berbobot */}
+      {/* Bio Hero: Lulusan TI */}
       <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 max-w-2xl leading-relaxed mb-8">
         {isEn
-          ? 'Bridging IT systems and business intelligence. I transform complex operational data into intuitive Excel dashboards, structured SQL queries, and strategic decision-making insights.'
-          : 'Menjembatani sistem teknologi informasi dan intelijen bisnis. Berfokus mentransformasi dataset mentah yang kompleks menjadi dashboard analitik Excel, pemodelan SQL terstruktur, dan insight strategis untuk keputusan bisnis.'}
+          ? 'Information Technology Graduate (2026) specializing in Data Analytics. Focused on transforming raw datasets into interactive Excel dashboards, structured SQL queries, and strategic business insights.'
+          : 'Lulusan Teknologi Informasi (2026) dengan spesialisasi Data Analytics. Berfokus menerjemahkan dataset mentah menjadi dashboard Excel interaktif, pemodelan query SQL terstruktur, dan insight bisnis yang strategis.'}
       </p>
 
       {/* Tombol Aksi Hero */}
@@ -71,7 +67,7 @@ export default function Hero({ language = 'id' } = {}) {
           onClick={(e) => scrollTo('about', e)}
           className="px-6 py-2.5 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer shadow-sm"
         >
-          {isEn ? 'About My Approach' : 'Tentang Saya'}
+          {isEn ? 'About Me' : 'Tentang Saya'}
         </a>
       </div>
     </div>

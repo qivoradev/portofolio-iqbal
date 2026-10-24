@@ -20,33 +20,27 @@ export default function Certifications({ language = 'id' } = {}) {
     {
       id: 'bnsp-web-dev',
       title: 'Junior Web Developer',
-      org: 'BADAN NASIONAL SERTIFIKASI PROFESI (BNSP)',
+      org: 'ISSUING ORG: BNSP',
       sub: isEn
         ? 'Indonesian National Occupational Competency Standards (SKKNI)'
         : 'Standar Kompetensi Kerja Nasional Indonesia (SKKNI)',
       badge: 'VERIFIED',
-      icon: '✓',
-      iconColor: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400',
       image: '/certificates/web-developer.webp',
     },
     {
       id: 'certiport-ai',
       title: 'Information Technology Specialist - Artificial Intelligence',
-      org: 'CERTIPORT (PEARSON VUE)',
-      sub: isEn
-        ? 'AI Concepts & Machine Learning Foundations'
-        : 'Konsep Dasar AI & Fondasi Machine Learning',
+      org: 'ISSUING ORG: CERTIPORT',
+      sub: 'Pearson VUE - Foundational AI',
       badge: 'VERIFIED',
-      icon: '⚡',
-      iconColor: 'bg-indigo-500/10 border-indigo-500/20 text-indigo-600 dark:text-indigo-400',
       image: '/certificates/ai-certiport.webp',
     },
   ];
 
   return (
-    <div className="w-full py-6">
+    <div className="w-full py-8">
       {/* 1. Header Section: Teks judul di luar kartu dengan border bawah */}
-      <div className="max-w-4xl mx-auto px-4 mt-16 mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
+      <div className="max-w-4xl mx-auto px-4 mt-8 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
             {isEn ? 'CREDENTIALS' : 'KREDENSIAL'}
@@ -59,68 +53,52 @@ export default function Certifications({ language = 'id' } = {}) {
         </div>
       </div>
 
-      {/* 2. Kartu Horizontal Ramping (Horizontal Dossier) */}
-      <div className="space-y-3.5 max-w-4xl mx-auto px-4">
-        {/* BNSP Card */}
-        <div
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveCert(certificates[0])}
-          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setActiveCert(certificates[0])}
-          className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors cursor-pointer group"
-        >
-          <div className="flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
-              ✓
+      {/* 2. Grid 2 Kolom Sejajar */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto px-4">
+        {certificates.map((cert) => (
+          <div
+            key={cert.id}
+            role="button"
+            tabIndex={0}
+            onClick={() => setActiveCert(cert)}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setActiveCert(cert)}
+            className="p-6 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors shadow-sm cursor-pointer group"
+          >
+            {/* Atas: Ikon sertifikat netral di kiri, pill hijau kecil "VERIFIED" di kanan */}
+            <div className="flex items-center justify-between mb-4">
+              <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-300 flex items-center justify-center font-bold text-sm">
+                <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+              </div>
+              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                {cert.badge}
+              </span>
             </div>
-            <div>
-              <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-400 dark:text-zinc-500">
-                BADAN NASIONAL SERTIFIKASI PROFESI (BNSP)
-              </p>
-              <h4 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-                Junior Web Developer
-              </h4>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                {certificates[0].sub}
-              </p>
-            </div>
-          </div>
-          <span className="self-start sm:self-center px-2.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-            VERIFIED
-          </span>
-        </div>
 
-        {/* CERTIPORT Card */}
-        <div
-          role="button"
-          tabIndex={0}
-          onClick={() => setActiveCert(certificates[1])}
-          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setActiveCert(certificates[1])}
-          className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors cursor-pointer group"
-        >
-          <div className="flex items-start gap-3.5">
-            <div className="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
-              ⚡
+            {/* Tengah: Penerbit, Nama Sertifikasi, Keterangan Standar */}
+            <div className="my-2">
+              <p className="font-mono text-[10px] tracking-wider uppercase text-zinc-500">
+                {cert.org}
+              </p>
+              <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mt-1 leading-snug group-hover:text-amber-500 transition-colors">
+                {cert.title}
+              </h3>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+                {cert.sub}
+              </p>
             </div>
-            <div>
-              <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-400 dark:text-zinc-500">
-                CERTIPORT (PEARSON VUE)
-              </p>
-              <h4 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
-                Information Technology Specialist - Artificial Intelligence
-              </h4>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                {certificates[1].sub}
-              </p>
+
+            {/* Bawah: Indikator aksi */}
+            <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-[11px] font-mono text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
+              <span>{isEn ? 'Inspect Document' : 'Lihat Dokumen Sertifikat'}</span>
+              <span>↗</span>
             </div>
           </div>
-          <span className="self-start sm:self-center px-2.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-            VERIFIED
-          </span>
-        </div>
+        ))}
       </div>
 
-      {/* Lightbox Modal (Jika pengguna ingin melihat detail dokumen sertifikat) */}
+      {/* Lightbox Modal (Jika pengguna ingin melihat sertifikat resolusi penuh) */}
       {activeCert && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn"

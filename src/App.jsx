@@ -43,7 +43,7 @@ function AppContent() {
   return (
     <>
       {/* ALUR UTAMA: Single Page Flow */}
-      <main className="min-h-screen bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-zinc-100 selection:bg-amber-500/20 selection:text-amber-500 transition-colors duration-200 pb-28">
+      <main className="min-h-screen bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-zinc-100 selection:bg-amber-500/20 selection:text-amber-500 transition-colors duration-200 pb-12">
         <Navbar language={language} />
         <section id="home">
           <Hero language={language} />
