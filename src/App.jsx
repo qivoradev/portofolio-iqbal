@@ -52,12 +52,32 @@ function AppContent({ activeTab, setActiveTab }) {
     // Cek apakah web sudah pernah dimuat di sesi tab ini
     return !sessionStorage.getItem('portfolio_visited');
   });
+  const [progress, setProgress] = useState(0);
+  const [isFading, setIsFading] = useState(false);
   const scrollRef = useRef(null);
 
-  const handleLoadingFinish = () => {
-    sessionStorage.setItem('portfolio_visited', 'true');
-    setIsLoading(false);
-  };
+  useEffect(() => {
+    if (!isLoading) return;
+
+    const interval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            setIsFading(true);
+            setTimeout(() => {
+              sessionStorage.setItem('portfolio_visited', 'true');
+              setIsLoading(false);
+            }, 500);
+          }, 200);
+          return 100;
+        }
+        return prev + 1;
+      });
+    }, 18);
+
+    return () => clearInterval(interval);
+  }, [isLoading]);
 
   // Otomatis reset posisi scroll ke atas saat berganti tab
   useEffect(() => {
@@ -69,7 +89,6 @@ function AppContent({ activeTab, setActiveTab }) {
 
   return (
     <>
-      {isLoading && <LoadingScreen onFinish={handleLoadingFinish} />}
       <div className="min-h-screen w-full bg-zinc-100 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 flex flex-col justify-between items-center px-4 pt-20 pb-4 relative transition-colors duration-150">
         {/* Floating Capsule di Desktop & Floating Dock di Mobile */}
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} language={language} />
@@ -110,6 +129,16 @@ function AppContent({ activeTab, setActiveTab }) {
           © 2026 Iqbal Dwi Fathonah. All Rights Reserved.
         </footer>
       </div>
+
+      {isLoading && (
+        <div
+          className={`fixed inset-0 z-50 transition-opacity duration-500 ease-in-out ${
+            isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
+        >
+          <LoadingScreen progress={progress} />
+        </div>
+      )}
     </>
   );
 }

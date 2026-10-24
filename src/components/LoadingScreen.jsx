@@ -1,81 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-const LoadingScreen = ({ onFinish }) => {
-  const [progress, setProgress] = useState(0);
-  const [isFading, setIsFading] = useState(false);
-  const [statusText, setStatusText] = useState('BOOTING_CONSOLE...');
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          clearInterval(interval);
-          setStatusText('SYSTEM_READY [OK]');
-          setTimeout(() => setIsFading(true), 300);
-          setTimeout(() => onFinish(), 850);
-          return 100;
-        }
-
-        const next = prev + 1;
-        if (next === 25) setStatusText('READING_EXCEL_MODELS...');
-        if (next === 60) setStatusText('COMPUTING_METRICS & KPIS...');
-        if (next === 90) setStatusText('FINALIZING_DASHBOARDS...');
-
-        return next;
-      });
-    }, 22);
-
-    return () => clearInterval(interval);
-  }, [onFinish]);
-
+export default function LoadingScreen({ progress = 0 }) {
   return (
-    <div
-      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#09090b] text-white overflow-hidden transition-opacity duration-500 ease-in-out select-none ${
-        isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
-      }`}
-    >
-      {/* 1. Ambient Glow Colors (Pendaran Cahaya Oranye & Zamrud) */}
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-orange-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-orange-500/5 rounded-full blur-[90px] pointer-events-none" />
+    <div className="fixed inset-0 z-50 bg-[#09090b] flex flex-col items-center justify-center p-4 select-none">
+      {/* Brand Tagline Monospace */}
+      <p className="font-mono text-[11px] tracking-[0.25em] text-zinc-500 uppercase mb-3 flex items-center gap-2">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+        IQBAL.DF // SYSTEM_INITIALIZATION
+      </p>
 
-      {/* 2. Background Grid Pattern Halus */}
-      <div 
-        className="absolute inset-0 opacity-[0.15] pointer-events-none [mask-image:radial-gradient(ellipse_at_center,white,transparent_75%)]"
-        style={{
-          backgroundImage: `radial-gradient(circle, #71717a 1px, transparent 1px)`,
-          backgroundSize: '24px 24px'
-        }}
-      />
-
-      {/* 3. Kotak Konsol Pemuat (Card Frame) */}
-      <div className="relative z-10 w-80 max-w-[88vw] p-6 rounded-2xl border border-zinc-800/90 bg-zinc-950/70 backdrop-blur-xl shadow-2xl flex flex-col items-center">
-        {/* Top Mini Header */}
-        <div className="w-full flex items-center justify-between pb-3 mb-4 border-b border-zinc-800/80 font-mono text-xs text-zinc-400">
-          <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-            <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-          </div>
-          <span className="text-[11px] text-zinc-500 font-mono tracking-wide">iqbaldf</span>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="w-full h-1.5 bg-zinc-900 rounded-full overflow-hidden p-[1px] border border-zinc-800 mb-3 shadow-inner">
-          <div
-            className="h-full bg-gradient-to-r from-orange-500 via-amber-400 to-emerald-400 rounded-full transition-all duration-75 ease-out"
-            style={{ width: `${progress}%` }}
-          />
-        </div>
-
-        {/* Status Subtitle & Angka Persentase */}
-        <div className="w-full flex items-center justify-between font-mono text-[11px]">
-          <span className="tracking-wider text-zinc-400">{statusText}</span>
-          <span className="text-orange-400 font-semibold">{progress}%</span>
-        </div>
+      {/* Angka Persentase Digital */}
+      <div className="font-mono text-3xl sm:text-4xl font-bold tracking-tight text-zinc-100 mb-4">
+        {Math.round(progress)}
+        <span className="text-orange-500 text-lg sm:text-xl font-normal ml-0.5">%</span>
       </div>
+
+      {/* Progress Bar Ultra Ramping (2px Line) */}
+      <div className="w-64 sm:w-80 h-[2px] bg-zinc-800 rounded-full overflow-hidden relative mb-4">
+        <div
+          className="h-full bg-gradient-to-r from-orange-500 via-amber-400 to-emerald-400 transition-all duration-150 ease-out shadow-[0_0_12px_rgba(249,115,22,0.4)]"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
+      {/* Status Log Dinamis */}
+      <p className="font-mono text-[11px] text-zinc-500 tracking-wider h-4">
+        {progress < 35 && '> READING_DATA_MODELS...'}
+        {progress >= 35 && progress < 70 && '> COMPILING_SQL_QUERIES...'}
+        {progress >= 70 && progress < 100 && '> INITIALIZING_DASHBOARDS...'}
+        {progress >= 100 && '> SYSTEM_READY'}
+      </p>
     </div>
   );
-};
-
-export default LoadingScreen;
+}
