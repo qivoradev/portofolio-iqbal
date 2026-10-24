@@ -19,27 +19,29 @@ export default function Certifications({ language = 'id' } = {}) {
   const certificates = [
     {
       id: 'bnsp-web-dev',
-      title: 'Junior Web Developer',
-      org: 'ISSUING ORG: BNSP',
-      sub: isEn
+      title: 'Web Developer',
+      issuer: isEn
+        ? 'National Professional Certification Agency (BNSP) via Licensed LSP'
+        : 'Badan Nasional Sertifikasi Profesi (BNSP) melalui LSP Terlisensi',
+      qualification: isEn
         ? 'Indonesian National Occupational Competency Standards (SKKNI)'
         : 'Standar Kompetensi Kerja Nasional Indonesia (SKKNI)',
-      badge: 'VERIFIED',
+      code: 'SKKNI • 2026',
       image: '/certificates/web-developer.webp',
     },
     {
       id: 'certiport-ai',
       title: 'Information Technology Specialist - Artificial Intelligence',
-      org: 'ISSUING ORG: CERTIPORT',
-      sub: 'Pearson VUE - Foundational AI',
-      badge: 'VERIFIED',
+      issuer: 'Certiport (Pearson VUE Authorized Testing Center)',
+      qualification: 'Foundational AI & Machine Learning Problem Solving',
+      code: 'ITS-AI • GLOBAL',
       image: '/certificates/ai-certiport.webp',
     },
   ];
 
   return (
     <div className="w-full py-8">
-      {/* 1. Header Section: Teks judul di luar kartu dengan border bawah */}
+      {/* 1. Header Section */}
       <div className="max-w-4xl mx-auto px-4 mt-8 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
@@ -53,8 +55,8 @@ export default function Certifications({ language = 'id' } = {}) {
         </div>
       </div>
 
-      {/* 2. Grid 2 Kolom Sejajar */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto px-4">
+      {/* 2. Grid 2 Kolom Kredensial */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto px-4">
         {certificates.map((cert) => (
           <div
             key={cert.id}
@@ -62,43 +64,40 @@ export default function Certifications({ language = 'id' } = {}) {
             tabIndex={0}
             onClick={() => setActiveCert(cert)}
             onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setActiveCert(cert)}
-            className="p-6 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors shadow-sm cursor-pointer group"
+            className="p-5 sm:p-6 rounded-2xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-sm transition-all flex flex-col justify-between group cursor-pointer"
           >
-            {/* Atas: Ikon sertifikat netral di kiri, pill hijau kecil "VERIFIED" di kanan */}
+            {/* Bagian Atas */}
             <div className="flex items-center justify-between mb-4">
-              <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-300 flex items-center justify-center font-bold text-sm">
-                <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
-                {cert.badge}
+              <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-semibold">
+                VERIFIED CREDENTIAL
+              </span>
+              <span className="text-[11px] font-mono text-zinc-400">
+                {cert.code}
               </span>
             </div>
 
-            {/* Tengah: Penerbit, Nama Sertifikasi, Keterangan Standar */}
+            {/* Bagian Tengah (Nama Sertifikasi) */}
             <div className="my-2">
-              <p className="font-mono text-[10px] tracking-wider uppercase text-zinc-500">
-                {cert.org}
+              <p className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400 mb-1.5 leading-snug">
+                {cert.issuer}
               </p>
-              <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mt-1 leading-snug group-hover:text-amber-500 transition-colors">
+              <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-amber-500 transition-colors">
                 {cert.title}
               </h3>
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
-                {cert.sub}
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+                {cert.qualification}
               </p>
             </div>
 
-            {/* Bawah: Indikator aksi */}
-            <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-[11px] font-mono text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
-              <span>{isEn ? 'Inspect Document' : 'Lihat Dokumen Sertifikat'}</span>
-              <span>↗</span>
+            {/* Bagian Bawah */}
+            <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200 transition-colors">
+              <span>{isEn ? 'Verifikasi Sertifikat ↗' : 'Verifikasi Sertifikat ↗'}</span>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Lightbox Modal (Jika pengguna ingin melihat sertifikat resolusi penuh) */}
+      {/* Lightbox Modal */}
       {activeCert && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
@@ -116,7 +115,7 @@ export default function Certifications({ language = 'id' } = {}) {
                   {activeCert.title}
                 </h3>
                 <p className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-0.5">
-                  {activeCert.org}
+                  {activeCert.issuer}
                 </p>
               </div>
               <button

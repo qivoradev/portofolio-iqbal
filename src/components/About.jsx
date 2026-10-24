@@ -19,8 +19,8 @@ export default function About({ language = 'id' } = {}) {
       <div className="max-w-none text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4 mb-10">
         <p>
           {isEn
-            ? 'As an Information Technology graduate (2026) specializing in Data Analytics, I combine programming logic and database understanding with practical business analytics. I am accustomed to processing raw datasets, performing data cleaning, and building interactive analytical dashboards that deliver clear, measurable metric summaries for decision-makers.'
-            : 'Sebagai lulusan Teknologi Informasi (2026) yang mendalami bidang Data Analytics, saya menggabungkan logika pemrograman dan pemahaman database dengan analisis bisnis praktis. Saya terbiasa mengolah dataset mentah, melakukan pembersihan data (cleaning), serta membangun dashboard analitik interaktif yang menyajikan ringkasan metrik secara jelas dan terukur bagi pengambil keputusan.'}
+            ? 'Information Technology Graduate (2026) specializing in Data Analytics. Armed with standardized competencies through Web Development (BNSP) and Artificial Intelligence (Certiport) certifications, I integrate computational logic and data architecture into strategic business analysis. My focus is on processing raw datasets, ensuring data integrity, and building accurate executive dashboards to drive decision-making.'
+            : 'Lulusan Teknologi Informasi (2026) dengan spesialisasi Data Analytics. Berbekal kompetensi terstandarisasi melalui sertifikasi Web Development (BNSP) serta Artificial Intelligence (Certiport), saya mengintegrasikan logika komputasi dan arsitektur data ke dalam analisis bisnis strategis. Fokus saya adalah mengolah dataset mentah, memastikan integritas data, dan membangun dashboard eksekutif yang akurat untuk mendukung pengambilan keputusan.'}
         </p>
       </div>
 

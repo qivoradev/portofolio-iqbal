@@ -91,7 +91,7 @@ export default function Projects({ language = 'id' } = {}) {
         {projectsData.map((project, idx) => (
           <div
             key={project.id}
-            className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col lg:flex-row gap-8 items-start lg:items-center"
+            className="p-4 sm:p-7 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col lg:flex-row gap-8 items-start lg:items-center"
           >
             {/* Kolom Kiri / Atas: Visual Dashboard */}
             <div className="w-full lg:w-1/2">
@@ -126,13 +126,13 @@ export default function Projects({ language = 'id' } = {}) {
                 <h3 className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-white mb-2 leading-snug">
                   {project.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
+                <p className="line-clamp-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-3 leading-relaxed">
                   {project.description}
                 </p>
               </div>
 
               {/* Baris Ringkasan KPI Utama */}
-              <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 mb-4 text-center">
+              <div className="grid grid-cols-3 gap-2 p-2.5 sm:p-3 my-3 rounded-xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 text-center">
                 {project.metrics.map((m, mIdx) => (
                   <div key={mIdx} className="flex flex-col items-center justify-center text-center px-0.5">
                     <p className="text-[10px] text-zinc-500 font-medium truncate w-full">{m.label}</p>
@@ -142,7 +142,7 @@ export default function Projects({ language = 'id' } = {}) {
               </div>
 
               {/* Tools Badges */}
-              <div className="flex flex-wrap gap-1.5 mb-5">
+              <div className="hidden sm:flex flex-wrap gap-1.5 mb-4">
                 {project.tools.map((tool, tIdx) => (
                   <span
                     key={tIdx}
