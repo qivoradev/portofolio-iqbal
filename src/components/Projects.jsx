@@ -12,7 +12,7 @@ export default function Projects({ language = 'id' } = {}) {
       id: 'superstore-sales',
       title: 'Superstore Sales & Profitability Analysis',
       category: isEn ? 'Excel Analytics & Reporting' : 'Analisis & Pelaporan Excel',
-      badge: 'Excel',
+      badge: 'EXCEL',
       image: '/projects/superstore-dashboard.png',
       description: isEn
         ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
@@ -50,7 +50,7 @@ export default function Projects({ language = 'id' } = {}) {
       id: 'nyc-collisions',
       title: 'NYC Motor Vehicle Collisions & Safety Analysis',
       category: isEn ? 'Excel Modeling & Safety Analysis' : 'Pemodelan Excel & Analisis Keselamatan',
-      badge: 'Excel',
+      badge: 'EXCEL',
       image: '/projects/nyc-collision-dashboard.png',
       description: isEn
         ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
@@ -124,7 +124,7 @@ export default function Projects({ language = 'id' } = {}) {
       id: 'financial-budget-variance',
       title: 'Corporate Budget vs. Actual Variance & KPI Forecasting',
       category: isEn ? 'Financial Modeling & Forecasting' : 'Pemodelan Finansial & Forecasting',
-      badge: 'Excel',
+      badge: 'EXCEL',
       image: '/projects/nyc-collision-dashboard.png',
       description: isEn
         ? 'Comprehensive OPEX/CAPEX variance modeling and scenario-based forecasting across 12 business divisions with dynamic variance threshold alerts.'
@@ -161,31 +161,33 @@ export default function Projects({ language = 'id' } = {}) {
   const visibleProjects = showAll ? projectsData : projectsData.slice(0, 2);
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
-      {/* 1. Header Section Bersih */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2 uppercase">
-          {isEn ? 'FEATURED PROJECTS' : 'PROYEK & STUDI KASUS'}
-        </h2>
-        <p className="text-zinc-600 dark:text-zinc-400 text-sm max-w-2xl leading-relaxed">
-          {isEn
-            ? 'Business data analytics, KPI modeling, and executive Excel dashboards demonstrating end-to-end data transformation.'
-            : 'Studi kasus analisis data bisnis, pemodelan KPI, dan dashboard eksekutif Excel untuk menerjemahkan data mentah menjadi keputusan strategis.'}
-        </p>
+    <div className="w-full py-6">
+      {/* 1. Section Header: Teks judul di luar kartu dengan border bawah */}
+      <div className="max-w-5xl mx-auto px-4 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
+            {isEn ? 'FEATURED CASE STUDIES & DATA ANALYTICS' : 'STUDI KASUS & ANALISIS DATA'}
+          </h2>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+            {isEn
+              ? 'Business data modeling & executive Microsoft Excel dashboards.'
+              : 'Pemodelan data bisnis & dashboard eksekutif Microsoft Excel.'}
+          </p>
+        </div>
       </div>
 
-      {/* 2. Grid Proyek Utama (2 Bento Cards Berdampingan) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {/* 2. Grid Proyek (2 Kolom di Desktop) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto px-4">
         {visibleProjects.map((project) => (
           <div
             key={project.id}
-            className="bg-white border-zinc-200/90 shadow-sm dark:bg-zinc-900/40 dark:border-zinc-800/80 rounded-2xl border overflow-hidden flex flex-col justify-between group transition-all"
+            className="bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 rounded-2xl p-5 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between shadow-sm group"
           >
             <div>
-              {/* Visual Preview Screenshot / Dashboard Mockup */}
+              {/* Preview Dashboard */}
               <div
                 onClick={() => setActiveModalProject(project)}
-                className="relative aspect-video rounded-xl overflow-hidden border border-zinc-200/90 dark:border-zinc-800/60 m-4 mb-3 cursor-pointer group/img outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none bg-zinc-100 dark:bg-zinc-950"
+                className="rounded-xl overflow-hidden aspect-[16/10] border border-zinc-200 dark:border-zinc-800 mb-4 bg-zinc-950 relative cursor-pointer group/img outline-none focus:outline-none"
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
@@ -209,93 +211,90 @@ export default function Projects({ language = 'id' } = {}) {
                 </div>
               </div>
 
-              {/* Konten Card */}
-              <div className="px-5 pb-2">
-                {/* Kategori & Badge EXCEL / SQL */}
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 font-medium">
-                    {project.category}
-                  </span>
-                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded-md border font-medium ${
-                    project.badge === 'SQL'
-                      ? 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/30'
-                      : 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/30'
-                  }`}>
-                    {project.badge}
-                  </span>
-                </div>
+              {/* Header Kartu: Kategori kiri & Badge kanan */}
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="text-[11px] font-mono text-zinc-500 uppercase">
+                  {project.category}
+                </span>
+                <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-medium border ${
+                  project.badge === 'SQL'
+                    ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
+                    : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
+                }`}>
+                  {project.badge}
+                </span>
+              </div>
 
-                {/* Judul Proyek */}
-                <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors mb-2 leading-snug">
-                  {project.title}
-                </h3>
+              {/* Judul Proyek: Putih/Gelap Bersih (Tidak Berubah Oranye) */}
+              <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-2 leading-snug">
+                {project.title}
+              </h3>
 
-                {/* Highlight Ringkas */}
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
-                  {project.highlight}
-                </p>
+              {/* Deskripsi */}
+              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-3 leading-relaxed">
+                {project.description || project.highlight}
+              </p>
 
-                {/* Kotak Metrik KPI */}
-                {project.metrics && project.metrics.length > 0 && (
-                  <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-zinc-50 border border-zinc-200/70 dark:bg-zinc-950/50 dark:border-zinc-800/80 my-4 text-center">
-                    {project.metrics.slice(0, 3).map((metric, idx) => (
-                      <div key={idx} className="flex flex-col text-center px-1">
-                        <span className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400 font-mono truncate">
-                          {metric.label}
-                        </span>
-                        <span className="text-sm sm:text-base font-mono font-bold text-zinc-900 dark:text-zinc-100 truncate">
-                          {metric.value}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Tag Metodologi */}
-                <div className="flex flex-wrap gap-1.5 mb-5">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="bg-zinc-100 text-zinc-700 border-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:border-zinc-800 text-[11px] font-mono px-2.5 py-1 rounded-md border"
-                    >
-                      {tech}
-                    </span>
+              {/* Baris Metrik KPI: Container abu-abu netral sangat halus */}
+              {project.metrics && project.metrics.length > 0 && (
+                <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 mb-4 text-center">
+                  {project.metrics.slice(0, 3).map((metric, idx) => (
+                    <div key={idx} className="flex flex-col items-center justify-center text-center px-0.5">
+                      <span className="text-[10px] text-zinc-500 font-medium truncate w-full">
+                        {metric.label}
+                      </span>
+                      <span className="text-xs sm:text-sm font-mono font-bold text-zinc-900 dark:text-zinc-100 truncate w-full">
+                        {metric.value}
+                      </span>
+                    </div>
                   ))}
                 </div>
+              )}
+
+              {/* Tag Metodologi */}
+              <div className="flex flex-wrap gap-1.5 mb-5">
+                {project.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/60 text-zinc-600 dark:text-zinc-400 border border-zinc-200/50 dark:border-zinc-800"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
             </div>
 
-            {/* Tombol Aksi "Lihat Detail Analisis" */}
-            <div className="p-5 pt-0">
+            {/* Tombol Aksi */}
+            <div className="pt-2">
               <button
                 type="button"
                 onClick={() => setActiveModalProject(project)}
-                className="w-full py-2.5 rounded-xl border border-zinc-200 bg-zinc-100/80 text-zinc-800 hover:bg-zinc-200 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.99] group/btn outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none"
+                className="w-full py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-mono font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer active:scale-[0.99]"
               >
                 <span>{language === 'en' ? 'View Analysis Details' : 'Lihat Detail Analisis'}</span>
-                <span className="text-zinc-400 dark:text-zinc-500 group-hover/btn:text-zinc-900 dark:group-hover/btn:text-zinc-200 transition-colors">↗</span>
+                <span className="text-zinc-400 dark:text-zinc-500">↗</span>
               </button>
             </div>
           </div>
         ))}
       </div>
 
-      {/* 3. Tombol Toggle Tampilkan Lebih Banyak */}
-      <div className="flex justify-end mt-8">
+      {/* 3. Tombol Toggle Proyek (Kanan Bawah Grid) */}
+      <div className="flex justify-end max-w-5xl mx-auto px-4 mt-6">
         <button
           type="button"
           onClick={() => setShowAll(!showAll)}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300 transition-all active:scale-95 shadow-sm cursor-pointer"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 transition-all active:scale-95 shadow-sm cursor-pointer"
         >
           <span>
             {showAll
-              ? (language === 'en' ? 'Show Less ↑' : 'Tutup ↑')
-              : (language === 'en' ? 'Show More Projects ↓' : 'Tampilkan Lebih Banyak ↓')}
+              ? (language === 'en' ? 'Show Less ↑' : 'Tutup Proyek ↑')
+              : (language === 'en' ? 'More Projects ↓' : 'Tampilkan Lebih Banyak ↓')}
           </span>
         </button>
       </div>
 
-      {/* Modal Detail / Preview Dashboard */}
+      {/* Modal Detail Dashboard */}
       {activeModalProject && (
         <ProjectModal
           project={activeModalProject}

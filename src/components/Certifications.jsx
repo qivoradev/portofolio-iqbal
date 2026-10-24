@@ -20,105 +20,107 @@ export default function Certifications({ language = 'id' } = {}) {
     {
       id: 'bnsp-web-dev',
       title: 'Junior Web Developer',
-      issuer: 'BADAN NASIONAL SERTIFIKASI PROFESI (BNSP)',
-      sub: 'Standar Kompetensi Kerja Nasional Indonesia (SKKNI)',
+      org: 'BADAN NASIONAL SERTIFIKASI PROFESI (BNSP)',
+      sub: isEn
+        ? 'Indonesian National Occupational Competency Standards (SKKNI)'
+        : 'Standar Kompetensi Kerja Nasional Indonesia (SKKNI)',
       badge: 'VERIFIED',
       icon: '✓',
-      iconBg: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500',
+      iconColor: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400',
       image: '/certificates/web-developer.webp',
     },
     {
       id: 'certiport-ai',
-      title: 'Information Technology Specialist - AI',
-      issuer: 'CERTIPORT (PEARSON VUE)',
-      sub: 'Artificial Intelligence & Foundational Machine Learning',
+      title: 'Information Technology Specialist - Artificial Intelligence',
+      org: 'CERTIPORT (PEARSON VUE)',
+      sub: isEn
+        ? 'AI Concepts & Machine Learning Foundations'
+        : 'Konsep Dasar AI & Fondasi Machine Learning',
       badge: 'VERIFIED',
       icon: '⚡',
-      iconBg: 'bg-indigo-500/10 border-indigo-500/20 text-indigo-400',
+      iconColor: 'bg-indigo-500/10 border-indigo-500/20 text-indigo-600 dark:text-indigo-400',
       image: '/certificates/ai-certiport.webp',
     },
   ];
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
-      {/* 1. Header Seksi yang Bersih */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white mb-1 uppercase">
-          {isEn ? 'CREDENTIALS' : 'KREDENSIAL'}
-        </h2>
-        <p className="text-xs text-zinc-500 dark:text-zinc-400">
-          {isEn
-            ? 'Industry certifications verified by national & global standards'
-            : 'Sertifikasi industri terverifikasi standar nasional & global'}
-        </p>
+    <div className="w-full py-6">
+      {/* 1. Header Section: Teks judul di luar kartu dengan border bawah */}
+      <div className="max-w-4xl mx-auto px-4 mt-16 mb-6 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
+        <div>
+          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
+            {isEn ? 'CREDENTIALS' : 'KREDENSIAL'}
+          </h2>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+            {isEn
+              ? 'National & global competency standardizations verified by accredited bodies.'
+              : 'Standarisasi kompetensi nasional & global yang terverifikasi.'}
+          </p>
+        </div>
       </div>
 
-      {/* 2. Grid 2 Kolom untuk Sertifikat BNSP dan CERTIPORT */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-8">
-        {/* Kartu 1: BNSP */}
+      {/* 2. Kartu Horizontal Ramping (Horizontal Dossier) */}
+      <div className="space-y-3.5 max-w-4xl mx-auto px-4">
+        {/* BNSP Card */}
         <div
           role="button"
           tabIndex={0}
           onClick={() => setActiveCert(certificates[0])}
           onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setActiveCert(certificates[0])}
-          className="p-6 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 relative flex flex-col justify-between hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer group shadow-sm"
+          className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors cursor-pointer group"
         >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center font-bold">
+          <div className="flex items-start gap-3.5">
+            <div className="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
               ✓
             </div>
-            <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-              VERIFIED
-            </span>
+            <div>
+              <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-400 dark:text-zinc-500">
+                BADAN NASIONAL SERTIFIKASI PROFESI (BNSP)
+              </p>
+              <h4 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                Junior Web Developer
+              </h4>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                {certificates[0].sub}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-[10px] font-mono tracking-wider uppercase text-zinc-400 mb-1">
-              ISSUING ORG: BADAN NASIONAL SERTIFIKASI PROFESI (BNSP)
-            </p>
-            <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-1 group-hover:text-emerald-500 transition-colors">
-              Junior Web Developer
-            </h3>
-            <p className="text-xs text-zinc-500">Standar Kompetensi Kerja Nasional Indonesia (SKKNI)</p>
-          </div>
-          <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-[11px] font-mono text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
-            <span>{isEn ? 'View Credential Document' : 'Lihat Dokumen Sertifikat'}</span>
-            <span>↗</span>
-          </div>
+          <span className="self-start sm:self-center px-2.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+            VERIFIED
+          </span>
         </div>
 
-        {/* Kartu 2: CERTIPORT */}
+        {/* CERTIPORT Card */}
         <div
           role="button"
           tabIndex={0}
           onClick={() => setActiveCert(certificates[1])}
           onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setActiveCert(certificates[1])}
-          className="p-6 rounded-2xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 relative flex flex-col justify-between hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-pointer group shadow-sm"
+          className="p-4 sm:p-5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors cursor-pointer group"
         >
-          <div className="flex items-center justify-between mb-4">
-            <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold">
+          <div className="flex items-start gap-3.5">
+            <div className="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center font-bold text-sm flex-shrink-0">
               ⚡
             </div>
-            <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
-              VERIFIED
-            </span>
+            <div>
+              <p className="font-mono text-[10px] tracking-widest uppercase text-zinc-400 dark:text-zinc-500">
+                CERTIPORT (PEARSON VUE)
+              </p>
+              <h4 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                Information Technology Specialist - Artificial Intelligence
+              </h4>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                {certificates[1].sub}
+              </p>
+            </div>
           </div>
-          <div>
-            <p className="text-[10px] font-mono tracking-wider uppercase text-zinc-400 mb-1">
-              ISSUING ORG: CERTIPORT (PEARSON VUE)
-            </p>
-            <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-1 group-hover:text-indigo-400 transition-colors">
-              Information Technology Specialist - AI
-            </h3>
-            <p className="text-xs text-zinc-500">Artificial Intelligence & Foundational Machine Learning</p>
-          </div>
-          <div className="mt-4 pt-3 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-[11px] font-mono text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300">
-            <span>{isEn ? 'View Credential Document' : 'Lihat Dokumen Sertifikat'}</span>
-            <span>↗</span>
-          </div>
+          <span className="self-start sm:self-center px-2.5 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+            VERIFIED
+          </span>
         </div>
       </div>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal (Jika pengguna ingin melihat detail dokumen sertifikat) */}
       {activeCert && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
@@ -136,7 +138,7 @@ export default function Certifications({ language = 'id' } = {}) {
                   {activeCert.title}
                 </h3>
                 <p className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-0.5">
-                  {activeCert.issuer}
+                  {activeCert.org}
                 </p>
               </div>
               <button

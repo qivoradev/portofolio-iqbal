@@ -48,7 +48,7 @@ export default function Navbar({ language: propLanguage } = {}) {
   return (
     <>
       {/* 1. DESKTOP VIEW (Floating Top Header) */}
-      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center justify-between px-5 py-2.5 rounded-full bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-zinc-200/90 dark:border-zinc-800 shadow-md dark:shadow-2xl max-w-fit transition-colors duration-200 gap-4 select-none">
+      <header className="fixed top-4 left-1/2 -translate-x-1/2 z-40 hidden md:flex items-center justify-between px-5 py-2.5 rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur border border-zinc-200 dark:border-zinc-800 shadow-md max-w-fit transition-colors duration-200 gap-4 select-none">
         {/* Sisi Kiri (Brand / Dot) */}
         <div
           onClick={() => scrollTo('home')}
@@ -57,7 +57,7 @@ export default function Navbar({ language: propLanguage } = {}) {
           tabIndex={0}
           onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollTo('home')}
         >
-          <span className="w-2 h-2 rounded-full bg-orange-500" />
+          <span className="w-2 h-2 rounded-full bg-amber-500" />
           <span>Iqbal D.F</span>
         </div>
 
@@ -72,7 +72,7 @@ export default function Navbar({ language: propLanguage } = {}) {
                 onClick={() => scrollTo(item.id)}
                 className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors cursor-pointer border-0 ${
                   isActive
-                    ? 'text-orange-500 font-semibold bg-orange-500/10'
+                    ? 'text-amber-500 font-semibold bg-amber-500/10'
                     : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800/60'
                 }`}
               >
@@ -112,7 +112,7 @@ export default function Navbar({ language: propLanguage } = {}) {
       {/* 2. MOBILE VIEW (Floating Bottom Dock) */}
       <nav
         aria-label="Mobile Navigation"
-        className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex md:hidden items-center gap-1.5 px-3 py-2 rounded-full bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-lg shadow-2xl select-none"
+        className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40 flex md:hidden items-center gap-1.5 px-3 py-2 rounded-full bg-zinc-900/90 dark:bg-zinc-900/90 backdrop-blur border border-zinc-800 shadow-xl select-none"
       >
         {/* 1. Beranda (Home Icon) */}
         <button
