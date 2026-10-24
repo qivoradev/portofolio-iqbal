@@ -164,16 +164,22 @@
 html {
   scroll-behavior: smooth;
   font-family: var(--font-body);
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: #fafafa;
+  color: #18181b;
   line-height: 1.7;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
 
+html.dark {
+  background-color: #09090b;
+  color: #f4f4f5;
+}
+
 body {
   min-height: 100vh;
-  background-color: var(--bg-primary);
+  background-color: inherit;
+  color: inherit;
   overflow-x: hidden;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;

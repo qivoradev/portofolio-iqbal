@@ -89,8 +89,8 @@ function AppContent({ activeTab, setActiveTab }) {
 
   return (
     <>
-      <div className="min-h-screen w-full bg-zinc-100 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100 flex flex-col justify-between items-center px-4 pt-20 pb-4 relative transition-colors duration-150">
-        {/* Floating Capsule di Desktop & Floating Dock di Mobile */}
+      <div className="min-h-screen w-full bg-zinc-50 text-zinc-900 dark:bg-[#09090b] dark:text-zinc-100 flex flex-col justify-between items-center px-4 pt-16 sm:pt-20 pb-4 relative transition-colors duration-200">
+        {/* Floating Capsule Navbar */}
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} language={language} />
 
         {/* Area Konten Tab di Tengah */}
@@ -154,8 +154,10 @@ export default function App() {
     const root = document.documentElement;
     if (theme === 'dark') {
       root.classList.add('dark');
+      root.setAttribute('data-theme', 'dark');
     } else {
       root.classList.remove('dark');
+      root.setAttribute('data-theme', 'light');
     }
     localStorage.setItem('portfolio_theme', theme);
   }, [theme]);

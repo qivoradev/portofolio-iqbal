@@ -85,12 +85,12 @@ export default function Projects({ language = 'en' } = {}) {
 
   return (
     <section className="w-full max-w-5xl mx-auto py-6 sm:py-8">
-      {/* 1. Header Section Bersih (Open Bento Header) */}
+      {/* 1. Header Section Bersih */}
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white mb-2">
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
           {isEn ? 'Featured Projects' : 'Studi Kasus & Analisis Data'}
         </h1>
-        <p className="text-zinc-400 text-sm max-w-2xl leading-relaxed">
+        <p className="text-zinc-600 dark:text-zinc-400 text-sm max-w-2xl leading-relaxed">
           {isEn
             ? 'Business data analytics, KPI modeling, and executive Excel dashboards demonstrating end-to-end data transformation.'
             : 'Studi kasus analisis data bisnis, pemodelan KPI, dan dashboard eksekutif Excel untuk menerjemahkan data mentah menjadi keputusan strategis.'}
@@ -102,13 +102,13 @@ export default function Projects({ language = 'en' } = {}) {
         {projects.map((project) => (
           <div
             key={project.id}
-            className="rounded-2xl bg-zinc-900/40 border border-zinc-800/80 hover:border-zinc-700/80 transition-all overflow-hidden flex flex-col justify-between shadow-sm group"
+            className="bg-white border-zinc-200/90 shadow-sm dark:bg-zinc-900/40 dark:border-zinc-800/80 rounded-2xl border overflow-hidden flex flex-col justify-between group transition-all"
           >
             <div>
               {/* Visual Preview Screenshot / Dashboard Mockup */}
               <div
                 onClick={() => setActiveModalProject(project)}
-                className="relative aspect-video rounded-xl overflow-hidden border border-zinc-800/60 m-4 mb-3 cursor-pointer group/img outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none bg-zinc-950"
+                className="relative aspect-video rounded-xl overflow-hidden border border-zinc-200/90 dark:border-zinc-800/60 m-4 mb-3 cursor-pointer group/img outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none bg-zinc-100 dark:bg-zinc-950"
                 role="button"
                 tabIndex={0}
                 onKeyDown={(e) => {
@@ -136,33 +136,33 @@ export default function Projects({ language = 'en' } = {}) {
               <div className="px-5 pb-2">
                 {/* Kategori & Badge EXCEL */}
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[11px] font-mono text-zinc-400 font-medium">
+                  <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 font-medium">
                     {project.category}
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-medium">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/30 border font-medium">
                     Excel
                   </span>
                 </div>
 
-                {/* Judul Proyek (Selalu Putih Bersih, Tanpa Warna Oranye) */}
-                <h2 className="text-base sm:text-lg font-bold text-zinc-100 group-hover:text-white transition-colors mb-2 leading-snug">
+                {/* Judul Proyek (Selalu Bersih, Tidak Berubah Oranye) */}
+                <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors mb-2 leading-snug">
                   {project.title}
                 </h2>
 
                 {/* Highlight Ringkas */}
-                <p className="text-xs text-zinc-400 leading-relaxed mb-4">
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
                   {project.highlight}
                 </p>
 
-                {/* Metrik Kunci / KPI Chips */}
+                {/* Kotak Metrik KPI */}
                 {project.metrics && project.metrics.length > 0 && (
-                  <div className="grid grid-cols-3 gap-1.5 mb-4 p-2.5 rounded-xl bg-zinc-950/60 border border-zinc-800/80 shadow-xs">
+                  <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-zinc-50 border border-zinc-200/70 dark:bg-zinc-950/50 dark:border-zinc-800/80 my-4 text-center">
                     {project.metrics.slice(0, 3).map((metric, idx) => (
                       <div key={idx} className="flex flex-col text-center px-1">
-                        <span className="text-[9px] sm:text-[10px] text-zinc-400 font-mono truncate">
+                        <span className="text-[10px] sm:text-xs text-zinc-500 dark:text-zinc-400 font-mono truncate">
                           {metric.label}
                         </span>
-                        <span className="text-[11px] sm:text-xs font-mono font-semibold text-zinc-100 truncate">
+                        <span className="text-sm sm:text-base font-mono font-bold text-zinc-900 dark:text-zinc-100 truncate">
                           {metric.value}
                         </span>
                       </div>
@@ -170,12 +170,12 @@ export default function Projects({ language = 'en' } = {}) {
                   </div>
                 )}
 
-                {/* Tech Stack Pills (Spesialisasi Metodologi) */}
+                {/* Tag Metodologi */}
                 <div className="flex flex-wrap gap-1.5 mb-5">
                   {project.stack.map((tech) => (
                     <span
                       key={tech}
-                      className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400"
+                      className="bg-zinc-100 text-zinc-700 border-zinc-200 dark:bg-zinc-900 dark:text-zinc-400 dark:border-zinc-800 text-[11px] font-mono px-2.5 py-1 rounded-md border"
                     >
                       {tech}
                     </span>
@@ -184,15 +184,15 @@ export default function Projects({ language = 'en' } = {}) {
               </div>
             </div>
 
-            {/* Action Trigger (Tombol Aksi Elegan) */}
+            {/* Tombol Aksi "Lihat Detail Analisis" */}
             <div className="p-5 pt-0">
               <button
                 type="button"
                 onClick={() => setActiveModalProject(project)}
-                className="w-full py-2.5 rounded-xl border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all active:scale-[0.99] group/btn outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none cursor-pointer"
+                className="w-full py-2.5 rounded-xl border border-zinc-200 bg-zinc-100/80 text-zinc-800 hover:bg-zinc-200 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-300 dark:hover:bg-zinc-800 dark:hover:text-white text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-[0.99] group/btn outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none"
               >
                 <span>{language === 'en' ? 'View Analysis Details' : 'Lihat Detail Analisis'}</span>
-                <span className="text-zinc-500 group-hover/btn:text-zinc-200 transition-colors">↗</span>
+                <span className="text-zinc-400 dark:text-zinc-500 group-hover/btn:text-zinc-900 dark:group-hover/btn:text-zinc-200 transition-colors">↗</span>
               </button>
             </div>
           </div>
@@ -202,29 +202,29 @@ export default function Projects({ language = 'en' } = {}) {
       {/* Modal Detail / Preview Dashboard */}
       {activeModalProject && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
           onClick={() => setActiveModalProject(null)}
           role="dialog"
           aria-modal="true"
         >
           <div
-            className="w-full max-w-3xl rounded-3xl border border-zinc-800 bg-zinc-950 p-6 sm:p-8 shadow-2xl relative text-zinc-100"
+            className="w-full max-w-3xl rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-6 sm:p-8 shadow-2xl relative text-zinc-900 dark:text-zinc-100"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-zinc-800 mb-5">
+            <div className="flex items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800 mb-5">
               <div>
-                <h3 className="text-lg font-bold text-white">
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-white">
                   {activeModalProject.title}
                 </h3>
-                <p className="text-xs font-mono text-emerald-400 mt-1">
+                <p className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-1">
                   {activeModalProject.category}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setActiveModalProject(null)}
-                className="p-2 rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-400 hover:text-white hover:bg-zinc-800 cursor-pointer transition-colors outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none"
+                className="p-2 rounded-xl border border-zinc-200 bg-zinc-100 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800 cursor-pointer transition-colors outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none"
                 aria-label="Close"
               >
                 <CloseIcon size={18} />
@@ -232,7 +232,7 @@ export default function Projects({ language = 'en' } = {}) {
             </div>
 
             {/* Modal Image */}
-            <div className="w-full aspect-video rounded-2xl overflow-hidden border border-zinc-800 bg-black mb-5">
+            <div className="w-full aspect-video rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-black mb-5">
               <img
                 src={activeModalProject.image}
                 alt={activeModalProject.title}
@@ -244,23 +244,23 @@ export default function Projects({ language = 'en' } = {}) {
             {activeModalProject.metrics && (
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-5">
                 {activeModalProject.metrics.map((metric, idx) => (
-                  <div key={idx} className="p-3 rounded-2xl border border-zinc-800/80 bg-zinc-900/60 text-center">
-                    <span className="text-[10px] text-zinc-400 font-mono block mb-1">{metric.label}</span>
-                    <span className="text-xs sm:text-sm font-mono font-bold text-zinc-100">{metric.value}</span>
+                  <div key={idx} className="p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 text-center">
+                    <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono block mb-1">{metric.label}</span>
+                    <span className="text-xs sm:text-sm font-mono font-bold text-zinc-900 dark:text-zinc-100">{metric.value}</span>
                   </div>
                 ))}
               </div>
             )}
 
             {/* Key Business Insights */}
-            <div className="rounded-2xl border border-zinc-800/80 bg-zinc-900/40 p-5">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-400 font-semibold mb-3">
+            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-5">
+              <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-semibold mb-3">
                 {isEn ? 'Key Analytical Takeaways (Excel)' : 'Insight Kunci Analisis (Excel)'}
               </h4>
               <ul className="space-y-2">
                 {activeModalProject.insights.map((insight, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-xs text-zinc-300 leading-relaxed">
-                    <CheckIcon size={14} className="text-emerald-400 shrink-0 mt-0.5" />
+                  <li key={idx} className="flex items-start gap-2.5 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
+                    <CheckIcon size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                     <span>{insight}</span>
                   </li>
                 ))}

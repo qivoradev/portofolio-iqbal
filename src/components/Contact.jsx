@@ -6,17 +6,17 @@ export default function Contact({ language = 'en' } = {}) {
   return (
     <section className="w-full max-w-5xl mx-auto py-6 sm:py-12 flex flex-col items-center justify-center">
       {/* Kartu Kontak Terpusat (Clean Modern Bento Card) */}
-      <div className="max-w-2xl w-full mx-auto p-8 sm:p-12 rounded-3xl bg-zinc-900/40 border border-zinc-800/80 backdrop-blur-sm flex flex-col items-center text-center relative overflow-hidden shadow-2xl">
+      <div className="max-w-2xl w-full mx-auto p-8 sm:p-12 rounded-3xl bg-white border border-zinc-200/90 shadow-sm dark:bg-zinc-900/40 dark:border-zinc-800/80 backdrop-blur-sm flex flex-col items-center text-center relative overflow-hidden">
         {/* Subtle Ambient Glow */}
         <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none -z-10" />
 
         {/* Judul Utama */}
-        <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 tracking-tight">
+        <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-2 tracking-tight">
           {isEn ? "Let's Collaborate" : 'Mari Berkolaborasi'}
         </h2>
 
         {/* Deskripsi Ajakan Ramah & Profesional */}
-        <p className="text-zinc-400 text-sm max-w-md mx-auto mb-8 leading-relaxed">
+        <p className="text-zinc-600 dark:text-zinc-400 text-sm max-w-md mx-auto mb-8 leading-relaxed">
           {isEn
             ? 'Have an analytics opportunity, business intelligence project, or strategic inquiry? Connect directly via channels below.'
             : 'Punya tawaran analisis data, proyek spreadsheet, atau peluang kerja? Hubungi saya secara langsung melalui kanal berikut.'}
@@ -31,10 +31,10 @@ export default function Contact({ language = 'en' } = {}) {
             rel="noreferrer"
             aria-label="Email"
             title="Email"
-            className="w-12 h-12 rounded-full border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 hover:border-zinc-700 transition-all active:scale-95 flex items-center justify-center group shadow-sm"
+            className="w-12 h-12 rounded-full border border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-700 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/80 dark:hover:bg-zinc-800 dark:text-zinc-300 flex items-center justify-center transition-all active:scale-95 group"
           >
             <svg
-              className="w-5 h-5 text-zinc-400 group-hover:text-[#EA4335] group-hover:scale-110 transition-all"
+              className="w-5 h-5 text-zinc-600 dark:text-zinc-400 group-hover:text-[#EA4335] group-hover:scale-110 transition-all"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
@@ -49,10 +49,10 @@ export default function Contact({ language = 'en' } = {}) {
             rel="noreferrer"
             aria-label="WhatsApp"
             title="WhatsApp"
-            className="w-12 h-12 rounded-full border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 hover:border-zinc-700 transition-all active:scale-95 flex items-center justify-center group shadow-sm"
+            className="w-12 h-12 rounded-full border border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-700 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/80 dark:hover:bg-zinc-800 dark:text-zinc-300 flex items-center justify-center transition-all active:scale-95 group"
           >
             <svg
-              className="w-5 h-5 text-zinc-400 group-hover:text-[#25D366] group-hover:scale-110 transition-all"
+              className="w-5 h-5 text-zinc-600 dark:text-zinc-400 group-hover:text-[#25D366] group-hover:scale-110 transition-all"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
@@ -67,10 +67,10 @@ export default function Contact({ language = 'en' } = {}) {
             rel="noreferrer"
             aria-label="GitHub"
             title="GitHub"
-            className="w-12 h-12 rounded-full border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 hover:border-zinc-700 transition-all active:scale-95 flex items-center justify-center group shadow-sm"
+            className="w-12 h-12 rounded-full border border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-700 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/80 dark:hover:bg-zinc-800 dark:text-zinc-300 flex items-center justify-center transition-all active:scale-95 group"
           >
             <svg
-              className="w-5 h-5 text-zinc-400 group-hover:text-white group-hover:scale-110 transition-all"
+              className="w-5 h-5 text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white group-hover:scale-110 transition-all"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
@@ -89,10 +89,10 @@ export default function Contact({ language = 'en' } = {}) {
             rel="noreferrer"
             aria-label="LinkedIn"
             title="LinkedIn"
-            className="w-12 h-12 rounded-full border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 hover:border-zinc-700 transition-all active:scale-95 flex items-center justify-center group shadow-sm"
+            className="w-12 h-12 rounded-full border border-zinc-200 bg-white hover:bg-zinc-100 text-zinc-700 shadow-sm dark:border-zinc-800 dark:bg-zinc-900/80 dark:hover:bg-zinc-800 dark:text-zinc-300 flex items-center justify-center transition-all active:scale-95 group"
           >
             <svg
-              className="w-5 h-5 text-zinc-400 group-hover:text-[#0A66C2] group-hover:scale-110 transition-all"
+              className="w-5 h-5 text-zinc-600 dark:text-zinc-400 group-hover:text-[#0A66C2] group-hover:scale-110 transition-all"
               viewBox="0 0 24 24"
               fill="currentColor"
             >
