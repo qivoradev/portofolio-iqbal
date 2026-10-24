@@ -73,14 +73,14 @@ export default function Projects({ language = 'id' } = {}) {
   };
 
   return (
-    <div className="w-full py-8">
+    <div className="w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-8 py-16">
       {/* 1. Section Header: Teks judul di luar kartu dengan border bawah */}
-      <div className="max-w-5xl mx-auto px-4 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
+      <div className="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
             {isEn ? 'FEATURED PROJECTS' : 'PROYEK PILIHAN'}
           </h2>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
             {isEn
               ? 'Business intelligence dashboards and data modeling.'
               : 'Dashboard bisnis interaktif dan pemodelan data terstruktur.'}
@@ -89,14 +89,14 @@ export default function Projects({ language = 'id' } = {}) {
       </div>
 
       {/* 2. Layout Proyek: "Split Case Study" Vertikal */}
-      <div className="space-y-12 max-w-5xl mx-auto px-4">
+      <div className="space-y-12">
         {projectsData.map((project, idx) => (
           <div
             key={project.id}
-            className="p-4 sm:p-7 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col lg:flex-row gap-8 items-start lg:items-center"
+            className="p-5 sm:p-8 lg:p-9 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col lg:flex-row gap-8 lg:gap-10 items-start lg:items-center"
           >
-            {/* Kolom Kiri / Atas: Visual Dashboard */}
-            <div className="w-full lg:w-1/2">
+            {/* Kolom Kiri / Atas: Visual Dashboard (Mendapatkan porsi lapang di Desktop) */}
+            <div className="w-full lg:w-7/12">
               <div
                 onClick={() => handleOpenModal(project)}
                 className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-md bg-zinc-950 group relative cursor-pointer"
@@ -115,7 +115,7 @@ export default function Projects({ language = 'id' } = {}) {
             </div>
 
             {/* Kolom Kanan / Bawah: Narasi Bisnis & Dampak */}
-            <div className="w-full lg:w-1/2 flex flex-col justify-between">
+            <div className="w-full lg:w-5/12 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold">

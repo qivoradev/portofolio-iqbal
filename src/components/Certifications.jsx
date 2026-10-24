@@ -40,14 +40,14 @@ export default function Certifications({ language = 'id' } = {}) {
   ];
 
   return (
-    <div className="w-full py-8">
+    <div className="w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-8 py-16">
       {/* 1. Header Section */}
-      <div className="max-w-4xl mx-auto px-4 mt-8 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
+      <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
             {isEn ? 'CREDENTIALS' : 'KREDENSIAL'}
           </h2>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
+          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
             {isEn
               ? 'National & global competency standardizations verified by accredited bodies.'
               : 'Standarisasi kompetensi nasional & global yang terverifikasi.'}
@@ -56,7 +56,7 @@ export default function Certifications({ language = 'id' } = {}) {
       </div>
 
       {/* 2. Grid 2 Kolom Kredensial */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {certificates.map((cert) => (
           <div
             key={cert.id}
