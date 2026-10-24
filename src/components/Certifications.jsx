@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   AwardIcon,
   MaximizeIcon,
@@ -8,6 +8,17 @@ import {
 export default function Certifications({ language = 'en' } = {}) {
   const isEn = language === 'en';
   const [activeCert, setActiveCert] = useState(null);
+
+  useEffect(() => {
+    if (!activeCert) return;
+    document.body.style.overflow = 'hidden';
+    const handleKeyDown = (e) => e.key === 'Escape' && setActiveCert(null);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeCert]);
 
   const certificates = [
     {

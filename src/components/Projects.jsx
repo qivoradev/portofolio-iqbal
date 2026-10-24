@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import {
-  MaximizeIcon,
-  CloseIcon,
-  CheckIcon,
-} from './Icons';
+import { MaximizeIcon } from './Icons';
+import ProjectModal from './ProjectModal';
 
 export default function Projects({ language = 'en' } = {}) {
   const isEn = language === 'en';
@@ -16,6 +13,9 @@ export default function Projects({ language = 'en' } = {}) {
       category: isEn ? 'Excel Analytics & Reporting' : 'Analisis & Pelaporan Excel',
       badge: 'Excel',
       image: '/projects/superstore-dashboard.png',
+      description: isEn
+        ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
+        : 'Dashboard eksekutif Microsoft Excel untuk menganalisis total penjualan ($2.29M), profit margin (12.5%), serta kebocoran profit pada kategori produk dan wilayah bagian tertentu.',
       highlight: isEn
         ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
         : 'Dashboard eksekutif Microsoft Excel untuk menganalisis total penjualan ($2.29M), profit margin (12.5%), serta kebocoran profit pada kategori produk dan wilayah bagian tertentu.',
@@ -51,6 +51,9 @@ export default function Projects({ language = 'en' } = {}) {
       category: isEn ? 'Excel Modeling & Safety Analysis' : 'Pemodelan Excel & Analisis Keselamatan',
       badge: 'Excel',
       image: '/projects/nyc-collision-dashboard.png',
+      description: isEn
+        ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
+        : 'Dashboard interaktif evaluasi keselamatan lalu lintas Kota New York (2021–2023) untuk menganalisis 238.000+ insiden tabrakan, tingkat cedera, dan faktor utama kelalaian pengemudi.',
       highlight: isEn
         ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
         : 'Dashboard interaktif evaluasi keselamatan lalu lintas Kota New York (2021–2023) untuk menganalisis 238.000+ insiden tabrakan, tingkat cedera, dan faktor utama kelalaian pengemudi.',
@@ -201,73 +204,11 @@ export default function Projects({ language = 'en' } = {}) {
 
       {/* Modal Detail / Preview Dashboard */}
       {activeModalProject && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md"
-          onClick={() => setActiveModalProject(null)}
-          role="dialog"
-          aria-modal="true"
-        >
-          <div
-            className="w-full max-w-3xl rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-6 sm:p-8 shadow-2xl relative text-zinc-900 dark:text-zinc-100"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Modal Header */}
-            <div className="flex items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800 mb-5">
-              <div>
-                <h3 className="text-lg font-bold text-zinc-900 dark:text-white">
-                  {activeModalProject.title}
-                </h3>
-                <p className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-1">
-                  {activeModalProject.category}
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => setActiveModalProject(null)}
-                className="p-2 rounded-xl border border-zinc-200 bg-zinc-100 text-zinc-600 hover:text-zinc-900 hover:bg-zinc-200 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-400 dark:hover:text-white dark:hover:bg-zinc-800 cursor-pointer transition-colors outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none"
-                aria-label="Close"
-              >
-                <CloseIcon size={18} />
-              </button>
-            </div>
-
-            {/* Modal Image */}
-            <div className="w-full aspect-video rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-black mb-5">
-              <img
-                src={activeModalProject.image}
-                alt={activeModalProject.title}
-                className="w-full h-full object-contain"
-              />
-            </div>
-
-            {/* Modal Metrics Grid */}
-            {activeModalProject.metrics && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 mb-5">
-                {activeModalProject.metrics.map((metric, idx) => (
-                  <div key={idx} className="p-3 rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 text-center">
-                    <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono block mb-1">{metric.label}</span>
-                    <span className="text-xs sm:text-sm font-mono font-bold text-zinc-900 dark:text-zinc-100">{metric.value}</span>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* Key Business Insights */}
-            <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-5">
-              <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-semibold mb-3">
-                {isEn ? 'Key Analytical Takeaways (Excel)' : 'Insight Kunci Analisis (Excel)'}
-              </h4>
-              <ul className="space-y-2">
-                {activeModalProject.insights.map((insight, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-xs text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                    <CheckIcon size={14} className="text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
-                    <span>{insight}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+        <ProjectModal
+          project={activeModalProject}
+          onClose={() => setActiveModalProject(null)}
+          language={language}
+        />
       )}
     </section>
   );
