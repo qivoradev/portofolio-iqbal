@@ -40,6 +40,13 @@ function AppContent() {
     return () => clearInterval(interval);
   }, [isLoading]);
 
+  const [showTopBtn, setShowTopBtn] = useState(false);
+  useEffect(() => {
+    const checkScroll = () => setShowTopBtn(window.scrollY > 400);
+    window.addEventListener('scroll', checkScroll, { passive: true });
+    return () => window.removeEventListener('scroll', checkScroll);
+  }, []);
+
   return (
     <>
       {/* ALUR UTAMA: Single Page Flow */}
@@ -62,6 +69,19 @@ function AppContent() {
         </section>
         <Footer />
       </main>
+
+      {/* Floating Back to Top Button */}
+      {showTopBtn && (
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Kembali ke Atas"
+          className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-zinc-900/90 text-white dark:bg-white dark:text-zinc-900 shadow-xl border border-zinc-700/50 hover:scale-110 active:scale-95 transition-all animate-fadeIn cursor-pointer"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
+          </svg>
+        </button>
+      )}
 
       {/* Full-screen Terminal Preloader */}
       {isLoading && (
