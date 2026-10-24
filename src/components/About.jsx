@@ -7,10 +7,7 @@ export default function About({ language = 'id' } = {}) {
     <div className="max-w-4xl mx-auto px-4">
       {/* Header Section */}
       <div className="mb-8 text-center sm:text-left">
-        <span className="text-xs font-mono uppercase tracking-widest text-amber-500 font-semibold">
-          // BACKGROUND &amp; EXPERTISE
-        </span>
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mt-1">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
           {isEn ? 'About Me' : 'Tentang Saya'}
         </h2>
       </div>
@@ -37,8 +34,8 @@ export default function About({ language = 'id' } = {}) {
             </h3>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {isEn
-                ? 'Checking anomalies, handling missing values, and structuring tables before analytical processing.'
-                : 'Memeriksa anomali, menangani nilai kosong (missing values), dan merapikan struktur tabel sebelum proses analisis.'}
+                ? 'Handling missing values, anomalies, and data type validation before analysis.'
+                : 'Menangani nilai hilang (missing values), anomali, dan validasi tipe data sebelum analisis.'}
             </p>
           </div>
         </div>
@@ -50,12 +47,12 @@ export default function About({ language = 'id' } = {}) {
               02 // DATA MODELING
             </div>
             <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-2">
-              {isEn ? 'Query Logic & Relations' : 'Logika Query & Relasi'}
+              {isEn ? 'Structured Calculations & Relations' : 'Logika Pemodelan & Relasi'}
             </h3>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {isEn
-                ? 'Data grouping, relational filtering, and multi-table integration using SQL logic and Excel lookup formulas.'
-                : 'Pengelompokan data, filtering relasional, dan integrasi multi-tabel menggunakan logika SQL dan formula lookup Excel.'}
+                ? 'Lookup formulas, structured calculations, and multi-table relations based on query logic.'
+                : 'Formula lookup, kalkulasi terstruktur, dan relasi multi-tabel berbasis logika query.'}
             </p>
           </div>
         </div>
@@ -71,8 +68,8 @@ export default function About({ language = 'id' } = {}) {
             </h3>
             <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {isEn
-                ? 'Visualizing core business metrics with Pivot Tables, dynamic slicers, and easy-to-understand performance charts.'
-                : 'Visualisasi metrik bisnis utama dengan Pivot Tables, dynamic slicer, dan chart performa yang mudah dipahami.'}
+                ? 'Intuitive Excel interface design with Pivot Tables, dynamic slicers, and executive visualizations.'
+                : 'Desain antarmuka Excel intuitif dengan Pivot Tables, dynamic slicers, dan visualisasi eksekutif.'}
             </p>
           </div>
         </div>

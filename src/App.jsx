@@ -29,8 +29,8 @@ function AppContent() {
             setTimeout(() => {
               sessionStorage.setItem('portfolio_visited', 'true');
               setIsLoading(false);
-            }, 500);
-          }, 200);
+            }, 400);
+          }, 150);
           return 100;
         }
         return prev + 1;
@@ -50,12 +50,12 @@ function AppContent() {
   return (
     <>
       {/* ALUR UTAMA: Single Page Flow */}
-      <main className="min-h-screen bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-zinc-100 selection:bg-amber-500/20 selection:text-amber-500 transition-colors duration-200 pb-12">
+      <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-zinc-100 transition-colors duration-200 pb-16">
         <Navbar language={language} />
         <section id="home">
           <Hero language={language} />
         </section>
-        <section id="about" className="py-16 border-t border-zinc-200 dark:border-zinc-800/80">
+        <section id="about">
           <About language={language} />
         </section>
         <section id="projects">
@@ -75,7 +75,7 @@ function AppContent() {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Kembali ke Atas"
-          className="fixed bottom-6 right-6 z-50 p-3 rounded-full bg-zinc-900/90 text-white dark:bg-white dark:text-zinc-900 shadow-xl border border-zinc-700/50 hover:scale-110 active:scale-95 transition-all animate-fadeIn cursor-pointer"
+          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 shadow-xl border border-zinc-700/50 hover:scale-110 active:scale-95 transition-all cursor-pointer"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -86,7 +86,7 @@ function AppContent() {
       {/* Full-screen Terminal Preloader */}
       {isLoading && (
         <div
-          className={`fixed inset-0 z-50 transition-opacity duration-500 ease-in-out ${
+          className={`fixed inset-0 z-50 transition-opacity duration-400 ease-in-out ${
             isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}
         >

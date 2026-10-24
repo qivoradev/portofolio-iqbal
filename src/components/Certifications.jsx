@@ -56,7 +56,7 @@ export default function Certifications({ language = 'id' } = {}) {
       </div>
 
       {/* 2. Grid 2 Kolom Kredensial */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-4xl mx-auto px-4">
         {certificates.map((cert) => (
           <div
             key={cert.id}
@@ -69,7 +69,7 @@ export default function Certifications({ language = 'id' } = {}) {
             {/* Bagian Atas */}
             <div className="flex items-center justify-between mb-4">
               <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-semibold">
-                VERIFIED CREDENTIAL
+                VERIFIED
               </span>
               <span className="text-[11px] font-mono text-zinc-400">
                 {cert.code}
@@ -91,7 +91,7 @@ export default function Certifications({ language = 'id' } = {}) {
 
             {/* Bagian Bawah */}
             <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200 transition-colors">
-              <span>{isEn ? 'Verifikasi Sertifikat ↗' : 'Verifikasi Sertifikat ↗'}</span>
+              <span>{isEn ? 'Verify Credential ↗' : 'Verifikasi Sertifikat ↗'}</span>
             </div>
           </div>
         ))}

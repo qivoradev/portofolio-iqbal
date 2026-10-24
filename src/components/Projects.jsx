@@ -171,7 +171,7 @@ export default function Projects({ language = 'id' } = {}) {
                   onClick={() => handleOpenModal(project)}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-xs font-mono font-medium hover:opacity-90 active:scale-95 transition-all cursor-pointer shadow-sm"
                 >
-                  <span>{language === 'en' ? 'Open Detailed Analysis' : 'Lihat Detail Analisis Bisnis'}</span>
+                  <span>{language === 'en' ? 'Open Detailed Analysis' : 'Buka Detail Analisis'}</span>
                   <span>↗</span>
                 </button>
               </div>

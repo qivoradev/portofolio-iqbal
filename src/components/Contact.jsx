@@ -4,8 +4,8 @@ export default function Contact({ language = 'id' } = {}) {
   const isEn = language === 'en';
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-16">
-      <div className="p-8 sm:p-10 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-xl backdrop-blur-sm text-center relative overflow-hidden">
+    <div className="max-w-xl mx-auto px-4 py-16">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-xl text-center relative overflow-hidden">
         {/* Subtle decorative glow */}
         <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-24 bg-amber-500/10 dark:bg-amber-400/5 rounded-full blur-2xl pointer-events-none" />
 
@@ -31,7 +31,7 @@ export default function Contact({ language = 'id' } = {}) {
           <a
             href="mailto:iqbaldwifathonah@gmail.com"
             aria-label="Email"
-            className="w-12 h-12 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/60 hover:bg-zinc-100 dark:hover:bg-zinc-700/60 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
+            className="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
             title={isEn ? 'Send Email' : 'Kirim Email'}
           >
             <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -45,7 +45,7 @@ export default function Contact({ language = 'id' } = {}) {
             target="_blank"
             rel="noreferrer"
             aria-label="WhatsApp"
-            className="w-12 h-12 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/60 hover:bg-zinc-100 dark:hover:bg-zinc-700/60 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
+            className="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
             title={isEn ? 'Contact via WhatsApp' : 'Hubungi via WhatsApp'}
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -59,7 +59,7 @@ export default function Contact({ language = 'id' } = {}) {
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
-            className="w-12 h-12 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/60 hover:bg-zinc-100 dark:hover:bg-zinc-700/60 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
+            className="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
             title={isEn ? 'Visit LinkedIn' : 'Kunjungi LinkedIn'}
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -73,7 +73,7 @@ export default function Contact({ language = 'id' } = {}) {
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
-            className="w-12 h-12 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/60 hover:bg-zinc-100 dark:hover:bg-zinc-700/60 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
+            className="w-12 h-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/60 border border-zinc-200 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-200 flex items-center justify-center transition-all hover:scale-105 active:scale-95 shadow-sm"
             title={isEn ? 'Visit GitHub' : 'Kunjungi GitHub'}
           >
             <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">

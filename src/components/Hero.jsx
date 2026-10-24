@@ -12,10 +12,10 @@ export default function Hero({ language = 'id' } = {}) {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 pt-24 sm:pt-32 pb-16 text-center flex flex-col items-center">
+    <div className="w-full max-w-3xl mx-auto px-5 pt-24 sm:pt-32 pb-14 flex flex-col items-center text-center">
       {/* Avatar Foto dengan ring halus & status dot */}
-      <div className="relative mb-5">
-        <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden ring-2 ring-zinc-700/80 dark:ring-zinc-700 p-1 bg-zinc-900 shadow-2xl relative">
+      <div className="relative mb-4">
+        <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700 p-1 bg-zinc-900 shadow-2xl relative">
           <img
             src="/profile.png"
             alt="Iqbal Dwi Fathonah"
@@ -28,22 +28,22 @@ export default function Hero({ language = 'id' } = {}) {
         </div>
         <span
           className="absolute bottom-1.5 right-1.5 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-500 ring-4 ring-[#0a0a0c]"
-          title={isEn ? 'Available for hire' : 'Terbuka untuk peluang kerja'}
+          title={isEn ? 'Open for Work' : 'Terbuka untuk Kerja'}
         />
       </div>
 
       {/* Status Open for Work */}
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-4">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 dark:text-emerald-400 text-xs font-mono mb-4">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
         <span>{isEn ? 'Open for Work' : 'Terbuka untuk Kerja'}</span>
       </div>
 
-      {/* Headline Utama */}
-      <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-zinc-900 dark:text-white mb-3">
+      {/* Headline Utama & Role */}
+      <h1 className="text-2xl sm:text-4xl font-extrabold text-zinc-900 dark:text-white mb-1.5">
         Iqbal Dwi Fathonah
       </h1>
-      <p className="text-xs sm:text-sm font-mono tracking-widest uppercase text-amber-500 font-semibold mb-5">
-        Data Analyst • Business Intelligence &amp; Modeling
+      <p className="text-xs sm:text-sm font-mono tracking-widest uppercase text-amber-500 font-semibold mb-4">
+        DATA ANALYST • BUSINESS INTELLIGENCE &amp; MODELING
       </p>
 
       {/* Bio Hero: Lulusan TI */}
@@ -53,19 +53,19 @@ export default function Hero({ language = 'id' } = {}) {
           : 'Lulusan Teknologi Informasi (2026) dengan spesialisasi Data Analytics. Berfokus menerjemahkan dataset mentah menjadi dashboard Excel interaktif, pemodelan query SQL terstruktur, dan insight bisnis yang strategis.'}
       </p>
 
-      {/* Tombol Aksi Hero */}
+      {/* Dua Tombol Aksi Rounded-Full */}
       <div className="flex flex-wrap items-center justify-center gap-3">
         <a
           href="#projects"
           onClick={(e) => scrollTo('projects', e)}
-          className="px-6 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 text-xs sm:text-sm font-medium hover:opacity-90 active:scale-95 transition-all shadow-md cursor-pointer"
+          className="px-6 py-2.5 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 text-xs sm:text-sm font-medium hover:opacity-90 active:scale-95 transition-all shadow-md cursor-pointer"
         >
           {isEn ? 'View Projects ↓' : 'Lihat Proyek ↓'}
         </a>
         <a
           href="#about"
           onClick={(e) => scrollTo('about', e)}
-          className="px-6 py-2.5 rounded-xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer shadow-sm"
+          className="px-6 py-2.5 rounded-full border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer shadow-sm"
         >
           {isEn ? 'About Me' : 'Tentang Saya'}
         </a>
