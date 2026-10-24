@@ -75,7 +75,7 @@ function AppContent() {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Kembali ke Atas"
-          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 shadow-xl border border-zinc-700/50 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-white text-zinc-950 shadow-xl border border-zinc-200 dark:border-zinc-700 hover:scale-110 active:scale-95 transition-all cursor-pointer"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
