@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { MaximizeIcon } from './Icons';
 import ProjectModal from './ProjectModal';
 
-export default function Projects({ language = 'en' } = {}) {
+export default function Projects({ language = 'id' } = {}) {
   const isEn = language === 'en';
   const [activeModalProject, setActiveModalProject] = useState(null);
+  const [showAll, setShowAll] = useState(false);
 
-  const projects = [
+  const projectsData = [
     {
       id: 'superstore-sales',
       title: 'Superstore Sales & Profitability Analysis',
@@ -67,7 +68,6 @@ export default function Projects({ language = 'en' } = {}) {
       metrics: [
         { label: isEn ? 'Total Collisions' : 'Total Kecelakaan', value: '238,421' },
         { label: isEn ? 'Total Injured' : 'Korban Cedera', value: '116,227' },
-        { label: isEn ? 'Total Fatalities' : 'Korban Jiwa', value: '268' },
         { label: isEn ? 'Injury Rate' : 'Tingkat Cedera', value: '48.7%' },
       ],
       insights: isEn
@@ -84,15 +84,89 @@ export default function Projects({ language = 'en' } = {}) {
             'Menyajikan matriks indikator cedera (Injury Rate 48.7%) sebagai dasar perumusan rekomendasi titik patroli presisi.',
           ],
     },
+    {
+      id: 'ecommerce-retention',
+      title: 'E-Commerce Customer Retention & Cohort Analytics',
+      category: isEn ? 'SQL Modeling & Cohort Analytics' : 'Pemodelan SQL & Analisis Kohor',
+      badge: 'SQL',
+      image: '/projects/superstore-dashboard.png',
+      description: isEn
+        ? 'Advanced SQL and Excel behavioral cohort modeling tracking customer lifetime value (LTV), repeat purchase velocity, and churn reduction across 48,000+ accounts.'
+        : 'Pemodelan kohor perilaku dan query SQL tingkat lanjut untuk melacak Customer Lifetime Value (LTV), retensi pelanggan, dan mitigasi churn pada 48.000+ akun pengguna.',
+      highlight: isEn
+        ? 'Advanced SQL and Excel behavioral cohort modeling tracking customer lifetime value (LTV), repeat purchase velocity, and churn reduction across 48,000+ accounts.'
+        : 'Pemodelan kohor perilaku dan query SQL tingkat lanjut untuk melacak Customer Lifetime Value (LTV), retensi pelanggan, dan mitigasi churn pada 48.000+ akun pengguna.',
+      stack: [
+        'SQL Cohorts',
+        'Customer Retention',
+        'LTV Modeling',
+        'Window Functions',
+        'Churn Mitigation',
+      ],
+      metrics: [
+        { label: isEn ? '30-Day Retention' : 'Retensi 30 Hari', value: '42.8%' },
+        { label: isEn ? 'LTV Growth' : 'Kenaikan LTV', value: '+28.4%' },
+        { label: isEn ? 'Analyzed Accounts' : 'Akun Dianalisis', value: '48,250' },
+      ],
+      insights: isEn
+        ? [
+            'Identified key drop-off point between first and second transaction cycles.',
+            'Engineered SQL window functions to segment customer cohorts by signup month.',
+            'Optimized targeted re-engagement timing, lifting 60-day repeat purchase rate by 14%.',
+          ]
+        : [
+            'Mengidentifikasi titik kritis drop-off transaksi pertama ke transaksi kedua.',
+            'Merancang query SQL window functions untuk segmentasi kohor pelanggan berdasarkan bulan registrasi.',
+            'Mengoptimalkan waktu promosi tertarget, menaikkan repeat purchase 60 hari sebesar 14%.',
+          ],
+    },
+    {
+      id: 'financial-budget-variance',
+      title: 'Corporate Budget vs. Actual Variance & KPI Forecasting',
+      category: isEn ? 'Financial Modeling & Forecasting' : 'Pemodelan Finansial & Forecasting',
+      badge: 'Excel',
+      image: '/projects/nyc-collision-dashboard.png',
+      description: isEn
+        ? 'Comprehensive OPEX/CAPEX variance modeling and scenario-based forecasting across 12 business divisions with dynamic variance threshold alerts.'
+        : 'Pemodelan variansi OPEX/CAPEX komprehensif dan peramalan berbasis skenario di 12 divisi bisnis dengan visualisasi peringatan selisih anggaran otomatis.',
+      highlight: isEn
+        ? 'Comprehensive OPEX/CAPEX variance modeling and scenario-based forecasting across 12 business divisions with dynamic variance threshold alerts.'
+        : 'Pemodelan variansi OPEX/CAPEX komprehensif dan peramalan berbasis skenario di 12 divisi bisnis dengan visualisasi peringatan selisih anggaran otomatis.',
+      stack: [
+        'Budget Variance',
+        'OPEX Forecasting',
+        'Scenario Modeling',
+        'Sensitivity Model',
+        'Executive Alerts',
+      ],
+      metrics: [
+        { label: isEn ? 'Budget Accuracy' : 'Akurasi Anggaran', value: '96.4%' },
+        { label: isEn ? 'Monitored OPEX' : 'OPEX Dipantau', value: '$8.4M' },
+        { label: isEn ? 'Variance Detected' : 'Variansi Terdeteksi', value: '-3.2%' },
+      ],
+      insights: isEn
+        ? [
+            'Built automated dynamic variance threshold alerts for divisional budget overruns.',
+            'Created interactive scenario toggles for Best Case, Base Case, and Conservative forecast models.',
+            'Reduced monthly financial consolidation and reporting cycle by 3 days.',
+          ]
+        : [
+            'Membangun sistem peringatan otomatis untuk deviasi anggaran per divisi.',
+            'Mengembangkan kontrol skenario interaktif (Best Case, Base Case, dan Konservatif).',
+            'Mempercepat siklus konsolidasi dan pelaporan keuangan bulanan hingga 3 hari kerja.',
+          ],
+    },
   ];
 
+  const visibleProjects = showAll ? projectsData : projectsData.slice(0, 2);
+
   return (
-    <section className="w-full max-w-5xl mx-auto py-6 sm:py-8">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6">
       {/* 1. Header Section Bersih */}
       <div className="mb-8">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
-          {isEn ? 'Featured Projects' : 'Studi Kasus & Analisis Data'}
-        </h1>
+        <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2 uppercase">
+          {isEn ? 'FEATURED PROJECTS' : 'PROYEK & STUDI KASUS'}
+        </h2>
         <p className="text-zinc-600 dark:text-zinc-400 text-sm max-w-2xl leading-relaxed">
           {isEn
             ? 'Business data analytics, KPI modeling, and executive Excel dashboards demonstrating end-to-end data transformation.'
@@ -102,7 +176,7 @@ export default function Projects({ language = 'en' } = {}) {
 
       {/* 2. Grid Proyek Utama (2 Bento Cards Berdampingan) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {projects.map((project) => (
+        {visibleProjects.map((project) => (
           <div
             key={project.id}
             className="bg-white border-zinc-200/90 shadow-sm dark:bg-zinc-900/40 dark:border-zinc-800/80 rounded-2xl border overflow-hidden flex flex-col justify-between group transition-all"
@@ -137,20 +211,24 @@ export default function Projects({ language = 'en' } = {}) {
 
               {/* Konten Card */}
               <div className="px-5 pb-2">
-                {/* Kategori & Badge EXCEL */}
+                {/* Kategori & Badge EXCEL / SQL */}
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 font-medium">
                     {project.category}
                   </span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/30 border font-medium">
-                    Excel
+                  <span className={`text-[10px] font-mono px-2 py-0.5 rounded-md border font-medium ${
+                    project.badge === 'SQL'
+                      ? 'bg-amber-50 text-amber-700 border-amber-200 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/30'
+                      : 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/30'
+                  }`}>
+                    {project.badge}
                   </span>
                 </div>
 
-                {/* Judul Proyek (Selalu Bersih, Tidak Berubah Oranye) */}
-                <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors mb-2 leading-snug">
+                {/* Judul Proyek */}
+                <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors mb-2 leading-snug">
                   {project.title}
-                </h2>
+                </h3>
 
                 {/* Highlight Ringkas */}
                 <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
@@ -202,6 +280,21 @@ export default function Projects({ language = 'en' } = {}) {
         ))}
       </div>
 
+      {/* 3. Tombol Toggle Tampilkan Lebih Banyak */}
+      <div className="flex justify-end mt-8">
+        <button
+          type="button"
+          onClick={() => setShowAll(!showAll)}
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-300 transition-all active:scale-95 shadow-sm cursor-pointer"
+        >
+          <span>
+            {showAll
+              ? (language === 'en' ? 'Show Less ↑' : 'Tutup ↑')
+              : (language === 'en' ? 'Show More Projects ↓' : 'Tampilkan Lebih Banyak ↓')}
+          </span>
+        </button>
+      </div>
+
       {/* Modal Detail / Preview Dashboard */}
       {activeModalProject && (
         <ProjectModal
@@ -210,6 +303,6 @@ export default function Projects({ language = 'en' } = {}) {
           language={language}
         />
       )}
-    </section>
+    </div>
   );
 }

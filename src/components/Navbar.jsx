@@ -1,26 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
 import { HomeIcon, BarChartIcon, AwardIcon, MailIcon, SunIcon, MoonIcon } from './Icons';
 
-export default function Navbar({
-  activeTab: propActiveTab,
-  setActiveTab: propSetActiveTab,
-  language: propLanguage,
-} = {}) {
+export default function Navbar({ language: propLanguage } = {}) {
   const portfolio = usePortfolio();
-  const activeSection = propActiveTab || portfolio.activeTab || 'home';
-  const setActiveSection = propSetActiveTab || portfolio.setActiveTab;
   const language = propLanguage || portfolio.language || 'id';
   const { toggleLanguage, theme, toggleTheme } = portfolio;
-
   const isEn = language === 'en';
+
+  const [activeSection, setActiveSection] = useState('home');
 
   const navItems = [
     { id: 'home', label: isEn ? 'Home' : 'Beranda', Icon: HomeIcon },
     { id: 'projects', label: isEn ? 'Projects' : 'Proyek', Icon: BarChartIcon },
-    { id: 'certifications', label: isEn ? 'Certifications' : 'Sertifikasi', Icon: AwardIcon },
+    { id: 'credentials', label: isEn ? 'Credentials' : 'Kredensial', Icon: AwardIcon },
     { id: 'contact', label: isEn ? 'Contact' : 'Kontak', Icon: MailIcon },
   ];
+
+  // Smooth scroll helper
+  const scrollTo = (id) => {
+    setActiveSection(id);
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Scroll spy to dynamically track the active section
+  useEffect(() => {
+    const sectionIds = ['home', 'projects', 'credentials', 'contact'];
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 250;
+      for (let i = sectionIds.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sectionIds[i]);
+        if (el && el.offsetTop <= scrollPosition) {
+          setActiveSection(sectionIds[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
@@ -28,15 +51,11 @@ export default function Navbar({
       <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center justify-between px-5 py-2.5 rounded-full bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl border border-zinc-200/90 dark:border-zinc-800 shadow-md dark:shadow-2xl max-w-fit transition-colors duration-200 gap-4 select-none">
         {/* Sisi Kiri (Brand / Dot) */}
         <div
-          onClick={() => setActiveSection && setActiveSection('home')}
+          onClick={() => scrollTo('home')}
           className="flex items-center gap-2 font-semibold text-zinc-900 dark:text-white text-sm shrink-0 cursor-pointer select-none"
           role="button"
           tabIndex={0}
-          onKeyDown={(e) => {
-            if ((e.key === 'Enter' || e.key === ' ') && setActiveSection) {
-              setActiveSection('home');
-            }
-          }}
+          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollTo('home')}
         >
           <span className="w-2 h-2 rounded-full bg-orange-500" />
           <span>Iqbal D.F</span>
@@ -50,7 +69,7 @@ export default function Navbar({
               <button
                 key={item.id}
                 type="button"
-                onClick={() => setActiveSection && setActiveSection(item.id)}
+                onClick={() => scrollTo(item.id)}
                 className={`px-3 py-1.5 text-sm font-medium rounded-full transition-colors cursor-pointer border-0 ${
                   isActive
                     ? 'text-orange-500 font-semibold bg-orange-500/10'
@@ -98,8 +117,8 @@ export default function Navbar({
         {/* 1. Beranda (Home Icon) */}
         <button
           type="button"
-          onClick={() => setActiveSection && setActiveSection('home')}
-          aria-label="Beranda"
+          onClick={() => scrollTo('home')}
+          aria-label={isEn ? 'Home' : 'Beranda'}
           className={`p-2 rounded-full transition-colors cursor-pointer border-0 ${
             activeSection === 'home'
               ? 'bg-zinc-800 text-amber-400'
@@ -112,8 +131,8 @@ export default function Navbar({
         {/* 2. Proyek (Chart / Projects Icon) */}
         <button
           type="button"
-          onClick={() => setActiveSection && setActiveSection('projects')}
-          aria-label="Proyek"
+          onClick={() => scrollTo('projects')}
+          aria-label={isEn ? 'Projects' : 'Proyek'}
           className={`p-2 rounded-full transition-colors cursor-pointer border-0 ${
             activeSection === 'projects'
               ? 'bg-zinc-800 text-amber-400'
@@ -123,13 +142,13 @@ export default function Navbar({
           <BarChartIcon size={16} className="w-4 h-4" />
         </button>
 
-        {/* 3. Sertifikasi (Badge / Certificate Icon) */}
+        {/* 3. Kredensial (Badge / Certificate Icon) */}
         <button
           type="button"
-          onClick={() => setActiveSection && setActiveSection('certifications')}
-          aria-label="Sertifikasi"
+          onClick={() => scrollTo('credentials')}
+          aria-label={isEn ? 'Credentials' : 'Kredensial'}
           className={`p-2 rounded-full transition-colors cursor-pointer border-0 ${
-            activeSection === 'certifications'
+            activeSection === 'credentials'
               ? 'bg-zinc-800 text-amber-400'
               : 'text-zinc-400 hover:text-white'
           }`}
@@ -140,8 +159,8 @@ export default function Navbar({
         {/* 4. Kontak (Mail Icon) */}
         <button
           type="button"
-          onClick={() => setActiveSection && setActiveSection('contact')}
-          aria-label="Kontak"
+          onClick={() => scrollTo('contact')}
+          aria-label={isEn ? 'Contact' : 'Kontak'}
           className={`p-2 rounded-full transition-colors cursor-pointer border-0 ${
             activeSection === 'contact'
               ? 'bg-zinc-800 text-amber-400'

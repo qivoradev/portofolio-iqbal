@@ -7,13 +7,19 @@ export default function Hero({
   const isEn = language === 'en';
 
   const goToProjects = () => {
-    if (setActiveTab) {
+    const el = document.getElementById('projects');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else if (setActiveTab) {
       setActiveTab('projects');
     }
   };
 
   const goToCerts = () => {
-    if (setActiveTab) {
+    const el = document.getElementById('credentials');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    } else if (setActiveTab) {
       setActiveTab('certifications');
     }
   };

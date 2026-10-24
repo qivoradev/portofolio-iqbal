@@ -12,32 +12,29 @@ export default function Footer() {
   };
 
   return (
-    <footer className="site-footer">
-      <div className="container">
-        <div className="footer-container flex flex-col items-center justify-center gap-4 py-8">
-          {/* Tombol Back to Top Kapsul Minimalis */}
-          <button
-            type="button"
-            onClick={scrollToTop}
-            className="footer-back-to-top-btn inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700 hover:bg-zinc-800/60 text-xs font-medium transition-all duration-300 group cursor-pointer"
-            title={t.footer?.backToTop || (language === 'en' ? 'Back to Top' : 'Ke Atas')}
-            aria-label={t.footer?.backToTop || (language === 'en' ? 'Back to Top' : 'Ke Atas')}
-          >
-            <span>{t.footer?.backToTop || (language === 'en' ? 'Back to Top' : 'Ke Atas')}</span>
-            <ArrowUp
-              size={14}
-              className="back-to-top-icon group-hover:-translate-y-1 transition-transform duration-300"
-              aria-hidden="true"
-            />
-          </button>
+    <footer className="w-full border-t border-zinc-200/80 dark:border-zinc-800/80 py-8 bg-zinc-50 dark:bg-[#09090b] transition-colors duration-200">
+      <div className="max-w-5xl mx-auto px-4 flex flex-col items-center justify-center gap-4">
+        {/* Tombol Back to Top Kapsul Minimalis */}
+        <button
+          type="button"
+          onClick={scrollToTop}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 text-xs font-medium transition-all duration-300 group cursor-pointer shadow-sm active:scale-95"
+          title={t?.footer?.backToTop || (language === 'en' ? 'Back to Top' : 'Ke Atas')}
+          aria-label={t?.footer?.backToTop || (language === 'en' ? 'Back to Top' : 'Ke Atas')}
+        >
+          <span>{t?.footer?.backToTop || (language === 'en' ? 'Back to Top' : 'Ke Atas')}</span>
+          <ArrowUp
+            size={14}
+            className="group-hover:-translate-y-1 transition-transform duration-300"
+            aria-hidden="true"
+          />
+        </button>
 
-          {/* Teks Hak Cipta */}
-          <p className="footer-copyright-text text-center text-xs text-zinc-500 pb-8 m-0">
-            © {CURRENT_YEAR} {portfolioData?.name || 'Iqbal Dwi Fathonah'}. {t.footer?.copyright || (language === 'en' ? 'All Rights Reserved.' : 'Hak Cipta Dilindungi.')}
-          </p>
-        </div>
+        {/* Teks Hak Cipta */}
+        <p className="text-center text-xs font-mono text-zinc-500 pb-20 md:pb-4 m-0">
+          © {CURRENT_YEAR} {portfolioData?.name || 'Iqbal Dwi Fathonah'}. {t?.footer?.copyright || (language === 'en' ? 'All Rights Reserved.' : 'Hak Cipta Dilindungi.')}
+        </p>
       </div>
     </footer>
   );
 }
-
