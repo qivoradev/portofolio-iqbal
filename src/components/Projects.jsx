@@ -117,22 +117,10 @@ export default function Projects({ language = 'id' } = {}) {
             {/* Kolom Kanan / Bawah: Narasi Bisnis & Dampak */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between">
               <div>
-                <div className="flex items-center justify-between gap-2 mb-2">
+                <div className="flex items-center gap-2 mb-2">
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold">
                     MICROSOFT EXCEL
                   </span>
-                  {project.datasetUrl && (
-                    <a
-                      href={project.datasetUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 hover:text-amber-500 transition-colors"
-                      title={language === 'en' ? 'Open dataset source' : 'Buka sumber dataset'}
-                    >
-                      <span>{language === 'en' ? 'Dataset Source' : 'Sumber Dataset'}</span>
-                      <span>↗</span>
-                    </a>
-                  )}
                 </div>
                 <h3 className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-white mb-2 leading-snug">
                   {project.title}
@@ -153,11 +141,11 @@ export default function Projects({ language = 'id' } = {}) {
               </div>
 
               {/* Tools Badges */}
-              <div className="hidden sm:flex flex-wrap gap-1.5 mb-4">
+              <div className="flex flex-wrap gap-1.5 my-3">
                 {project.tools.map((tool, tIdx) => (
                   <span
                     key={tIdx}
-                    className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300"
+                    className="text-[10px] sm:text-xs font-mono px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800/80 border border-zinc-200 dark:border-zinc-700/60 text-zinc-700 dark:text-zinc-300"
                   >
                     {tool}
                   </span>

@@ -107,12 +107,12 @@ export default function Certifications({ language = 'id' } = {}) {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full max-w-lg sm:max-w-2xl max-h-[92vh] flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-xl max-h-[85vh] flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl overflow-hidden my-auto"
           >
-            {/* Sticky Header Modal */}
-            <div className="sticky top-0 z-20 flex items-center justify-between px-4 sm:px-5 py-3 bg-white/95 dark:bg-zinc-900/95 backdrop-blur border-b border-zinc-200 dark:border-zinc-800">
+            {/* Header Modal */}
+            <div className="flex items-center justify-between px-5 py-3.5 border-b border-zinc-200 dark:border-zinc-800 bg-white/95 dark:bg-zinc-900/95">
               <div>
-                <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 line-clamp-1">
+                <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100">
                   {activeCert.title}
                 </h3>
                 <p className="text-[10px] sm:text-xs font-mono text-emerald-600 dark:text-emerald-400">
@@ -129,31 +129,13 @@ export default function Certifications({ language = 'id' } = {}) {
               </button>
             </div>
 
-            {/* Wadah Gambar Sertifikat yang Luas & Scrollable */}
-            <div className="overflow-y-auto p-2 sm:p-4 flex flex-col items-center bg-zinc-100 dark:bg-zinc-950/70">
-              <div className="w-full rounded-xl overflow-hidden shadow-lg border border-zinc-200 dark:border-zinc-800 bg-white">
-                <img
-                  src={activeCert.image}
-                  alt={activeCert.title}
-                  className="w-full h-auto object-contain select-none"
-                />
-              </div>
-            </div>
-
-            {/* Footer Modal: Tombol Buka Ukuran Penuh */}
-            <div className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 flex justify-between items-center text-xs">
-              <span className="text-[11px] font-mono text-zinc-500">
-                {isEn ? 'Official Competency Standard' : 'Standar Kompetensi Resmi'}
-              </span>
-              <a
-                href={activeCert.image}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:text-amber-500 transition-colors font-mono text-[11px]"
-              >
-                <span>{isEn ? 'Open Original File' : 'Buka File Asli'}</span>
-                <span>↗</span>
-              </a>
+            {/* Gambar Sertifikat Full Fit */}
+            <div className="overflow-y-auto p-3 sm:p-5 flex items-center justify-center bg-zinc-100 dark:bg-zinc-950">
+              <img
+                src={activeCert.image}
+                alt={activeCert.title}
+                className="max-h-[68vh] w-auto max-w-full object-contain rounded-lg shadow-md border border-zinc-200 dark:border-zinc-800"
+              />
             </div>
           </div>
         </div>

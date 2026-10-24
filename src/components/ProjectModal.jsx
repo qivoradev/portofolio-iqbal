@@ -34,18 +34,6 @@ export default function ProjectModal({ project, onClose, language = 'en' }) {
           </div>
 
           <div className="flex items-center gap-3">
-            {project.datasetUrl && (
-              <a
-                href={project.datasetUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 hover:text-amber-500 transition-colors"
-                title={language === 'en' ? 'Open dataset source' : 'Buka sumber dataset'}
-              >
-                <span>{language === 'en' ? 'Dataset Source' : 'Sumber Dataset'}</span>
-                <span>↗</span>
-              </a>
-            )}
             {/* TOMBOL CLOSE (X) YANG JELAS & MUDAH DI-TAP */}
             <button
               type="button"
@@ -110,19 +98,8 @@ export default function ProjectModal({ project, onClose, language = 'en' }) {
             </div>
           )}
 
-          {/* E. Footer Modal (Tombol Selesai & Sumber Dataset) */}
-          <div className="pt-2 flex items-center justify-between">
-            {project.datasetUrl ? (
-              <a
-                href={project.datasetUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 hover:text-amber-500 transition-colors"
-              >
-                <span>{language === 'en' ? 'Dataset Source' : 'Sumber Dataset'}</span>
-                <span>↗</span>
-              </a>
-            ) : <span />}
+          {/* E. Footer Modal */}
+          <div className="pt-2 flex items-center justify-end">
             <button
               type="button"
               onClick={onClose}
