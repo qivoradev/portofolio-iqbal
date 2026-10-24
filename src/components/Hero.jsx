@@ -15,11 +15,11 @@ export default function Hero({ language = 'id' } = {}) {
     <div className="max-w-4xl mx-auto px-4 pt-24 sm:pt-32 pb-16 text-center flex flex-col items-center">
       {/* Avatar Foto dengan ring halus & status dot */}
       <div className="relative mb-5">
-        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700 p-1 bg-zinc-100 dark:bg-zinc-900 shadow-xl select-none">
+        <div className="w-28 h-28 sm:w-36 sm:h-36 rounded-full overflow-hidden ring-2 ring-zinc-700/80 dark:ring-zinc-700 p-1 bg-zinc-900 shadow-2xl relative">
           <img
             src="/profile.png"
             alt="Iqbal Dwi Fathonah"
-            className="w-full h-full rounded-full object-cover object-[center_18%] scale-[1.5] -translate-y-1 select-none pointer-events-none drop-shadow-sm"
+            className="w-full h-full rounded-full object-cover object-center scale-110"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src = '/foto-nobg.png';
@@ -27,7 +27,7 @@ export default function Hero({ language = 'id' } = {}) {
           />
         </div>
         <span
-          className="absolute bottom-1 right-1 w-4 h-4 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-black"
+          className="absolute bottom-1.5 right-1.5 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-500 ring-4 ring-[#0a0a0c]"
           title={isEn ? 'Available for hire' : 'Terbuka untuk peluang kerja'}
         />
       </div>
