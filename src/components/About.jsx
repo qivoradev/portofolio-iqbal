@@ -1,140 +1,75 @@
-import React, { useEffect, useRef } from 'react';
-import { usePortfolio } from '../context/PortfolioContext';
-import SectionHeading from './SectionHeading';
-import { GraduationCap, MapPin, BadgeCheck } from 'lucide-react';
+import React from 'react';
 
-const FACT_ICONS = {
-  GraduationCap,
-  education: GraduationCap,
-  MapPin,
-  location: MapPin,
-  BadgeCheck,
-  Award: BadgeCheck,
-  certifications: BadgeCheck,
-};
-
-/**
- * Section Tentang — Bento 2x2 Layout with Refined Bento Mini-Cards
- */
-export default function About() {
-  const { t, portfolioData, language } = usePortfolio();
-  const { about, aboutFacts } = portfolioData;
-
-  const quoteHighlight = (about.highlight && (about.highlight[language] || about.highlight.en || about.highlight.id))
-    || "Information Technology graduate specialized in data storytelling, interactive dashboards, and business analytics.";
-
-  const paragraphs = about[language] || about.en || about.id || [];
-  const facts = aboutFacts[language] || aboutFacts.en || aboutFacts.id || [];
-
-  const sectionRef = useRef(null);
-  const leadLineRef = useRef(null);
-
-  useEffect(() => {
-    const el = sectionRef.current;
-    const lineEl = leadLineRef.current;
-    if (!el || !lineEl) return;
-
-    // Set line visible by default
-    lineEl.style.transform = 'scaleY(1)';
-
-    const onScroll = () => {
-      const rect = el.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      const start = windowH * 0.85;
-      const end = 104;
-
-      let progress = 0;
-      if (rect.top <= end) {
-        progress = 1;
-      } else if (rect.top >= start) {
-        progress = 0.2;
-      } else {
-        progress = (start - rect.top) / (start - end);
-      }
-
-      lineEl.style.transform = `scaleY(${Math.min(1, Math.max(0.2, progress)).toFixed(4)})`;
-    };
-
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+export default function About({ language = 'id' } = {}) {
+  const isEn = language === 'en';
 
   return (
-    <section id="tentang" className="about-section py-12 md:py-16" ref={sectionRef}>
-      <div className="container">
-        {/* Judul: SectionHeading Rata Kiri */}
-        <SectionHeading title={t.about.title} />
+    <div className="max-w-4xl mx-auto px-4">
+      {/* Header Section */}
+      <div className="mb-10 text-center sm:text-left">
+        <span className="text-xs font-mono uppercase tracking-widest text-amber-500 font-semibold">
+          // BACKGROUND &amp; PHILOSOPHY
+        </span>
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mt-1">
+          {isEn ? 'Behind The Data' : 'Tentang Saya & Pola Pikir'}
+        </h2>
+      </div>
 
-        {/* Grid Dua Kolom (Teks Kiri & Bento 2x2 Kanan) */}
-        <div className="about-grid">
-          {/* Kolom Kiri: Teks */}
-          <div className="about-col-text">
-            {/* Quote Highlight dengan garis aksen vertikal */}
-            <p className="about-lead">
-              <span className="about-lead-line" ref={leadLineRef} aria-hidden="true" />
-              {quoteHighlight}
-            </p>
+      {/* Narasi Cerita */}
+      <div className="max-w-none text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4 mb-10">
+        <p>
+          {isEn
+            ? 'With a strong foundation in Information Technology, I view data not just as numbers on a sheet, but as the pulse of an organization. My technical background allows me to understand both the underlying database architecture and the real-world business objectives behind every metric.'
+            : 'Berbekal latar belakang pendidikan di bidang Teknologi Informasi, saya memandang data bukan sekadar tumpukan angka di lembar kerja, melainkan denyut nadi operasional bisnis. Pemahaman sistem dan logika pemrograman memungkinkan saya menguasai alur data secara menyeluruh—mulai dari ekstraksi mentah hingga penyajian dashboard interaktif.'}
+        </p>
+        <p>
+          {isEn
+            ? 'My analytical principle is simple: understand the business problem first, validate the data thoroughly, and deliver dashboards that executives can actually use to take immediate action.'
+            : 'Prinsip kerja yang saya pegang: pahami konteks masalah bisnisnya terlebih dahulu, pastikan validitas dan kebersihan data, lalu rancang visualisasi yang memudahkan pengambil keputusan mengeksekusi strategi secara tepat.'}
+        </p>
+      </div>
 
-            {/* Paragraf-paragraf isi */}
-            <div className="about-body">
-              {paragraphs.map((para, idx) => (
-                <p key={idx} className="about-para">{para}</p>
-              ))}
-            </div>
-          </div>
+      {/* 3 Pilar Analisis (Pilar Bernilai Bisnis) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {/* Pilar 1 */}
+        <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
+          <div className="text-amber-500 font-mono text-sm font-bold mb-2">01 // RIGOROUS PREP</div>
+          <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-1.5">
+            {isEn ? 'Data Cleansing & Integrity' : 'Data Cleansing & Integritas'}
+          </h3>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+            {isEn
+              ? 'Eliminating anomalies, resolving missing entries, and establishing robust table relationships before analysis begins.'
+              : 'Menghilangkan anomali, mengatasi data hilang, dan menyusun relasi tabel yang kokoh sebelum proses analisis dimulai.'}
+          </p>
+        </div>
 
-          {/* Kolom Kanan: Bento Grid 2x2 Mini-Cards */}
-          <div className="about-col-sheet">
-            <div className="about-bento-grid grid grid-cols-1 sm:grid-cols-2 gap-3" role="list">
-              {facts.map((fact, idx) => {
-                const isStatus = fact.id === 'status' || fact.isOpenToWork;
-                const IconComponent = FACT_ICONS[fact.icon] || FACT_ICONS[fact.id] || BadgeCheck;
+        {/* Pilar 2 */}
+        <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
+          <div className="text-emerald-500 font-mono text-sm font-bold mb-2">02 // STRATEGIC VALUE</div>
+          <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-1.5">
+            {isEn ? 'Root Cause Discovery' : 'Penemuan Akar Masalah'}
+          </h3>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+            {isEn
+              ? 'Investigating patterns behind sales variances, negative margins, and critical operational risk points.'
+              : 'Menyelidiki pola di balik varians penjualan, margin minus, maupun titik risiko operasional yang krusial bagi bisnis.'}
+          </p>
+        </div>
 
-                return (
-                  <div
-                    key={fact.id || idx}
-                    className="about-bento-card bg-zinc-900/40 border border-zinc-800/80 hover:border-zinc-700 transition-all duration-200 rounded-xl p-4"
-                    role="listitem"
-                  >
-                    {/* Baris 1: Kotak Ikon di kiri, Label kategori di kanan atas */}
-                    <div className="about-bento-card-top flex items-start justify-between mb-3">
-                      <div
-                        className="about-bento-icon-box w-9 h-9 rounded-lg bg-zinc-800/80 border border-zinc-700/60 flex items-center justify-center text-orange-400"
-                        aria-hidden="true"
-                      >
-                        {isStatus ? (
-                          <span className="relative flex h-3 w-3">
-                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
-                          </span>
-                        ) : (
-                          <IconComponent size={18} />
-                        )}
-                      </div>
-
-                      <span className="about-bento-label text-xs uppercase tracking-wider text-zinc-500 font-medium">
-                        {fact.label}
-                      </span>
-                    </div>
-
-                    {/* Baris 2 & 3: Nilai Utama & Sub-keterangan */}
-                    <div className="about-bento-card-body">
-                      <div className="about-bento-value text-zinc-100 font-semibold text-base mt-2">
-                        {fact.value}
-                      </div>
-                      {fact.subtext && (
-                        <div className="about-bento-subtext text-zinc-400 text-xs mt-0.5">
-                          {fact.subtext}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+        {/* Pilar 3 */}
+        <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
+          <div className="text-indigo-500 font-mono text-sm font-bold mb-2">03 // ACTIONABLE UX</div>
+          <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm mb-1.5">
+            {isEn ? 'Executive Dashboard Design' : 'Desain Dashboard Eksekutif'}
+          </h3>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+            {isEn
+              ? 'Delivering intuitive Excel interfaces with dynamic slicers and executive-friendly KPI metric summaries.'
+              : 'Menyajikan antarmuka Excel yang intuitif lengkap dengan slicer dinamis dan ringkasan metrik KPI yang ramah eksekutif.'}
+          </p>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PortfolioProvider, usePortfolio } from './context/PortfolioContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import About from './components/About';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
 import Contact from './components/Contact';
@@ -41,11 +42,14 @@ function AppContent() {
 
   return (
     <>
-      {/* ALUR UTAMA: Single Page Flow Tanpa Kartu Bertumpuk */}
+      {/* ALUR UTAMA: Single Page Flow */}
       <main className="min-h-screen bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-zinc-100 selection:bg-amber-500/20 selection:text-amber-500 transition-colors duration-200 pb-28">
         <Navbar language={language} />
         <section id="home">
           <Hero language={language} />
+        </section>
+        <section id="about" className="py-16 border-t border-zinc-200 dark:border-zinc-800/80">
+          <About language={language} />
         </section>
         <section id="projects">
           <Projects language={language} />

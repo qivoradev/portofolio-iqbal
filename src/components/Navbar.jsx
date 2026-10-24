@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { usePortfolio } from '../context/PortfolioContext';
-import { HomeIcon, BarChartIcon, AwardIcon, MailIcon, SunIcon, MoonIcon } from './Icons';
+import { HomeIcon, UserIcon, BarChartIcon, AwardIcon, MailIcon, SunIcon, MoonIcon } from './Icons';
 
 export default function Navbar({ language: propLanguage } = {}) {
   const portfolio = usePortfolio();
@@ -12,6 +12,7 @@ export default function Navbar({ language: propLanguage } = {}) {
 
   const navItems = [
     { id: 'home', label: isEn ? 'Home' : 'Beranda', Icon: HomeIcon },
+    { id: 'about', label: isEn ? 'About' : 'Tentang', Icon: UserIcon },
     { id: 'projects', label: isEn ? 'Projects' : 'Proyek', Icon: BarChartIcon },
     { id: 'credentials', label: isEn ? 'Credentials' : 'Kredensial', Icon: AwardIcon },
     { id: 'contact', label: isEn ? 'Contact' : 'Kontak', Icon: MailIcon },
@@ -28,7 +29,7 @@ export default function Navbar({ language: propLanguage } = {}) {
 
   // Scroll spy to dynamically track the active section
   useEffect(() => {
-    const sectionIds = ['home', 'projects', 'credentials', 'contact'];
+    const sectionIds = ['home', 'about', 'projects', 'credentials', 'contact'];
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 250;
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -128,7 +129,21 @@ export default function Navbar({ language: propLanguage } = {}) {
           <HomeIcon size={16} className="w-4 h-4" />
         </button>
 
-        {/* 2. Proyek (Chart / Projects Icon) */}
+        {/* 2. Tentang (User / About Icon) */}
+        <button
+          type="button"
+          onClick={() => scrollTo('about')}
+          aria-label={isEn ? 'About' : 'Tentang'}
+          className={`p-2 rounded-full transition-colors cursor-pointer border-0 ${
+            activeSection === 'about'
+              ? 'bg-zinc-800 text-amber-400'
+              : 'text-zinc-400 hover:text-white'
+          }`}
+        >
+          <UserIcon size={16} className="w-4 h-4" />
+        </button>
+
+        {/* 3. Proyek (Chart / Projects Icon) */}
         <button
           type="button"
           onClick={() => scrollTo('projects')}
@@ -142,7 +157,7 @@ export default function Navbar({ language: propLanguage } = {}) {
           <BarChartIcon size={16} className="w-4 h-4" />
         </button>
 
-        {/* 3. Kredensial (Badge / Certificate Icon) */}
+        {/* 4. Kredensial (Badge / Certificate Icon) */}
         <button
           type="button"
           onClick={() => scrollTo('credentials')}
@@ -156,7 +171,7 @@ export default function Navbar({ language: propLanguage } = {}) {
           <AwardIcon size={16} className="w-4 h-4" />
         </button>
 
-        {/* 4. Kontak (Mail Icon) */}
+        {/* 5. Kontak (Mail Icon) */}
         <button
           type="button"
           onClick={() => scrollTo('contact')}
