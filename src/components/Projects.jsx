@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { MaximizeIcon } from './Icons';
 import ProjectModal from './ProjectModal';
 
 export default function Projects({ language = 'id' } = {}) {
   const isEn = language === 'en';
   const [activeModalProject, setActiveModalProject] = useState(null);
-  const [showAll, setShowAll] = useState(false);
 
   const projectsData = [
     {
       id: 'superstore-sales',
       title: 'Superstore Sales & Profitability Analysis',
       category: isEn ? 'Excel Analytics & Reporting' : 'Analisis & Pelaporan Excel',
-      badge: 'EXCEL',
+      badge: 'MICROSOFT EXCEL',
       image: '/projects/superstore-dashboard.png',
       description: isEn
         ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
@@ -50,7 +48,7 @@ export default function Projects({ language = 'id' } = {}) {
       id: 'nyc-collisions',
       title: 'NYC Motor Vehicle Collisions & Safety Analysis',
       category: isEn ? 'Excel Modeling & Safety Analysis' : 'Pemodelan Excel & Analisis Keselamatan',
-      badge: 'EXCEL',
+      badge: 'MICROSOFT EXCEL',
       image: '/projects/nyc-collision-dashboard.png',
       description: isEn
         ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
@@ -84,89 +82,19 @@ export default function Projects({ language = 'id' } = {}) {
             'Menyajikan matriks indikator cedera (Injury Rate 48.7%) sebagai dasar perumusan rekomendasi titik patroli presisi.',
           ],
     },
-    {
-      id: 'ecommerce-retention',
-      title: 'E-Commerce Customer Retention & Cohort Analytics',
-      category: isEn ? 'SQL Modeling & Cohort Analytics' : 'Pemodelan SQL & Analisis Kohor',
-      badge: 'SQL',
-      image: '/projects/superstore-dashboard.png',
-      description: isEn
-        ? 'Advanced SQL and Excel behavioral cohort modeling tracking customer lifetime value (LTV), repeat purchase velocity, and churn reduction across 48,000+ accounts.'
-        : 'Pemodelan kohor perilaku dan query SQL tingkat lanjut untuk melacak Customer Lifetime Value (LTV), retensi pelanggan, dan mitigasi churn pada 48.000+ akun pengguna.',
-      highlight: isEn
-        ? 'Advanced SQL and Excel behavioral cohort modeling tracking customer lifetime value (LTV), repeat purchase velocity, and churn reduction across 48,000+ accounts.'
-        : 'Pemodelan kohor perilaku dan query SQL tingkat lanjut untuk melacak Customer Lifetime Value (LTV), retensi pelanggan, dan mitigasi churn pada 48.000+ akun pengguna.',
-      stack: [
-        'SQL Cohorts',
-        'Customer Retention',
-        'LTV Modeling',
-        'Window Functions',
-        'Churn Mitigation',
-      ],
-      metrics: [
-        { label: isEn ? '30-Day Retention' : 'Retensi 30 Hari', value: '42.8%' },
-        { label: isEn ? 'LTV Growth' : 'Kenaikan LTV', value: '+28.4%' },
-        { label: isEn ? 'Analyzed Accounts' : 'Akun Dianalisis', value: '48,250' },
-      ],
-      insights: isEn
-        ? [
-            'Identified key drop-off point between first and second transaction cycles.',
-            'Engineered SQL window functions to segment customer cohorts by signup month.',
-            'Optimized targeted re-engagement timing, lifting 60-day repeat purchase rate by 14%.',
-          ]
-        : [
-            'Mengidentifikasi titik kritis drop-off transaksi pertama ke transaksi kedua.',
-            'Merancang query SQL window functions untuk segmentasi kohor pelanggan berdasarkan bulan registrasi.',
-            'Mengoptimalkan waktu promosi tertarget, menaikkan repeat purchase 60 hari sebesar 14%.',
-          ],
-    },
-    {
-      id: 'financial-budget-variance',
-      title: 'Corporate Budget vs. Actual Variance & KPI Forecasting',
-      category: isEn ? 'Financial Modeling & Forecasting' : 'Pemodelan Finansial & Forecasting',
-      badge: 'EXCEL',
-      image: '/projects/nyc-collision-dashboard.png',
-      description: isEn
-        ? 'Comprehensive OPEX/CAPEX variance modeling and scenario-based forecasting across 12 business divisions with dynamic variance threshold alerts.'
-        : 'Pemodelan variansi OPEX/CAPEX komprehensif dan peramalan berbasis skenario di 12 divisi bisnis dengan visualisasi peringatan selisih anggaran otomatis.',
-      highlight: isEn
-        ? 'Comprehensive OPEX/CAPEX variance modeling and scenario-based forecasting across 12 business divisions with dynamic variance threshold alerts.'
-        : 'Pemodelan variansi OPEX/CAPEX komprehensif dan peramalan berbasis skenario di 12 divisi bisnis dengan visualisasi peringatan selisih anggaran otomatis.',
-      stack: [
-        'Budget Variance',
-        'OPEX Forecasting',
-        'Scenario Modeling',
-        'Sensitivity Model',
-        'Executive Alerts',
-      ],
-      metrics: [
-        { label: isEn ? 'Budget Accuracy' : 'Akurasi Anggaran', value: '96.4%' },
-        { label: isEn ? 'Monitored OPEX' : 'OPEX Dipantau', value: '$8.4M' },
-        { label: isEn ? 'Variance Detected' : 'Variansi Terdeteksi', value: '-3.2%' },
-      ],
-      insights: isEn
-        ? [
-            'Built automated dynamic variance threshold alerts for divisional budget overruns.',
-            'Created interactive scenario toggles for Best Case, Base Case, and Conservative forecast models.',
-            'Reduced monthly financial consolidation and reporting cycle by 3 days.',
-          ]
-        : [
-            'Membangun sistem peringatan otomatis untuk deviasi anggaran per divisi.',
-            'Mengembangkan kontrol skenario interaktif (Best Case, Base Case, dan Konservatif).',
-            'Mempercepat siklus konsolidasi dan pelaporan keuangan bulanan hingga 3 hari kerja.',
-          ],
-    },
   ];
 
-  const visibleProjects = showAll ? projectsData : projectsData.slice(0, 2);
+  const handleOpenModal = (project) => {
+    setActiveModalProject(project);
+  };
 
   return (
-    <div className="w-full py-6">
+    <div className="w-full py-8">
       {/* 1. Section Header: Teks judul di luar kartu dengan border bawah */}
-      <div className="max-w-5xl mx-auto px-4 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
+      <div className="max-w-5xl mx-auto px-4 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
-            {isEn ? 'FEATURED CASE STUDIES & DATA ANALYTICS' : 'STUDI KASUS & ANALISIS DATA'}
+            {isEn ? 'FEATURED CASE STUDIES' : 'STUDI KASUS & ANALISIS DATA'}
           </h2>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
             {isEn
@@ -176,122 +104,75 @@ export default function Projects({ language = 'id' } = {}) {
         </div>
       </div>
 
-      {/* 2. Grid Proyek (2 Kolom di Desktop) */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto px-4">
-        {visibleProjects.map((project) => (
+      {/* 2. Layout Proyek: "Split Case Study" Vertikal */}
+      <div className="space-y-12 max-w-5xl mx-auto px-4">
+        {projectsData.map((project, idx) => (
           <div
             key={project.id}
-            className="bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800/80 rounded-2xl p-5 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all flex flex-col justify-between shadow-sm group"
+            className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col lg:flex-row gap-8 items-center"
           >
-            <div>
-              {/* Preview Dashboard */}
+            {/* Kolom Kiri: Visual Dashboard */}
+            <div className="w-full lg:w-1/2">
               <div
-                onClick={() => setActiveModalProject(project)}
-                className="rounded-xl overflow-hidden aspect-[16/10] border border-zinc-200 dark:border-zinc-800 mb-4 bg-zinc-950 relative cursor-pointer group/img outline-none focus:outline-none"
+                onClick={() => handleOpenModal(project)}
+                className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-md bg-zinc-950 group relative cursor-pointer"
                 role="button"
                 tabIndex={0}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    setActiveModalProject(project);
-                  }
-                }}
-                title={isEn ? 'Click to enlarge dashboard' : 'Klik untuk perbesar dashboard'}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleOpenModal(project)}
+                title={isEn ? 'Click to inspect dashboard' : 'Klik untuk melihat dashboard'}
               >
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover object-top transition-transform duration-300 group-hover/img:scale-105"
+                  className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-zinc-950/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/90 text-white text-xs font-mono border border-zinc-700 shadow-lg">
-                    <MaximizeIcon size={13} />
-                    {isEn ? 'Enlarge' : 'Perbesar'}
-                  </span>
-                </div>
-              </div>
-
-              {/* Header Kartu: Kategori kiri & Badge kanan */}
-              <div className="flex items-center justify-between gap-2 mb-2">
-                <span className="text-[11px] font-mono text-zinc-500 uppercase">
-                  {project.category}
-                </span>
-                <span className={`text-[10px] font-mono px-2 py-0.5 rounded font-medium border ${
-                  project.badge === 'SQL'
-                    ? 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20'
-                    : 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20'
-                }`}>
-                  {project.badge}
-                </span>
-              </div>
-
-              {/* Judul Proyek: Putih/Gelap Bersih (Tidak Berubah Oranye) */}
-              <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 mb-2 leading-snug">
-                {project.title}
-              </h3>
-
-              {/* Deskripsi */}
-              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-3 leading-relaxed">
-                {project.description || project.highlight}
-              </p>
-
-              {/* Baris Metrik KPI: Container abu-abu netral sangat halus */}
-              {project.metrics && project.metrics.length > 0 && (
-                <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 mb-4 text-center">
-                  {project.metrics.slice(0, 3).map((metric, idx) => (
-                    <div key={idx} className="flex flex-col items-center justify-center text-center px-0.5">
-                      <span className="text-[10px] text-zinc-500 font-medium truncate w-full">
-                        {metric.label}
-                      </span>
-                      <span className="text-xs sm:text-sm font-mono font-bold text-zinc-900 dark:text-zinc-100 truncate w-full">
-                        {metric.value}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              )}
-
-              {/* Tag Metodologi */}
-              <div className="flex flex-wrap gap-1.5 mb-5">
-                {project.stack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800/60 text-zinc-600 dark:text-zinc-400 border border-zinc-200/50 dark:border-zinc-800"
-                  >
-                    {tech}
-                  </span>
-                ))}
               </div>
             </div>
 
-            {/* Tombol Aksi */}
-            <div className="pt-2">
-              <button
-                type="button"
-                onClick={() => setActiveModalProject(project)}
-                className="w-full py-2.5 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/80 dark:bg-zinc-900/60 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-xs font-mono font-medium flex items-center justify-center gap-1.5 transition-colors cursor-pointer active:scale-[0.99]"
-              >
-                <span>{language === 'en' ? 'View Analysis Details' : 'Lihat Detail Analisis'}</span>
-                <span className="text-zinc-400 dark:text-zinc-500">↗</span>
-              </button>
+            {/* Kolom Kanan: Narasi Bisnis & Dampak */}
+            <div className="w-full lg:w-1/2 flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold">
+                    MICROSOFT EXCEL
+                  </span>
+                  <span className="text-xs font-mono text-zinc-400">
+                    {isEn ? `CASE STUDY #${idx + 1}` : `STUDI KASUS #${idx + 1}`}
+                  </span>
+                </div>
+                <h3 className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-white mb-2">
+                  {project.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Baris Ringkasan KPI Utama */}
+              <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 mb-5 text-center">
+                {project.metrics.map((m, mIdx) => (
+                  <div key={mIdx} className="flex flex-col items-center justify-center text-center px-0.5">
+                    <p className="text-[10px] text-zinc-500 font-medium truncate w-full">{m.label}</p>
+                    <p className="text-xs sm:text-sm font-mono font-bold text-zinc-900 dark:text-zinc-100 truncate w-full">{m.value}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Tombol Aksi */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => handleOpenModal(project)}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-xs font-mono font-medium hover:opacity-90 active:scale-95 transition-all cursor-pointer shadow-sm"
+                >
+                  <span>{language === 'en' ? 'Open Detailed Analysis' : 'Lihat Detail Analisis Bisnis'}</span>
+                  <span>↗</span>
+                </button>
+              </div>
             </div>
           </div>
         ))}
-      </div>
-
-      {/* 3. Tombol Toggle Proyek (Kanan Bawah Grid) */}
-      <div className="flex justify-end max-w-5xl mx-auto px-4 mt-6">
-        <button
-          type="button"
-          onClick={() => setShowAll(!showAll)}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:bg-zinc-100 dark:hover:bg-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 transition-all active:scale-95 shadow-sm cursor-pointer"
-        >
-          <span>
-            {showAll
-              ? (language === 'en' ? 'Show Less ↑' : 'Tutup Proyek ↑')
-              : (language === 'en' ? 'More Projects ↓' : 'Tampilkan Lebih Banyak ↓')}
-          </span>
-        </button>
       </div>
 
       {/* Modal Detail Dashboard */}
