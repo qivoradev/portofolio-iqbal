@@ -94,7 +94,7 @@ function AppContent({ activeTab, setActiveTab }) {
         <Navbar activeTab={activeTab} setActiveTab={setActiveTab} language={language} />
 
         {/* Area Konten Tab di Tengah */}
-        <main className="w-full max-w-4xl flex-1 flex flex-col justify-center items-center py-2" id="main-content">
+        <main className="w-full max-w-5xl flex-1 flex flex-col justify-center items-center py-2" id="main-content">
           <TabErrorBoundary>
             <div ref={scrollRef} key={activeTab} className="w-full flex-1 flex flex-col items-center justify-center">
               {activeTab === 'home' && (
