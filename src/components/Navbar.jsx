@@ -47,9 +47,9 @@ export default function Navbar({ language: propLanguage } = {}) {
   }, []);
 
   return (
-    <header className="fixed top-3 left-1/2 -translate-x-1/2 z-50 max-w-fit select-none">
+    <header className="fixed top-3 left-0 right-0 z-50 flex justify-center pointer-events-none px-4 select-none">
       {/* 1. DESKTOP VIEW (hidden md:flex) */}
-      <div className="hidden md:flex items-center justify-between px-5 py-2.5 rounded-full bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-md shadow-lg gap-4">
+      <div className="pointer-events-auto hidden md:flex items-center justify-between px-5 py-2.5 rounded-full bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-md shadow-lg gap-4">
         {/* Sisi Kiri (Brand / Dot) */}
         <div
           onClick={() => scrollTo('home')}
@@ -111,7 +111,7 @@ export default function Navbar({ language: propLanguage } = {}) {
       </div>
 
       {/* 2. MOBILE VIEW (flex md:hidden) - Kapsul Ikon Murni */}
-      <div className="flex md:hidden items-center gap-1 px-3 py-1.5 rounded-full bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-md shadow-lg">
+      <div className="pointer-events-auto flex md:hidden items-center gap-1 px-3 py-1.5 rounded-full bg-zinc-900/90 dark:bg-zinc-900/90 border border-zinc-800 backdrop-blur-md shadow-lg">
         {navItems.map((item) => {
           const isActive = activeSection === item.id;
           const IconComponent = item.Icon;

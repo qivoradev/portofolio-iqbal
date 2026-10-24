@@ -11,6 +11,7 @@ export default function Projects({ language = 'id' } = {}) {
       title: 'Superstore Sales & Profitability Analysis',
       category: isEn ? 'Excel Analytics & Reporting' : 'Analisis & Pelaporan Excel',
       badge: 'MICROSOFT EXCEL',
+      datasetUrl: 'https://www.kaggle.com/datasets/vivek468/superstore-dataset-final',
       image: '/projects/superstore-dashboard.png',
       description: isEn
         ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
@@ -40,6 +41,7 @@ export default function Projects({ language = 'id' } = {}) {
       title: 'NYC Motor Vehicle Collisions & Safety Analysis',
       category: isEn ? 'Excel Modeling & Safety Analysis' : 'Pemodelan Excel & Analisis Keselamatan',
       badge: 'MICROSOFT EXCEL',
+      datasetUrl: 'https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95',
       image: '/projects/nyc-collision-dashboard.png',
       description: isEn
         ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
@@ -76,12 +78,12 @@ export default function Projects({ language = 'id' } = {}) {
       <div className="max-w-5xl mx-auto px-4 mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
-            {isEn ? 'FEATURED CASE STUDIES & DATA ANALYTICS' : 'STUDI KASUS & ANALISIS DATA'}
+            {isEn ? 'FEATURED PROJECTS' : 'PROYEK PILIHAN'}
           </h2>
           <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1">
             {isEn
-              ? 'Business data modeling & executive Microsoft Excel dashboards.'
-              : 'Pemodelan data bisnis & dashboard eksekutif Microsoft Excel.'}
+              ? 'Business intelligence dashboards and data modeling.'
+              : 'Dashboard bisnis interaktif dan pemodelan data terstruktur.'}
           </p>
         </div>
       </div>
@@ -115,13 +117,22 @@ export default function Projects({ language = 'id' } = {}) {
             {/* Kolom Kanan / Bawah: Narasi Bisnis & Dampak */}
             <div className="w-full lg:w-1/2 flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-2 mb-2">
+                <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold">
                     MICROSOFT EXCEL
                   </span>
-                  <span className="text-xs font-mono text-zinc-400">
-                    {isEn ? `CASE STUDY #${idx + 1}` : `STUDI KASUS #${idx + 1}`}
-                  </span>
+                  {project.datasetUrl && (
+                    <a
+                      href={project.datasetUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 hover:text-amber-500 transition-colors"
+                      title={language === 'en' ? 'Open dataset source' : 'Buka sumber dataset'}
+                    >
+                      <span>{language === 'en' ? 'Dataset Source' : 'Sumber Dataset'}</span>
+                      <span>↗</span>
+                    </a>
+                  )}
                 </div>
                 <h3 className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-white mb-2 leading-snug">
                   {project.title}

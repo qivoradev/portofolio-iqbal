@@ -60,7 +60,7 @@ export default function Hero({ language = 'id' } = {}) {
           onClick={(e) => scrollTo('projects', e)}
           className="px-6 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 text-xs sm:text-sm font-medium hover:opacity-90 active:scale-95 transition-all shadow-md cursor-pointer"
         >
-          {isEn ? 'View Case Studies ↓' : 'Lihat Studi Kasus ↓'}
+          {isEn ? 'View Projects ↓' : 'Lihat Proyek ↓'}
         </a>
         <a
           href="#about"

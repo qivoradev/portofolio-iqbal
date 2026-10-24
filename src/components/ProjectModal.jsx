@@ -33,17 +33,31 @@ export default function ProjectModal({ project, onClose, language = 'en' }) {
             </span>
           </div>
 
-          {/* TOMBOL CLOSE (X) YANG JELAS & MUDAH DI-TAP */}
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Tutup Detail"
-            className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors cursor-pointer border-0"
-          >
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-3">
+            {project.datasetUrl && (
+              <a
+                href={project.datasetUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 hover:text-amber-500 transition-colors"
+                title={language === 'en' ? 'Open dataset source' : 'Buka sumber dataset'}
+              >
+                <span>{language === 'en' ? 'Dataset Source' : 'Sumber Dataset'}</span>
+                <span>↗</span>
+              </a>
+            )}
+            {/* TOMBOL CLOSE (X) YANG JELAS & MUDAH DI-TAP */}
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Tutup Detail"
+              className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors cursor-pointer border-0"
+            >
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* SCROLLABLE BODY (KONTEN UTAMA) */}
@@ -96,8 +110,19 @@ export default function ProjectModal({ project, onClose, language = 'en' }) {
             </div>
           )}
 
-          {/* E. Footer Modal (Tombol Selesai) */}
-          <div className="pt-2 flex justify-end">
+          {/* E. Footer Modal (Tombol Selesai & Sumber Dataset) */}
+          <div className="pt-2 flex items-center justify-between">
+            {project.datasetUrl ? (
+              <a
+                href={project.datasetUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[11px] font-mono text-zinc-500 hover:text-amber-500 transition-colors"
+              >
+                <span>{language === 'en' ? 'Dataset Source' : 'Sumber Dataset'}</span>
+                <span>↗</span>
+              </a>
+            ) : <span />}
             <button
               type="button"
               onClick={onClose}
