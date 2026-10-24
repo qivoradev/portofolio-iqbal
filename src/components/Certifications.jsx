@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CloseIcon } from './Icons';
+
 
 export default function Certifications({ language = 'id' } = {}) {
   const isEn = language === 'en';
@@ -100,40 +100,60 @@ export default function Certifications({ language = 'id' } = {}) {
       {/* Lightbox Modal */}
       {activeCert && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-fadeIn"
+          className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-black/85 backdrop-blur-sm animate-fadeIn"
           onClick={() => setActiveCert(null)}
           role="dialog"
           aria-modal="true"
         >
           <div
-            className="w-full max-w-3xl rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 shadow-2xl relative text-zinc-900 dark:text-zinc-100 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-lg sm:max-w-2xl max-h-[92vh] flex flex-col bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-2xl overflow-hidden"
           >
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800 mb-4">
+            {/* Sticky Header Modal */}
+            <div className="sticky top-0 z-20 flex items-center justify-between px-4 sm:px-5 py-3 bg-white/95 dark:bg-zinc-900/95 backdrop-blur border-b border-zinc-200 dark:border-zinc-800">
               <div>
-                <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white">
+                <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100 line-clamp-1">
                   {activeCert.title}
                 </h3>
-                <p className="text-xs font-mono text-emerald-600 dark:text-emerald-400 mt-0.5">
+                <p className="text-[10px] sm:text-xs font-mono text-emerald-600 dark:text-emerald-400">
                   {activeCert.issuer}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setActiveCert(null)}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 transition-colors cursor-pointer border-0"
-                aria-label="Tutup"
+                aria-label={isEn ? 'Close' : 'Tutup'}
+                className="w-8 h-8 rounded-full flex items-center justify-center bg-zinc-100 hover:bg-zinc-200 dark:bg-zinc-800 dark:hover:bg-zinc-700 text-zinc-600 dark:text-zinc-300 transition-colors cursor-pointer border-0"
               >
-                <CloseIcon size={16} />
+                ✕
               </button>
             </div>
 
-            <div className="w-full aspect-[16/10] rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-950 flex items-center justify-center">
-              <img
-                src={activeCert.image}
-                alt={activeCert.title}
-                className="w-full h-full object-contain"
-              />
+            {/* Wadah Gambar Sertifikat yang Luas & Scrollable */}
+            <div className="overflow-y-auto p-2 sm:p-4 flex flex-col items-center bg-zinc-100 dark:bg-zinc-950/70">
+              <div className="w-full rounded-xl overflow-hidden shadow-lg border border-zinc-200 dark:border-zinc-800 bg-white">
+                <img
+                  src={activeCert.image}
+                  alt={activeCert.title}
+                  className="w-full h-auto object-contain select-none"
+                />
+              </div>
+            </div>
+
+            {/* Footer Modal: Tombol Buka Ukuran Penuh */}
+            <div className="p-3 bg-white dark:bg-zinc-900 border-t border-zinc-200 dark:border-zinc-800 flex justify-between items-center text-xs">
+              <span className="text-[11px] font-mono text-zinc-500">
+                {isEn ? 'Official Competency Standard' : 'Standar Kompetensi Resmi'}
+              </span>
+              <a
+                href={activeCert.image}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-200 hover:text-amber-500 transition-colors font-mono text-[11px]"
+              >
+                <span>{isEn ? 'Open Original File' : 'Buka File Asli'}</span>
+                <span>↗</span>
+              </a>
             </div>
           </div>
         </div>

@@ -110,8 +110,8 @@ export default function Navbar({ language: propLanguage } = {}) {
         </div>
       </div>
 
-      {/* 2. MOBILE VIEW (flex md:hidden) - Ringkas Minimalis */}
-      <div className="pointer-events-auto w-full max-w-md flex md:hidden items-center justify-between px-4 py-2 rounded-full bg-zinc-900/95 dark:bg-zinc-900/95 border border-zinc-800 backdrop-blur-md shadow-lg">
+      {/* 2. MOBILE VIEW (flex md:hidden) - Adaptif Light & Dark */}
+      <div className="pointer-events-auto fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] max-w-md flex md:hidden items-center justify-between px-3.5 py-2 rounded-full bg-white/90 text-zinc-900 border border-zinc-200 shadow-md backdrop-blur-md dark:bg-zinc-900/90 dark:text-zinc-100 dark:border-zinc-800 transition-colors select-none">
         {/* KIRI */}
         <a
           href="#home"
@@ -122,7 +122,7 @@ export default function Navbar({ language: propLanguage } = {}) {
           className="flex items-center gap-2 cursor-pointer"
         >
           <span className="w-2 h-2 rounded-full bg-amber-500" />
-          <span className="text-xs font-bold font-mono text-white">Iqbal D.F</span>
+          <span className="text-xs font-bold font-mono text-zinc-900 dark:text-white">Iqbal D.F</span>
         </a>
 
         {/* KANAN */}
@@ -131,7 +131,7 @@ export default function Navbar({ language: propLanguage } = {}) {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="text-[11px] font-mono font-semibold text-zinc-300 hover:text-white px-2 py-0.5 rounded-md bg-zinc-800/80 cursor-pointer border-0"
+            className="text-[11px] font-mono font-semibold px-2 py-0.5 rounded-md bg-zinc-100 text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:text-white transition-colors cursor-pointer border-0"
           >
             {language.toUpperCase()}
           </button>
@@ -141,12 +141,12 @@ export default function Navbar({ language: propLanguage } = {}) {
             type="button"
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="p-1.5 text-zinc-300 hover:text-amber-400 cursor-pointer border-0 flex items-center justify-center"
+            className="p-1.5 text-zinc-600 hover:text-amber-500 dark:text-zinc-400 dark:hover:text-amber-400 transition-colors cursor-pointer border-0 flex items-center justify-center"
           >
             {theme === 'dark' ? (
               <SunIcon size={16} className="w-4 h-4 text-amber-400" />
             ) : (
-              <MoonIcon size={16} className="w-4 h-4 text-zinc-300" />
+              <MoonIcon size={16} className="w-4 h-4" />
             )}
           </button>
 
@@ -157,7 +157,7 @@ export default function Navbar({ language: propLanguage } = {}) {
               e.preventDefault();
               scrollTo('contact');
             }}
-            className="px-3 py-1 rounded-full bg-white text-zinc-950 text-[11px] font-medium shadow-sm active:scale-95 transition-all cursor-pointer"
+            className="px-3 py-1 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 text-[11px] font-medium shadow-sm hover:opacity-90 active:scale-95 transition-all cursor-pointer"
           >
             {language === 'en' ? 'Contact' : 'Kontak'}
           </a>

@@ -4,17 +4,22 @@ export default function About({ language = 'id' } = {}) {
   const isEn = language === 'en';
 
   return (
-    <div className="max-w-4xl mx-auto px-4">
+    <div className="w-full">
       {/* Header Section */}
-      <div className="mb-8 text-center sm:text-left">
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
-          {isEn ? 'About Me' : 'Tentang Saya'}
-        </h2>
+      <div className="max-w-4xl mx-auto px-4 mb-8 text-left">
+        <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
+          <span className="font-mono text-xs uppercase tracking-widest text-amber-500 font-semibold block mb-1">
+            // BACKGROUND & EXPERTISE
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
+            {language === 'en' ? 'About Me' : 'Tentang Saya'}
+          </h2>
+        </div>
       </div>
 
       {/* Narasi Profil Otentik */}
-      <div className="max-w-none text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed space-y-4 mb-10">
-        <p>
+      <div className="max-w-4xl mx-auto px-4 text-left">
+        <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8">
           {isEn
             ? 'Information Technology Graduate (2026) specializing in Data Analytics. Armed with standardized competencies through Web Development (BNSP) and Artificial Intelligence (Certiport) certifications, I integrate computational logic and data architecture into strategic business analysis. My focus is on processing raw datasets, ensuring data integrity, and building accurate executive dashboards to drive decision-making.'
             : 'Lulusan Teknologi Informasi (2026) dengan spesialisasi Data Analytics. Berbekal kompetensi terstandarisasi melalui sertifikasi Web Development (BNSP) serta Artificial Intelligence (Certiport), saya mengintegrasikan logika komputasi dan arsitektur data ke dalam analisis bisnis strategis. Fokus saya adalah mengolah dataset mentah, memastikan integritas data, dan membangun dashboard eksekutif yang akurat untuk mendukung pengambilan keputusan.'}
@@ -22,7 +27,8 @@ export default function About({ language = 'id' } = {}) {
       </div>
 
       {/* 3 Kartu Keahlian (Skema Warna Seragam) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Kartu 1: DATA PREPARATION */}
         <div className="p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors flex flex-col justify-between">
           <div>
@@ -75,5 +81,7 @@ export default function About({ language = 'id' } = {}) {
         </div>
       </div>
     </div>
+  </div>
   );
 }
+
