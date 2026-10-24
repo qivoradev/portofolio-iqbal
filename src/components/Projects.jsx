@@ -10,14 +10,6 @@ export default function Projects({ language = 'en' } = {}) {
   const isEn = language === 'en';
   const [activeModalProject, setActiveModalProject] = useState(null);
 
-  const excelTags = [
-    'Microsoft Excel',
-    'Pivot Tables',
-    'Dynamic Slicers',
-    'Data Cleaning',
-    'Executive KPI Cards',
-  ];
-
   const projects = [
     {
       id: 'superstore-sales',
@@ -28,7 +20,13 @@ export default function Projects({ language = 'en' } = {}) {
       highlight: isEn
         ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
         : 'Dashboard eksekutif Microsoft Excel untuk menganalisis total penjualan ($2.29M), profit margin (12.5%), serta kebocoran profit pada kategori produk dan wilayah bagian tertentu.',
-      stack: excelTags,
+      stack: [
+        'Margin Leakage',
+        'Financial Modeling',
+        'Pivot Tables',
+        'Dynamic Slicers',
+        'Data Cleaning',
+      ],
       metrics: [
         { label: isEn ? 'Total Sales' : 'Total Penjualan', value: '$2,295,274' },
         { label: isEn ? 'Total Profit' : 'Total Profit', value: '$285,988' },
@@ -47,7 +45,6 @@ export default function Projects({ language = 'en' } = {}) {
             'Menganalisis elastisitas dan dampak pemberian tingkat diskon terhadap penurunan profitabilitas bisnis.',
             'Membangun kontrol navigasi interaktif berbasis slicer dinamis untuk pemfilteran tahun, wilayah (region), dan segmen pasar.',
           ],
-      badgeColor: 'text-emerald-500 dark:text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
       icon: TableIcon,
     },
     {
@@ -59,12 +56,18 @@ export default function Projects({ language = 'en' } = {}) {
       highlight: isEn
         ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
         : 'Dashboard interaktif evaluasi keselamatan lalu lintas Kota New York (2021–2023) untuk menganalisis 238.000+ insiden tabrakan, tingkat cedera, dan faktor utama kelalaian pengemudi.',
-      stack: excelTags,
+      stack: [
+        'Risk & Safety Analysis',
+        'Time-Series Trend',
+        'Root Cause Analysis',
+        'Pivot Tables',
+        'Executive KPIs',
+      ],
       metrics: [
-        { label: 'Total Collisions', value: '238,421' },
-        { label: 'Total Injured', value: '116,227' },
-        { label: 'Total Fatalities', value: '268' },
-        { label: 'Injury Rate', value: '48.7%' },
+        { label: isEn ? 'Total Collisions' : 'Total Kecelakaan', value: '238,421' },
+        { label: isEn ? 'Total Injured' : 'Korban Cedera', value: '116,227' },
+        { label: isEn ? 'Total Fatalities' : 'Korban Jiwa', value: '268' },
+        { label: isEn ? 'Injury Rate' : 'Tingkat Cedera', value: '48.7%' },
       ],
       insights: isEn
         ? [
@@ -79,7 +82,6 @@ export default function Projects({ language = 'en' } = {}) {
             'Menganalisis faktor kelalaian: Driver Inattention/Distraction menjadi pemicu utama dengan lebih dari 58.300 insiden.',
             'Menyajikan matriks indikator cedera (Injury Rate 48.7%) sebagai dasar perumusan rekomendasi titik patroli presisi.',
           ],
-      badgeColor: 'text-orange-500 dark:text-orange-400 border-orange-500/30 bg-orange-500/10',
       icon: TableIcon,
     },
   ];
@@ -89,10 +91,10 @@ export default function Projects({ language = 'en' } = {}) {
       {/* Jendela Konsol Luar */}
       <div className="w-full rounded-3xl border border-zinc-200 dark:border-zinc-800/90 bg-white/90 dark:bg-zinc-950/80 text-zinc-900 dark:text-zinc-100 shadow-2xl backdrop-blur-xl overflow-hidden flex flex-col relative transition-colors duration-300">
         {/* Ambient Glow */}
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-orange-500/10 blur-[120px] rounded-full pointer-events-none -z-10" />
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none -z-10" />
 
         {/* 1. Header Konsol Terminal */}
-        <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-200 dark:border-zinc-800/80 bg-zinc-100 dark:bg-zinc-900/60 font-mono text-xs transition-colors duration-300">
+        <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-200 dark:border-zinc-800/80 bg-zinc-100 dark:bg-zinc-900/60 font-mono text-xs transition-colors duration-300 select-none">
           <div className="flex items-center gap-2">
             <span className="w-3 h-3 rounded-full bg-[#ef4444]" />
             <span className="w-3 h-3 rounded-full bg-[#eab308]" />
@@ -109,106 +111,103 @@ export default function Projects({ language = 'en' } = {}) {
 
         {/* 2. Grid Proyek Utama (2 Bento Cards Berdampingan) */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 sm:p-8">
-          {projects.map((project) => {
-            const ProjectIcon = project.icon;
-            return (
-              <div
-                key={project.id}
-                className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-5 flex flex-col justify-between transition-all duration-300 hover:border-orange-500/40 hover:bg-zinc-100/60 dark:hover:bg-zinc-900/60 group shadow-sm"
-              >
-                <div>
-                  {/* Visual Preview Screenshot / Dashboard Mockup */}
-                  <div
-                    onClick={() => setActiveModalProject(project)}
-                    className="relative w-full aspect-video rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-950 mb-4 cursor-pointer group/img"
-                    role="button"
-                    tabIndex={0}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        setActiveModalProject(project);
-                      }
-                    }}
-                    title={isEn ? 'Click to enlarge dashboard' : 'Klik untuk perbesar dashboard'}
-                  >
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-full object-cover object-top transition-transform duration-300 group-hover/img:scale-105"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-zinc-950/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
-                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/90 text-white text-xs font-mono border border-zinc-700 shadow-lg">
-                        <MaximizeIcon size={13} />
-                        {isEn ? 'Enlarge' : 'Perbesar'}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Kategori Badge */}
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 font-medium">
-                      {project.category}
+          {projects.map((project) => (
+            <div
+              key={project.id}
+              className="rounded-2xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/40 p-5 flex flex-col justify-between transition-all duration-300 hover:border-zinc-700 hover:bg-zinc-100/60 dark:hover:bg-zinc-900/60 group shadow-sm outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none"
+            >
+              <div>
+                {/* Visual Preview Screenshot / Dashboard Mockup */}
+                <div
+                  onClick={() => setActiveModalProject(project)}
+                  className="relative w-full aspect-video rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-950 mb-4 cursor-pointer group/img outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none"
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      setActiveModalProject(project);
+                    }
+                  }}
+                  title={isEn ? 'Click to enlarge dashboard' : 'Klik untuk perbesar dashboard'}
+                >
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover object-top transition-transform duration-300 group-hover/img:scale-105"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-zinc-950/40 opacity-0 group-hover/img:opacity-100 transition-opacity flex items-center justify-center">
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900/90 text-white text-xs font-mono border border-zinc-700 shadow-lg">
+                      <MaximizeIcon size={13} />
+                      {isEn ? 'Enlarge' : 'Perbesar'}
                     </span>
-                    <span className={`text-[10px] font-mono px-2 py-0.5 rounded border ${project.badgeColor}`}>
-                      Excel
-                    </span>
-                  </div>
-
-                  {/* Judul Proyek */}
-                  <h2 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white mb-2 leading-snug group-hover:text-orange-500 dark:group-hover:text-orange-400 transition-colors">
-                    {project.title}
-                  </h2>
-
-                  {/* Highlight Ringkas */}
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3">
-                    {project.highlight}
-                  </p>
-
-                  {/* Metrik Kunci / KPI Chips */}
-                  {project.metrics && project.metrics.length > 0 && (
-                    <div className="grid grid-cols-3 gap-1.5 mb-3.5 p-2 rounded-xl bg-white/80 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs">
-                      {project.metrics.slice(0, 3).map((metric, idx) => (
-                        <div key={idx} className="flex flex-col text-center px-1">
-                          <span className="text-[9px] sm:text-[10px] text-zinc-500 dark:text-zinc-400 font-mono truncate">
-                            {metric.label}
-                          </span>
-                          <span className="text-[11px] sm:text-xs font-mono font-bold text-zinc-900 dark:text-white truncate">
-                            {metric.value}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-
-                  {/* Tech Stack Pills (Murni Excel) */}
-                  <div className="flex flex-wrap gap-1.5 mb-5">
-                    {project.stack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="text-[11px] font-mono px-2 py-0.5 rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/70 text-zinc-700 dark:text-zinc-300 shadow-xs"
-                      >
-                        {tech}
-                      </span>
-                    ))}
                   </div>
                 </div>
 
-                {/* Action Trigger */}
-                <button
-                  type="button"
-                  onClick={() => setActiveModalProject(project)}
-                  className="w-full inline-flex items-center justify-center gap-2 px-4 py-2 rounded-xl border border-zinc-300 dark:border-zinc-700/80 bg-white dark:bg-zinc-800/40 hover:bg-orange-500 hover:border-orange-500 hover:text-white text-zinc-700 dark:text-zinc-300 text-xs font-semibold transition-all cursor-pointer shadow-xs"
-                >
-                  <ProjectIcon size={14} />
-                  <span>{isEn ? 'Inspect Visual Analytics' : 'Lihat Detail Analisis'}</span>
-                </button>
+                {/* Kategori & Badge EXCEL */}
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400 font-medium">
+                    {project.category}
+                  </span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 font-medium">
+                    Excel
+                  </span>
+                </div>
+
+                {/* Judul Proyek (Selalu Putih Bersih, Tanpa Warna Oranye) */}
+                <h2 className="text-base sm:text-lg font-bold text-zinc-100 group-hover:text-white transition-colors mb-2 leading-snug">
+                  {project.title}
+                </h2>
+
+                {/* Highlight Ringkas */}
+                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3">
+                  {project.highlight}
+                </p>
+
+                {/* Metrik Kunci / KPI Chips */}
+                {project.metrics && project.metrics.length > 0 && (
+                  <div className="grid grid-cols-3 gap-1.5 mb-3.5 p-2 rounded-xl bg-white/80 dark:bg-zinc-950/60 border border-zinc-200/80 dark:border-zinc-800/80 shadow-xs">
+                    {project.metrics.slice(0, 3).map((metric, idx) => (
+                      <div key={idx} className="flex flex-col text-center px-1">
+                        <span className="text-[9px] sm:text-[10px] text-zinc-500 dark:text-zinc-400 font-mono truncate">
+                          {metric.label}
+                        </span>
+                        <span className="text-[11px] sm:text-xs font-mono font-bold text-zinc-900 dark:text-white truncate">
+                          {metric.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Tech Stack Pills (Spesialisasi Metodologi) */}
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {project.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-[11px] font-mono px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800 text-zinc-400"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-            );
-          })}
+
+              {/* Action Trigger (Tombol Aksi Elegan) */}
+              <button
+                type="button"
+                onClick={() => setActiveModalProject(project)}
+                className="w-full py-2.5 rounded-xl border border-zinc-800 bg-zinc-900/60 hover:bg-zinc-800 hover:border-zinc-700 text-zinc-300 hover:text-white text-xs font-mono font-medium flex items-center justify-center gap-2 transition-all active:scale-[0.99] group/btn outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none cursor-pointer"
+              >
+                <span>{language === 'en' ? 'View Analysis Details' : 'Lihat Detail Analisis'}</span>
+                <span className="text-zinc-500 group-hover/btn:text-zinc-200 transition-colors">↗</span>
+              </button>
+            </div>
+          ))}
         </div>
 
         {/* 3. Footer Konsol Terminal */}
-        <div className="px-5 py-2.5 border-t border-zinc-200 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-950/90 flex items-center justify-between text-[10px] font-mono text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
+        <div className="px-5 py-2.5 border-t border-zinc-200 dark:border-zinc-900 bg-zinc-50 dark:bg-zinc-950/90 flex items-center justify-between text-[10px] font-mono text-zinc-500 dark:text-zinc-400 transition-colors duration-300 select-none">
           <span>CATALOG_STATUS: 2 WORKBOOKS LOADED</span>
           <span>COMPREHENSIVE_EXCEL_STACK // VERIFIED</span>
         </div>
@@ -232,14 +231,14 @@ export default function Projects({ language = 'en' } = {}) {
                 <h3 className="text-lg font-bold text-zinc-900 dark:text-white">
                   {activeModalProject.title}
                 </h3>
-                <p className="text-xs font-mono text-orange-500 mt-0.5">
+                <p className="text-xs font-mono text-emerald-400 mt-0.5">
                   {activeModalProject.category}
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => setActiveModalProject(null)}
-                className="p-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white cursor-pointer transition-colors"
+                className="p-1.5 rounded-lg border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white cursor-pointer transition-colors outline-none focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-700 active:outline-none"
                 aria-label="Close"
               >
                 <CloseIcon size={18} />
@@ -261,7 +260,7 @@ export default function Projects({ language = 'en' } = {}) {
                 {activeModalProject.metrics.map((metric, idx) => (
                   <div key={idx} className="p-2 rounded-xl border border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/60 text-center">
                     <span className="text-[10px] text-zinc-500 dark:text-zinc-400 font-mono block mb-0.5">{metric.label}</span>
-                    <span className="text-xs sm:text-sm font-mono font-bold text-orange-500">{metric.value}</span>
+                    <span className="text-xs sm:text-sm font-mono font-bold text-zinc-100">{metric.value}</span>
                   </div>
                 ))}
               </div>
