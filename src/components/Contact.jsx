@@ -31,8 +31,8 @@ export default function Contact({ language = 'id' } = {}) {
             <span>{isEn ? 'Ready to Discuss' : 'Siap Berdiskusi'}</span>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white mb-2">
-            {isEn ? "Let's Collaborate" : 'Mari Berkolaborasi'}
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
+            {language === 'en' ? "Let's Collaborate" : "Mari Berkolaborasi"}
           </h3>
           <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-md mx-auto leading-relaxed">
             {isEn

@@ -10,7 +10,7 @@ export default function About({ language = 'id' } = {}) {
         <span className="font-mono text-xs uppercase tracking-widest text-amber-500 font-semibold block mb-1">
           // BACKGROUND & EXPERTISE
         </span>
-        <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-zinc-900 dark:text-white">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
           {language === 'en' ? 'About Me' : 'Tentang Saya'}
         </h2>
       </div>
@@ -85,7 +85,7 @@ export default function About({ language = 'id' } = {}) {
             <span className="font-mono text-xs uppercase tracking-widest text-amber-500 font-semibold block mb-2">
               // STACK & TOOLKIT
             </span>
-            <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-900 dark:text-white mb-3 tracking-tight">
+            <h3 className="text-lg sm:text-xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
               {language === 'en' ? 'Core Analytical Arsenal' : 'Perangkat Analisis & Workflow'}
             </h3>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">

@@ -41,12 +41,12 @@ export default function Hero({ language = 'id' } = {}) {
         <span>{isEn ? 'Open for Work' : 'Terbuka untuk Kerja'}</span>
       </div>
 
-      {/* Headline Nama: Lebih bertenaga di Desktop */}
-      <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-900 dark:text-white mb-2">
+      {/* Headline Nama: Selaras dan proporsional */}
+      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
         Iqbal Dwi Fathonah
       </h1>
 
-      <p className="text-xs sm:text-sm lg:text-base font-mono tracking-widest uppercase text-amber-500 font-semibold mb-5">
+      <p className="text-xs sm:text-sm font-mono tracking-wider uppercase text-amber-500 font-semibold mb-4">
         DATA ANALYST • BUSINESS INTELLIGENCE & MODELING
       </p>
 

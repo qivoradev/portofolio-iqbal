@@ -42,17 +42,13 @@ export default function Certifications({ language = 'id' } = {}) {
   return (
     <div className="w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-8 py-16">
       {/* 1. Header Section */}
-      <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-zinc-200 dark:border-zinc-800/80 pb-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white uppercase">
-            {isEn ? 'CREDENTIALS' : 'KREDENSIAL'}
-          </h2>
-          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            {isEn
-              ? 'National & global competency standardizations verified by accredited bodies.'
-              : 'Standarisasi kompetensi nasional & global yang terverifikasi.'}
-          </p>
-        </div>
+      <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-8 text-left">
+        <span className="font-mono text-xs uppercase tracking-widest text-amber-500 font-semibold block mb-1">
+          // VERIFIED CREDENTIALS
+        </span>
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+          {language === 'en' ? 'Credentials' : 'Kredensial'}
+        </h2>
       </div>
 
       {/* 2. Grid 2 Kolom Kredensial */}
