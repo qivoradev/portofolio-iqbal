@@ -8,6 +8,7 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
+import profilePic from './assets/profile.png';
 
 function AppContent() {
   const { language, toggleLanguage, theme, toggleTheme } = usePortfolio();
@@ -57,7 +58,7 @@ function AppContent() {
           darkMode={theme === 'dark'}
           toggleTheme={toggleTheme}
         />
-        <Hero language={language} />
+        <Hero language={language} profilePic={profilePic} />
         <Projects language={language} />
         <About language={language} />
         <section id="credentials" className="scroll-mt-14">

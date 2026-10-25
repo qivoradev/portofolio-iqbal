@@ -1,80 +1,35 @@
 import React from 'react';
-import { usePortfolio } from '../context/PortfolioContext';
 
-export default function Navbar({
-  language: propLanguage,
-  toggleLanguage: propToggleLanguage,
-  darkMode: propDarkMode,
-  toggleTheme: propToggleTheme,
-} = {}) {
-  const portfolio = usePortfolio();
-  const language = propLanguage !== undefined ? propLanguage : portfolio.language;
-  const toggleLanguage = propToggleLanguage || portfolio.toggleLanguage;
-  const darkMode = propDarkMode !== undefined ? propDarkMode : portfolio.theme === 'dark';
-  const toggleTheme = propToggleTheme || portfolio.toggleTheme;
-
+export default function Navbar({ language, toggleLanguage, darkMode, toggleTheme }) {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#09090b]/85 backdrop-blur-md border-b border-zinc-200 dark:border-white/[0.08] transition-colors">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+      <div className="pointer-events-auto flex items-center gap-1 sm:gap-2 px-3 py-2 rounded-2xl bg-[#1a1a1a]/95 border border-white/10 shadow-2xl backdrop-blur-xl text-zinc-400">
         
-        {/* Brand Kiri */}
-        <a href="#home" className="flex items-center gap-2.5 font-bold tracking-tight group">
-          <span className="w-2.5 h-2.5 rounded-full bg-lime-500 dark:bg-lime-400 group-hover:scale-125 transition-transform shadow-[0_0_8px_#a3e635]" />
-          <span className="font-mono text-xs tracking-widest text-zinc-900 dark:text-zinc-200">IQBAL.DF</span>
+        <a href="#home" className="p-2.5 rounded-xl hover:text-white hover:bg-white/10 transition-colors" title="Home">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
         </a>
 
-        {/* Menu Navigasi Tengah */}
-        <nav className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
-          <a href="#home" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Home</a>
-          <a href="#projects" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Projects</a>
-          <a href="#about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Tools</a>
-          <a href="#contact" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a>
-        </nav>
+        <a href="#projects" className="p-2.5 rounded-xl hover:text-white hover:bg-white/10 transition-colors" title="Projects">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" /></svg>
+        </a>
 
-        {/* Aksi Kanan: SVG Theme Toggle & CTA Button */}
-        <div className="flex items-center gap-3">
-          
-          {/* Theme Toggle Button (Clean SVG Icon - Bukan Emoji) */}
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="p-2 rounded-xl border border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
-            title="Toggle theme"
-            aria-label="Toggle theme"
-          >
-            {darkMode ? (
-              // Sun Icon (Muncul saat Dark Mode untuk beralih ke Light)
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                <circle cx="12" cy="12" r="4" />
-                <path strokeLinecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
-              </svg>
-            ) : (
-              // Moon Icon (Muncul saat Light Mode untuk beralih ke Dark)
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            )}
-          </button>
+        <a href="#about" className="p-2.5 rounded-xl hover:text-white hover:bg-white/10 transition-colors" title="Tools">
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /><path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+        </a>
 
-          {/* Language Toggle */}
-          <button
-            type="button"
-            onClick={toggleLanguage}
-            className="px-2.5 py-1.5 rounded-xl border border-zinc-200 dark:border-white/10 text-[11px] font-mono font-bold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
-            title={language === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
-          >
-            {language === 'en' ? 'ID' : 'EN'}
-          </button>
+        <div className="w-[1px] h-5 bg-white/10 mx-1" />
 
-          {/* CTA Button ala Sawad */}
-          <a
-            href="mailto:iqbalfathonah20@gmail.com"
-            className="hidden sm:inline-flex px-4 py-2 rounded-full bg-zinc-900 dark:bg-lime-400 hover:bg-zinc-800 dark:hover:bg-lime-300 text-white dark:text-black font-bold text-xs font-mono tracking-wide transition-all shadow-sm"
-          >
-            LET'S TALK →
-          </a>
-        </div>
+        <button onClick={toggleTheme} className="p-2.5 rounded-xl hover:text-white hover:bg-white/10 transition-colors">
+          {darkMode ? (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><circle cx="12" cy="12" r="4" /><path strokeLinecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg>
+          ) : (
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5"><path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+          )}
+        </button>
 
+        <button onClick={toggleLanguage} className="px-2.5 py-1 rounded-lg text-[11px] font-mono font-bold text-lime-400 hover:bg-white/10 transition-colors">
+          {language === 'en' ? 'ID' : 'EN'}
+        </button>
       </div>
     </header>
   );
