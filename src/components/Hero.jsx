@@ -1,8 +1,6 @@
 import React from 'react';
 
 export default function Hero({ language = 'id' } = {}) {
-  const isEn = language === 'en';
-
   const scrollTo = (id, e) => {
     if (e) e.preventDefault();
     const el = document.getElementById(id);
@@ -12,65 +10,80 @@ export default function Hero({ language = 'id' } = {}) {
   };
 
   return (
-    <div className="w-full max-w-full md:max-w-3xl lg:max-w-5xl mx-auto px-5 sm:px-8 pt-24 sm:pt-32 lg:pt-36 pb-16 flex flex-col items-center text-center relative">
-      {/* Efek Ambient Glow Halus di Belakang Profil (Khusus Desktop agar ruang samping hidup) */}
-      <div className="hidden lg:block absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
+    <section className="relative pt-28 pb-16 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-24 overflow-hidden">
+      {/* Efek Ambient Glow Halus di Belakang Profil */}
+      <div className="hidden lg:block absolute top-1/4 left-1/4 -translate-x-1/2 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
-      <div className="relative mb-5 flex justify-center">
-        {/* Lingkaran Avatar Container */}
-        <div className="w-32 h-32 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700/80 p-1 bg-zinc-900 shadow-xl relative flex items-center justify-center">
-          <img 
-            src="/profile.png" 
-            alt="Iqbal Dwi Fathonah" 
-            className="w-full h-full rounded-full object-cover scale-[1.85] -translate-y-3 sm:-translate-y-4 transition-transform duration-300"
-            style={{ objectPosition: 'center 20%' }}
-            onError={(e) => {
-              e.currentTarget.onerror = null;
-              e.currentTarget.src = '/foto-nobg.png';
-            }}
-          />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        
+        {/* Container Responsif: Col di Mobile, Row Seimbang di Desktop */}
+        <div className="flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 lg:gap-14 text-center lg:text-left">
+          
+          {/* SISI KIRI (DESKTOP) / ATAS (MOBILE): Foto Profil & Badge */}
+          <div className="flex flex-col items-center lg:items-start shrink-0">
+            <div className="w-36 h-36 sm:w-44 sm:h-44 lg:w-56 lg:h-56 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700/80 p-1.5 bg-zinc-900 shadow-2xl relative flex items-center justify-center">
+              <img 
+                src="/profile.png" 
+                alt="Iqbal Dwi Fathonah" 
+                className="w-full h-full rounded-full object-cover scale-[1.85] -translate-y-3 sm:-translate-y-4 lg:-translate-y-5 transition-transform duration-300"
+                style={{ objectPosition: 'center 20%' }}
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = '/foto-nobg.png';
+                }}
+              />
+            </div>
+          </div>
+
+          {/* SISI KANAN (DESKTOP) / BAWAH (MOBILE): Teks & Tombol Aksi */}
+          <div className="flex-1 max-w-2xl flex flex-col items-center lg:items-start">
+            
+            {/* Status Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium mb-4">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span>{language === 'en' ? 'Open for Work' : 'Terbuka untuk Kerja'}</span>
+            </div>
+
+            {/* Nama Utama */}
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
+              Iqbal Dwi Fathonah
+            </h1>
+
+            {/* Subtitle Role */}
+            <p className="text-xs sm:text-sm lg:text-base font-semibold tracking-wider uppercase text-emerald-600 dark:text-emerald-400 mb-4">
+              DATA ANALYST • BUSINESS INTELLIGENCE & MODELING
+            </p>
+
+            {/* Paragraf Deskripsi */}
+            <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8">
+              {language === 'en'
+                ? 'Information Technology Graduate (2026) specializing in Data Analytics. Focused on transforming raw datasets into interactive Excel dashboards, structured SQL queries, and strategic business insights.'
+                : 'Lulusan Teknologi Informasi (2026) dengan spesialisasi Data Analytics. Berfokus menerjemahkan dataset mentah menjadi dashboard Excel interaktif, pemodelan query SQL terstruktur, dan insight bisnis yang strategis.'}
+            </p>
+
+            {/* Tombol CTA */}
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 w-full sm:w-auto">
+              <a
+                href="#projects"
+                onClick={(e) => scrollTo('projects', e)}
+                className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-all shadow-sm cursor-pointer text-center"
+              >
+                {language === 'en' ? 'View Projects ↓' : 'Lihat Proyek ↓'}
+              </a>
+              <a
+                href="#about"
+                onClick={(e) => scrollTo('about', e)}
+                className="w-full sm:w-auto px-6 py-2.5 rounded-full bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white text-sm font-medium hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-all shadow-sm cursor-pointer text-center"
+              >
+                {language === 'en' ? 'About Me' : 'Tentang Saya'}
+              </a>
+            </div>
+
+          </div>
+
         </div>
+
       </div>
-
-      {/* Status Open for Work */}
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono mb-4">
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
-        <span>{isEn ? 'Open for Work' : 'Terbuka untuk Kerja'}</span>
-      </div>
-
-      {/* Headline Nama: Selaras dan proporsional */}
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
-        Iqbal Dwi Fathonah
-      </h1>
-
-      <p className="text-sm sm:text-base font-semibold tracking-wider uppercase text-emerald-700 dark:text-emerald-400 mb-4">
-        DATA ANALYST • BUSINESS INTELLIGENCE & MODELING
-      </p>
-
-      {/* Paragraf Bio: Diberikan max-w-3xl di desktop agar proporsional dan tidak terjepit */}
-      <p className="text-xs sm:text-base lg:text-lg text-zinc-600 dark:text-zinc-300 max-w-xl lg:max-w-3xl leading-relaxed mb-8 px-2">
-        {language === 'en'
-          ? 'Information Technology Graduate (2026) specializing in Data Analytics. Focused on transforming raw datasets into interactive Excel dashboards, structured SQL queries, and strategic business insights.'
-          : 'Lulusan Teknologi Informasi (2026) dengan spesialisasi Data Analytics. Berfokus menerjemahkan dataset mentah menjadi dashboard Excel interaktif, pemodelan query SQL terstruktur, dan insight bisnis yang strategis.'}
-      </p>
-
-      {/* Tombol Aksi */}
-      <div className="flex flex-wrap items-center justify-center gap-3.5">
-        <a
-          href="#projects"
-          onClick={(e) => scrollTo('projects', e)}
-          className="px-6 py-3 rounded-full bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 text-xs sm:text-sm font-medium hover:opacity-90 active:scale-95 transition-all shadow-md cursor-pointer"
-        >
-          {language === 'en' ? 'View Projects ↓' : 'Lihat Proyek ↓'}
-        </a>
-        <a
-          href="#about"
-          onClick={(e) => scrollTo('about', e)}
-          className="px-6 py-3 rounded-full border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/80 text-zinc-700 dark:text-zinc-300 text-xs sm:text-sm font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 active:scale-95 transition-all cursor-pointer"
-        >
-          {language === 'en' ? 'About Me' : 'Tentang Saya'}
-        </a>
-      </div>
-    </div>
+    </section>
   );
 }
