@@ -3,7 +3,7 @@ import React from 'react';
 export default function About({ language = 'id' } = {}) {
   const capabilities = [
     {
-      num: '01',
+      num: '1',
       title: language === 'en' ? 'SQL & Data Modeling' : 'SQL & Pemodelan Data',
       desc: language === 'en'
         ? 'Relational table structuring, multi-table joins, CTEs, subqueries, and validating data integrity.'
@@ -11,7 +11,7 @@ export default function About({ language = 'id' } = {}) {
       tools: 'SQL, PostgreSQL, MySQL, DBeaver',
     },
     {
-      num: '02',
+      num: '2',
       title: language === 'en' ? 'Executive BI & Reporting' : 'BI Eksekutif & Pelaporan',
       desc: language === 'en'
         ? 'Dynamic spreadsheet architecture, lookup modeling (XLOOKUP, INDEX/MATCH), pivot tables, and KPI cards.'
@@ -19,7 +19,7 @@ export default function About({ language = 'id' } = {}) {
       tools: 'Microsoft Excel, Looker Studio',
     },
     {
-      num: '03',
+      num: '3',
       title: language === 'en' ? 'Business Insights & Wireframing' : 'Analisis Bisnis & Wireframing',
       desc: language === 'en'
         ? 'Translating stakeholder questions into actionable metrics, root-cause diagnostics, and structured dashboard UI.'
@@ -29,15 +29,16 @@ export default function About({ language = 'id' } = {}) {
   ];
 
   return (
-    <section id="about" className="py-20 sm:py-28 bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-white border-t border-zinc-200 dark:border-zinc-800/80 transition-colors scroll-mt-14">
+    <section id="about" className="py-20 sm:py-28 bg-white dark:bg-[#0a0a0c] text-zinc-900 dark:text-white border-t border-zinc-200 dark:border-zinc-800/80 transition-colors scroll-mt-14">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
+        {/* Section Header: Warna Teks Kontras Adaptif */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
-            <span className="text-xs font-mono tracking-widest uppercase text-emerald-600 dark:text-emerald-400 font-bold block mb-2">
+            <span className="text-xs font-mono tracking-widest uppercase text-lime-600 dark:text-lime-400 font-bold block mb-2">
               Capabilities
             </span>
-            <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-900 dark:text-white">
               {language === 'en' ? 'Technical Competencies' : 'Kompetensi Teknis'}
             </h2>
           </div>
@@ -46,17 +47,18 @@ export default function About({ language = 'id' } = {}) {
           </span>
         </div>
 
+        {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {capabilities.map((item) => (
             <div
               key={item.num}
-              className="p-7 rounded-3xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/50 transition-colors flex flex-col justify-between shadow-sm"
+              className="p-7 rounded-3xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-lime-500/50 transition-colors flex flex-col justify-between shadow-sm"
             >
               <div>
-                <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 block mb-3">
-                  {item.num}
+                <span className="text-xs font-mono font-bold text-lime-600 dark:text-lime-400 block mb-3">
+                  0{item.num}
                 </span>
-                <h3 className="text-lg font-bold mb-2">
+                <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2">
                   {item.title}
                 </h3>
                 <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 font-sans">
@@ -64,7 +66,7 @@ export default function About({ language = 'id' } = {}) {
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
+              <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 font-mono text-xs text-lime-600 dark:text-lime-400 font-semibold">
                 {item.tools}
               </div>
             </div>

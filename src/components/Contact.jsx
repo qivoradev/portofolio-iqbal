@@ -38,15 +38,15 @@ export default function Contact({ language = 'id' } = {}) {
         {/* Section Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
-            <span className="text-xs font-mono tracking-widest uppercase text-emerald-600 dark:text-emerald-400 font-bold block mb-2">
+            <span className="text-xs font-mono tracking-widest uppercase text-lime-600 dark:text-lime-400 font-bold block mb-2">
               Inquiries
             </span>
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
               {isEn ? 'Get In Touch' : 'Hubungi Saya'}
             </h2>
           </div>
-          <div className="flex items-center gap-2 text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="flex items-center gap-2 text-xs font-mono text-lime-600 dark:text-lime-400 font-bold">
+            <span className="w-2 h-2 rounded-full bg-lime-500 animate-pulse" />
             <span>{isEn ? 'READY TO DISCUSS' : 'SIAP BERDISKUSI'}</span>
           </div>
         </div>
@@ -76,7 +76,7 @@ export default function Contact({ language = 'id' } = {}) {
                   <button
                     type="button"
                     onClick={handleCopyEmail}
-                    className="px-3 py-1.5 text-xs font-mono font-bold rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-emerald-600 dark:hover:bg-emerald-400 transition-colors cursor-pointer border-0 shrink-0"
+                    className="px-3 py-1.5 text-xs font-mono font-bold rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-lime-400 hover:text-black dark:hover:bg-lime-400 dark:hover:text-black transition-colors cursor-pointer border-0 shrink-0"
                   >
                     {copied ? (isEn ? 'Copied!' : 'Tersalin!') : (isEn ? 'Copy' : 'Salin')}
                   </button>
@@ -88,7 +88,7 @@ export default function Contact({ language = 'id' } = {}) {
                     href="https://wa.me/6282322231710?text=Halo%20Iqbal,%20saya%20melihat%20portofolio%20Data%20Analyst%20Anda"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 hover:border-emerald-500 text-zinc-700 dark:text-zinc-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                    className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 hover:border-lime-500 text-zinc-700 dark:text-zinc-300 hover:text-lime-600 dark:hover:text-lime-400 transition-colors"
                   >
                     WHATSAPP ↗
                   </a>
@@ -96,7 +96,7 @@ export default function Contact({ language = 'id' } = {}) {
                     href="https://linkedin.com/in/iqbaldwifathonah"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 hover:border-emerald-500 text-zinc-700 dark:text-zinc-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                    className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 hover:border-lime-500 text-zinc-700 dark:text-zinc-300 hover:text-lime-600 dark:hover:text-lime-400 transition-colors"
                   >
                     LINKEDIN ↗
                   </a>
@@ -104,7 +104,7 @@ export default function Contact({ language = 'id' } = {}) {
                     href="https://github.com/iqbaldwifathonah"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 hover:border-emerald-500 text-zinc-700 dark:text-zinc-300 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors"
+                    className="px-4 py-2 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 hover:border-lime-500 text-zinc-700 dark:text-zinc-300 hover:text-lime-600 dark:hover:text-lime-400 transition-colors"
                   >
                     GITHUB ↗
                   </a>
@@ -130,7 +130,7 @@ export default function Contact({ language = 'id' } = {}) {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder={isEn ? 'Your full name...' : 'Nama lengkap Anda...'}
-                    className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 transition-all font-sans"
                   />
                 </div>
 
@@ -145,7 +145,7 @@ export default function Contact({ language = 'id' } = {}) {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder={isEn ? 'your.email@example.com' : 'alamat.email@anda.com'}
-                    className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 transition-all font-sans"
                   />
                 </div>
 
@@ -160,13 +160,13 @@ export default function Contact({ language = 'id' } = {}) {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder={isEn ? 'Write your project details or inquiry...' : 'Tuliskan detail proyek atau kebutuhan Anda...'}
-                    className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500 transition-all resize-none font-sans"
+                    className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-sm text-zinc-900 dark:text-white placeholder-zinc-400 focus:outline-none focus:border-lime-500 focus:ring-1 focus:ring-lime-500 transition-all resize-none font-sans"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 px-6 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:text-white font-mono text-xs sm:text-sm font-bold tracking-wider transition-all cursor-pointer border-0 shadow-md mt-2"
+                  className="w-full py-3.5 px-6 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-lime-400 hover:text-black dark:hover:bg-lime-400 dark:hover:text-black font-mono text-xs sm:text-sm font-bold tracking-wider transition-all cursor-pointer border-0 shadow-md mt-2"
                 >
                   <span>SEND MESSAGE →</span>
                 </button>
