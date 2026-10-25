@@ -15,10 +15,10 @@ export default function Hero({ language = 'id' } = {}) {
       <div className="hidden lg:block absolute top-1/4 right-1/4 translate-x-1/2 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12 text-center lg:text-left">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_auto] gap-10 lg:gap-16 items-center">
           
-          {/* SISI KIRI (DESKTOP) / BAWAH (MOBILE): Teks & Tombol Aksi (order-2 di mobile, order-1 di desktop) */}
-          <div className="flex-1 flex flex-col items-center lg:items-start order-2 lg:order-1">
+          {/* Kolom Kiri (Teks & CTA - order-2 di mobile, order-1 di desktop) */}
+          <div className="text-center lg:text-left flex flex-col items-center lg:items-start order-2 lg:order-1">
             
             {/* Status Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium mb-4">
@@ -27,7 +27,7 @@ export default function Hero({ language = 'id' } = {}) {
             </div>
 
             {/* Nama Utama */}
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2 whitespace-nowrap">
               Iqbal Dwi Fathonah
             </h1>
 
@@ -36,7 +36,7 @@ export default function Hero({ language = 'id' } = {}) {
               DATA ANALYST • BUSINESS INTELLIGENCE & MODELING
             </p>
 
-            {/* Paragraf Deskripsi (Dibatasi max-w-xl agar tidak kepanjangan per baris) */}
+            {/* Paragraf Narasi */}
             <p className="max-w-xl text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8">
               {language === 'en'
                 ? 'Information Technology Graduate (2026) specializing in Data Analytics. Focused on transforming raw datasets into interactive Excel dashboards, structured SQL queries, and strategic business insights.'
@@ -63,13 +63,13 @@ export default function Hero({ language = 'id' } = {}) {
 
           </div>
 
-          {/* SISI KANAN (DESKTOP) / ATAS (MOBILE): Foto Profil (order-1 di mobile, order-2 di desktop) */}
-          <div className="flex flex-col items-center shrink-0 order-1 lg:order-2">
-            <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-60 lg:h-60 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700/80 p-1.5 bg-zinc-900 shadow-2xl relative flex items-center justify-center">
+          {/* Kolom Kanan (Foto Profil - order-1 di mobile, order-2 di desktop) */}
+          <div className="flex justify-center shrink-0 order-1 lg:order-2">
+            <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-[340px] lg:h-[340px] aspect-square shrink-0 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700/80 p-1.5 bg-zinc-900 shadow-2xl relative flex items-center justify-center">
               <img 
                 src="/profile.png" 
                 alt="Iqbal Dwi Fathonah" 
-                className="w-full h-full rounded-full object-cover scale-[1.85] -translate-y-2.5 sm:-translate-y-3.5 lg:-translate-y-5 transition-transform duration-300"
+                className="w-full h-full rounded-full object-cover scale-[1.85] -translate-y-2.5 sm:-translate-y-3.5 lg:-translate-y-6 transition-transform duration-300"
                 style={{ objectPosition: 'center 20%' }}
                 onError={(e) => {
                   e.currentTarget.onerror = null;

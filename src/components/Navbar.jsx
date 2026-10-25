@@ -74,7 +74,7 @@ export default function Navbar({ language: propLanguage } = {}) {
                 className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors cursor-pointer border-0 ${
                   isActive
                     ? 'text-zinc-900 dark:text-white font-semibold bg-zinc-100 dark:bg-zinc-800'
-                    : 'text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100/60 dark:hover:bg-zinc-800/60'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 hover:bg-zinc-100/60 dark:hover:bg-zinc-800/60'
                 }`}
               >
                 {item.label}
