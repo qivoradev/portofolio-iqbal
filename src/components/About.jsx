@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function About({ language = 'id' } = {}) {
-  const services = [
+  const capabilities = [
     {
       num: '01',
       title: language === 'en' ? 'SQL & Data Modeling' : 'SQL & Pemodelan Data',
@@ -29,42 +29,42 @@ export default function About({ language = 'id' } = {}) {
   ];
 
   return (
-    <section id="about" className="py-20 bg-[#0a0a0c] text-white border-t border-zinc-800/80 scroll-mt-14">
+    <section id="about" className="py-20 sm:py-28 bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-white border-t border-zinc-200 dark:border-zinc-800/80 transition-colors scroll-mt-14">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
-            <span className="text-xs font-mono tracking-widest uppercase text-lime-400 font-bold block mb-2">
-              SERVICES & SKILLS
+            <span className="text-xs font-mono tracking-widest uppercase text-emerald-600 dark:text-emerald-400 font-bold block mb-2">
+              Capabilities
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight uppercase">
-              {language === 'en' ? 'Core Capabilities' : 'Layanan & Keahlian'}
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight">
+              {language === 'en' ? 'Technical Competencies' : 'Kompetensi Teknis'}
             </h2>
           </div>
           <span className="text-xs font-mono text-zinc-500 uppercase">
-            END-TO-END ANALYTICS WORKFLOW
+            End-to-End Analytics Workflow
           </span>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {services.map((item) => (
+          {capabilities.map((item) => (
             <div
               key={item.num}
-              className="p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-lime-400/50 transition-colors flex flex-col justify-between"
+              className="p-7 rounded-3xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/50 transition-colors flex flex-col justify-between shadow-sm"
             >
               <div>
-                <span className="text-xs font-mono font-bold text-lime-400 block mb-3">
-                  // {item.num}
+                <span className="text-xs font-mono font-bold text-emerald-600 dark:text-emerald-400 block mb-3">
+                  {item.num}
                 </span>
-                <h3 className="text-lg font-bold text-white mb-2">
+                <h3 className="text-lg font-bold mb-2">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6 font-sans">
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 font-sans">
                   {item.desc}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-zinc-800 font-mono text-xs text-lime-400 font-semibold">
+              <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800 font-mono text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
                 {item.tools}
               </div>
             </div>
