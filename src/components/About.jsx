@@ -1,80 +1,76 @@
 import React from 'react';
 
 export default function About({ language }) {
-  const competencies = [
+  const capabilities = [
     {
-      module: 'MODULE // 01',
-      title: language === 'en' ? 'SQL & Data Modeling' : 'SQL & Pemodelan Data',
+      num: '01',
+      title: language === 'en' ? 'SQL & RELATIONAL DATA MODELING' : 'SQL & PEMODELAN DATA RELASIONAL',
       desc: language === 'en'
-        ? 'Relational table structuring, multi-table joins, subqueries, CTEs, aggregations, and data validation.'
+        ? 'Relational table structuring, multi-table joins, subqueries, CTEs, and data integrity verification.'
         : 'Pemodelan skema relasional, multi-table joins, subqueries, CTEs, agregasi data, dan validasi data mentah.',
-      tools: ['SQL', 'PostgreSQL', 'MySQL', 'DBeaver'],
+      stack: 'SQL, PostgreSQL, MySQL, DBeaver',
     },
     {
-      module: 'MODULE // 02',
-      title: language === 'en' ? 'Interactive BI & Reporting' : 'BI Interaktif & Pelaporan',
+      num: '02',
+      title: language === 'en' ? 'EXECUTIVE BI & INTERACTIVE REPORTING' : 'BI EKSEKUTIF & PELAPORAN INTERAKTIF',
       desc: language === 'en'
-        ? 'Automated spreadsheet models, dynamic lookups (XLOOKUP, INDEX/MATCH), pivot tables, and executive KPI cards.'
-        : 'Arsitektur spreadsheet dinamis, formula pemodelan (XLOOKUP, INDEX/MATCH), pivot interaktif, dan KPI bisnis.',
-      tools: ['Microsoft Excel', 'Looker Studio', 'KPI Modeling'],
+        ? 'Dynamic spreadsheet architecture, lookup modeling, automated KPI cards, and stakeholder dashboards.'
+        : 'Arsitektur spreadsheet dinamis, formula pemodelan (XLOOKUP, INDEX/MATCH), pivot interaktif, dan visualisasi dasbor eksekutif.',
+      stack: 'Microsoft Excel, Looker Studio',
     },
     {
-      module: 'MODULE // 03',
-      title: language === 'en' ? 'Business Insights & UI Wireframing' : 'Analisis Bisnis & Wireframing',
+      num: '03',
+      title: language === 'en' ? 'BUSINESS DIAGNOSTICS & UI WIREFRAMING' : 'DIAGNOSIS BISNIS & WIREFRAMING',
       desc: language === 'en'
-        ? 'Translating stakeholder questions into actionable metrics, root-cause diagnostics, and structured dashboard mockups.'
-        : 'Menerjemahkan sasaran bisnis menjadi indikator terukur, analisis akar masalah (root-cause), dan wireframe dasbor.',
-      tools: ['Figma', 'Problem Framing', 'Business Metrics'],
+        ? 'Translating operational business goals into measurable indicators, root-cause diagnostics, and structured dashboard UI.'
+        : 'Menerjemahkan sasaran bisnis menjadi indikator terukur, analisis akar masalah (root-cause), dan perancangan wireframe dasbor terstruktur.',
+      stack: 'Figma, Problem Framing, Business Metrics',
     },
   ];
 
   return (
-    <section id="about" className="py-16 sm:py-24 border-t border-zinc-200 dark:border-zinc-800 scroll-mt-16">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-20 sm:py-28 scroll-mt-14">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="mb-8 sm:mb-12">
-          <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold block mb-1">
-            Core Capabilities
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
+          <div>
+            <span className="text-xs font-mono tracking-widest text-emerald-600 dark:text-emerald-400 uppercase block mb-2">
+              [ 02 ] CAPABILITIES
+            </span>
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white uppercase">
+              {language === 'en' ? 'CORE COMPETENCIES' : 'KOMPETENSI TEKNIS'}
+            </h2>
+          </div>
+          <span className="text-xs font-mono text-zinc-400 uppercase">
+            END-TO-END ANALYTICS WORKFLOW
           </span>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
-            {language === 'en' ? 'Technical Competencies' : 'Kompetensi Teknis'}
-          </h2>
-          <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400 mt-1">
-            {language === 'en'
-              ? 'Proven tools and workflows applied across end-to-end data pipelines'
-              : 'Perangkat dan alur kerja yang diterapkan dalam alur analisis data menyeluruh'}
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {competencies.map((item) => (
+        {/* Editorial Index Rows */}
+        <div className="divide-y divide-zinc-200 dark:divide-zinc-800 border-y border-zinc-200 dark:border-zinc-800">
+          {capabilities.map((item) => (
             <div
-              key={item.title}
-              className="p-6 rounded-3xl bg-white dark:bg-zinc-900/80 border border-zinc-200 dark:border-zinc-800 flex flex-col justify-between shadow-sm"
+              key={item.num}
+              className="py-8 sm:py-10 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition-colors px-2 sm:px-4"
             >
-              <div>
-                <span className="text-[10px] font-mono tracking-widest text-emerald-600 dark:text-emerald-400 block mb-2">
-                  {item.module}
-                </span>
-                <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white mb-2">
+              <div className="lg:col-span-1 font-mono text-sm text-zinc-400 font-bold">
+                /{item.num}
+              </div>
+
+              <div className="lg:col-span-4">
+                <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-white tracking-tight">
                   {item.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
+              </div>
+
+              <div className="lg:col-span-4">
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans">
                   {item.desc}
                 </p>
               </div>
 
-              <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80">
-                <span className="text-[10px] font-mono uppercase tracking-wider text-zinc-400 block mb-2">
-                  Primary Toolkit
-                </span>
-                <div className="flex flex-wrap gap-1.5">
-                  {item.tools.map((t) => (
-                    <span key={t} className="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 text-[11px] font-medium font-mono">
-                      {t}
-                    </span>
-                  ))}
-                </div>
+              <div className="lg:col-span-3 lg:text-right font-mono text-xs text-emerald-600 dark:text-emerald-400 font-medium">
+                {item.stack}
               </div>
             </div>
           ))}

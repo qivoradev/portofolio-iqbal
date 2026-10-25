@@ -71,65 +71,71 @@ export default function Projects({ language = 'id', projects: propProjects, open
   ];
 
   const projects = propProjects || defaultProjects;
-  const handleOpenModal = propOpenModal || ((project) => setInternalModalProject(project));
+  const openModal = propOpenModal || ((project) => setInternalModalProject(project));
 
   return (
-    <section id="projects" className="pt-16 pb-16 sm:pt-24 sm:pb-24 border-t border-zinc-200 dark:border-zinc-800 scroll-mt-16">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-20 sm:py-28 border-b border-zinc-200 dark:border-zinc-800/80 scroll-mt-14">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex items-center justify-between mb-8 sm:mb-12">
+        {/* Section Heading */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-14">
           <div>
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold block mb-1">
-              Case Studies & Dashboards
+            <span className="text-xs font-mono tracking-widest text-emerald-600 dark:text-emerald-400 uppercase block mb-2">
+              [ 01 ] PORTFOLIO
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
-              {language === 'en' ? 'Featured Analytics Projects' : 'Studi Kasus & Dashboard'}
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white uppercase">
+              {language === 'en' ? 'SELECTED WORKS' : 'PROYEK PILIHAN'}
             </h2>
           </div>
-          <span className="text-xs text-zinc-400 font-mono hidden sm:inline-block">2 Verified Works</span>
+          <span className="text-xs font-mono text-zinc-400 uppercase">
+            2 CASE STUDIES DOCUMENTED
+          </span>
         </div>
 
-        {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          {projects.map((project) => (
-            <div 
+        {/* Full-width Editorial Project Showcase Cards */}
+        <div className="space-y-16 sm:space-y-24">
+          {projects.map((project, idx) => (
+            <div
               key={project.id}
-              onClick={() => handleOpenModal(project)}
-              className="group p-5 sm:p-6 rounded-3xl bg-white dark:bg-zinc-900/80 hover:bg-zinc-50 dark:hover:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/50 dark:hover:border-emerald-500/50 transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-md"
+              onClick={() => openModal(project)}
+              className="group cursor-pointer block"
             >
-              <div>
-                {/* Thumbnail Preview */}
-                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-5 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
-                  />
-                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-zinc-900/80 backdrop-blur-sm text-white text-[10px] font-mono">
-                    Interactive Excel
-                  </div>
+              {/* Image Frame Wide Aspect Ratio */}
+              <div className="relative aspect-[16/9] w-full rounded-2xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 mb-6">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-zinc-950/80 backdrop-blur-md font-mono text-[11px] text-white">
+                  0{idx + 1} // CASE STUDY
                 </div>
-
-                <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors mb-2">
-                  {project.title}
-                </h3>
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 line-clamp-3 leading-relaxed mb-6">
-                  {project.description}
-                </p>
               </div>
 
-              {/* Tags & Action Button */}
-              <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-xs font-mono">
-                <div className="flex flex-wrap gap-1.5">
-                  {(project.tags || []).map((tag) => (
-                    <span key={tag} className="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-[10px]">
+              {/* Meta Detail Line */}
+              <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-4 pt-2">
+                <div className="max-w-2xl">
+                  <h3 className="text-xl sm:text-3xl font-extrabold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors uppercase tracking-tight mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans">
+                    {project.description}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 shrink-0 font-mono text-xs">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2.5 py-1 rounded-md border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400"
+                    >
                       {tag}
                     </span>
                   ))}
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold ml-2 group-hover:translate-x-1 transition-transform inline-block">
+                    EXPLORE ↗
+                  </span>
                 </div>
-                <span className="text-emerald-600 dark:text-emerald-400 font-semibold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform shrink-0 ml-2">
-                  Inspect Details ↗
-                </span>
               </div>
             </div>
           ))}
