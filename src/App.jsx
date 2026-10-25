@@ -10,7 +10,7 @@ import Footer from './components/Footer';
 import LoadingScreen from './components/LoadingScreen';
 
 function AppContent() {
-  const { language } = usePortfolio();
+  const { language, toggleLanguage, theme, toggleTheme } = usePortfolio();
   const [isLoading, setIsLoading] = useState(() => {
     return !sessionStorage.getItem('portfolio_visited');
   });
@@ -50,8 +50,13 @@ function AppContent() {
   return (
     <>
       {/* ALUR UTAMA: Single Page Flow */}
-      <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-[#0a0a0d] text-white transition-colors duration-200">
-        <Navbar language={language} />
+      <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-zinc-50 dark:bg-[#09090b] text-zinc-900 dark:text-white transition-colors duration-200">
+        <Navbar
+          language={language}
+          toggleLanguage={toggleLanguage}
+          darkMode={theme === 'dark'}
+          toggleTheme={toggleTheme}
+        />
         <Hero language={language} />
         <Projects language={language} />
         <About language={language} />

@@ -10,7 +10,7 @@ export default function About({ language = 'id' } = {}) {
       desc: isEn
         ? 'Dynamic formula architecture (XLOOKUP, INDEX/MATCH), multi-slicer pivot tables, and automated executive dashboards.'
         : 'Arsitektur formula dinamis (XLOOKUP, INDEX/MATCH), pivot table multi-slicer, dan otomatisasi dashboard eksekutif.',
-      tag: 'PRIMARY',
+      tag: 'PRIMARY'
     },
     {
       name: 'SQL (PostgreSQL / MySQL)',
@@ -18,15 +18,15 @@ export default function About({ language = 'id' } = {}) {
       desc: isEn
         ? 'Relational table structuring, multi-table joins, CTEs, subqueries, and validating data integrity from raw tables.'
         : 'Struktur tabel relasional, multi-table joins, CTEs, subqueries, dan validasi integritas data dari tabel mentah.',
-      tag: 'BACKEND',
+      tag: 'BACKEND'
     },
     {
       name: 'Looker Studio',
       category: isEn ? 'Business Intelligence' : 'Business Intelligence',
       desc: isEn
         ? 'Connecting relational data sources into cloud-accessible stakeholder reporting with interactive drill-downs.'
-        : 'Menghubungkan sumber data relasional ke pelaporan cloud yang interaktif dengan kemampuan drill-down untuk stakeholder.',
-      tag: 'REPORTING',
+        : 'Menghubungkan sumber data relasional ke pelaporan cloud interaktif dengan drill-down untuk stakeholder.',
+      tag: 'REPORTING'
     },
     {
       name: 'Figma',
@@ -34,12 +34,12 @@ export default function About({ language = 'id' } = {}) {
       desc: isEn
         ? 'Wireframing dashboard layouts, aligning business metrics into clean visual hierarchies before implementation.'
         : 'Perancangan wireframe dasbor, menyelaraskan metrik bisnis ke dalam hierarki visual yang jelas sebelum implementasi.',
-      tag: 'DESIGN',
+      tag: 'DESIGN'
     },
   ];
 
   return (
-    <section id="about" className="py-20 sm:py-28 bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-white border-t border-zinc-200 dark:border-zinc-800/80 transition-colors scroll-mt-14">
+    <section id="about" className="py-20 sm:py-28 bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-white border-t border-zinc-200 dark:border-white/[0.08] transition-colors scroll-mt-14">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -62,11 +62,11 @@ export default function About({ language = 'id' } = {}) {
           {tools.map((item) => (
             <div
               key={item.name}
-              className="p-6 rounded-3xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 hover:border-lime-500/50 dark:hover:border-lime-400/50 transition-all flex flex-col justify-between shadow-sm"
+              className="p-6 rounded-3xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/[0.08] hover:border-lime-500/50 dark:hover:border-lime-400/50 transition-all flex flex-col justify-between shadow-sm"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-lime-600 dark:text-lime-400">
+                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-lime-600 dark:text-lime-400">
                     {item.tag}
                   </span>
                 </div>

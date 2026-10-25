@@ -8,91 +8,74 @@ export default function Navbar({
   toggleTheme: propToggleTheme,
 } = {}) {
   const portfolio = usePortfolio();
-  const language = propLanguage || portfolio.language || 'id';
+  const language = propLanguage !== undefined ? propLanguage : portfolio.language;
   const toggleLanguage = propToggleLanguage || portfolio.toggleLanguage;
-  const toggleTheme = propToggleTheme || portfolio.toggleTheme;
   const darkMode = propDarkMode !== undefined ? propDarkMode : portfolio.theme === 'dark';
-
-  const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const toggleTheme = propToggleTheme || portfolio.toggleTheme;
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-4xl select-none">
-      <div className="px-4 sm:px-6 py-2.5 rounded-full bg-[#0e0e12]/80 border border-white/10 backdrop-blur-xl shadow-2xl flex items-center justify-between text-xs font-medium text-white">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-[#09090b]/85 backdrop-blur-md border-b border-zinc-200 dark:border-white/[0.08] transition-colors">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         
-        {/* Brand Logo */}
-        <a
-          href="#home"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollTo('home');
-          }}
-          className="flex items-center gap-2 font-bold font-mono tracking-wider hover:text-lime-400 transition-colors"
-        >
-          <span className="w-2 h-2 rounded-full bg-lime-400 shadow-[0_0_8px_#a3e635]" />
-          <span>IQBAL.DF</span>
+        {/* Brand Kiri */}
+        <a href="#home" className="flex items-center gap-2.5 font-bold tracking-tight group">
+          <span className="w-2.5 h-2.5 rounded-full bg-lime-500 dark:bg-lime-400 group-hover:scale-125 transition-transform shadow-[0_0_8px_#a3e635]" />
+          <span className="font-mono text-xs tracking-widest text-zinc-900 dark:text-zinc-200">IQBAL.DF</span>
         </a>
 
-        {/* Links */}
-        <div className="flex items-center gap-3 sm:gap-6 font-sans text-zinc-400">
-          <a
-            href="#projects"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollTo('projects');
-            }}
-            className="hover:text-white transition-colors"
-          >
-            {language === 'en' ? 'Projects' : 'Proyek'}
-          </a>
-          <a
-            href="#about"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollTo('about');
-            }}
-            className="hidden sm:inline-block hover:text-white transition-colors"
-          >
-            {language === 'en' ? 'Tools' : 'Alat'}
-          </a>
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault();
-              scrollTo('contact');
-            }}
-            className="hover:text-white transition-colors"
-          >
-            {language === 'en' ? 'Contact' : 'Kontak'}
-          </a>
-        </div>
+        {/* Menu Navigasi Tengah */}
+        <nav className="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+          <a href="#home" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Home</a>
+          <a href="#projects" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Projects</a>
+          <a href="#about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Tools</a>
+          <a href="#contact" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a>
+        </nav>
 
-        {/* Action Toggles */}
-        <div className="flex items-center gap-2 pl-3 border-l border-white/10">
+        {/* Aksi Kanan: SVG Theme Toggle & CTA Button */}
+        <div className="flex items-center gap-3">
+          
+          {/* Theme Toggle Button (Clean SVG Icon - Bukan Emoji) */}
           <button
             type="button"
             onClick={toggleTheme}
-            className="p-1 rounded-full text-zinc-400 hover:text-white transition-colors cursor-pointer border-0 bg-transparent text-sm leading-none"
+            className="p-2 rounded-xl border border-zinc-200 dark:border-white/10 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
             title="Toggle theme"
             aria-label="Toggle theme"
           >
-            {darkMode ? '☀️' : '🌙'}
+            {darkMode ? (
+              // Sun Icon (Muncul saat Dark Mode untuk beralih ke Light)
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <circle cx="12" cy="12" r="4" />
+                <path strokeLinecap="round" d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+              </svg>
+            ) : (
+              // Moon Icon (Muncul saat Light Mode untuk beralih ke Dark)
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            )}
           </button>
+
+          {/* Language Toggle */}
           <button
             type="button"
             onClick={toggleLanguage}
-            className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/10 text-lime-400 hover:bg-white/20 transition-colors cursor-pointer border-0"
+            className="px-2.5 py-1.5 rounded-xl border border-zinc-200 dark:border-white/10 text-[11px] font-mono font-bold text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-white/5 transition-colors cursor-pointer"
             title={language === 'en' ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
           >
             {language === 'en' ? 'ID' : 'EN'}
           </button>
+
+          {/* CTA Button ala Sawad */}
+          <a
+            href="mailto:iqbalfathonah20@gmail.com"
+            className="hidden sm:inline-flex px-4 py-2 rounded-full bg-zinc-900 dark:bg-lime-400 hover:bg-zinc-800 dark:hover:bg-lime-300 text-white dark:text-black font-bold text-xs font-mono tracking-wide transition-all shadow-sm"
+          >
+            LET'S TALK →
+          </a>
         </div>
 
       </div>
-    </nav>
+    </header>
   );
 }
