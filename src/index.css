@@ -19,7 +19,10 @@ html, body {
    Editorial Minimalis Bergaya Data Journalism
    ========================================================================== */
 
-:root {
+:root,
+[data-theme="dark"],
+[data-theme="light"] {
+  /* Newsprint Dark Design Tokens */
   --bg: #111110;
   --bg-2: #1A1A18;
   --bg-3: #242422;
@@ -30,33 +33,15 @@ html, body {
   --text-3: #3E3E3B;
   --green: #22C55E;
 
-  /* Legacy aliases for compatibility */
+  /* Aliases & Shared Variables */
   --surface: #1A1A18;
   --surface-2: #242422;
   --border: #252523;
   --accent: #22C55E;
   --accent-hover: #16A34A;
-}
+  --accent-soft: rgba(34, 197, 94, 0.12);
 
-body {
-  background-color: #111110 !important;
-  color: #E8E6DF;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition: none !important;
-    animation: none !important;
-  }
-}
-
-  /* Latar Halus Panel Hero (Opacity) */
-  --hero-glow-opacity: 0.10;
-  --hero-line-opacity: 0.08;
-
-  /* Spacing Scale Tokens: skala 4/8/12/16/24/32/48/64/96 */
+  /* Spacing Scale Tokens */
   --space-4: 4px;
   --space-8: 8px;
   --space-12: 12px;
@@ -67,90 +52,12 @@ body {
   --space-64: 64px;
   --space-96: 96px;
 
-  /* Radius */
-  --radius-sm: 12px;
-  --radius-md: 20px;
-  --radius-lg: 32px;
+  /* Radius Tokens */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
   --radius-pill: 9999px;
-
-  /* Bayangan (hanya 0 1px 2px rgba(0,0,0,.05) di tema terang) */
-  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --navbar-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-
-  /* Floating Navbar */
-  --navbar-bg: rgba(255, 255, 255, 0.80);
-  --navbar-border: var(--border);
-  --navbar-height: 72px;
-
-  /* Brand Colors */
-  --brand-github-dark: #181717;
-  --brand-linkedin: #0A66C2;
-  --brand-instagram: #E4405F;
-  --brand-whatsapp: #25D366;
-
-  /* Backward Compatibility Aliases agar section lain tetap terbaca */
-  --bg-primary: var(--bg);
-  --bg-surface: var(--surface);
-  --bg-surface-elevated: var(--surface-2);
-  --bg-surface-subtle: var(--surface-2);
-  --border-subtle: var(--border);
-  --border-card: var(--border);
-  --border-strong: var(--border);
-  --text-primary: var(--text);
-  --text-secondary: var(--text-2);
-  --text-muted: var(--text-2);
-  --text-inverse: #FFFFFF;
-  --accent-subtle: var(--accent-soft);
-
-  /* Typography */
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-
-  /* Layout */
-  --max-width: 1140px;
-
-  /* Transitions */
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.2s ease;
-
-  /* Backdrop Grid */
-  --backdrop-stroke: var(--accent);
-  --backdrop-opacity: 0.15;
-  --backdrop-opacity-grid: 0.08;
-}
-
-[data-theme="dark"] {
-  /* Netral, tidak kebiruan */
-  --bg: #0E0F12;
-  --surface: #16181C;
-  --surface-2: #1C1F24;
-
-  /* Text Colors */
-  --text: #F2F0EB;
-  --text-2: #A5A29B;
-
-  /* Borders */
-  --border: #2A2D33;
-
-  /* Aksen */
-  --accent: #DE6833;
-  --accent-hover: #E87A48;
-  --accent-soft: rgba(222, 104, 51, 0.12);
-
-  /* Latar Halus Panel Hero (Opacity Tema Gelap) */
-  --hero-glow-opacity: 0.12;
-  --hero-line-opacity: 0.07;
-
-  /* Bayangan (tidak ada di tema gelap) */
-  --shadow-card: none;
-  --navbar-shadow: none;
-
-  /* Floating Navbar */
-  --navbar-bg: rgba(22, 24, 28, 0.80);
-  --navbar-border: var(--border);
-
-  /* Brand Colors */
-  --brand-github-dark: #FFFFFF;
 
   /* Backward Compatibility Aliases */
   --bg-primary: var(--bg);
@@ -158,18 +65,31 @@ body {
   --bg-surface-elevated: var(--surface-2);
   --bg-surface-subtle: var(--surface-2);
   --border-subtle: var(--border);
-  --border-card: var(--border);
-  --border-strong: var(--border);
+  --border-card: var(--line-2);
+  --border-strong: var(--line-2);
   --text-primary: var(--text);
   --text-secondary: var(--text-2);
-  --text-muted: var(--text-2);
-  --text-inverse: #0E0F12;
+  --text-muted: var(--text-3);
+  --text-inverse: #111110;
   --accent-subtle: var(--accent-soft);
 
-  /* Backdrop Grid */
-  --backdrop-stroke: var(--accent);
-  --backdrop-opacity: 0.15;
-  --backdrop-opacity-grid: 0.08;
+  /* Typography */
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout */
+  --max-width: 1152px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 
 /* ==========================================================================
@@ -182,19 +102,14 @@ body {
   padding: 0;
 }
 
-html {
+html, html.dark {
   scroll-behavior: smooth;
   font-family: var(--font-body);
-  background-color: #fafafa;
-  color: #18181b;
+  background-color: #111110;
+  color: #E8E6DF;
   line-height: 1.7;
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
-}
-
-html.dark {
-  background-color: #09090b;
-  color: #f4f4f5;
 }
 
 body {
