@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import ProjectModal from './ProjectModal';
 
-export default function Projects({ language = 'id' } = {}) {
+export default function Projects({ language = 'id', projects: propProjects, openModal: propOpenModal } = {}) {
   const isEn = language === 'en';
-  const [activeModalProject, setActiveModalProject] = useState(null);
+  const [internalModalProject, setInternalModalProject] = useState(null);
 
-  const projects = [
+  const defaultProjects = [
     {
       id: 'superstore-sales',
       title: 'Superstore Sales & Profitability Analysis',
@@ -15,7 +15,7 @@ export default function Projects({ language = 'id' } = {}) {
       description: isEn
         ? 'Executive Microsoft Excel dashboard analyzing total sales ($2.29M), profit margin (12.5%), and profit leakages across product categories and regional states.'
         : 'Dashboard eksekutif Microsoft Excel untuk menganalisis total penjualan ($2.29M), profit margin (12.5%), serta kebocoran profit pada kategori produk dan wilayah bagian tertentu.',
-      tags: ['Excel', 'Pivot Tables', 'Executive KPIs'],
+      tags: ['Microsoft Excel', 'Pivot Tables', 'Executive KPIs'],
       coreTools: ['Microsoft Excel', 'Pivot Tables', 'Executive KPIs'],
       detailedTools: ['Microsoft Excel', 'Data Cleaning', 'Pivot Tables', 'Dynamic Slicers', 'Margin Analysis', 'Seasonality Trends', 'Executive KPIs'],
       metrics: [
@@ -46,7 +46,7 @@ export default function Projects({ language = 'id' } = {}) {
       description: isEn
         ? 'Interactive NYC traffic safety evaluation dashboard (2021–2023) analyzing 238,000+ collision records, injury rates, and primary driver distraction factors.'
         : 'Dashboard interaktif evaluasi keselamatan lalu lintas Kota New York (2021–2023) untuk menganalisis 238.000+ insiden tabrakan, tingkat cedera, dan faktor utama kelalaian pengemudi.',
-      tags: ['Excel', 'Geospatial', 'Safety Metrics'],
+      tags: ['Microsoft Excel', 'Geospatial', 'Safety Metrics'],
       coreTools: ['Microsoft Excel', 'Pivot Tables', 'Executive KPIs'],
       detailedTools: ['Microsoft Excel', 'Data Preparation', 'Pivot Tables', 'Geospatial Trends', 'Driver Distraction Analysis', 'Executive KPIs'],
       metrics: [
@@ -70,70 +70,65 @@ export default function Projects({ language = 'id' } = {}) {
     },
   ];
 
-  const openModal = (project) => {
-    setActiveModalProject(project);
-  };
+  const projects = propProjects || defaultProjects;
+  const handleOpenModal = propOpenModal || ((project) => setInternalModalProject(project));
 
   return (
-    <section id="projects" className="py-16 sm:py-20 scroll-mt-14">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="pt-16 pb-16 sm:pt-24 sm:pb-24 border-t border-zinc-200 dark:border-zinc-800 scroll-mt-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="flex items-center justify-between mb-8">
+        <div className="flex items-center justify-between mb-8 sm:mb-12">
           <div>
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-400 font-semibold block mb-1">
-              Featured Playlists
+            <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold block mb-1">
+              Case Studies & Dashboards
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-              {language === 'en' ? 'Selected Case Studies' : 'Studi Kasus Pilihan'}
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+              {language === 'en' ? 'Featured Analytics Projects' : 'Studi Kasus & Dashboard'}
             </h2>
           </div>
-          <span className="text-xs text-zinc-500 font-mono hidden sm:inline-block">2 curated releases</span>
+          <span className="text-xs text-zinc-400 font-mono hidden sm:inline-block">2 Verified Works</span>
         </div>
 
-        {/* Project Cards (Spotify "Featured Playlists" Cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Project Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
           {projects.map((project) => (
             <div 
               key={project.id}
-              onClick={() => openModal(project)}
-              className="group p-5 rounded-2xl bg-zinc-900/60 hover:bg-zinc-900/90 border border-zinc-800/80 hover:border-zinc-700 transition-all duration-300 cursor-pointer flex flex-col justify-between"
+              onClick={() => handleOpenModal(project)}
+              className="group p-5 sm:p-6 rounded-3xl bg-white dark:bg-zinc-900/80 hover:bg-zinc-50 dark:hover:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 hover:border-emerald-500/50 dark:hover:border-emerald-500/50 transition-all duration-300 cursor-pointer flex flex-col justify-between shadow-sm hover:shadow-md"
             >
               <div>
-                {/* Album Cover Thumbnail */}
-                <div className="relative aspect-video sm:aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-zinc-950">
+                {/* Thumbnail Preview */}
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-5 bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800">
                   <img 
                     src={project.image} 
                     alt={project.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
                   />
-                  {/* Spotify Floating Green Play Button on Hover */}
-                  <div className="absolute bottom-3 right-3 w-10 h-10 rounded-full bg-[#1DB954] text-black flex items-center justify-center font-bold shadow-xl opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                    <svg className="w-4 h-4 fill-current translate-x-0.5" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
-                    </svg>
+                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded-md bg-zinc-900/80 backdrop-blur-sm text-white text-[10px] font-mono">
+                    Interactive Excel
                   </div>
                 </div>
 
-                <h3 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors mb-1">
+                <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors mb-2">
                   {project.title}
                 </h3>
-                <p className="text-xs text-zinc-400 line-clamp-2 leading-relaxed mb-4">
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 line-clamp-3 leading-relaxed mb-6">
                   {project.description}
                 </p>
               </div>
 
-              {/* Footer Meta */}
-              <div className="pt-3 border-t border-zinc-800 flex items-center justify-between text-xs font-mono">
-                <div className="flex gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 text-[10px]">
+              {/* Tags & Action Button */}
+              <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-xs font-mono">
+                <div className="flex flex-wrap gap-1.5">
+                  {(project.tags || []).map((tag) => (
+                    <span key={tag} className="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-[10px]">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <span className="text-emerald-400 font-semibold text-[11px] flex items-center gap-1">
-                  Inspect Track ↗
+                <span className="text-emerald-600 dark:text-emerald-400 font-semibold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform shrink-0 ml-2">
+                  Inspect Details ↗
                 </span>
               </div>
             </div>
@@ -141,10 +136,10 @@ export default function Projects({ language = 'id' } = {}) {
         </div>
 
         {/* Modal Detail Dashboard */}
-        {activeModalProject && (
+        {internalModalProject && (
           <ProjectModal
-            project={activeModalProject}
-            onClose={() => setActiveModalProject(null)}
+            project={internalModalProject}
+            onClose={() => setInternalModalProject(null)}
             language={language}
           />
         )}
