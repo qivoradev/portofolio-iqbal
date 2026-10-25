@@ -1,76 +1,120 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-export default function Hero({ language = 'id', profilePic = '/profile.png' } = {}) {
-  const domainTags = language === 'en'
-    ? ['Sales Analytics', 'Dashboard Reporting', 'SQL Modeling']
-    : ['Analisis Penjualan', 'Dashboard KPI', 'Pemodelan SQL'];
+export default function Hero({ language, profilePic: _profilePic }) {
+  const [activeTab, setActiveTab] = useState('query');
 
   return (
-    <section id="home" className="relative pt-28 pb-16 sm:pt-36 sm:pb-20 overflow-hidden">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center flex flex-col items-center">
+    <section id="home" className="relative pt-24 pb-16 sm:pt-32 sm:pb-20 overflow-hidden">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Status Badge */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium mb-6">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-          <span>{language === 'en' ? 'Open for Work' : 'Terbuka untuk Kerja'}</span>
-        </div>
-
-        {/* Headline Utama Ala Matt Farley */}
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-zinc-900 dark:text-white mb-4">
-          Data Analyst & Business Intelligence
-        </h1>
-
-        {/* Subtitle Value Proposition */}
-        <p className="max-w-2xl text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8">
-          {language === 'en'
-            ? 'Information Technology Graduate (2026) specializing in Data Analytics. Focused on transforming raw datasets into interactive Excel dashboards, structured SQL queries, and strategic business insights.'
-            : 'Lulusan Teknologi Informasi (2026) dengan spesialisasi Data Analytics. Berfokus menerjemahkan dataset mentah menjadi dashboard Excel interaktif, pemodelan query SQL terstruktur, dan insight bisnis yang strategis.'}
-        </p>
-
-        {/* Avatar Profil Tengah (Lingkaran Bersih Tanpa Balok Hitam Berat) */}
-        <div className="mb-6">
-          <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full overflow-hidden ring-4 ring-zinc-200 dark:ring-zinc-800 shadow-xl bg-zinc-900 relative flex items-center justify-center">
-            <img
-              src={profilePic || '/profile.png'}
-              alt="Iqbal Dwi Fathonah"
-              className="w-full h-full rounded-full object-cover scale-[1.42] -translate-y-2 transition-transform duration-300"
-              style={{ objectPosition: 'center 4%' }}
-              onError={(e) => {
-                e.currentTarget.onerror = null;
-                e.currentTarget.src = '/foto-nobg.png';
-              }}
-            />
+        {/* Baris Atas: Persona & Avatar */}
+        <div className="text-center max-w-3xl mx-auto mb-10">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-mono font-medium mb-4">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span>SYS_STATUS: OPEN_FOR_WORK</span>
           </div>
+          
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-zinc-900 dark:text-white mb-3">
+            Iqbal Dwi Fathonah
+          </h1>
+          <p className="text-xs sm:text-sm font-mono tracking-wider uppercase text-emerald-600 dark:text-emerald-400 mb-4">
+            DATA ANALYST • BUSINESS INTELLIGENCE & MODELING • YOGYAKARTA, ID
+          </p>
+          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl mx-auto">
+            {language === 'en'
+              ? 'Translating raw business data into structured SQL models, automated Excel dashboards, and executive insights.'
+              : 'Menerjemahkan data mentah menjadi model SQL terstruktur, dashboard Excel otomatis, dan insight bisnis strategis.'}
+          </p>
         </div>
 
-        {/* Nama & Status Ringkas */}
-        <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-white mb-2">
-          Iqbal Dwi Fathonah
-        </h2>
-        <p className="text-xs uppercase tracking-widest font-semibold text-emerald-600 dark:text-emerald-400 mb-6">
-          YOGYAKARTA, INDONESIA
-        </p>
+        {/* The Data Console Mockup (Inspirasi Terminal edh.dev ala Data Analyst) */}
+        <div className="max-w-3xl mx-auto rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-2xl overflow-hidden font-mono text-xs">
+          
+          {/* Header Jendela Terminal */}
+          <div className="flex items-center justify-between px-4 py-2.5 bg-zinc-100 dark:bg-zinc-900/90 border-b border-zinc-200 dark:border-zinc-800 select-none">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full bg-rose-500/80 inline-block" />
+              <span className="w-3 h-3 rounded-full bg-amber-500/80 inline-block" />
+              <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
+              <span className="ml-2 text-zinc-500 dark:text-zinc-400 text-[11px]">profile_query.sql</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => setActiveTab('query')}
+                className={`px-2.5 py-1 rounded text-[11px] transition-colors ${
+                  activeTab === 'query'
+                    ? 'bg-zinc-200 dark:bg-zinc-800 text-zinc-900 dark:text-white font-semibold'
+                    : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
+                }`}
+              >
+                SQL Editor
+              </button>
+              <button
+                onClick={() => setActiveTab('output')}
+                className={`px-2.5 py-1 rounded text-[11px] transition-colors ${
+                  activeTab === 'output'
+                    ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 font-semibold'
+                    : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'
+                }`}
+              >
+                Output (1 row)
+              </button>
+            </div>
+          </div>
 
-        {/* Domain Tags Pilihan */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-10">
-          {domainTags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 text-xs font-medium font-sans border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/60 text-zinc-600 dark:text-zinc-300 rounded-lg shadow-sm"
-            >
-              {tag}
+          {/* Isi Konsol Terminal */}
+          <div className="p-4 sm:p-6 overflow-x-auto min-h-[170px] flex flex-col justify-center bg-zinc-50/50 dark:bg-zinc-950">
+            {activeTab === 'query' ? (
+              <div className="space-y-1 text-zinc-700 dark:text-zinc-300">
+                <p><span className="text-zinc-400 select-none mr-3">1</span><span className="text-purple-600 dark:text-purple-400 font-semibold">SELECT</span> candidate_name, role, primary_toolkit</p>
+                <p><span className="text-zinc-400 select-none mr-3">2</span><span className="text-purple-600 dark:text-purple-400 font-semibold">FROM</span> talent_pool</p>
+                <p><span className="text-zinc-400 select-none mr-3">3</span><span className="text-purple-600 dark:text-purple-400 font-semibold">WHERE</span> domain = <span className="text-emerald-600 dark:text-emerald-400">'Business Intelligence'</span></p>
+                <p><span className="text-zinc-400 select-none mr-3">4</span>  <span className="text-purple-600 dark:text-purple-400 font-semibold">AND</span> base_location = <span className="text-emerald-600 dark:text-emerald-400">'Yogyakarta'</span></p>
+                <p><span className="text-zinc-400 select-none mr-3">5</span><span className="text-purple-600 dark:text-purple-400 font-semibold">LIMIT</span> 1;</p>
+              </div>
+            ) : (
+              <div className="text-zinc-700 dark:text-zinc-300">
+                <table className="w-full text-left border-collapse text-[11px]">
+                  <thead>
+                    <tr className="border-b border-zinc-200 dark:border-zinc-800 text-zinc-400">
+                      <th className="pb-2 pr-4 font-medium">candidate_name</th>
+                      <th className="pb-2 pr-4 font-medium">role</th>
+                      <th className="pb-2 font-medium">primary_toolkit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="pt-2 pr-4 font-semibold text-zinc-900 dark:text-white">Iqbal Dwi Fathonah</td>
+                      <td className="pt-2 pr-4 text-emerald-600 dark:text-emerald-400">Data & BI Analyst</td>
+                      <td className="pt-2 text-zinc-600 dark:text-zinc-400">Excel, SQL, Looker</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+          {/* Footer Konsol */}
+          <div className="px-4 py-2 bg-zinc-100/60 dark:bg-zinc-900/40 border-t border-zinc-200 dark:border-zinc-800 text-[10px] text-zinc-400 flex items-center justify-between">
+            <span>Query executed successfully in 12ms</span>
+            <span className="flex items-center gap-1.5 text-emerald-500">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+              Connected: PostgreSQL / Cloud
             </span>
-          ))}
+          </div>
+
         </div>
 
-        {/* Indikator Halus Scroll ke Proyek */}
-        <a
-          href="#projects"
-          className="inline-flex items-center gap-2 text-xs font-sans text-zinc-400 dark:text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors group cursor-pointer"
-        >
-          <span>{language === 'en' ? 'Explore selected works' : 'Eksplorasi proyek pilihan'}</span>
-          <span className="group-hover:translate-y-1 transition-transform inline-block">↓</span>
-        </a>
+        {/* Indikator Halus ke Seksi Proyek */}
+        <div className="mt-10 flex justify-center">
+          <a
+            href="#projects"
+            className="inline-flex items-center gap-2 text-xs font-mono text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors group"
+          >
+            <span>-- EXPLORE SELECTED WORKS --</span>
+            <span className="group-hover:translate-y-1 transition-transform inline-block">↓</span>
+          </a>
+        </div>
 
       </div>
     </section>
