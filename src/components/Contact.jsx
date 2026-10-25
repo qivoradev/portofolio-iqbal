@@ -181,7 +181,7 @@ export default function Contact({ language = 'id' } = {}) {
 
         {/* Info Domisili */}
         <p className="text-[11px] font-sans text-zinc-500 dark:text-zinc-400 text-center">
-          📍 Yogyakarta / Jakarta, Indonesia • GMT+7
+          📍 Yogyakarta, Indonesia • GMT+7
         </p>
       </div>
     </div>

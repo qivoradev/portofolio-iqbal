@@ -52,15 +52,9 @@ function AppContent() {
       {/* ALUR UTAMA: Single Page Flow */}
       <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-zinc-100 transition-colors duration-200 pb-16">
         <Navbar language={language} />
-        <section id="home" className="scroll-mt-28">
-          <Hero language={language} />
-        </section>
-        <section id="projects" className="scroll-mt-28">
-          <Projects language={language} />
-        </section>
-        <section id="about" className="scroll-mt-28">
-          <About language={language} />
-        </section>
+        <Hero language={language} />
+        <Projects language={language} />
+        <About language={language} />
         <section id="credentials" className="scroll-mt-28">
           <Certifications language={language} />
         </section>
@@ -86,9 +80,8 @@ function AppContent() {
       {/* Full-screen Terminal Preloader */}
       {isLoading && (
         <div
-          className={`fixed inset-0 z-50 transition-opacity duration-400 ease-in-out ${
-            isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
-          }`}
+          className={`fixed inset-0 z-50 transition-opacity duration-400 ease-in-out ${isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
+            }`}
         >
           <LoadingScreen progress={progress} />
         </div>
