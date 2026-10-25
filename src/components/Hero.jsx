@@ -33,8 +33,8 @@ export default function Hero({ language = 'id', profilePic = '/profile.png' } = 
             <img
               src={profilePic || '/profile.png'}
               alt="Iqbal Dwi Fathonah"
-              className="w-full h-full rounded-full object-cover scale-[1.25] -translate-y-1 transition-transform duration-300"
-              style={{ objectPosition: 'center 10%' }}
+              className="w-full h-full rounded-full object-cover scale-[1.42] -translate-y-2 transition-transform duration-300"
+              style={{ objectPosition: 'center 4%' }}
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 e.currentTarget.src = '/foto-nobg.png';
@@ -48,7 +48,7 @@ export default function Hero({ language = 'id', profilePic = '/profile.png' } = 
           Iqbal Dwi Fathonah
         </h2>
         <p className="text-xs uppercase tracking-widest font-semibold text-emerald-600 dark:text-emerald-400 mb-6">
-          Bekasi, Indonesia
+          YOGYAKARTA, INDONESIA
         </p>
 
         {/* Domain Tags Pilihan */}

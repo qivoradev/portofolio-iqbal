@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const EMAIL_ADDRESS = 'iqbaldwifathonah@gmail.com';
+const EMAIL_ADDRESS = 'iqbalfathonah20@gmail.com';
 
 export default function Contact({ language = 'id' } = {}) {
   const isEn = language === 'en';
