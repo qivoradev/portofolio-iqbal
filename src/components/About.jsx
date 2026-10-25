@@ -1,106 +1,79 @@
 import React from 'react';
 
 export default function About({ language }) {
-  const isEn = language === 'en';
-
-  const competencies = [
+  const modules = [
     {
-      num: '/01',
-      title: 'SQL & RELATIONAL DATA MODELING',
-      desc: isEn
-        ? 'Relational table structuring, multi-table joins, subqueries, CTEs, and data integrity verification.'
+      num: '01',
+      title: language === 'en' ? 'SQL & Data Modeling' : 'SQL & Pemodelan Data',
+      desc: language === 'en'
+        ? 'Relational table structuring, multi-table joins, subqueries, CTEs, aggregations, and data validation.'
         : 'Pemodelan skema relasional, multi-table joins, subqueries, CTEs, agregasi data, dan validasi data mentah.',
-      tools: 'SQL, PostgreSQL, MySQL, DBeaver',
+      stack: 'PostgreSQL, MySQL, DBeaver',
     },
     {
-      num: '/02',
-      title: 'EXECUTIVE BI & INTERACTIVE REPORTING',
-      desc: isEn
-        ? 'Dynamic spreadsheet architecture, lookup modeling, automated KPI cards, and stakeholder dashboards.'
-        : 'Arsitektur spreadsheet dinamis, formula pemodelan (XLOOKUP, INDEX/MATCH), pivot interaktif, dan visualisasi dasbor eksekutif.',
-      tools: 'Microsoft Excel, Looker Studio',
+      num: '02',
+      title: language === 'en' ? 'Interactive BI & Reporting' : 'BI Interaktif & Pelaporan',
+      desc: language === 'en'
+        ? 'Automated spreadsheet models, dynamic lookups (XLOOKUP, INDEX/MATCH), pivot tables, and executive KPI cards.'
+        : 'Arsitektur spreadsheet dinamis, formula pemodelan (XLOOKUP, INDEX/MATCH), pivot interaktif, dan KPI bisnis.',
+      stack: 'Microsoft Excel, Looker Studio',
     },
     {
-      num: '/03',
-      title: 'BUSINESS DIAGNOSTICS & UI WIREFRAMING',
-      desc: isEn
-        ? 'Translating operational business goals into measurable indicators, root-cause diagnostics, and structured dashboard UI.'
-        : 'Menerjemahkan sasaran bisnis menjadi indikator terukur, analisis akar masalah (root-cause), dan perancangan wireframe dasbor terstruktur.',
-      tools: 'Figma, KPI Metrics Design',
+      num: '03',
+      title: language === 'en' ? 'Business Insights & Wireframing' : 'Analisis Bisnis & Wireframing',
+      desc: language === 'en'
+        ? 'Translating stakeholder questions into actionable metrics, root-cause diagnostics, and structured dashboard UI.'
+        : 'Menerjemahkan sasaran bisnis menjadi indikator terukur, analisis akar masalah (root-cause), dan wireframe dasbor.',
+      stack: 'Figma, Problem Framing, Business KPIs',
     },
   ];
 
   return (
-    <section id="about" className="py-20 sm:py-28 bg-[#111110] text-[#E8E6DF] scroll-mt-14">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-16 sm:py-24 border-t border-zinc-200 dark:border-zinc-800/80 scroll-mt-14">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div
-          className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 mb-12"
-          style={{ borderBottom: '0.5px solid #252523' }}
-        >
-          <div>
-            <span
-              className="text-[11px] font-mono font-bold tracking-widest text-[#22C55E] uppercase block mb-2"
-              style={{ letterSpacing: '0.1em' }}
-            >
-              [ 02 ] CAPABILITIES
-            </span>
-            <h2
-              className="font-extrabold uppercase text-[#E8E6DF]"
-              style={{
-                fontSize: 'clamp(32px, 5vw, 52px)',
-                letterSpacing: '-0.025em',
-                lineHeight: 1.08,
-              }}
-            >
-              CORE COMPETENCIES
-            </h2>
-          </div>
-          <span className="text-[11px] font-mono text-[#3E3E3B] uppercase tracking-wider">
-            END-TO-END ANALYTICS WORKFLOW
-          </span>
-        </div>
-
-        {/* 4-Column Table Rows (TIDAK ada card/box, border separator 0.5px antar row) */}
-        <div style={{ borderTop: '0.5px solid #252523' }}>
-          {competencies.map((item) => (
-            <div
-              key={item.num}
-              className="py-8 sm:py-10 grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 items-start transition-colors"
-              style={{
-                borderBottom: '0.5px solid #252523',
-                transitionDuration: '0.15s',
-              }}
-            >
-              {/* Kolom 1: Nomor */}
-              <div className="md:col-span-1 font-mono text-xs sm:text-sm font-bold text-[#3E3E3B]">
-                {item.num}
-              </div>
-
-              {/* Kolom 2: Judul */}
-              <div className="md:col-span-4">
-                <h3 className="text-base sm:text-lg font-bold text-[#E8E6DF] tracking-tight leading-snug">
-                  {item.title}
-                </h3>
-              </div>
-
-              {/* Kolom 3: Deskripsi */}
-              <div className="md:col-span-4">
-                <p
-                  className="text-[#8A8A86]"
-                  style={{ fontSize: '15px', lineHeight: 1.7 }}
-                >
-                  {item.desc}
-                </p>
-              </div>
-
-              {/* Kolom 4: Tools */}
-              <div className="md:col-span-3 md:text-right font-mono text-xs font-semibold text-[#8A8A86] tracking-wide pt-1 md:pt-0">
-                {item.tools}
-              </div>
+        {/* macOS Window for Capabilities */}
+        <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/90 shadow-xl overflow-hidden">
+          
+          <div className="px-4 py-2.5 bg-zinc-100/90 dark:bg-zinc-900/90 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between select-none">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block" />
+              <span className="ml-2 font-mono text-[11px] text-zinc-500 dark:text-zinc-400 font-medium">
+                system_preferences — technical_competencies
+              </span>
             </div>
-          ))}
+            <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">
+              ● SYNCED
+            </span>
+          </div>
+
+          <div className="p-6 sm:p-8 divide-y divide-zinc-100 dark:divide-zinc-800">
+            {modules.map((m) => (
+              <div key={m.num} className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+                <div className="max-w-md">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-bold">
+                      [{m.num}]
+                    </span>
+                    <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+                      {m.title}
+                    </h3>
+                  </div>
+                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                    {m.desc}
+                  </p>
+                </div>
+                <div className="sm:text-right font-mono text-xs text-zinc-700 dark:text-zinc-300 font-medium">
+                  <span className="px-2.5 py-1 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 inline-block">
+                    {m.stack}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
 
       </div>

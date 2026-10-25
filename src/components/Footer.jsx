@@ -2,14 +2,8 @@ import React from 'react';
 
 export default function Footer() {
   return (
-    <footer
-      className="bg-[#111110] text-[#8A8A86] text-xs font-mono transition-colors"
-      style={{
-        borderTop: '0.5px solid #252523',
-        padding: '28px 24px',
-      }}
-    >
-      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer className="bg-zinc-100 dark:bg-zinc-950 text-zinc-500 dark:text-zinc-400 text-xs font-mono border-t border-zinc-200 dark:border-zinc-800/80 py-8 px-6 transition-colors">
+      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
         {/* Kiri */}
         <div>
           <span>
@@ -19,8 +13,8 @@ export default function Footer() {
 
         {/* Kanan */}
         <div className="flex items-center gap-2 shrink-0">
-          <span className="w-2 h-2 rounded-full bg-[#22C55E] inline-block animate-pulse" />
-          <span className="text-[#8A8A86]">Available for full-time roles</span>
+          <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+          <span className="text-zinc-600 dark:text-zinc-400">Available for full-time roles</span>
         </div>
       </div>
     </footer>
