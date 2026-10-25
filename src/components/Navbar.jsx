@@ -12,8 +12,8 @@ export default function Navbar({ language: propLanguage } = {}) {
 
   const navItems = [
     { id: 'home', label: isEn ? 'Home' : 'Beranda', Icon: HomeIcon },
-    { id: 'about', label: isEn ? 'About' : 'Tentang', Icon: UserIcon },
     { id: 'projects', label: isEn ? 'Projects' : 'Proyek', Icon: BarChartIcon },
+    { id: 'about', label: isEn ? 'About' : 'Tentang', Icon: UserIcon },
     { id: 'credentials', label: isEn ? 'Credentials' : 'Kredensial', Icon: AwardIcon },
     { id: 'contact', label: isEn ? 'Contact' : 'Kontak', Icon: MailIcon },
   ];
@@ -29,7 +29,7 @@ export default function Navbar({ language: propLanguage } = {}) {
 
   // Scroll spy to dynamically track the active section
   useEffect(() => {
-    const sectionIds = ['home', 'about', 'projects', 'credentials', 'contact'];
+    const sectionIds = ['home', 'projects', 'about', 'credentials', 'contact'];
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 250;
       for (let i = sectionIds.length - 1; i >= 0; i--) {
@@ -49,7 +49,7 @@ export default function Navbar({ language: propLanguage } = {}) {
   return (
     <header className="fixed top-3 inset-x-0 z-50 flex justify-center pointer-events-none px-4 select-none">
       {/* 1. DESKTOP VIEW (hidden md:flex) */}
-      <div className="pointer-events-auto hidden md:flex items-center gap-5 px-5 py-2.5 rounded-full bg-white/90 text-zinc-900 border border-zinc-200 dark:bg-zinc-900/90 dark:text-zinc-100 dark:border-zinc-800 backdrop-blur-md shadow-lg transition-colors">
+      <div className="pointer-events-auto hidden md:flex items-center gap-5 px-5 py-2.5 rounded-full bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800 shadow-md text-zinc-900 dark:text-zinc-100 transition-colors">
         {/* Sisi Kiri (Brand / Dot) */}
         <div
           onClick={() => scrollTo('home')}
@@ -58,7 +58,7 @@ export default function Navbar({ language: propLanguage } = {}) {
           tabIndex={0}
           onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollTo('home')}
         >
-          <span className="w-2 h-2 rounded-full bg-amber-500" />
+          <span className="w-2 h-2 rounded-full bg-emerald-500" />
           <span>Iqbal D.F</span>
         </div>
 
@@ -73,7 +73,7 @@ export default function Navbar({ language: propLanguage } = {}) {
                 onClick={() => scrollTo(item.id)}
                 className={`px-3 py-1.5 text-xs font-medium rounded-full transition-colors cursor-pointer border-0 ${
                   isActive
-                    ? 'text-amber-500 dark:text-amber-400 font-semibold bg-zinc-100 dark:bg-zinc-800'
+                    ? 'text-zinc-900 dark:text-white font-semibold bg-zinc-100 dark:bg-zinc-800'
                     : 'text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100/60 dark:hover:bg-zinc-800/60'
                 }`}
               >
@@ -97,7 +97,7 @@ export default function Navbar({ language: propLanguage } = {}) {
           <button
             type="button"
             onClick={toggleTheme}
-            className="p-1.5 text-zinc-600 dark:text-zinc-300 hover:text-amber-500 dark:hover:text-amber-400 rounded-full transition-colors cursor-pointer border-0 flex items-center justify-center"
+            className="p-1.5 text-zinc-600 dark:text-zinc-300 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-full transition-colors cursor-pointer border-0 flex items-center justify-center"
             aria-label="Toggle theme"
             title={theme === 'dark' ? 'Ganti ke Mode Terang' : 'Ganti ke Mode Gelap'}
           >
@@ -111,7 +111,7 @@ export default function Navbar({ language: propLanguage } = {}) {
       </div>
 
       {/* 2. MOBILE VIEW (flex md:hidden) - Adaptif Light & Dark */}
-      <div className="pointer-events-auto fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] max-w-md flex md:hidden items-center justify-between px-3.5 py-2 rounded-full bg-white/90 text-zinc-900 border border-zinc-200 shadow-md backdrop-blur-md dark:bg-zinc-900/90 dark:text-zinc-100 dark:border-zinc-800 transition-colors select-none">
+      <div className="pointer-events-auto fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-1.5rem)] max-w-md flex md:hidden items-center justify-between px-3 py-1.5 rounded-full bg-white/95 dark:bg-zinc-900/95 backdrop-blur-md border border-zinc-200/80 dark:border-zinc-800 shadow-md text-zinc-900 dark:text-zinc-100 transition-colors select-none">
         {/* KIRI */}
         <a
           href="#home"
@@ -121,12 +121,12 @@ export default function Navbar({ language: propLanguage } = {}) {
           }}
           className="flex items-center gap-2 cursor-pointer"
         >
-          <span className="w-2 h-2 rounded-full bg-amber-500" />
+          <span className="w-2 h-2 rounded-full bg-emerald-500" />
           <span className="text-xs font-bold font-mono text-zinc-900 dark:text-white">Iqbal D.F</span>
         </a>
 
         {/* KANAN */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Toggle Bahasa */}
           <button
             type="button"
@@ -141,7 +141,7 @@ export default function Navbar({ language: propLanguage } = {}) {
             type="button"
             onClick={toggleTheme}
             aria-label="Toggle theme"
-            className="p-1.5 text-zinc-600 hover:text-amber-500 dark:text-zinc-400 dark:hover:text-amber-400 transition-colors cursor-pointer border-0 flex items-center justify-center"
+            className="p-1.5 text-zinc-600 hover:text-emerald-600 dark:text-zinc-400 dark:hover:text-emerald-400 transition-colors cursor-pointer border-0 flex items-center justify-center"
           >
             {theme === 'dark' ? (
               <SunIcon size={16} className="w-4 h-4 text-amber-400" />

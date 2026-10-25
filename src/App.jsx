@@ -52,19 +52,19 @@ function AppContent() {
       {/* ALUR UTAMA: Single Page Flow */}
       <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-zinc-100 transition-colors duration-200 pb-16">
         <Navbar language={language} />
-        <section id="home">
+        <section id="home" className="scroll-mt-28">
           <Hero language={language} />
         </section>
-        <section id="about">
-          <About language={language} />
-        </section>
-        <section id="projects">
+        <section id="projects" className="scroll-mt-28">
           <Projects language={language} />
         </section>
-        <section id="credentials">
+        <section id="about" className="scroll-mt-28">
+          <About language={language} />
+        </section>
+        <section id="credentials" className="scroll-mt-28">
           <Certifications language={language} />
         </section>
-        <section id="contact">
+        <section id="contact" className="scroll-mt-28">
           <Contact language={language} />
         </section>
         <Footer />

@@ -7,8 +7,8 @@ export default function About({ language = 'id' } = {}) {
     <div className="w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-8 py-16">
       {/* Header Section Rata Kiri */}
       <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-8 text-left">
-        <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
-          // BACKGROUND & EXPERTISE
+        <span className="font-sans text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
+          {language === 'en' ? 'Background & Expertise' : 'Latar Belakang & Spesialisasi'}
         </span>
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
           {language === 'en' ? 'About Me' : 'Tentang Saya'}
@@ -16,7 +16,7 @@ export default function About({ language = 'id' } = {}) {
       </div>
 
       {/* Paragraf Narasi: Lebih lega di desktop */}
-      <p className="text-sm sm:text-base lg:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 text-left max-w-4xl">
+      <p className="text-sm sm:text-base lg:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed mb-10 text-left max-w-4xl">
         {isEn
           ? 'Information Technology Graduate (2026) specializing in Data Analytics. Armed with standardized competencies through Web Development (BNSP) and Artificial Intelligence (Certiport) certifications, I integrate computational logic and data architecture into strategic business analysis. My focus is on processing raw datasets, ensuring data integrity, and building accurate executive dashboards to drive decision-making.'
           : 'Lulusan Teknologi Informasi (2026) dengan spesialisasi Data Analytics. Berbekal kompetensi terstandarisasi melalui sertifikasi Web Development (BNSP) serta Artificial Intelligence (Certiport), saya mengintegrasikan logika komputasi dan arsitektur data ke dalam analisis bisnis strategis. Fokus saya adalah mengolah dataset mentah, memastikan integritas data, dan membangun dashboard eksekutif yang akurat untuk mendukung pengambilan keputusan.'}
@@ -27,13 +27,13 @@ export default function About({ language = 'id' } = {}) {
         {/* Kartu 1: DATA PREPARATION */}
         <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors flex flex-col justify-between">
           <div>
-            <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold mb-2 block">
-              01 // DATA PREPARATION
+            <span className="font-sans text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold mb-2 block">
+              Data Preparation
             </span>
             <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm sm:text-base mb-2">
               {isEn ? 'Data Cleaning & Validation' : 'Data Cleaning & Validasi'}
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
               {isEn
                 ? 'Handling missing values, anomalies, and data type validation before analysis.'
                 : 'Menangani nilai hilang (missing values), anomali, dan validasi tipe data sebelum analisis.'}
@@ -44,13 +44,13 @@ export default function About({ language = 'id' } = {}) {
         {/* Kartu 2: DATA MODELING */}
         <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors flex flex-col justify-between">
           <div>
-            <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold mb-2 block">
-              02 // DATA MODELING
+            <span className="font-sans text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold mb-2 block">
+              Data Modeling
             </span>
             <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm sm:text-base mb-2">
               {isEn ? 'Structured Calculations & Relations' : 'Logika Pemodelan & Relasi'}
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
               {isEn
                 ? 'Lookup formulas, structured calculations, and multi-table relations based on query logic.'
                 : 'Formula lookup, kalkulasi terstruktur, dan relasi multi-tabel berbasis logika query.'}
@@ -61,13 +61,13 @@ export default function About({ language = 'id' } = {}) {
         {/* Kartu 3: VISUALIZATION */}
         <div className="p-6 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors flex flex-col justify-between">
           <div>
-            <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold mb-2 block">
-              03 // VISUALIZATION
+            <span className="font-sans text-[11px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-semibold mb-2 block">
+              Data Visualization
             </span>
             <h3 className="font-semibold text-zinc-900 dark:text-zinc-100 text-sm sm:text-base mb-2">
               {isEn ? 'KPI Dashboards & Reporting' : 'Dashboard & Pelaporan KPI'}
             </h3>
-            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed">
               {isEn
                 ? 'Intuitive Excel interface design with Pivot Tables, dynamic slicers, and executive visualizations.'
                 : 'Desain antarmuka Excel intuitif dengan Pivot Tables, dynamic slicers, dan visualisasi eksekutif.'}
@@ -81,23 +81,20 @@ export default function About({ language = 'id' } = {}) {
         {/* Header Ringkas Sejajar */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6 text-left">
           <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block mb-0.5">
-              // STACK & TOOLKIT
+            <span className="font-sans text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium block mb-0.5">
+              {language === 'en' ? 'Stack & Toolkit' : 'Perangkat & Alur Kerja'}
             </span>
             <h3 className="text-base sm:text-lg font-bold tracking-tight text-zinc-900 dark:text-white">
               {language === 'en' ? 'Core Technologies & Workflow' : 'Perangkat Analisis & Alur Kerja'}
             </h3>
           </div>
-          <p className="text-xs font-mono text-zinc-400 dark:text-zinc-500">
-            {language === 'en' ? 'Data Pipeline Stack' : 'Ekosistem Olah Data'}
-          </p>
         </div>
 
         {/* Grid 4 Kolom di Desktop (Membentang Penuh), 2 Kolom di Mobile */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 w-full">
           
           {/* 1. EXCEL */}
-          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm">
+          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm h-full">
             <div className="w-8 h-8 flex items-center justify-center shrink-0">
               <svg className="w-7 h-7" viewBox="0 0 48 48" fill="none">
                 <rect x="18" y="7" width="24" height="34" rx="2" fill="#107C41" />
@@ -108,13 +105,13 @@ export default function About({ language = 'id' } = {}) {
               </svg>
             </div>
             <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 truncate">Microsoft Excel</p>
-              <p className="text-[10px] sm:text-[11px] font-mono text-zinc-500 truncate">Lookup, Pivot & KPIs</p>
+              <p className="text-xs sm:text-sm font-sans font-semibold text-zinc-900 dark:text-zinc-100 truncate">Microsoft Excel</p>
+              <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400 truncate">Lookup, Pivot & KPIs</p>
             </div>
           </div>
 
           {/* 2. LOOKER STUDIO */}
-          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm">
+          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm h-full">
             <div className="w-8 h-8 flex items-center justify-center shrink-0">
               <svg className="w-7 h-7" viewBox="0 0 120 120" fill="none">
                 <circle cx="68" cy="74" r="28" stroke="#1A73E8" strokeWidth="14" fill="none" />
@@ -126,13 +123,13 @@ export default function About({ language = 'id' } = {}) {
               </svg>
             </div>
             <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 truncate">Looker Studio</p>
-              <p className="text-[10px] sm:text-[11px] font-mono text-zinc-500 truncate">Cloud BI & Reports</p>
+              <p className="text-xs sm:text-sm font-sans font-semibold text-zinc-900 dark:text-zinc-100 truncate">Looker Studio</p>
+              <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400 truncate">Cloud BI & Reports</p>
             </div>
           </div>
 
           {/* 3. FIGMA */}
-          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm">
+          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm h-full">
             <div className="w-8 h-8 flex items-center justify-center shrink-0">
               <svg className="w-7 h-7" viewBox="0 0 38 57" fill="none">
                 <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
@@ -143,13 +140,13 @@ export default function About({ language = 'id' } = {}) {
               </svg>
             </div>
             <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 truncate">Figma</p>
-              <p className="text-[10px] sm:text-[11px] font-mono text-zinc-500 truncate">UI/UX Canvas</p>
+              <p className="text-xs sm:text-sm font-sans font-semibold text-zinc-900 dark:text-zinc-100 truncate">Figma</p>
+              <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400 truncate">UI/UX Canvas</p>
             </div>
           </div>
 
           {/* 4. SQL */}
-          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm">
+          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm h-full">
             <div className="w-8 h-8 flex items-center justify-center shrink-0">
               <svg className="w-7 h-7" viewBox="0 0 100 100" fill="none">
                 <path d="M18 32V72C18 83 82 83 82 72V32H18Z" fill="#0072C6" />
@@ -159,8 +156,8 @@ export default function About({ language = 'id' } = {}) {
               </svg>
             </div>
             <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 truncate">SQL</p>
-              <p className="text-[10px] sm:text-[11px] font-mono text-zinc-500 truncate">Queries & Relations</p>
+              <p className="text-xs sm:text-sm font-sans font-semibold text-zinc-900 dark:text-zinc-100 truncate">SQL</p>
+              <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400 truncate">Queries & Relations</p>
             </div>
           </div>
 

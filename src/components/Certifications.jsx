@@ -26,7 +26,7 @@ export default function Certifications({ language = 'id' } = {}) {
       qualification: isEn
         ? 'Indonesian National Occupational Competency Standards (SKKNI)'
         : 'Standar Kompetensi Kerja Nasional Indonesia (SKKNI)',
-      code: 'SKKNI • 2026',
+      code: 'STANDAR SKKNI · 2026',
       image: '/certificates/web-developer.webp',
     },
     {
@@ -34,7 +34,7 @@ export default function Certifications({ language = 'id' } = {}) {
       title: 'Information Technology Specialist - Artificial Intelligence',
       issuer: 'Certiport (Pearson VUE Authorized Testing Center)',
       qualification: 'Foundational AI & Machine Learning Problem Solving',
-      code: 'ITS-AI • GLOBAL',
+      code: 'ITS-AI · STANDAR GLOBAL',
       image: '/certificates/ai-certiport.webp',
     },
   ];
@@ -43,8 +43,8 @@ export default function Certifications({ language = 'id' } = {}) {
     <div className="w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-8 py-16">
       {/* 1. Header Section */}
       <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-8 text-left">
-        <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
-          // VERIFIED CREDENTIALS
+        <span className="font-sans text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
+          {language === 'en' ? 'Verified Credentials' : 'Kredensial Terverifikasi'}
         </span>
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
           {language === 'en' ? 'Credentials' : 'Kredensial'}
@@ -67,26 +67,26 @@ export default function Certifications({ language = 'id' } = {}) {
               <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 text-[10px] font-mono px-2.5 py-0.5 rounded-full font-semibold">
                 VERIFIED
               </span>
-              <span className="text-[11px] font-mono text-zinc-400">
+              <span className="text-[11px] font-mono text-zinc-500 dark:text-zinc-400">
                 {cert.code}
               </span>
             </div>
 
             {/* Bagian Tengah (Nama Sertifikasi) */}
             <div className="my-2">
-              <p className="font-mono text-[11px] text-zinc-500 dark:text-zinc-400 mb-1.5 leading-snug">
+              <p className="font-sans text-xs text-zinc-600 dark:text-zinc-400 mb-1.5 leading-snug">
                 {cert.issuer}
               </p>
-              <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-amber-500 transition-colors">
+              <h3 className="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 leading-snug group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                 {cert.title}
               </h3>
-              <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-2 leading-relaxed">
+              <p className="text-xs text-zinc-600 dark:text-zinc-300 mt-2 leading-relaxed">
                 {cert.qualification}
               </p>
             </div>
 
             {/* Bagian Bawah */}
-            <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-500 group-hover:text-zinc-800 dark:group-hover:text-zinc-200 transition-colors">
+            <div className="pt-4 border-t border-zinc-100 dark:border-zinc-800/80 flex items-center justify-between text-xs font-sans text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-800 dark:group-hover:text-zinc-200 transition-colors">
               <span>{isEn ? 'Verify Credential ↗' : 'Verifikasi Sertifikat ↗'}</span>
             </div>
           </div>
@@ -111,7 +111,7 @@ export default function Certifications({ language = 'id' } = {}) {
                 <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-zinc-100">
                   {activeCert.title}
                 </h3>
-                <p className="text-[10px] sm:text-xs font-mono text-emerald-600 dark:text-emerald-400">
+                <p className="text-xs font-sans text-emerald-600 dark:text-emerald-400">
                   {activeCert.issuer}
                 </p>
               </div>

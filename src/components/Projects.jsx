@@ -76,8 +76,8 @@ export default function Projects({ language = 'id' } = {}) {
     <div className="w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-8 py-16">
       {/* 1. Section Header */}
       <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-8 text-left">
-        <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
-          // SELECTED WORKS
+        <span className="font-sans text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
+          {language === 'en' ? 'Featured Projects' : 'Proyek Unggulan'}
         </span>
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
           {language === 'en' ? 'Featured Projects' : 'Proyek Pilihan'}
@@ -93,35 +93,28 @@ export default function Projects({ language = 'id' } = {}) {
           >
             {/* Kolom Kiri / Atas: Visual Dashboard (Mendapatkan porsi lapang di Desktop) */}
             <div className="w-full lg:w-7/12">
-              <div
-                onClick={() => handleOpenModal(project)}
-                className="rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-md bg-zinc-950 group relative cursor-pointer"
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleOpenModal(project)}
-                title={isEn ? 'Click to inspect dashboard' : 'Klik untuk melihat dashboard'}
+              <button 
+                type="button" 
+                onClick={() => handleOpenModal(project)} 
+                aria-label={`Buka detail analisis ${project.title}`}
+                className="w-full text-left cursor-pointer group focus:outline-none rounded-2xl overflow-hidden block border border-zinc-200 dark:border-zinc-800 shadow-md bg-zinc-950"
               >
-                <img
-                  src={project.image}
-                  alt={project.title}
+                <img 
+                  src={project.image} 
+                  alt={project.title} 
                   className="w-full h-auto object-cover group-hover:scale-[1.02] transition-transform duration-300"
                   loading="lazy"
                 />
-              </div>
+              </button>
             </div>
 
             {/* Kolom Kanan / Bawah: Narasi Bisnis & Dampak */}
             <div className="w-full lg:w-5/12 flex flex-col justify-between">
               <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20 font-semibold">
-                    MICROSOFT EXCEL
-                  </span>
-                </div>
                 <h3 className="text-lg sm:text-2xl font-bold text-zinc-900 dark:text-white mb-2 leading-snug">
                   {project.title}
                 </h3>
-                <p className="line-clamp-2 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 mb-3 leading-relaxed">
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 mb-3 leading-relaxed">
                   {project.description}
                 </p>
               </div>
@@ -130,7 +123,7 @@ export default function Projects({ language = 'id' } = {}) {
               <div className="grid grid-cols-3 gap-2 p-2.5 sm:p-3 my-3 rounded-xl bg-zinc-50 dark:bg-zinc-950/60 border border-zinc-200/60 dark:border-zinc-800/80 text-center">
                 {project.metrics.map((m, mIdx) => (
                   <div key={mIdx} className="flex flex-col items-center justify-center text-center px-0.5">
-                    <p className="text-[10px] text-zinc-500 font-medium truncate w-full">{m.label}</p>
+                    <p className="text-[10px] text-zinc-600 dark:text-zinc-400 font-medium truncate w-full">{m.label}</p>
                     <p className="text-xs sm:text-sm font-mono font-bold text-zinc-900 dark:text-zinc-100 truncate w-full">{m.value}</p>
                   </div>
                 ))}
@@ -153,7 +146,7 @@ export default function Projects({ language = 'id' } = {}) {
                 <button
                   type="button"
                   onClick={() => handleOpenModal(project)}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-xs font-mono font-medium hover:opacity-90 active:scale-95 transition-all cursor-pointer shadow-sm"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-zinc-900 text-white dark:bg-zinc-100 dark:text-zinc-900 text-xs font-sans font-medium hover:opacity-90 active:scale-95 transition-all cursor-pointer shadow-sm"
                 >
                   <span>{language === 'en' ? 'Open Detailed Analysis' : 'Buka Detail Analisis'}</span>
                   <span>↗</span>

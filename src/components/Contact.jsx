@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 
+const EMAIL_ADDRESS = 'iqbaldwifathonah@gmail.com';
+
 export default function Contact({ language = 'id' } = {}) {
   const isEn = language === 'en';
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [copied, setCopied] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,26 +18,36 @@ export default function Contact({ language = 'id' } = {}) {
     const body = encodeURIComponent(
       `Nama: ${formData.name}\nEmail: ${formData.email}\n\nPesan:\n${formData.message}`
     );
-    window.location.href = `mailto:iqbaldwifathonah@gmail.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${subject}&body=${body}`;
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL_ADDRESS);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy email:', err);
+    }
   };
 
   return (
     <div className="max-w-xl mx-auto px-4 py-16">
       <div className="p-6 sm:p-9 rounded-3xl bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 shadow-xl relative overflow-hidden">
         {/* Subtle decorative glow */}
-        <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-24 bg-amber-500/10 dark:bg-amber-400/5 rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -top-12 left-1/2 -translate-x-1/2 w-48 h-24 bg-emerald-500/10 dark:bg-emerald-400/5 rounded-full blur-2xl pointer-events-none" />
 
         {/* Header */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 text-xs font-mono mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-xs font-sans font-medium mb-3">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
             <span>{isEn ? 'Ready to Discuss' : 'Siap Berdiskusi'}</span>
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2">
+          <h3 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white mb-2 font-sans">
             {language === 'en' ? "Let's Collaborate" : "Mari Berkolaborasi"}
           </h3>
-          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 max-w-md mx-auto leading-relaxed">
+          <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 max-w-md mx-auto leading-relaxed font-sans">
             {isEn
               ? 'Have an analytics project or data opportunity? Send a message directly or connect via instant channels below.'
               : 'Tertarik mendiskusikan pengolahan data atau peluang kerja sama? Kirimkan pesan langsung atau hubungi saluran cepat di bawah.'}
@@ -42,9 +55,9 @@ export default function Contact({ language = 'id' } = {}) {
         </div>
 
         {/* Form Input Interaktif */}
-        <form onSubmit={handleSubmit} className="space-y-3.5 mb-6 text-left">
+        <form onSubmit={handleSubmit} className="space-y-3.5 mb-2 text-left">
           <div>
-            <label className="block text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-1">
+            <label className="block text-xs font-sans font-medium text-zinc-600 dark:text-zinc-400 mb-1">
               {isEn ? 'Full Name' : 'Nama Lengkap'}
             </label>
             <input
@@ -54,12 +67,12 @@ export default function Contact({ language = 'id' } = {}) {
               value={formData.name}
               onChange={handleChange}
               placeholder={isEn ? 'Your full name...' : 'Nama lengkap Anda...'}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-colors font-sans"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-1">
+            <label className="block text-xs font-sans font-medium text-zinc-600 dark:text-zinc-400 mb-1">
               {isEn ? 'Email Address' : 'Alamat Email'}
             </label>
             <input
@@ -69,12 +82,12 @@ export default function Contact({ language = 'id' } = {}) {
               value={formData.email}
               onChange={handleChange}
               placeholder={isEn ? 'your.email@example.com' : 'alamat.email@anda.com'}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-colors font-sans"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-1">
+            <label className="block text-xs font-sans font-medium text-zinc-600 dark:text-zinc-400 mb-1">
               {isEn ? 'Message' : 'Pesan'}
             </label>
             <textarea
@@ -84,25 +97,37 @@ export default function Contact({ language = 'id' } = {}) {
               value={formData.message}
               onChange={handleChange}
               placeholder={isEn ? 'Write your message or inquiry details...' : 'Tuliskan pesan atau detail kebutuhan Anda...'}
-              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500 transition-colors resize-none"
+              className="w-full px-3.5 py-2.5 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/60 text-xs sm:text-sm text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/40 focus:border-emerald-500 transition-colors resize-none font-sans"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-2.5 px-4 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-medium text-xs sm:text-sm hover:opacity-90 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer border-0 mt-2"
+            className="w-full py-2.5 px-4 rounded-xl bg-zinc-900 text-white dark:bg-white dark:text-zinc-950 font-sans font-medium text-xs sm:text-sm hover:opacity-90 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer border-0 mt-2"
           >
             <span>{isEn ? 'Send Message via Email' : 'Kirim Pesan ke Email'}</span>
             <span>↗</span>
           </button>
         </form>
 
+        {/* Fitur Teks Alamat Email Langsung + Tombol Salin */}
+        <div className="flex items-center justify-center gap-2 mt-4 text-xs font-sans text-zinc-600 dark:text-zinc-400">
+          <span className="font-mono">{EMAIL_ADDRESS}</span>
+          <button 
+            type="button"
+            onClick={handleCopyEmail}
+            className="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer"
+          >
+            {copied ? (language === 'en' ? 'Copied!' : 'Tersalin!') : (language === 'en' ? 'Copy' : 'Salin')}
+          </button>
+        </div>
+
         {/* Pembatas Garis Tipis dengan Teks Tengah */}
         <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-zinc-200 dark:border-zinc-800" />
           </div>
-          <div className="relative flex justify-center text-[10px] font-mono uppercase tracking-wider">
+          <div className="relative flex justify-center text-[10px] font-sans font-semibold uppercase tracking-wider">
             <span className="bg-white dark:bg-[#121215] px-3 text-zinc-400 dark:text-zinc-500">
               {isEn ? 'DIRECT CHANNELS' : 'SALURAN LANGSUNG'}
             </span>
@@ -121,7 +146,7 @@ export default function Contact({ language = 'id' } = {}) {
             title="WhatsApp"
           >
             <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-              <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.275.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z" />
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
             </svg>
           </a>
 
@@ -155,10 +180,11 @@ export default function Contact({ language = 'id' } = {}) {
         </div>
 
         {/* Info Domisili */}
-        <p className="text-[11px] font-mono text-zinc-400 dark:text-zinc-500 text-center">
+        <p className="text-[11px] font-sans text-zinc-500 dark:text-zinc-400 text-center">
           📍 Yogyakarta / Jakarta, Indonesia • GMT+7
         </p>
       </div>
     </div>
   );
 }
+
