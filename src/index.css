@@ -15,33 +15,42 @@ html, body {
 }
 
 /* ==========================================================================
-   DESIGN SYSTEM - TAHAP 1
-   Arah: Terang-dulu, tenang, lega, rapi.
-   Tipografi: Plus Jakarta Sans (700/800 judul, 400/500 isi)
+   NEWSPRINT DARK DESIGN SYSTEM
+   Editorial Minimalis Bergaya Data Journalism
    ========================================================================== */
 
-:root,
-[data-theme="light"] {
-  /* Surface & Background */
-  --bg: #F7F5F0;
-  --surface: #FFFFFF;
-  --surface-2: #EFEBE3;
+:root {
+  --bg: #111110;
+  --bg-2: #1A1A18;
+  --bg-3: #242422;
+  --line: #252523;
+  --line-2: #2E2E2C;
+  --text: #E8E6DF;
+  --text-2: #8A8A86;
+  --text-3: #3E3E3B;
+  --green: #22C55E;
 
-  /* Text Colors */
-  --text: #1B1A17;
-  --text-2: #5C5850;
+  /* Legacy aliases for compatibility */
+  --surface: #1A1A18;
+  --surface-2: #242422;
+  --border: #252523;
+  --accent: #22C55E;
+  --accent-hover: #16A34A;
+}
 
-  /* Borders */
-  --border: #E2DDD2;
+body {
+  background-color: #111110 !important;
+  color: #E8E6DF;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
 
-  /* Aksen */
-  --accent: #BC4715;
-  --accent-hover: #9E380C;
-  --accent-soft: rgba(188, 71, 21, 0.10);
-
-  /* Titik crop foto hero (memotong ~25% area transparan atas kanvas: kepala mulai 32%, sisa ruang ~5.8% di desktop) */
-  --photo-top-offset: 25%;
-  --photo-top-offset-num: 0.25;
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 
   /* Latar Halus Panel Hero (Opacity) */
   --hero-glow-opacity: 0.10;

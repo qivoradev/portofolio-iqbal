@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PortfolioProvider, usePortfolio } from './context/PortfolioContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import StatBar from './components/StatBar';
 import About from './components/About';
 import Projects from './components/Projects';
 import Certifications from './components/Certifications';
@@ -50,15 +51,16 @@ function AppContent() {
   return (
     <>
       {/* ALUR UTAMA: Single Page Flow */}
-      <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-zinc-100 transition-colors duration-200 pb-16">
+      <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-[#111110] text-[#E8E6DF] transition-colors duration-200">
         <Navbar language={language} />
         <Hero language={language} />
+        <StatBar />
         <Projects language={language} />
         <About language={language} />
-        <section id="credentials" className="scroll-mt-28">
+        <section id="credentials" className="scroll-mt-14">
           <Certifications language={language} />
         </section>
-        <section id="contact" className="scroll-mt-28">
+        <section id="contact" className="scroll-mt-14">
           <Contact language={language} />
         </section>
         <Footer />
@@ -67,9 +69,11 @@ function AppContent() {
       {/* Floating Back to Top Button */}
       {showTopBtn && (
         <button
+          type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Kembali ke Atas"
-          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-white text-zinc-950 shadow-xl border border-zinc-200 dark:border-zinc-700 hover:scale-110 active:scale-95 transition-all cursor-pointer"
+          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-[#1A1A18] text-[#E8E6DF] hover:text-[#22C55E] transition-all cursor-pointer"
+          style={{ border: '0.5px solid #2E2E2C' }}
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -80,8 +84,9 @@ function AppContent() {
       {/* Full-screen Terminal Preloader */}
       {isLoading && (
         <div
-          className={`fixed inset-0 z-50 transition-opacity duration-400 ease-in-out ${isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
-            }`}
+          className={`fixed inset-0 z-50 transition-opacity duration-400 ease-in-out ${
+            isFading ? 'opacity-0 pointer-events-none' : 'opacity-100'
+          }`}
         >
           <LoadingScreen progress={progress} />
         </div>
