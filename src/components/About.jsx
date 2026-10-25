@@ -6,80 +6,57 @@ export default function About({ language = 'id' } = {}) {
   const tools = [
     {
       name: 'Microsoft Excel',
-      category: isEn ? 'Spreadsheet & Modeling' : 'Spreadsheet & Pemodelan',
+      category: isEn ? 'Modeling' : 'Pemodelan',
       desc: isEn
-        ? 'Dynamic formula architecture (XLOOKUP, INDEX/MATCH), multi-slicer pivot tables, and automated executive dashboards.'
-        : 'Arsitektur formula dinamis (XLOOKUP, INDEX/MATCH), pivot table multi-slicer, dan otomatisasi dashboard eksekutif.',
-      tag: 'PRIMARY'
+        ? 'Dynamic formula architecture, multi-slicer pivot tables, and automated executive dashboards.'
+        : 'Arsitektur formula dinamis, pivot table multi-slicer, dan otomatisasi dashboard eksekutif.',
     },
     {
-      name: 'SQL (PostgreSQL / MySQL)',
-      category: isEn ? 'Database & Cleansing' : 'Basis Data & Pembersihan',
+      name: 'SQL Databases',
+      category: isEn ? 'Cleansing' : 'Pembersihan',
       desc: isEn
-        ? 'Relational table structuring, multi-table joins, CTEs, subqueries, and validating data integrity from raw tables.'
-        : 'Struktur tabel relasional, multi-table joins, CTEs, subqueries, dan validasi integritas data dari tabel mentah.',
-      tag: 'BACKEND'
+        ? 'Relational table structuring, complex joins, CTEs, and validating data integrity.'
+        : 'Struktur tabel relasional, query joins kompleks, CTEs, dan validasi integritas data.',
     },
     {
       name: 'Looker Studio',
-      category: isEn ? 'Business Intelligence' : 'Business Intelligence',
+      category: isEn ? 'Reporting' : 'Pelaporan',
       desc: isEn
-        ? 'Connecting relational data sources into cloud-accessible stakeholder reporting with interactive drill-downs.'
-        : 'Menghubungkan sumber data relasional ke pelaporan cloud interaktif dengan drill-down untuk stakeholder.',
-      tag: 'REPORTING'
+        ? 'Connecting relational data sources into cloud-accessible stakeholder reporting.'
+        : 'Menghubungkan sumber data relasional ke pelaporan stakeholder berbasis cloud interaktif.',
     },
     {
       name: 'Figma',
-      category: isEn ? 'Interface & Framing' : 'Antarmuka & Wireframing',
+      category: isEn ? 'Design' : 'Desain',
       desc: isEn
-        ? 'Wireframing dashboard layouts, aligning business metrics into clean visual hierarchies before implementation.'
-        : 'Perancangan wireframe dasbor, menyelaraskan metrik bisnis ke dalam hierarki visual yang jelas sebelum implementasi.',
-      tag: 'DESIGN'
+        ? 'Wireframing dashboard layouts and aligning metrics into visual hierarchies.'
+        : 'Perancangan tata letak dashboard dan penyelarasan metrik ke hierarki visual yang jelas.',
     },
   ];
 
   return (
-    <section id="about" className="py-20 sm:py-28 bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-white border-t border-zinc-200 dark:border-white/[0.08] transition-colors scroll-mt-14">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-24 bg-zinc-50 dark:bg-[#0a0a0b] text-zinc-900 dark:text-white border-t border-zinc-200 dark:border-white/5 transition-colors scroll-mt-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-          <div>
-            <span className="text-xs font-mono tracking-widest uppercase text-lime-600 dark:text-lime-400 font-bold block mb-2">
-              PREMIUM TOOLKIT
-            </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white uppercase">
-              {isEn ? 'Core Technologies' : 'Perangkat Analisis Utama'}
-            </h2>
-          </div>
-          <span className="text-xs font-mono text-zinc-500 uppercase">
-            APPLIED TECHNICAL ARSENAL
-          </span>
+        <div className="mb-16 text-center">
+          <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4">
+            {isEn ? 'Core Capabilities' : 'Kompetensi Utama'}
+          </h2>
         </div>
 
-        {/* Tools Grid ala Sawad */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {tools.map((item) => (
             <div
               key={item.name}
-              className="p-6 rounded-3xl bg-white dark:bg-zinc-900/60 border border-zinc-200 dark:border-white/[0.08] hover:border-lime-500/50 dark:hover:border-lime-400/50 transition-all flex flex-col justify-between shadow-sm"
+              className="p-8 rounded-3xl bg-white dark:bg-white/5 border border-zinc-200 dark:border-white/10 shadow-sm flex flex-col h-full"
             >
-              <div>
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] font-mono font-bold px-2.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-lime-600 dark:text-lime-400">
-                    {item.tag}
-                  </span>
-                </div>
-                <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-1">
-                  {item.name}
-                </h3>
-                <span className="text-xs font-mono text-zinc-500 block mb-3">
-                  {item.category}
-                </span>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans">
-                  {item.desc}
-                </p>
+              <div className="text-xs font-mono font-bold text-emerald-600 dark:text-lime-400 mb-4 uppercase tracking-widest">
+                {item.category}
               </div>
+              <h3 className="text-lg font-bold mb-3">{item.name}</h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed flex-grow">
+                {item.desc}
+              </p>
             </div>
           ))}
         </div>

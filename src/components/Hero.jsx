@@ -1,124 +1,81 @@
 import React from 'react';
 
-export default function Hero({ language, profilePic }) {
-  const tickerItems = [
-    "SQL RELATIONAL DATA MODELING",
-    "MICROSOFT EXCEL BI AUTOMATION",
-    "EXECUTIVE KPI DASHBOARDS",
-    "ROOT-CAUSE DIAGNOSTICS",
-    "GOOGLE LOOKER STUDIO"
-  ];
-
+export default function Hero({ language, profilePic = '/profile.png' }) {
   return (
-    <section id="home" className="relative pt-32 sm:pt-44 bg-[#111111] text-white overflow-hidden font-sans pb-0">
-      
-      {/* Container Layout Utama (1300px agar rapi) */}
-      <div className="w-full max-w-[1300px] mx-auto px-4 sm:px-8 lg:px-12">
+    <section id="home" className="pt-28 pb-20 sm:pt-40 sm:pb-32 bg-zinc-50 dark:bg-[#0a0a0b] text-zinc-900 dark:text-white transition-colors">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* HARU MENGGUNAKAN FLEX (Bukan Grid) AGAR UKURAN TERKUNCI MATI */}
-        <div className="flex flex-col lg:flex-row items-center lg:items-start gap-12 lg:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* SISI KIRI: WHITE PASSPORT CARD (Dikunci matang di lebar 380px) */}
-          <div className="w-full max-w-[400px] lg:w-[380px] shrink-0 flex flex-col justify-between rounded-[40px] bg-white p-6 shadow-2xl relative">
+          {/* KIRI: Narasi & Metrik */}
+          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
             
-            {/* Area Foto Profil dengan Background Hijau Sawad */}
-            <div className="relative w-full aspect-[4/5] rounded-[32px] bg-gradient-to-br from-[#A3E635] to-[#4d7c0f] overflow-hidden flex items-end justify-center shadow-inner">
-              <img
-                src={profilePic}
-                alt="Iqbal Dwi Fathonah"
-                className="w-full h-full object-cover object-bottom scale-110 origin-bottom mix-blend-normal"
-              />
-              
-              {/* Badge Bawah Foto */}
-              <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
-                 <div className="px-4 py-1.5 rounded-full bg-white text-zinc-950 font-bold text-[10px] tracking-widest uppercase shadow-lg flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-lime-500 animate-pulse" />
-                    ID • GMT+7
-                 </div>
-              </div>
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white dark:bg-white/5 border border-zinc-200 dark:border-white/10 text-xs font-mono font-medium text-zinc-600 dark:text-zinc-400 mb-8 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-lime-400 animate-pulse" />
+              Yogyakarta, ID • Available for Roles
             </div>
 
-            {/* Nama di Dalam Kartu Kiri (Teks Hitam) */}
-            <div className="pt-8 pb-3 text-left">
-              <h2 className="text-[36px] font-black tracking-tight text-zinc-950 leading-[1.05] mb-3">
-                Iqbal Dwi <br/> Fathonah
-              </h2>
-              <p className="text-[14px] font-semibold text-zinc-500 leading-relaxed">
-                A Data Analyst who bridges raw relational datasets with strategic business decisions.
-              </p>
-            </div>
-          </div>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-zinc-900 dark:text-white leading-[1.15] mb-6">
+              Hi, I'm Iqbal. <br />
+              <span className="text-emerald-600 dark:text-lime-400">Data Analyst & BI Specialist.</span>
+            </h1>
 
-          {/* SISI KANAN: GIANT TYPOGRAPHY & STATS (Mengisi Sisa Layar Flex) */}
-          <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left pt-0 lg:pt-8 w-full">
-            
-            {/* Teks Raksasa DATA ANALYST (Ukuran Dikunci text-[140px]++) */}
-            <div className="flex flex-col space-y-0 leading-[0.85] mb-10 w-full">
-              <h1 className="text-[70px] sm:text-[110px] lg:text-[140px] xl:text-[160px] font-black tracking-tighter text-white uppercase m-0 p-0">
-                DATA
-              </h1>
-              <span className="text-[70px] sm:text-[110px] lg:text-[140px] xl:text-[160px] font-black tracking-tighter text-[#2a2a2a] uppercase m-0 p-0">
-                ANALYST
-              </span>
-            </div>
-
-            {/* Narasi */}
-            <p className="text-base sm:text-lg text-zinc-400 leading-relaxed font-sans max-w-2xl mb-12">
+            <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl mb-10">
               {language === 'en'
-                ? 'Information Technology Graduate (2026). Passionate about turning unstructured relational datasets into clean SQL models, automated Microsoft Excel dashboards, and measurable growth insights.'
-                : 'Lulusan Teknologi Informasi (2026). Berfokus menerjemahkan dataset mentah menjadi model query SQL terstruktur, otomatisasi dashboard Microsoft Excel, serta formulasi insight bisnis terukur.'}
+                ? 'Information Technology Graduate (2026). Specializing in transforming complex relational database schemas into clean SQL models, automated Microsoft Excel dashboards, and executive insights.'
+                : 'Lulusan Teknologi Informasi (2026). Berfokus menerjemahkan dataset mentah menjadi model query SQL terstruktur, otomatisasi dashboard Microsoft Excel, serta formulasi insight bisnis.'}
             </p>
 
-            {/* Angka Statistik (+2, 100%, 2026) Sejajar Horizontal */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-12 sm:gap-20 mb-14">
-              <div className="flex flex-col text-left">
-                <span className="text-6xl sm:text-[80px] font-black text-white leading-none tracking-tighter mb-2">+2</span>
-                <span className="text-[11px] text-zinc-500 uppercase tracking-widest font-mono">FEATURED<br/>DASHBOARDS</span>
+            <div className="grid grid-cols-3 gap-6 sm:gap-12 w-full max-w-xl border-y border-zinc-200 dark:border-white/10 py-6 mb-10 font-mono">
+              <div className="text-center lg:text-left">
+                <span className="text-3xl font-bold text-zinc-900 dark:text-white block mb-1">+2</span>
+                <span className="text-[11px] text-zinc-500 uppercase tracking-widest">Dashboards</span>
               </div>
-              <div className="flex flex-col text-left">
-                <span className="text-6xl sm:text-[80px] font-black text-white leading-none tracking-tighter mb-2">100%</span>
-                <span className="text-[11px] text-zinc-500 uppercase tracking-widest font-mono">SQL DATA<br/>CLEANSED</span>
+              <div className="text-center lg:text-left">
+                <span className="text-3xl font-bold text-emerald-600 dark:text-lime-400 block mb-1">100%</span>
+                <span className="text-[11px] text-zinc-500 uppercase tracking-widest">Data Cleansed</span>
               </div>
-              <div className="flex flex-col text-left">
-                <span className="text-6xl sm:text-[80px] font-black text-white leading-none tracking-tighter mb-2">2026</span>
-                <span className="text-[11px] text-zinc-500 uppercase tracking-widest font-mono">IT DEGREE<br/>GRADUATE</span>
+              <div className="text-center lg:text-left">
+                <span className="text-3xl font-bold text-zinc-900 dark:text-white block mb-1">2026</span>
+                <span className="text-[11px] text-zinc-500 uppercase tracking-widest">IT Graduate</span>
               </div>
             </div>
 
-            {/* Tombol CTA */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+            <div className="flex flex-wrap items-center gap-4">
               <a
                 href="#projects"
-                className="px-8 py-4 rounded-2xl bg-[#A3E635] hover:bg-[#84cc16] text-zinc-950 font-black text-sm tracking-wide transition-all shadow-[0_0_30px_rgba(163,230,53,0.2)]"
+                className="px-8 py-3.5 rounded-full bg-zinc-900 dark:bg-lime-400 hover:bg-zinc-800 dark:hover:bg-lime-300 text-white dark:text-zinc-950 font-bold text-sm transition-all shadow-md"
               >
                 {language === 'en' ? 'Explore Works' : 'Lihat Proyek'}
               </a>
               <a
-                href="https://linkedin.com/in/iqbaldwifathonah"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 rounded-2xl bg-white hover:bg-zinc-200 text-zinc-950 font-black text-sm tracking-wide transition-all"
+                href="mailto:iqbalfathonah20@gmail.com"
+                className="px-8 py-3.5 rounded-full bg-white dark:bg-transparent border border-zinc-300 dark:border-white/20 hover:border-zinc-400 dark:hover:border-white/40 text-zinc-700 dark:text-zinc-300 font-bold text-sm transition-all"
               >
-                LinkedIn ↗
+                {language === 'en' ? 'Contact Me' : 'Hubungi Saya'}
               </a>
             </div>
+            
+          </div>
 
+          {/* KANAN: Foto Profil Elegan */}
+          <div className="lg:col-span-5 flex justify-center lg:justify-end">
+            <div className="relative w-full max-w-[380px] aspect-[4/5] rounded-[2rem] bg-gradient-to-br from-zinc-200 to-zinc-300 dark:from-zinc-800 dark:to-zinc-900 border border-zinc-200 dark:border-white/10 overflow-hidden shadow-2xl">
+              <img
+                src={profilePic || '/profile.png'}
+                alt="Iqbal Dwi Fathonah"
+                className="w-full h-full object-cover object-bottom scale-105 origin-bottom"
+                onError={(e) => {
+                  e.currentTarget.onerror = null;
+                  e.currentTarget.src = '/profile.png';
+                }}
+              />
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+            </div>
           </div>
 
         </div>
 
-      </div>
-
-      {/* Infinite Marquee Ticker (Pita Bawah Berjalan) */}
-      <div className="mt-24 py-5 border-t border-white/5 bg-[#0a0a0a] overflow-hidden flex whitespace-nowrap">
-        <div className="animate-marquee flex gap-12 font-mono text-sm uppercase tracking-widest text-zinc-600">
-          {[...tickerItems, ...tickerItems, ...tickerItems].map((item, idx) => (
-            <div key={idx} className="flex items-center gap-12">
-              <span className="text-zinc-300 font-bold">{item}</span>
-              <span className="text-lime-500 text-lg">•</span>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
