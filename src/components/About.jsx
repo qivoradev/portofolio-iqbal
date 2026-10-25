@@ -90,8 +90,8 @@ export default function About({ language = 'id' } = {}) {
             </h3>
             <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {language === 'en'
-                ? 'Combining structured relational database querying, advanced spreadsheet modeling, and cloud-based BI dashboards to deliver auditable business intelligence.'
-                : 'Memadukan kalkulasi spreadsheet tingkat lanjut, pemodelan database terstruktur, dan cloud BI dashboard interaktif untuk menghasilkan insight bisnis yang presisi.'}
+                ? 'Combining structured spreadsheet analysis, data modeling, and cloud-based BI dashboards to deliver auditable business intelligence.'
+                : 'Memadukan analisis spreadsheet terstruktur, pemodelan data, dan dashboard BI interaktif untuk menghasilkan insight bisnis yang presisi.'}
             </p>
           </div>
 
@@ -111,7 +111,9 @@ export default function About({ language = 'id' } = {}) {
               </div>
               <div className="min-w-0">
                 <h4 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-500 transition-colors">Microsoft Excel</h4>
-                <p className="text-[11px] font-mono text-zinc-500 truncate">Advanced Modeling & Pivot</p>
+                <p className="text-[11px] font-mono text-zinc-500 truncate">
+                  {language === 'en' ? 'Lookup, Pivot Tables & KPIs' : 'Lookup, Pivot Tables & KPI'}
+                </p>
               </div>
             </div>
 
