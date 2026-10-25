@@ -43,7 +43,7 @@ export default function Certifications({ language = 'id' } = {}) {
     <div className="w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-8 py-16">
       {/* 1. Header Section */}
       <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-8 text-left">
-        <span className="font-mono text-xs uppercase tracking-widest text-amber-500 font-semibold block mb-1">
+        <span className="font-mono text-xs uppercase tracking-widest text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
           // VERIFIED CREDENTIALS
         </span>
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">

@@ -46,7 +46,7 @@ export default function Hero({ language = 'id' } = {}) {
         Iqbal Dwi Fathonah
       </h1>
 
-      <p className="text-xs sm:text-sm font-mono tracking-wider uppercase text-amber-500 font-semibold mb-4">
+      <p className="text-xs sm:text-sm font-mono tracking-widest uppercase text-emerald-600 dark:text-emerald-400 font-semibold mb-4">
         DATA ANALYST • BUSINESS INTELLIGENCE & MODELING
       </p>
 
