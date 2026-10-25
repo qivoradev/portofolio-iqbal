@@ -56,19 +56,19 @@ export default function Navbar({ language: propLanguage } = {}) {
 
   return (
     <header className="fixed top-4 inset-x-0 z-50 flex justify-center pointer-events-none px-4 select-none">
-      <div className="pointer-events-auto flex items-center justify-between gap-2 sm:gap-4 px-3 sm:px-4 py-1.5 sm:py-2 rounded-2xl bg-white/85 dark:bg-zinc-900/85 backdrop-blur-md border border-zinc-200 dark:border-zinc-800 shadow-xl transition-all">
-        {/* Brand with emerald dot */}
+      <div className="pointer-events-auto flex items-center justify-between gap-2 sm:gap-4 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-zinc-900/90 backdrop-blur-md border border-zinc-800 shadow-2xl transition-all">
+        {/* Brand with lime dot */}
         <button
           type="button"
           onClick={() => scrollTo('home')}
-          className="flex items-center gap-2 font-bold text-xs sm:text-sm text-zinc-900 dark:text-white shrink-0 cursor-pointer border-0 bg-transparent p-0 transition-colors hover:text-emerald-500"
+          className="flex items-center gap-2 font-bold text-xs sm:text-sm text-white shrink-0 cursor-pointer border-0 bg-transparent p-0 transition-colors hover:text-lime-400"
         >
-          <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse shrink-0" />
-          <span className="tracking-wider font-mono font-bold">IDF</span>
+          <span className="w-2 h-2 rounded-full bg-lime-400 inline-block animate-pulse shrink-0" />
+          <span className="tracking-tight font-black">Iqbal</span>
         </button>
 
         {/* Nav Links */}
-        <nav className="flex items-center gap-0.5 sm:gap-1 pl-2 sm:pl-3 border-l border-zinc-200 dark:border-zinc-800">
+        <nav className="flex items-center gap-0.5 sm:gap-1 pl-2 sm:pl-3 border-l border-zinc-800">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             return (
@@ -76,10 +76,10 @@ export default function Navbar({ language: propLanguage } = {}) {
                 key={item.id}
                 type="button"
                 onClick={() => scrollTo(item.id)}
-                className={`px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-medium rounded-lg cursor-pointer border-0 transition-all ${
+                className={`px-2.5 sm:px-3 py-1 text-[11px] sm:text-xs font-medium rounded-full cursor-pointer border-0 transition-all ${
                   isActive
-                    ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white font-semibold shadow-xs'
-                    : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100/60 dark:hover:bg-zinc-800/60'
+                    ? 'bg-lime-400 text-black font-bold shadow-xs'
+                    : 'text-zinc-400 hover:text-white hover:bg-zinc-800/60'
                 }`}
               >
                 {item.label}
@@ -89,12 +89,12 @@ export default function Navbar({ language: propLanguage } = {}) {
         </nav>
 
         {/* Action Controls: Theme & Language */}
-        <div className="flex items-center gap-1.5 pl-2 sm:pl-3 border-l border-zinc-200 dark:border-zinc-800 shrink-0">
+        <div className="flex items-center gap-1.5 pl-2 sm:pl-3 border-l border-zinc-800 shrink-0">
           {/* Theme Toggle Button */}
           <button
             type="button"
             onClick={toggleTheme}
-            className="p-1.5 rounded-lg text-zinc-600 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors cursor-pointer border-0 bg-transparent"
+            className="p-1.5 rounded-full text-zinc-400 hover:text-white hover:bg-zinc-800 transition-colors cursor-pointer border-0 bg-transparent"
             title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
             aria-label="Toggle Theme"
           >
@@ -123,7 +123,7 @@ export default function Navbar({ language: propLanguage } = {}) {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="px-2 py-0.5 text-[11px] font-mono font-bold rounded-md bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer border-0"
+            className="px-2.5 py-0.5 text-[11px] font-mono font-bold rounded-full bg-zinc-800 hover:bg-zinc-700 text-lime-400 transition-colors cursor-pointer border border-zinc-700"
             title={isEn ? 'Ganti ke Bahasa Indonesia' : 'Switch to English'}
           >
             {language.toUpperCase()}

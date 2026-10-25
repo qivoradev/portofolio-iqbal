@@ -1,68 +1,70 @@
 import React from 'react';
 
 export default function About({ language = 'id' } = {}) {
-  const competencies = [
+  const services = [
     {
-      index: '01',
-      title: language === 'en' ? 'SQL & Relational Data Modeling' : 'SQL & Pemodelan Data Relasional',
+      num: '01',
+      title: language === 'en' ? 'SQL & Data Modeling' : 'SQL & Pemodelan Data',
       desc: language === 'en'
-        ? 'Structuring normalized database schemas, complex multi-table joins, CTEs, subqueries, and validating data integrity.'
+        ? 'Relational table structuring, multi-table joins, CTEs, subqueries, and validating data integrity.'
         : 'Pemodelan skema relasional, multi-table joins, subqueries, CTEs, agregasi data, dan pembersihan anomali data mentah.',
       tools: 'SQL, PostgreSQL, MySQL, DBeaver',
     },
     {
-      index: '02',
-      title: language === 'en' ? 'Interactive BI & Executive Dashboards' : 'BI Interaktif & Dashboard Eksekutif',
+      num: '02',
+      title: language === 'en' ? 'Executive BI & Reporting' : 'BI Eksekutif & Pelaporan',
       desc: language === 'en'
-        ? 'Dynamic spreadsheet architecture, lookup modeling (XLOOKUP, INDEX/MATCH), automated pivot cards, and interactive stakeholder reporting.'
-        : 'Arsitektur spreadsheet dinamis, formula pemodelan (XLOOKUP, INDEX/MATCH), pivot interaktif, dan visualisasi dasbor eksekutif.',
+        ? 'Dynamic spreadsheet architecture, lookup modeling (XLOOKUP, INDEX/MATCH), pivot tables, and KPI cards.'
+        : 'Arsitektur spreadsheet dinamis, formula pemodelan (XLOOKUP, INDEX/MATCH), pivot interaktif, dan KPI bisnis.',
       tools: 'Microsoft Excel, Looker Studio',
     },
     {
-      index: '03',
-      title: language === 'en' ? 'Business Insights & Problem Framing' : 'Analisis Bisnis & Diagnostik Akar Masalah',
+      num: '03',
+      title: language === 'en' ? 'Business Insights & Wireframing' : 'Analisis Bisnis & Wireframing',
       desc: language === 'en'
-        ? 'Formulating data questions from business objectives, root-cause diagnostics, and wireframing dashboard interfaces.'
-        : 'Menerjemahkan sasaran bisnis menjadi indikator terukur, diagnosis akar masalah (root-cause), dan perancangan wireframe dasbor.',
-      tools: 'Figma, KPI Design, Root-Cause Analysis',
+        ? 'Translating stakeholder questions into actionable metrics, root-cause diagnostics, and structured dashboard UI.'
+        : 'Menerjemahkan sasaran bisnis menjadi indikator terukur, analisis akar masalah (root-cause), dan wireframe dasbor.',
+      tools: 'Figma, KPI Design, Framing',
     },
   ];
 
   return (
-    <section id="about" className="py-16 sm:py-24 border-b border-zinc-200 dark:border-zinc-800/80 scroll-mt-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="py-20 bg-[#0a0a0c] text-white border-t border-zinc-800/80 scroll-mt-14">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="flex items-center justify-between pb-6 mb-10 border-b border-zinc-200 dark:border-zinc-800">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold block mb-1">
-              TECHNICAL COMPETENCY
+            <span className="text-xs font-mono tracking-widest uppercase text-lime-400 font-bold block mb-2">
+              SERVICES & SKILLS
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
-              {language === 'en' ? 'Capabilities & Toolkits' : 'Kompetensi & Perangkat Kerja'}
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight uppercase">
+              {language === 'en' ? 'Core Capabilities' : 'Layanan & Keahlian'}
             </h2>
           </div>
-          <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-            Analytics Lifecycle
+          <span className="text-xs font-mono text-zinc-500 uppercase">
+            END-TO-END ANALYTICS WORKFLOW
           </span>
         </div>
 
-        <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
-          {competencies.map((item) => (
-            <div key={item.index} className="py-8 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-4">
-              <div className="md:col-span-1 font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400">
-                /{item.index}
-              </div>
-              <div className="md:col-span-4">
-                <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {services.map((item) => (
+            <div
+              key={item.num}
+              className="p-7 rounded-3xl bg-zinc-900/60 border border-zinc-800 hover:border-lime-400/50 transition-colors flex flex-col justify-between"
+            >
+              <div>
+                <span className="text-xs font-mono font-bold text-lime-400 block mb-3">
+                  // {item.num}
+                </span>
+                <h3 className="text-lg font-bold text-white mb-2">
                   {item.title}
                 </h3>
-              </div>
-              <div className="md:col-span-4">
-                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans">
+                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6 font-sans">
                   {item.desc}
                 </p>
               </div>
-              <div className="md:col-span-3 md:text-right font-mono text-xs text-zinc-700 dark:text-zinc-300 font-semibold">
+
+              <div className="pt-4 border-t border-zinc-800 font-mono text-xs text-lime-400 font-semibold">
                 {item.tools}
               </div>
             </div>

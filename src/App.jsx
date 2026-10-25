@@ -50,7 +50,7 @@ function AppContent() {
   return (
     <>
       {/* ALUR UTAMA: Single Page Flow */}
-      <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-zinc-50 dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 transition-colors duration-200">
+      <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-[#0a0a0c] text-white transition-colors duration-200">
         <Navbar language={language} />
         <Hero language={language} />
         <Projects language={language} />
@@ -70,7 +70,7 @@ function AppContent() {
           type="button"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           aria-label="Kembali ke Atas"
-          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-white/90 dark:bg-zinc-900/90 text-zinc-700 dark:text-zinc-200 border border-zinc-200 dark:border-zinc-800 shadow-lg hover:border-emerald-500 hover:text-emerald-500 transition-all cursor-pointer backdrop-blur-md"
+          className="fixed bottom-6 right-6 z-40 p-3 rounded-full bg-zinc-900/90 text-zinc-300 border border-zinc-800 shadow-2xl hover:border-lime-400 hover:text-lime-400 transition-all cursor-pointer backdrop-blur-md"
         >
           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 10l7-7m0 0l7 7m-7-7v18" />

@@ -9,92 +9,63 @@ export default function Projects({ language = 'id', projects: propProjects, open
   const openModal = propOpenModal || ((project) => setInternalModalProject(project));
 
   return (
-    <section id="projects" className="py-16 sm:py-24 border-b border-zinc-200 dark:border-zinc-800/80 scroll-mt-16">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="projects" className="py-20 bg-[#0d0d10] text-white border-t border-zinc-800/80 scroll-mt-14">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="flex items-center justify-between pb-6 mb-10 border-b border-zinc-200 dark:border-zinc-800">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
           <div>
-            <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold block mb-1">
-              {language === 'en' ? 'CASE STUDIES & REPORTING' : 'STUDI KASUS & PELAPORAN'}
+            <span className="text-xs font-mono tracking-widest uppercase text-lime-400 font-bold block mb-2">
+              FEATURED PORTFOLIO
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
-              {language === 'en' ? 'Selected Analytics Works' : 'Proyek Pilihan'}
+            <h2 className="text-3xl sm:text-5xl font-black tracking-tight uppercase">
+              {language === 'en' ? 'Selected Projects' : 'Studi Kasus & Dashboard'}
             </h2>
           </div>
-          <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
-            {projects.length} Works Documented
+          <span className="text-xs font-mono text-zinc-500">
+            {projects.length} VERIFIED CASE STUDIES
           </span>
         </div>
 
-        {/* Structured Projects List */}
-        <div className="space-y-12">
-          {projects.map((project, idx) => (
+        {/* Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {projects.map((project) => (
             <div
               key={project.id}
-              className="p-6 sm:p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50/50 dark:bg-zinc-900/40 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors"
+              onClick={() => openModal(project)}
+              className="group p-6 rounded-3xl bg-zinc-900/60 hover:bg-zinc-900 border border-zinc-800 hover:border-lime-400/50 transition-all duration-300 cursor-pointer flex flex-col justify-between"
             >
-              <div className="flex items-baseline justify-between gap-4 mb-2">
-                <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-bold">
-                  [ 0{idx + 1} // CASE STUDY ]
-                </span>
-                <span className="text-xs font-mono text-zinc-400">
-                  {(project.tags || []).join(' • ')}
-                </span>
+              <div>
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-6 bg-zinc-950 border border-zinc-800">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/80 backdrop-blur-md text-lime-400 font-mono text-[10px] font-bold">
+                    PRODUCTION
+                  </div>
+                </div>
+
+                <h3 className="text-xl font-bold group-hover:text-lime-400 transition-colors mb-2">
+                  {project.title}
+                </h3>
+                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-6 font-sans">
+                  {project.description || project.shortDesc}
+                </p>
               </div>
 
-              <h3 className="text-xl sm:text-2xl font-bold text-zinc-900 dark:text-white mb-3">
-                {project.title}
-              </h3>
-
-              <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-300 leading-relaxed mb-6 font-sans">
-                {project.description || project.shortDesc}
-              </p>
-
-              {/* Minimal Problem & Deliverables Structure */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 rounded-xl bg-white dark:bg-zinc-950/60 border border-zinc-200 dark:border-zinc-800/80 mb-6 text-xs">
-                <div>
-                  <span className="font-mono font-bold text-zinc-400 uppercase block mb-1">
-                    Problem Statement
-                  </span>
-                  <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                    {project.id === 'nyc-collisions'
-                      ? 'Mengevaluasi titik rawan kecelakaan di 5 borough NYC, mengidentifikasi faktor utama kelalaian, dan merumuskan pola jam rawan insiden lalu lintas.'
-                      : 'Menganalisis anomali rasio keuntungan, mengidentifikasi kebocoran margin diskon, dan memetakan performa produk rugi.'}
-                  </p>
+              <div className="pt-4 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono">
+                <div className="flex flex-wrap gap-1.5">
+                  {(project.tags || []).map((tag) => (
+                    <span key={tag} className="px-2.5 py-1 rounded-md bg-zinc-800 text-zinc-300 text-[10px]">
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-                <div>
-                  <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400 uppercase block mb-1">
-                    Deliverables & Output
-                  </span>
-                  <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                    {project.id === 'nyc-collisions' ? (
-                      <>
-                        • Analisis 238K+ Insiden Tabrakan<br />
-                        • Evaluasi Tingkat Cedera (Injury Rate 48.7%)<br />
-                        • Pemetaan Borough Terparah (Brooklyn & Queens 60%)
-                      </>
-                    ) : (
-                      <>
-                        • Pemodelan Total Sales ($2.29M)<br />
-                        • Multi-Slicer Dynamic Pivot Cards<br />
-                        • Analisis 5 Wilayah Kerugian Terbesar
-                      </>
-                    )}
-                  </p>
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="flex items-center justify-between pt-2">
-                <button
-                  type="button"
-                  onClick={() => openModal(project)}
-                  className="px-4 py-2 rounded-lg bg-zinc-900 dark:bg-zinc-100 hover:bg-emerald-600 dark:hover:bg-emerald-400 text-white dark:text-zinc-900 hover:text-white dark:hover:text-black text-xs font-mono font-semibold transition-all cursor-pointer inline-flex items-center gap-2 border-0"
-                >
-                  <span>Open Detailed Analysis</span>
-                  <span>↗</span>
-                </button>
+                <span className="text-lime-400 font-bold text-xs flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                  View Detail →
+                </span>
               </div>
             </div>
           ))}
