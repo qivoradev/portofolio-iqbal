@@ -91,12 +91,12 @@ export default function About({ language = 'id' } = {}) {
         </div>
 
         {/* Grid 4 Kolom di Desktop (Membentang Penuh), 2 Kolom di Mobile */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 w-full">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 w-full">
           
           {/* 1. EXCEL */}
-          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm h-full">
-            <div className="w-8 h-8 flex items-center justify-center shrink-0">
-              <svg className="w-7 h-7" viewBox="0 0 48 48" fill="none">
+          <div className="p-3 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-2.5 sm:gap-3 h-full min-h-[68px] shadow-sm">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 48 48" fill="none">
                 <rect x="18" y="7" width="24" height="34" rx="2" fill="#107C41" />
                 <path d="M24 15H36M24 21H36M24 27H36M24 33H36" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.9" />
                 <path d="M29 11V37" stroke="white" strokeWidth="2" strokeLinecap="round" opacity="0.9" />
@@ -104,16 +104,16 @@ export default function About({ language = 'id' } = {}) {
                 <text x="13.5" y="27.5" fill="white" fontSize="15" fontWeight="bold" fontFamily="system-ui, sans-serif" textAnchor="middle">X</text>
               </svg>
             </div>
-            <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-sans font-semibold text-zinc-900 dark:text-zinc-100 truncate">Microsoft Excel</p>
-              <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400 truncate">Lookup, Pivot & KPIs</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight">Microsoft Excel</p>
+              <p className="text-[10px] sm:text-[11px] font-sans text-zinc-500 dark:text-zinc-400 leading-tight mt-0.5">Lookup, Pivot & KPIs</p>
             </div>
           </div>
 
           {/* 2. LOOKER STUDIO */}
-          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm h-full">
-            <div className="w-8 h-8 flex items-center justify-center shrink-0">
-              <svg className="w-7 h-7" viewBox="0 0 120 120" fill="none">
+          <div className="p-3 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-2.5 sm:gap-3 h-full min-h-[68px] shadow-sm">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 120 120" fill="none">
                 <circle cx="68" cy="74" r="28" stroke="#1A73E8" strokeWidth="14" fill="none" />
                 <path d="M48 42A16 16 0 1 0 48 10" stroke="#EA4335" strokeWidth="12" strokeLinecap="round" fill="none"/>
                 <path d="M48 42A16 16 0 0 0 62 30" stroke="#F9AB00" strokeWidth="12" strokeLinecap="round" fill="none"/>
@@ -122,16 +122,16 @@ export default function About({ language = 'id' } = {}) {
                 <line x1="68" y1="24" x2="72" y2="20" stroke="#34A853" strokeWidth="8" strokeLinecap="round" />
               </svg>
             </div>
-            <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-sans font-semibold text-zinc-900 dark:text-zinc-100 truncate">Looker Studio</p>
-              <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400 truncate">Cloud BI & Reports</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight">Looker Studio</p>
+              <p className="text-[10px] sm:text-[11px] font-sans text-zinc-500 dark:text-zinc-400 leading-tight mt-0.5">Cloud BI Reports</p>
             </div>
           </div>
 
           {/* 3. FIGMA */}
-          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm h-full">
-            <div className="w-8 h-8 flex items-center justify-center shrink-0">
-              <svg className="w-7 h-7" viewBox="0 0 38 57" fill="none">
+          <div className="p-3 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-2.5 sm:gap-3 h-full min-h-[68px] shadow-sm">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 38 57" fill="none">
                 <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
                 <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
                 <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
@@ -139,25 +139,25 @@ export default function About({ language = 'id' } = {}) {
                 <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
               </svg>
             </div>
-            <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-sans font-semibold text-zinc-900 dark:text-zinc-100 truncate">Figma</p>
-              <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400 truncate">UI/UX Canvas</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight">Figma</p>
+              <p className="text-[10px] sm:text-[11px] font-sans text-zinc-500 dark:text-zinc-400 leading-tight mt-0.5">UI/UX Canvas</p>
             </div>
           </div>
 
           {/* 4. SQL */}
-          <div className="p-3.5 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-3 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all shadow-sm h-full">
-            <div className="w-8 h-8 flex items-center justify-center shrink-0">
-              <svg className="w-7 h-7" viewBox="0 0 100 100" fill="none">
+          <div className="p-3 rounded-xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 flex items-center gap-2.5 sm:gap-3 h-full min-h-[68px] shadow-sm">
+            <div className="w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center shrink-0">
+              <svg className="w-6 h-6 sm:w-7 sm:h-7" viewBox="0 0 100 100" fill="none">
                 <path d="M18 32V72C18 83 82 83 82 72V32H18Z" fill="#0072C6" />
                 <ellipse cx="50" cy="72" rx="32" ry="12" fill="#0072C6" />
                 <ellipse cx="50" cy="28" rx="32" ry="12" fill="#29B6F6" stroke="#0072C6" strokeWidth="2.5" />
                 <text x="50" y="63" fill="white" fontSize="24" fontWeight="900" fontFamily="system-ui, -apple-system, sans-serif" letterSpacing="0.5" textAnchor="middle">SQL</text>
               </svg>
             </div>
-            <div className="min-w-0">
-              <p className="text-xs sm:text-sm font-sans font-semibold text-zinc-900 dark:text-zinc-100 truncate">SQL</p>
-              <p className="text-xs font-sans text-zinc-500 dark:text-zinc-400 truncate">Queries & Relations</p>
+            <div className="min-w-0 flex-1">
+              <p className="text-xs sm:text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight">SQL</p>
+              <p className="text-[10px] sm:text-[11px] font-sans text-zinc-500 dark:text-zinc-400 leading-tight mt-0.5">Queries & Relational</p>
             </div>
           </div>
 

@@ -17,12 +17,13 @@ export default function Hero({ language = 'id' } = {}) {
       <div className="hidden lg:block absolute top-1/4 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/5 dark:bg-emerald-500/10 rounded-full blur-3xl pointer-events-none -z-10" />
 
       {/* Foto Profil: Berikan ukuran yang lebih mantap di Desktop */}
-      <div className="relative mb-6">
-        <div className="w-28 h-28 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700/80 p-1.5 bg-zinc-900 shadow-2xl relative">
+      <div className="relative mb-5 flex justify-center">
+        {/* Lingkaran Avatar */}
+        <div className="w-32 h-32 sm:w-36 sm:h-36 lg:w-40 lg:h-40 rounded-full overflow-hidden ring-2 ring-zinc-300 dark:ring-zinc-700/80 p-1 bg-white dark:bg-zinc-900 shadow-xl relative flex items-center justify-center">
           <img
             src="/profile.png"
             alt="Iqbal Dwi Fathonah"
-            className="w-full h-full rounded-full object-cover object-top scale-125"
+            className="w-full h-full rounded-full object-cover object-[center_18%] scale-150 transition-transform duration-300"
             onError={(e) => {
               e.currentTarget.onerror = null;
               e.currentTarget.src = '/foto-nobg.png';
