@@ -16,9 +16,14 @@ export default {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' },
         },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
       },
       animation: {
         fadeIn: 'fadeIn 0.2s ease-out',
+        marquee: 'marquee 25s linear infinite',
       },
     },
   },

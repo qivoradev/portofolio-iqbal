@@ -50,7 +50,7 @@ function AppContent() {
   return (
     <>
       {/* ALUR UTAMA: Single Page Flow */}
-      <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-zinc-50 dark:bg-[#0a0a0c] text-zinc-900 dark:text-white transition-colors duration-200">
+      <main className="w-full max-w-full overflow-x-hidden min-h-screen bg-[#0a0a0d] text-white transition-colors duration-200">
         <Navbar language={language} />
         <Hero language={language} />
         <Projects language={language} />
