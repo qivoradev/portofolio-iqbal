@@ -1,79 +1,72 @@
 import React from 'react';
 
-export default function About({ language }) {
-  const modules = [
+export default function About({ language = 'id' } = {}) {
+  const competencies = [
     {
-      num: '01',
-      title: language === 'en' ? 'SQL & Data Modeling' : 'SQL & Pemodelan Data',
+      index: '01',
+      title: language === 'en' ? 'SQL & Relational Data Modeling' : 'SQL & Pemodelan Data Relasional',
       desc: language === 'en'
-        ? 'Relational table structuring, multi-table joins, subqueries, CTEs, aggregations, and data validation.'
-        : 'Pemodelan skema relasional, multi-table joins, subqueries, CTEs, agregasi data, dan validasi data mentah.',
-      stack: 'PostgreSQL, MySQL, DBeaver',
+        ? 'Structuring normalized database schemas, complex multi-table joins, CTEs, subqueries, and validating data integrity.'
+        : 'Pemodelan skema relasional, multi-table joins, subqueries, CTEs, agregasi data, dan pembersihan anomali data mentah.',
+      tools: 'SQL, PostgreSQL, MySQL, DBeaver',
     },
     {
-      num: '02',
-      title: language === 'en' ? 'Interactive BI & Reporting' : 'BI Interaktif & Pelaporan',
+      index: '02',
+      title: language === 'en' ? 'Interactive BI & Executive Dashboards' : 'BI Interaktif & Dashboard Eksekutif',
       desc: language === 'en'
-        ? 'Automated spreadsheet models, dynamic lookups (XLOOKUP, INDEX/MATCH), pivot tables, and executive KPI cards.'
-        : 'Arsitektur spreadsheet dinamis, formula pemodelan (XLOOKUP, INDEX/MATCH), pivot interaktif, dan KPI bisnis.',
-      stack: 'Microsoft Excel, Looker Studio',
+        ? 'Dynamic spreadsheet architecture, lookup modeling (XLOOKUP, INDEX/MATCH), automated pivot cards, and interactive stakeholder reporting.'
+        : 'Arsitektur spreadsheet dinamis, formula pemodelan (XLOOKUP, INDEX/MATCH), pivot interaktif, dan visualisasi dasbor eksekutif.',
+      tools: 'Microsoft Excel, Looker Studio',
     },
     {
-      num: '03',
-      title: language === 'en' ? 'Business Insights & Wireframing' : 'Analisis Bisnis & Wireframing',
+      index: '03',
+      title: language === 'en' ? 'Business Insights & Problem Framing' : 'Analisis Bisnis & Diagnostik Akar Masalah',
       desc: language === 'en'
-        ? 'Translating stakeholder questions into actionable metrics, root-cause diagnostics, and structured dashboard UI.'
-        : 'Menerjemahkan sasaran bisnis menjadi indikator terukur, analisis akar masalah (root-cause), dan wireframe dasbor.',
-      stack: 'Figma, Problem Framing, Business KPIs',
+        ? 'Formulating data questions from business objectives, root-cause diagnostics, and wireframing dashboard interfaces.'
+        : 'Menerjemahkan sasaran bisnis menjadi indikator terukur, diagnosis akar masalah (root-cause), dan perancangan wireframe dasbor.',
+      tools: 'Figma, KPI Design, Root-Cause Analysis',
     },
   ];
 
   return (
-    <section id="about" className="py-16 sm:py-24 border-t border-zinc-200 dark:border-zinc-800/80 scroll-mt-14">
+    <section id="about" className="py-16 sm:py-24 border-b border-zinc-200 dark:border-zinc-800/80 scroll-mt-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* macOS Window for Capabilities */}
-        <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/90 shadow-xl overflow-hidden">
-          
-          <div className="px-4 py-2.5 bg-zinc-100/90 dark:bg-zinc-900/90 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between select-none">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block" />
-              <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block" />
-              <span className="ml-2 font-mono text-[11px] text-zinc-500 dark:text-zinc-400 font-medium">
-                system_preferences — technical_competencies
-              </span>
-            </div>
-            <span className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400">
-              ● SYNCED
+        <div className="flex items-center justify-between pb-6 mb-10 border-b border-zinc-200 dark:border-zinc-800">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-semibold block mb-1">
+              TECHNICAL COMPETENCY
             </span>
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+              {language === 'en' ? 'Capabilities & Toolkits' : 'Kompetensi & Perangkat Kerja'}
+            </h2>
           </div>
+          <span className="text-xs font-mono text-zinc-500 dark:text-zinc-400">
+            Analytics Lifecycle
+          </span>
+        </div>
 
-          <div className="p-6 sm:p-8 divide-y divide-zinc-100 dark:divide-zinc-800">
-            {modules.map((m) => (
-              <div key={m.num} className="py-6 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-start justify-between gap-4">
-                <div className="max-w-md">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400 font-bold">
-                      [{m.num}]
-                    </span>
-                    <h3 className="text-base font-bold text-zinc-900 dark:text-white">
-                      {m.title}
-                    </h3>
-                  </div>
-                  <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    {m.desc}
-                  </p>
-                </div>
-                <div className="sm:text-right font-mono text-xs text-zinc-700 dark:text-zinc-300 font-medium">
-                  <span className="px-2.5 py-1 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 inline-block">
-                    {m.stack}
-                  </span>
-                </div>
+        <div className="divide-y divide-zinc-200 dark:divide-zinc-800">
+          {competencies.map((item) => (
+            <div key={item.index} className="py-8 first:pt-0 last:pb-0 grid grid-cols-1 md:grid-cols-12 gap-4">
+              <div className="md:col-span-1 font-mono text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                /{item.index}
               </div>
-            ))}
-          </div>
-
+              <div className="md:col-span-4">
+                <h3 className="text-base font-bold text-zinc-900 dark:text-white">
+                  {item.title}
+                </h3>
+              </div>
+              <div className="md:col-span-4">
+                <p className="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-sans">
+                  {item.desc}
+                </p>
+              </div>
+              <div className="md:col-span-3 md:text-right font-mono text-xs text-zinc-700 dark:text-zinc-300 font-semibold">
+                {item.tools}
+              </div>
+            </div>
+          ))}
         </div>
 
       </div>

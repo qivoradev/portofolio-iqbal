@@ -64,7 +64,7 @@ export default function Navbar({ language: propLanguage } = {}) {
           className="flex items-center gap-2 font-bold text-xs sm:text-sm text-zinc-900 dark:text-white shrink-0 cursor-pointer border-0 bg-transparent p-0 transition-colors hover:text-emerald-500"
         >
           <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse shrink-0" />
-          <span className="tracking-tight font-mono">Iqbal.df</span>
+          <span className="tracking-wider font-mono font-bold">IDF</span>
         </button>
 
         {/* Nav Links */}
