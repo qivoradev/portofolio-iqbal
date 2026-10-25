@@ -73,16 +73,17 @@ export default function Projects({ language = 'id' } = {}) {
   };
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      {/* 1. Section Header */}
-      <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-8 text-left">
-        <span className="font-sans text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
-          {language === 'en' ? 'Case Studies & Dashboards' : 'Studi Kasus & Dashboard'}
-        </span>
-        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
-          {language === 'en' ? 'Featured Projects' : 'Proyek Pilihan'}
-        </h2>
-      </div>
+    <section id="projects" className="pt-20 pb-16 sm:pt-24 sm:pb-20 scroll-mt-14">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* 1. Section Header */}
+        <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-8 text-left">
+          <span className="font-sans text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
+            {language === 'en' ? 'Case Studies & Dashboards' : 'Studi Kasus & Dashboard'}
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            {language === 'en' ? 'Featured Projects' : 'Proyek Pilihan'}
+          </h2>
+        </div>
 
       {/* 2. Layout Proyek: "Split Case Study" Vertikal */}
       <div className="space-y-12">
@@ -165,6 +166,7 @@ export default function Projects({ language = 'id' } = {}) {
           language={language}
         />
       )}
-    </div>
+      </div>
+    </section>
   );
 }
