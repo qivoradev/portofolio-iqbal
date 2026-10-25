@@ -4,7 +4,7 @@ export default function About({ language = 'id' } = {}) {
   const isEn = language === 'en';
 
   return (
-    <div className="w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-8 py-16">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       {/* Header Section Rata Kiri */}
       <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-8 text-left">
         <span className="font-sans text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium block mb-1">

@@ -73,11 +73,11 @@ export default function Projects({ language = 'id' } = {}) {
   };
 
   return (
-    <div className="w-full max-w-full md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-5 sm:px-8 py-16">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       {/* 1. Section Header */}
       <div className="border-b border-zinc-200 dark:border-zinc-800/80 pb-4 mb-8 text-left">
         <span className="font-sans text-xs uppercase tracking-wider text-zinc-400 dark:text-zinc-500 font-medium block mb-1">
-          {language === 'en' ? 'Featured Projects' : 'Proyek Unggulan'}
+          {language === 'en' ? 'Case Studies & Dashboards' : 'Studi Kasus & Dashboard'}
         </span>
         <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 dark:text-white">
           {language === 'en' ? 'Featured Projects' : 'Proyek Pilihan'}
